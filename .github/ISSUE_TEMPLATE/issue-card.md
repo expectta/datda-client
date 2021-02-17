@@ -3,7 +3,7 @@ name: Issue Card
 about: '프로젝트 중 발생되는 Issue '
 title: ''
 labels: Issue
-assignees: expectta, in63119, gkdlvj1214, JH-Shim
+assignees: expectta, gkdlvj1214, in63119, JH-Shim
 
 ---
 
