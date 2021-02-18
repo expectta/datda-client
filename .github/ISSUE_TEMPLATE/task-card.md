@@ -3,7 +3,7 @@ name: Task Card
 about: 프로젝트 작업 분배
 title: ''
 labels: ''
-assignees: expectta, in63119, gkdlvj1214, JH-Shim
+assignees: expectta, gkdlvj1214, in63119, JH-Shim
 
 ---
 
