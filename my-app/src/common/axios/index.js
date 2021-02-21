@@ -1,1 +1,1 @@
-'여기는 axios 공간입니다.';
+import axios from 'axios';
