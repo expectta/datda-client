@@ -8,10 +8,8 @@ import styled, {
   createGlobalStyle,
 } from 'styled-components';
 import theme from './assets/theme';
-
 function App() {
   // modal 상태
-
   const [modalMessage, setModalMessage] = useState('^___^  << 한솔님');
   const [modalVisible, setModalVisible] = useState(false);
   // modal창 제거
@@ -57,5 +55,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-  }
+	}
+	a{
+		text-decoration:none;
+	}
 `;

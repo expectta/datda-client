@@ -10,7 +10,6 @@
     "@types/node": "^12.20.1",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
-    "@types/react-router-dom": "^5.1.7",
     "@types/redux": "^3.6.0",
     "@types/styled-components": "^5.1.7",
     "axios": "^0.21.1",
@@ -52,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "eslint": "^7.20.0",
