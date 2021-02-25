@@ -2,7 +2,7 @@
 name: Restrospect card
 about: 프로젝트를 진행하면서 느낀점 등을 회고하는 란입니다.
 title: ''
-labels: '인수찡 : 프로청렴러, 종훈찡 : 프로청나러, 지운찡 : 프로게을러, 한솔찡 : 프로긍정러'
+labels: '한솔찡 : 프로긍정러, 종훈찡 : 프로청나러, 지운찡 : 프로게을러, 인수찡 : 프로찡찡러'
 assignees: expectta, gkdlvj1214, in63119, JH-Shim
 
 ---
