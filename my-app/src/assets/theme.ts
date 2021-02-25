@@ -15,8 +15,8 @@ const fontSizes = {
 const deviceSizes = {
   mobileS: '320px',
   mobileM: '375px',
-  mobileL: '600px',
-  tablet: '768px',
+  mobileL: '700px',
+  tablet: '900px',
   tabletL: '1024px',
 };
 
@@ -50,8 +50,9 @@ const common = {
     justify-contents: center;
     align-items: center;
 	`,
-  buttonStyle: `
+  defaultButton: `
 		background:#6f6eff;
+		font-size:1rem;
 		color:white;
 		padding: 5px 20px 5px 20px;
     border: none;
@@ -75,9 +76,54 @@ const common = {
 		
   }
 	`,
-  divCardStyle: `
+  albumCardDiv: `
+	width:150px;
+	height:150px;
 	border-radius: 15px 15px 15px 15px;
 	box-shadow: 0px 0px 5px;
+	`,
+  ContentCardDiv: `
+	width:100%;
+	height:92%;
+	border-radius: 15px 15px 15px 15px;
+ box-shadow: 0px 0px 5px #c8c8c8;	`,
+
+  defaultInput: `
+	border: none;
+	border-bottom: 1px solid black;
+	outline: none;
+	
+	&:focus{
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: #6f6eff;
+  }
+    border-bottom: 2px solid #6f6eff;
+    color: #6f6eff;;
+	}
+	`,
+  AvatarImageDiv: `
+	 width: 100%;
+	 height:100%;
+	 border-radius: 0px 0px 60px;
+	`,
+  StateDiv: `
+	background:#6f6eff;
+		font-size:1rem;
+		color:white;
+    border: none;
+		border-radius: 5px;
+		padding: 3px 10px 3px 10px;
+	`,
+  NoticeCardDiv: `
+	width:96%;
+	height:60px;
+	
+	margin:0 auto;
+	border-radius: 8px 8px 8px 8px;
+	margin-top: 1%;
+	margin-bottom: 2%;
+	box-shadow: 0px 0px 5px #c8c8c8;
 	`,
 };
 
