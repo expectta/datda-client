@@ -15,6 +15,7 @@ const fontSizes = {
 const deviceSizes = {
   mobileS: '320px',
   mobileM: '375px',
+  //현재 기준(모바일)
   mobileL: '600px',
   tablet: '768px',
   tabletL: '1024px',
