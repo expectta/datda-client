@@ -127,22 +127,22 @@ const ThirdPart = styled.div`
   height: 50%;
   padding: 2%;
 `;
-const TimetableSection = styled.div`
-  width: 100%;
-  height: 25%;
-`;
-const MainMenuSection = styled.div`
-  width: 100%;
-  height: 25%;
-`;
-const MiniNoticeSection = styled.div`
-  width: 100%;
-  height: 25%;
-`;
-const MiniIndiNoticeSection = styled.div`
-  width: 100%;
-  height: 25%;
-`;
+// const TimetableSection = styled.div`
+//   width: 100%;
+//   height: 25%;
+// `;
+// const MainMenuSection = styled.div`
+//   width: 100%;
+//   height: 25%;
+// `;
+// const MiniNoticeSection = styled.div`
+//   width: 100%;
+//   height: 25%;
+// `;
+// const MiniIndiNoticeSection = styled.div`
+//   width: 100%;
+//   height: 25%;
+// `;
 
 // const Button = styled.button`
 //   ${({ theme }) => theme.common.defaultButton}

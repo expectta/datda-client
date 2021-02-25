@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Main, Login, Intro, Signin } from './pages/Index';
+import { Main, Login, Intro, Signup, UserInfo } from './pages/Index';
 import { Modal } from './components/Index';
 import styled, {
   GlobalStyleComponent,
@@ -27,11 +27,14 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/signin">
-            <Signin />
+          <Route path="/signup">
+            <Signup />
           </Route>
           <Route path="/main">
             <Main />
+          </Route>
+          <Route path="/userinfo">
+            <UserInfo />
           </Route>
         </Switch>
       </ThemeProvider>
