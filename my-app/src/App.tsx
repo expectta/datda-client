@@ -51,5 +51,23 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-  }
+    #intro_global{
+      ::-webkit-scrollbar{
+        width: 7px;
+        border-radius : 6px;
+        background-color : green;
+      }
+      
+      ::-webkit-scrollbar-thumb{
+        border-radius : 4px;
+          width : 100px;
+          background-color : orange;
+          -webkit-box-shadow : 0 0 1px rgba(255,255,255,0.5);
+        }
+    }
+    
+	}
+	a{
+		text-decoration:none;
+	}
 `;

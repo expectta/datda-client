@@ -11,5 +11,3 @@ export function handleLogin(email: string, password: string) {
       }
     });
 }
-
-// export function handleSignup()

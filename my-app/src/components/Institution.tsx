@@ -1,16 +1,18 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 interface Props {
+  instiInputs: Record<string, unknown>;
   institution: boolean;
   onChangeInsti: any;
   errormessage: string;
+  handleInstitution: any;
 }
-function Institution({ institution, onChangeInsti }: Props) {
-  const history = useHistory();
-
-  const setHistory = () => {
-    history.push('/login');
-  };
+function Institution({
+  instiInputs,
+  institution,
+  onChangeInsti,
+  errormessage,
+  handleInstitution,
+}: Props) {
   return institution ? (
     <div className="institution">
       <div>
@@ -24,11 +26,14 @@ function Institution({ institution, onChangeInsti }: Props) {
         <span>기관장</span>
         <input type="text" onChange={(e) => onChangeInsti('master', e)}></input>
       </div>
-      <div>
-        <span>분류</span>
-        <input type="text" onChange={(e) => onChangeInsti('info', e)}></input>
-      </div>
-      <button onClick={setHistory}>가입완료</button>
+      <div>{errormessage}</div>
+      <button
+        onClick={() =>
+          handleInstitution(instiInputs.institutionName, instiInputs.master)
+        }
+      >
+        다음
+      </button>
     </div>
   ) : (
     <div></div>

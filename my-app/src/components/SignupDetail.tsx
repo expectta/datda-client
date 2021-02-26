@@ -33,7 +33,7 @@ function Signup2({
           handleSignupDetail(inputs.name, inputs.role, inputs.mobile);
         }}
       >
-        완료
+        {inputs.permission === 'institution' ? '다음' : '완료'}
       </button>
       <div>{errormessage}</div>
     </div>

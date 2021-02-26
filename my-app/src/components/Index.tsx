@@ -13,6 +13,10 @@ import MainMenu from './MainMenu';
 import MiniIndiNotice from './MIniIndiNotice';
 import MiniNotice from './MiniNotice';
 import Timetable from './Timetable';
+import SignupSearchInsti from './SignupSeachInsti';
+import SignupSearchClass from './SignupSearchClass';
+import InstiSelection from './InstiSelection';
+import SocialSelection from './SocialSelection';
 import NoticeList from './NoticeLIst';
 import ListInnerCard from './ListInnerCard';
 import WrietNotice from './WriteNotice';
@@ -36,6 +40,10 @@ export {
   SignupDetail,
   Institution,
   Selection,
+  SignupSearchInsti,
+  SignupSearchClass,
+  InstiSelection,
+  SocialSelection,
   ListInnerCard,
   WrietNotice,
   ReadNotice,

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Signup,
   SignupDetail,
   Institution,
   Selection,
+  SignupSearchInsti,
+  SignupSearchClass,
+  InstiSelection,
+  SocialSelection,
 } from '../components/Index';
 import {
   isPasswordCheck,
@@ -24,13 +28,13 @@ function Signin() {
     passwordCheck: null,
     name: null,
     mobile: null,
-    permission: null,
+    permission: '',
     role: null,
   });
   const [instiInputs, setInstiInputs] = useState({
     institutionName: null,
     master: null,
-    info: null,
+    info: '',
   });
 
   //에러메세지
@@ -39,23 +43,48 @@ function Signin() {
   const [isInsti, setIsInsti] = useState<boolean>(false);
   //첫 페이지(회원 유형 선택)
   const [selection, setSelection] = useState<boolean>(true);
+
+  const [socialSelection, setSocialSelection] = useState<boolean>(false);
   //아이디 비밀번호 설정 페이지
   const [signup, setSignup] = useState<boolean>(false);
   //이름 이메일 전화번호
   const [signupDetail, setSignupDetail] = useState<boolean>(false);
   //기관 눌렀을 시에 추가 입력 페이지
   const [institution, setInstitution] = useState<boolean>(false);
-  const history = useHistory();
 
-  const handleIsInsti = () => {
+  const [instiSelection, setInstiSelection] = useState<boolean>(false);
+  // 선생님과 학부모가 버튼을 눌렀을 시
+  const [searchInsti, setSearchInsti] = useState<boolean>(false);
+
+  const [searchClass, setSearchClass] = useState<boolean>(false);
+
+  const history = useHistory();
+  //학부모, 선생님을 선택할 시
+  const handleSelection = (value: string) => {
     setSelection(false);
-    setSignup(true);
+    setSocialSelection(true);
+    setInputs({ ...inputs, permission: value });
+  };
+
+  // useEffect(() => {
+  //   if (selection === false) {
+  //     setSocialSelection(true);
+  //   }
+  // }, [selection]);
+
+  const handleIsInsti = (value: string) => {
+    setSelection(false);
+    setSocialSelection(true);
+    setInputs({ ...inputs, permission: value });
     setIsInsti(true);
   };
-  const handleSelection = () => {
-    setSelection(false);
+
+  const handleSocialSelection = () => {
+    setSocialSelection(false);
     setSignup(true);
   };
+  //기관 가입을 선택할 시
+
   const handleSignup = (
     email: string,
     password: string,
@@ -91,6 +120,26 @@ function Signin() {
       isInsti ? setInstitution(true) : history.push('/login');
     }
   };
+  const handleInstitution = (institutionName: string, master: string) => {
+    institutionName === null || master === null
+      ? setErrormessage('모든 항목은 필수입니다')
+      : (setErrormessage(''), setInstitution(false), setInstiSelection(true));
+  };
+
+  const handleInstiSelection = (info: string) => {
+    info.length === 0
+      ? setErrormessage('교습소 중 하나를 선택해주세요')
+      : (history.push('/'), setErrormessage(''));
+  };
+
+  const handleSearchInsti = () => {
+    setSearchInsti(false);
+    setSearchClass(true);
+  };
+
+  const handleSearchClass = () => {
+    history.push('/login');
+  };
 
   //인풋데이터 값 바꾸기
   const onChange = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,14 +154,22 @@ function Signin() {
     const { value } = e.target;
     setInstiInputs({ ...instiInputs, [key]: value });
   };
+  //교육소 분류 state에 넣기
+  const inputInstiInfo = (value: string) => {
+    setInstiInputs({ ...instiInputs, info: value });
+  };
 
   return (
     <SignupGlobal>
-      <h1>Datda에 오신걸 환영합니다.</h1>
+      <h1>Datda</h1>
       <Selection
         handleIsInsti={handleIsInsti}
         selection={selection}
         handleSelection={handleSelection}
+      />
+      <SocialSelection
+        socialSelection={socialSelection}
+        handleSocialSelection={handleSocialSelection}
       />
       <Signup
         inputs={inputs}
@@ -130,8 +187,25 @@ function Signin() {
       />
       <Institution
         institution={institution}
+        handleInstitution={handleInstitution}
         onChangeInsti={onChangeInsti}
         errormessage={errormessage}
+        instiInputs={instiInputs}
+      />
+      {/* <SignupSearchInsti
+        searchInsti={searchInsti}
+        handleSearchInsti={handleSearchInsti}
+      />
+      <SignupSearchClass
+        searchClass={searchClass}
+        handleSearchClass={handleSearchClass}
+      /> */}
+      <InstiSelection
+        errormessage={errormessage}
+        instiInputs={instiInputs}
+        instiSelection={instiSelection}
+        handleInstiSelection={handleInstiSelection}
+        inputInstiInfo={inputInstiInfo}
       />
     </SignupGlobal>
   );
