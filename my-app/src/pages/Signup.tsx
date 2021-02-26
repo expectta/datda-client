@@ -64,8 +64,13 @@ function Signin() {
     setSelection(false);
     setSocialSelection(true);
     setInputs({ ...inputs, permission: value });
-    console.log(1);
   };
+
+  // useEffect(() => {
+  //   if (selection === false) {
+  //     setSocialSelection(true);
+  //   }
+  // }, [selection]);
 
   const handleIsInsti = (value: string) => {
     setSelection(false);
@@ -112,7 +117,7 @@ function Signin() {
     } else {
       setSignupDetail(false);
       setErrormessage('');
-      isInsti ? setInstitution(true) : setSearchInsti(true);
+      isInsti ? setInstitution(true) : history.push('/login');
     }
   };
   const handleInstitution = (institutionName: string, master: string) => {
@@ -187,14 +192,14 @@ function Signin() {
         errormessage={errormessage}
         instiInputs={instiInputs}
       />
-      <SignupSearchInsti
+      {/* <SignupSearchInsti
         searchInsti={searchInsti}
         handleSearchInsti={handleSearchInsti}
       />
       <SignupSearchClass
         searchClass={searchClass}
         handleSearchClass={handleSearchClass}
-      />
+      /> */}
       <InstiSelection
         errormessage={errormessage}
         instiInputs={instiInputs}
