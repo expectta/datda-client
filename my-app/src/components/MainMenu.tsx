@@ -6,23 +6,23 @@ export default function MainMenu() {
   return (
     <Wrap>
       <MenuWrap>
-        <IconWrap to="/">
+        <IconWrap to="/main/notice">
           <IconImage src="../images/nap.png" alt="공지사항"></IconImage>
           <Describe>공지사항</Describe>
         </IconWrap>
-        <IconWrap to="/">
+        <IconWrap to="/main/medicine">
           <IconImage src="../images/nap.png" alt="공지사항"></IconImage>
           <Describe>투약의뢰서</Describe>
         </IconWrap>
-        <IconWrap to="/">
+        <IconWrap to="/main/meal">
           <IconImage src="../images/nap.png" alt="공지사항"></IconImage>
           <Describe>급식표</Describe>
         </IconWrap>
-        <IconWrap to="/">
+        <IconWrap to="/main/indi_notice">
           <IconImage src="../images/nap.png" alt="공지사항"></IconImage>
           <Describe>알림장</Describe>
         </IconWrap>
-        <IconWrap to="/">
+        <IconWrap to="/main/album">
           <IconImage src="../images/nap.png" alt="공지사항"></IconImage>
           <Describe>앨범</Describe>
         </IconWrap>

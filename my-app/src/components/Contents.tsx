@@ -57,7 +57,7 @@ const Wrap = styled.div`
 `;
 
 const ContentCard = styled.div`
-  ${({ theme }) => theme.common.ContentCardDiv}
+  ${({ theme }) => theme.common.contentCardDiv}
 `;
 
 const BookMark = styled.button<Property>`

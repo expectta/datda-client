@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-export default function IndiNotice() {
+export default function Meal() {
   return (
     <Wrap>
       <ContentCard>
-        <Title>알림장</Title>
+        <Title>급식표</Title>
       </ContentCard>
     </Wrap>
   );
