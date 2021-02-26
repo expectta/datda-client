@@ -43,7 +43,7 @@ const StateWrap = styled.div`
   width: 100%;
   display: flex;
 
-  ${({ theme }) => theme.common.StateDiv}
+  ${({ theme }) => theme.common.stateDiv}
 `;
 const StateIcons = styled.img`
   widht: 40px;

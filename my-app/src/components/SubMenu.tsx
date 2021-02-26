@@ -5,8 +5,8 @@ import styled from 'styled-components';
 export default function SubMenu() {
   return (
     <Wrap>
-      <SubMenuBar>버그리포트</SubMenuBar>
-      <SubMenuBar>교육 프로그</SubMenuBar>
+      <SubMenuBar to="/">버그리포트</SubMenuBar>
+      <SubMenuBar to="/main/education">교육 프로그</SubMenuBar>
     </Wrap>
   );
 }
@@ -16,7 +16,8 @@ const Wrap = styled.div`
   text-align: center;
 `;
 
-const SubMenuBar = styled.button`
+const SubMenuBar = styled(Link)`
+  display: block;
   margin-top: 10px;
   width: 100%;
   ${({ theme }) => theme.common.defaultButton}

@@ -1,4 +1,17 @@
 import React from 'react';
+
+import { Router, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+import {
+  TimetableList,
+  Profile,
+  Notice,
+  Medicine,
+  Album,
+  Meal,
+  IndiNotice,
+  EducationList,
+} from './Index';
 import {
   Nav,
   Avatar,
@@ -7,8 +20,10 @@ import {
   SubMenu,
   FooterContents,
 } from '../components/Index';
-import styled from 'styled-components';
-function Main() {
+interface propsType {
+  match: any;
+}
+function Main({ match }: propsType) {
   return (
     <Wrap>
       <Header id="header">
@@ -27,7 +42,17 @@ function Main() {
         </ThirdPart>
       </Aside>
       <Section id="content">
-        <Contents></Contents>
+        <Switch>
+          <Route exact path={`${match.path}`} component={Contents} />
+          <Route path={`${match.path}/notice`} component={Notice} />
+          <Route path={`${match.path}/medicine`} component={Medicine} />
+          <Route path={`${match.path}/meal`} component={Meal} />
+          <Route path={`${match.path}/indi_notice`} component={IndiNotice} />
+          <Route path={`${match.path}/album`} component={Album} />
+          <Route path={`${match.path}/profile`} component={Profile} />
+          <Route path={`${match.path}/timetable`} component={TimetableList} />
+          <Route path={`${match.path}/education`} component={EducationList} />
+        </Switch>
       </Section>
       <Footer>
         <FooterContents></FooterContents>
@@ -127,22 +152,22 @@ const ThirdPart = styled.div`
   height: 50%;
   padding: 2%;
 `;
-// const TimetableSection = styled.div`
-//   width: 100%;
-//   height: 25%;
-// `;
-// const MainMenuSection = styled.div`
-//   width: 100%;
-//   height: 25%;
-// `;
-// const MiniNoticeSection = styled.div`
-//   width: 100%;
-//   height: 25%;
-// `;
-// const MiniIndiNoticeSection = styled.div`
-//   width: 100%;
-//   height: 25%;
-// `;
+const TimetableSection = styled.div`
+  width: 100%;
+  height: 25%;
+`;
+const MainMenuSection = styled.div`
+  width: 100%;
+  height: 25%;
+`;
+const MiniNoticeSection = styled.div`
+  width: 100%;
+  height: 25%;
+`;
+const MiniIndiNoticeSection = styled.div`
+  width: 100%;
+  height: 25%;
+`;
 
 // const Button = styled.button`
 //   ${({ theme }) => theme.common.defaultButton}
