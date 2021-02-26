@@ -36,6 +36,7 @@ function Signup({
           onChange={(e) => onChange('passwordCheck', e)}
         ></input>
       </div>
+      <div>{errormessage}</div>
       <button
         onClick={() => {
           handleSignup(inputs.email, inputs.password, inputs.passwordCheck);
@@ -43,7 +44,6 @@ function Signup({
       >
         다음
       </button>
-      <div>{errormessage}</div>
     </div>
   ) : (
     <div></div>

@@ -5,15 +5,21 @@ import styled from 'styled-components';
 function Intro() {
   return (
     <IntroGlobal>
-      <img></img>
-      <div>우리 아이 유치원 생활</div>
-      <div>더욱 스마트하게 관리하기</div>
-      <Link to="/signup">
-        <span>회원가입</span>
-      </Link>
-      <Link to="/login">
-        <span>로그인</span>
-      </Link>
+      <div className="section intro">
+        <div className="introText">
+          <div>우리 아이 유치원 생활</div>
+          <div>더욱 스마트하게 관리하기</div>
+          <LinkArea>
+            <Link to="/signup">
+              <LinkDetail>회원가입</LinkDetail>
+            </Link>
+            <Link to="/login">
+              <LinkDetail>로그인</LinkDetail>
+            </Link>
+          </LinkArea>
+        </div>
+      </div>
+
       <div className="section 1">
         <GreenFont>공지사항</GreenFont>
         <span>과 </span>
@@ -48,6 +54,25 @@ const GreenFont = styled.span`
 
 const IntroGlobal = styled.div`
   .section {
-    margin: 10px 0px 10px 0px;
+    width : 100vw;
+    height : 100vh;
+    border : solid 2px;
   }
+  .introText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  text-align : center;
+  width : 70%
+  margin: 0 auto;
+`;
+
+const LinkArea = styled.div`
+  margin-top: 10vh;
+`;
+
+const LinkDetail = styled.button`
+  margin: 0 5vw 0 5vw;
 `;

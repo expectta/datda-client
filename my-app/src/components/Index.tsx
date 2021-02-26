@@ -14,6 +14,10 @@ import MiniIndiNotice from './MIniIndiNotice';
 import MiniNotice from './MiniNotice';
 import Timetable from './Timetable';
 import Notice from './Notice';
+import SignupSearchInsti from './SignupSeachInsti';
+import SignupSearchClass from './SignupSearchClass';
+import InstiSelection from './InstiSelection';
+import SocialSelection from './SocialSelection';
 export {
   MainMenu,
   MiniIndiNotice,
@@ -31,4 +35,8 @@ export {
   SignupDetail,
   Institution,
   Selection,
+  SignupSearchInsti,
+  SignupSearchClass,
+  InstiSelection,
+  SocialSelection,
 };

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Login() {
-  const [inputs, setInputs] = useState({ email: null, password: null });
+  const [inputs, setInputs] = useState({ email: '', password: '' });
   const [errormessage, setErrormessage] = useState<string>('');
 
   const onChange = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,10 +11,17 @@ function Login() {
     setInputs({ ...inputs, [key]: value });
   };
 
+  const handleLogin = (email: string, password: string) => {
+    if (email.length === 0 || password.length === 0) {
+      setErrormessage('이메일이나 비밀번호를 입력해주세요.');
+    } else {
+      setErrormessage('');
+    }
+  };
+
   return (
     <LoginGlobal>
-      <Header>Login</Header>
-      <SmallHead>Datda EDU</SmallHead>
+      <Header>Datda</Header>
       <InputBox>
         <span className="inputText">이메일</span>
         <input
@@ -31,13 +38,15 @@ function Login() {
           onChange={(e) => onChange('password', e)}
         ></input>
       </InputBox>
-      <button>로그인</button>
+      <div>{errormessage}</div>
+      <button onClick={() => handleLogin(inputs.email, inputs.password)}>
+        로그인
+      </button>
       <Link to="/signup">
         <div>
           <button>회원가입</button>
         </div>
       </Link>
-      <div>{errormessage}</div>
     </LoginGlobal>
   );
 }
@@ -46,7 +55,7 @@ export default Login;
 
 const LoginGlobal = styled.div`
   text-align: center;
-  margin: 40vh 0 0 0;
+  margin: 0 auto;
 `;
 
 const InputBox = styled.div`
