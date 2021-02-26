@@ -7,7 +7,7 @@ function Nav() {
     <Wrap>
       <WrapLinks>
         <Links to="/main">홈</Links>
-        <Links to="/userinfo">프로필</Links>
+        <Links to="/main/profile">프로필</Links>
         <Links to="/">로그아웃</Links>
       </WrapLinks>
     </Wrap>

@@ -24,7 +24,7 @@ export default function Timetable() {
         <ProgerssBarBack></ProgerssBarBack>
       </Container>
 
-      <TimeTable to="/">전체시간표 보기</TimeTable>
+      <TimeTable to="/main/timetable">전체시간표 보기</TimeTable>
     </Wrap>
   );
 }

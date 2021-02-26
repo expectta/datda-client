@@ -50,6 +50,7 @@ const common = {
     justify-contents: center;
     align-items: center;
 	`,
+  //기본 버튼 (파란색)
   defaultButton: `
 		background:#6f6eff;
 		font-size:1rem;
@@ -59,8 +60,10 @@ const common = {
 		border-radius: 20px;
 		outline:0px;
 		cursor:pointer;
+    text-decoration: none;
 
 	`,
+  //미선택 버튼 (회색)
   unclickedButtonStyle: `
 	background:#d8d8d8;
 		color:white;
@@ -68,6 +71,8 @@ const common = {
     border: none;
 		border-radius: 20px;
 		outline:0px;
+		text-decoration: none;
+
 		cursor:pointer;
   &:hover {
     transition: all 0.3s ease-in-out;
@@ -82,17 +87,25 @@ const common = {
 	border-radius: 15px 15px 15px 15px;
 	box-shadow: 0px 0px 5px;
 	`,
-  ContentCardDiv: `
+  //section 기본 스타일
+  contentCardDiv: `
 	width:100%;
 	height:92%;
+	border: 0px;
 	border-radius: 15px 15px 15px 15px;
- box-shadow: 0px 0px 5px #c8c8c8;	`,
-
+  box-shadow: 0px 0px 5px #c8c8c8;	`,
+  // section title 기본 슽타일
+  contentTitle: `
+	font-size:${fontSizes.xl};
+	width:95%; 
+	color:#bcbcbc;
+	padding:4%;
+	`,
+  // 기본 Input 태그
   defaultInput: `
 	border: none;
 	border-bottom: 1px solid black;
 	outline: none;
-	
 	&:focus{
   ::placeholder,
   ::-webkit-input-placeholder {
@@ -102,12 +115,12 @@ const common = {
     color: #6f6eff;;
 	}
 	`,
-  AvatarImageDiv: `
-	 width: 100%;
-	 height:100%;
-	 border-radius: 0px 0px 60px;
+  avatarImageDiv: `
+	width: 100%;
+	height:100%;
+	border-radius: 0px 0px 60px;
 	`,
-  StateDiv: `
+  stateDiv: `
 	background:#6f6eff;
 		font-size:1rem;
 		color:white;
@@ -115,10 +128,9 @@ const common = {
 		border-radius: 5px;
 		padding: 3px 10px 3px 10px;
 	`,
-  NoticeCardDiv: `
+  noticeCardDiv: `
 	width:96%;
 	height:60px;
-	
 	margin:0 auto;
 	border-radius: 8px 8px 8px 8px;
 	margin-top: 1%;

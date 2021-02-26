@@ -13,11 +13,16 @@ import MainMenu from './MainMenu';
 import MiniIndiNotice from './MIniIndiNotice';
 import MiniNotice from './MiniNotice';
 import Timetable from './Timetable';
-import Notice from './Notice';
 import SignupSearchInsti from './SignupSeachInsti';
 import SignupSearchClass from './SignupSearchClass';
 import InstiSelection from './InstiSelection';
 import SocialSelection from './SocialSelection';
+import NoticeList from './NoticeLIst';
+import ListInnerCard from './ListInnerCard';
+import WrietNotice from './WriteNotice';
+import ReadNotice from './ReadNotice';
+import MedicineList from './MedicineList';
+import WriteMedicine from './WriteMedicine';
 export {
   MainMenu,
   MiniIndiNotice,
@@ -30,7 +35,7 @@ export {
   State,
   SubMenu,
   FooterContents,
-  Notice,
+  NoticeList,
   Signup,
   SignupDetail,
   Institution,
@@ -39,4 +44,9 @@ export {
   SignupSearchClass,
   InstiSelection,
   SocialSelection,
+  ListInnerCard,
+  WrietNotice,
+  ReadNotice,
+  MedicineList,
+  WriteMedicine,
 };

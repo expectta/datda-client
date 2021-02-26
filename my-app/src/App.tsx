@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  RouteComponentProps,
+} from 'react-router-dom';
 import { Main, Login, Intro, Signup, UserInfo } from './pages/Index';
 import { Modal } from './components/Index';
 import styled, {
@@ -8,6 +13,7 @@ import styled, {
   createGlobalStyle,
 } from 'styled-components';
 import theme from './assets/theme';
+
 function App() {
   // modal 상태
   const [modalMessage, setModalMessage] = useState('^___^  << 한솔님');
@@ -21,21 +27,11 @@ function App() {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route exact path="/">
-            <Intro />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/main">
-            <Main />
-          </Route>
-          <Route path="/userinfo">
-            <UserInfo />
-          </Route>
+          <Route exact path="/" component={Intro} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/main" component={Main} />
+          <Route path="/userinfo" component={UserInfo} />
         </Switch>
       </ThemeProvider>
       <Modal visible={modalVisible} closable maskClosable onClose={closeModal}>

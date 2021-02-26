@@ -87,7 +87,7 @@ const NoticeContainar = styled.div`
   overflow: auto;
 `;
 const NoticeCard = styled.div`
-  ${({ theme }) => theme.common.NoticeCardDiv}
+  ${({ theme }) => theme.common.noticeCardDiv}
 `;
 const SubTitle = styled.div`
   width: 100%;

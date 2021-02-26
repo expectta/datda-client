@@ -23,7 +23,7 @@ const Wrap = styled.div`
 
 const AvatarCard = styled.img`
   overflow: hidden;
-  ${({ theme }) => theme.common.AvatarImageDiv}
+  ${({ theme }) => theme.common.avatarImageDiv}
 `;
 
 const NameTagWrap = styled.div`
