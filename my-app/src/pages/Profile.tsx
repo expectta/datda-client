@@ -5,6 +5,9 @@ export default function Profile() {
     <Wrap>
       <ContentCard>
         <Title>프로필</Title>
+        <div id="profileName">
+          <span>이름</span>
+        </div>
       </ContentCard>
     </Wrap>
   );

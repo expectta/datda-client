@@ -6,7 +6,7 @@ export default function SubMenu() {
   return (
     <Wrap>
       <SubMenuBar to="/">버그리포트</SubMenuBar>
-      <SubMenuBar to="/main/education">교육 프로그</SubMenuBar>
+      <SubMenuBar to="/main/education">교육 프로그램</SubMenuBar>
     </Wrap>
   );
 }
