@@ -10,7 +10,7 @@ import State from './State';
 import SubMenu from './SubMenu';
 import FooterContents from './FooterContents';
 import MainMenu from './MainMenu';
-import MiniIndiNotice from './MIniIndiNotice';
+import MiniIndiNotice from './MiniIndiNotice';
 import MiniNotice from './MiniNotice';
 import Timetable from './Timetable';
 import SignupSearchInsti from './SignupSeachInsti';
