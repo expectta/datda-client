@@ -4,16 +4,22 @@ import styled from 'styled-components';
 import { notice } from '../assets/testdata';
 import { ListInnerCard } from './Index';
 interface propsType {
-  match: any;
+  title: string;
+  fristCategory: string;
+  secondCategory: string;
 }
-export default function NoticeList({ match }: propsType) {
+export default function ListForm({
+  title,
+  fristCategory,
+  secondCategory,
+}: propsType) {
   return (
     <Wrap>
       <ContentCard>
-        <Title>공지사항</Title>
+        <Title>{title}</Title>
         <CategoryWrap>
-          <CategoryNotice>공지사항</CategoryNotice>
-          <CategoryEvent>행사</CategoryEvent>
+          <CategoryNotice>{fristCategory}</CategoryNotice>
+          <CategoryEvent>{secondCategory}</CategoryEvent>
           <CategoryYear>년도별 검색</CategoryYear>
         </CategoryWrap>
         <CardWrapper>
@@ -53,6 +59,8 @@ const CategoryWrap = styled.div`
   height: auto;
   margin: 0 auto;
   display: flex;
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 1%;
 `;
 const CategoryNotice = styled.span`
   flex: 1 auto;

@@ -13,7 +13,7 @@ interface propsType {
   category?: string;
 }
 
-export default function NoticeInnerCard(props: propsType) {
+export default function ListInnerCard(props: propsType) {
   // 공지사항 리스트 상태
   const { noticeId, title, category, createAt } = props;
   // 투약의뢰서 리스트 상태
@@ -21,44 +21,33 @@ export default function NoticeInnerCard(props: propsType) {
   return (
     <>
       <NoticeCard>
-        <SubTitle>
-          <CreateAt>{createAt}</CreateAt>
-        </SubTitle>
-        <Contents>
-          <Text> {title || '투약의뢰서'}</Text>
-          <GoToPostButton to="/main/notice/post">{'>'}</GoToPostButton>
-        </Contents>
+        <Point>* </Point>
+        <Content> {title}</Content>
+        <CreateAt>{createAt}</CreateAt>
       </NoticeCard>
     </>
   );
 }
+const Point = styled.div`
+  flex: 0.5 auto;
+`;
 
 const NoticeCard = styled.div`
-  ${({ theme }) => theme.common.noticeCardDiv}
-`;
-const SubTitle = styled.div`
-  width: 100%;
   display: flex;
+  padding: 1%;
+`;
 
-  border-bottom: 1px solid lightgray;
-  height: 35%;
-`;
-const Contents = styled.div`
-  width: 96%;
-  margin: 0 auto;
-  display: flex;
-`;
 const CreateAt = styled.div`
-  width: 96%;
   margin: 0 auto;
   color: #bcbbbb;
+  flex: inital;
   align-self: center;
 `;
-const Text = styled.span`
-  flex: 22 auto;
+const Content = styled.div`
   align-self: center;
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 12 auto;
   white-space: nowrap;
 `;
 const GoToPostButton = styled(Link)`

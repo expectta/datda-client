@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ListInnerCard } from './Index';
 
 export default function MiniNotice() {
   return (
@@ -8,52 +9,7 @@ export default function MiniNotice() {
       <NoticeWrap>
         <Title>알림장</Title>
         <NoticeContainar>
-          <NoticeCard>
-            <SubTitle>
-              <CreateAt>{'2021년 2월 20일'}</CreateAt>
-            </SubTitle>
-            <Contents>
-              <Text>
-                {' '}
-                {
-                  '3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!'
-                }
-              </Text>
-              <GoToPostButton to="/">{'>'}</GoToPostButton>
-            </Contents>
-          </NoticeCard>
-          <NoticeCard>
-            <SubTitle>
-              <CreateAt>{'2021년 2월 20일'}</CreateAt>
-            </SubTitle>
-            <Contents>
-              <Text> {'3월 2일 입학식이 있습니다!'}</Text>
-              <GoToPostButton to="/">{'>'}</GoToPostButton>
-            </Contents>
-          </NoticeCard>
-          <NoticeCard>
-            <SubTitle>
-              <CreateAt>{'2021년 2월 20일'}</CreateAt>
-            </SubTitle>
-            <Contents>
-              <Text> {'3월span 2일 입학식이 있습니다!'}</Text>
-              <GoToPostButton to="/">{'>'}</GoToPostButton>
-            </Contents>
-          </NoticeCard>
-          <NoticeCard>
-            <SubTitle>
-              <CreateAt>{'2021년 2월 20일'}</CreateAt>
-            </SubTitle>
-            <Contents>
-              <Text>
-                {' '}
-                {
-                  '3월 2일 입학식이 있습니다3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!3월 2일 입학식이 있습니다!!'
-                }
-              </Text>
-              <GoToPostButton to="/">{'>'}</GoToPostButton>
-            </Contents>
-          </NoticeCard>
+          <ListInnerCard></ListInnerCard>
         </NoticeContainar>
       </NoticeWrap>
     </Wrap>

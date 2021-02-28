@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-export default function ReadNotice() {
+
+interface propsType {
+  title: string;
+}
+export default function ReadForm({ title }: propsType) {
   return (
     <Wrap>
       <ContentCard>
-        <Title>공지사항</Title>
+        <Title>{title}</Title>
         <Container>
           <TitleWrapper>
             <SubTitle>{'제목'}</SubTitle>
