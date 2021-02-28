@@ -98,6 +98,7 @@ const common = {
   contentTitle: `
 	font-size:${fontSizes.xl};
 	width:95%; 
+	height:10%;
 	color:#bcbcbc;
 	padding:4%;
 	`,
@@ -136,6 +137,12 @@ const common = {
 	margin-top: 1%;
 	margin-bottom: 2%;
 	box-shadow: 0px 0px 5px #c8c8c8;
+	`,
+  defaultCardDiv: `
+	widht:100%;
+	height:100%;
+	border-radius: 15px 15px 15px 15px;
+  box-shadow: 0px 0px 5px #c8c8c8;
 	`,
 };
 
