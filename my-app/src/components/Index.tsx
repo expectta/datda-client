@@ -19,10 +19,12 @@ import InstiSelection from './InstiSelection';
 import SocialSelection from './SocialSelection';
 import NoticeList from './NoticeLIst';
 import ListInnerCard from './ListInnerCard';
-import WrietNotice from './WriteNotice';
+import WriteNotice from './WriteNotice';
 import ReadNotice from './ReadNotice';
 import MedicineList from './MedicineList';
 import WriteMedicine from './WriteMedicine';
+import CardList from './CardList';
+import WriteMeal from './WriteMeal';
 export {
   MainMenu,
   MiniIndiNotice,
@@ -45,8 +47,10 @@ export {
   InstiSelection,
   SocialSelection,
   ListInnerCard,
-  WrietNotice,
+  WriteNotice,
   ReadNotice,
   MedicineList,
   WriteMedicine,
+  CardList,
+  WriteMeal,
 };
