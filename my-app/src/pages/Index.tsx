@@ -11,6 +11,7 @@ import Medicine from './Medicine';
 import Profile from './Profile';
 import TimetableList from './TimetableList';
 import EducationList from './EducationList';
+import Report from './Report';
 
 export {
   Album,
@@ -26,4 +27,5 @@ export {
   Profile,
   TimetableList,
   EducationList,
+  Report,
 };
