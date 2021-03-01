@@ -51,7 +51,7 @@ export default function MiniNotice() {
 }
 const Wrap = styled.div`
   width: 95%;
-  height: 28%;
+  height: 29%;
   margin: 0 auto;
 `;
 const NoticeWrap = styled.div`
