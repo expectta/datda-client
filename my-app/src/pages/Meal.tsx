@@ -1,16 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Switch } from 'react-router-dom';
-import { CardList, WriteMeal, WriteNotice } from '../components/Index';
-export default function Meal() {
+import { Route, Switch, RouteComponentProps } from 'react-router-dom';
+import { CardList, WriteMeal, WriteForm } from '../components/Index';
+interface propsType {
+  location: RouteComponentProps['location'];
+  history: RouteComponentProps['history'];
+  match: RouteComponentProps['match'];
+}
+export default function Meal({ match }: propsType) {
   return (
     <Wrap>
-      <ContentCard>
-        <Switch>
-          <Route exact path="/main/meal" component={CardList} />
-          <Route exact pasth="/main/meal/write" component={WriteMeal} />
-        </Switch>
-      </ContentCard>
+      <Switch>
+        <Route exact path={`${match.path}`}>
+          <CardList
+            title="급식표"
+            imageTitle={'2월 급식표'}
+            createdAt={'2021년 2월 2일'}
+          ></CardList>
+        </Route>
+        <Route exact pasth={`${match.path}/write`}>
+          <WriteForm title="급식표 등록" type="meal"></WriteForm>
+        </Route>
+      </Switch>
     </Wrap>
   );
 }

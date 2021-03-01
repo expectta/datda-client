@@ -5,7 +5,6 @@ export const findStepEducation = (
   totalTimetable: Array<any>,
 ) => {
   let currentStep = 0;
-  console.log(currentTime, '전달받은 현재시간');
   const calculatedCurrentTime = Number(currentTime);
 
   for (const element of totalTimetable) {

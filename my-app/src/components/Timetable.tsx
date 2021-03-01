@@ -21,7 +21,7 @@ export default function Timetable() {
   });
   // 현재 진행중인 교육상태 업데이트
   useEffect(() => {
-    console.log(time, ' 현재시간');
+    // console.log(time, ' 현재시간');
     const currentEducation = findStepEducation(
       time,
       currentTimeTable.totalTimetable,
@@ -56,12 +56,12 @@ export default function Timetable() {
     setInterval(tick, 1000);
   }
   useEffect(() => {
-    console.log(
-      currentTimeTable.step,
-      '현재스탭',
-      currentTimeTable.previousStep,
-      '이전스탭',
-    );
+    // console.log(
+    //   currentTimeTable.step,
+    //   '현재스탭',
+    //   currentTimeTable.previousStep,
+    //   '이전스탭',
+    // );
     setCurrentTimeTable({
       ...currentTimeTable,
       previousStep: currentTimeTable.step,
