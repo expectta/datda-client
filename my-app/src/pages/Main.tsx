@@ -17,6 +17,7 @@ import {
   Meal,
   IndiNotice,
   EducationList,
+  Report,
 } from './Index';
 import {
   Nav,
@@ -57,6 +58,7 @@ function Main({ match }: RouteComponentProps<any>) {
             <Route path={`${match.path}/profile`} component={Profile} />
             <Route path={`${match.path}/timetable`} component={TimetableList} />
             <Route path={`${match.path}/education`} component={EducationList} />
+            <Route paht={`${match.path}/report`} component={Report} />
           </Switch>
         </ContentCard>
       </Section>

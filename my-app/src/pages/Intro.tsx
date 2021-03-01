@@ -37,14 +37,13 @@ function Intro() {
           </div>
         </Section1Box>
         <div id="section1Image" data-aos="fade-up" data-aos-duration="1500">
-          이곳은 그림 구역입니다
+          <img id="section1Image1" src="../images/web/intro2_graphic.svg"></img>
         </div>
       </Section1>
 
       <Section2 className="section 2">
         <div id="section2Flex">
           <div id="section2Left">
-            <div id="section2Image1">여기는 그림2입니다.</div>
             <Section2Box>
               <div className="bigText">
                 <div>
@@ -69,7 +68,7 @@ function Intro() {
             data-aos-duration="500"
             data-aos-mirror="true"
           >
-            이 곳은 시험입니다.
+            <img src="../images/web/intro3_graphic.svg"></img>
           </div>
         </div>
       </Section2>
@@ -85,8 +84,8 @@ function Intro() {
             <div>오늘의 식단들을 공유합니다. 쑥쑥 성장할 우리 아이들!</div>
           </div>
         </div>
-        <div id="section3Image" data-aos="fade-right" data-aos-duration="1500">
-          이곳은 그림3입니다
+        <div id="section3Image" data-aos="fade-right" data-aos-duration="2000">
+          <img src="../images/web/intro4_graphic.svg"></img>
         </div>
       </Section3>
       <Section4 className="section 4">
@@ -103,18 +102,14 @@ function Intro() {
           </div>
           <div id="section3Right">
             <div
-              className="section4Image1"
-              data-aos="fade-left"
+              id="section4Image1"
+              data-aos="fade-up"
               data-aos-duration="1000"
             >
-              이곳은 그림4입니다.
+              <img src="../images/web/intro5_graphic_back.svg"></img>
             </div>
-            <div
-              className="section4Image2"
-              data-aos="fade-right"
-              data-aos-duration="1000"
-            >
-              이곳은 그림4입니다.
+            <div className="section4Image2">
+              <img src="../images/web/intro5_graphic_front.svg"></img>
             </div>
           </div>
         </div>
@@ -132,7 +127,7 @@ function Intro() {
           </div>
         </div>
         <div id="section5Image" data-aos="fade-up" data-aos-duration="1000">
-          이곳은 그림5입니다.
+          <img src="../images/web/intro6_graphic.svg"></img>
         </div>
       </Section5>
       <Section6 className="section 6">
@@ -150,7 +145,7 @@ function Intro() {
           </div>
         </div>
         <div id="section6Image" data-aos="fade-left" data-aos-duration="2000">
-          이곳은 그림 6입니다.
+          <img src="../images/web/intro7_graphic.svg"></img>
         </div>
       </Section6>
       <LinkAgain className="linkAgain">
@@ -205,7 +200,7 @@ const IntroGlobal = styled.div`
 `;
 
 const SectionIntro = styled.div`
-  background: gray;
+  background-image : url('../images/web/intro1_crop_dark.png');
   text-align: center;
   display:flex;
   flex-direction: column;
@@ -221,31 +216,30 @@ const SectionIntro = styled.div`
 `;
 
 const Section1 = styled.div`
-  background: lightgray;
+  background-image: url('../images/web/intro2_background.png');
   #section1Image {
     padding-right: 10vw;
     text-align: right;
-    margin-top: 10vh;
   }
 `;
 
 const Section1Box = styled.div`
-  background-color: rgba(11, 156, 49, 0.47);
   text-align: left;
   color: white;
-  height: 60%;
+  height: 40%;
   padding: 10%;
 `;
 
 const Section2 = styled.div`
-  background: rgb(220, 255, 187);
-  #section2Image {
-    text-align: right;
-  }
+  background-image: url('../images/web/intro3_background.png');
   #section2Flex {
     display: flex;
     height: 100vh;
-    padding-left: 10%;
+    padding-left: 5%;
+  }
+  #section2Left {
+    width: 46vw;
+    padding-top: 38vh;
   }
 
   #section2Image1 {
@@ -254,8 +248,8 @@ const Section2 = styled.div`
     padding-left: 10vw;
   }
   #section2Image2 {
-    margin-top: 70vh;
-    margin-left: 30vw;
+    margin-top: 35vh;
+    text-align: right;
   }
 `;
 
@@ -264,7 +258,7 @@ const Section2Box = styled.div`
 `;
 
 const Section3 = styled.div`
-  background: rgb(251, 246, 246);
+  background-image: url('../images/web/intro4_background.png')
   padding-right: 5%;
   .section3Box {
     margin-top: 17%;
@@ -277,7 +271,7 @@ const Section3 = styled.div`
 `;
 
 const Section4 = styled.div`
-  background: rgb(254, 255, 128);
+  background-image: url('../images/web/intro5_background.png');
   padding: 5%;
   #section4Flex {
     display: flex;
@@ -285,11 +279,15 @@ const Section4 = styled.div`
   }
   #section4Box {
     color: rgb(123, 118, 109);
+    width: 48vw;
+  }
+  #section4Image1 {
+    height: 48%;
   }
 `;
 
 const Section5 = styled.div`
-  background: rgb(229, 242, 250);
+  background-image: url('../images/web/intro6_background.png');
   padding: 7%;
   #section5Box {
     background: rgb(229, 229, 229);
@@ -302,19 +300,24 @@ const Section5 = styled.div`
   }
   #section5Image {
     text-align: right;
+    margin-top: -38vh;
   }
 `;
 
 const Section6 = styled.div`
-  background: rgb(229, 229, 229);
+  background-image: url('../images/web/intro7_background.png');
   display: flex;
   padding: 7%;
 
+  #section6Left {
+    width: 30%;
+  }
+
   #section6Image {
-    padding-left: 20%;
     text-align: right;
-    margin-left: 30%;
+    width: 70%;
     margin-top: 10%;
+    padding-left: 30%;
   }
 `;
 
