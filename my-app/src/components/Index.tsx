@@ -10,7 +10,6 @@ import State from './State';
 import SubMenu from './SubMenu';
 import FooterContents from './FooterContents';
 import MainMenu from './MainMenu';
-import MiniIndiNotice from './MiniIndiNotice';
 import MiniNotice from './MiniNotice';
 import Timetable from './Timetable';
 import SignupSearchInsti from './SignupSeachInsti';
@@ -21,15 +20,21 @@ import ListForm from './ListForm';
 import ListInnerCard from './ListInnerCard';
 import WriteNotice from './WriteNotice';
 import ReadForm from './ReadForm';
-import MedicineList from './MedicineList';
 import WriteMedicine from './WriteMedicine';
 import CardList from './CardList';
 import WriteMeal from './WriteMeal';
+import MIniIndiNotice from './MIniIndiNotice';
+import ImagePostForm from './ImagePostForm';
+import TextAreaForm from './TextAreaForm';
+import WriteForm from './WriteForm';
+
 export {
   MainMenu,
-  MiniIndiNotice,
+  WriteForm,
+  MIniIndiNotice,
   MiniNotice,
   Timetable,
+  TextAreaForm,
   Nav,
   Modal,
   Avatar,
@@ -39,6 +44,7 @@ export {
   FooterContents,
   ListForm,
   Signup,
+  ImagePostForm,
   SignupDetail,
   Institution,
   Selection,
@@ -49,7 +55,6 @@ export {
   ListInnerCard,
   WriteNotice,
   ReadForm,
-  MedicineList,
   WriteMedicine,
   CardList,
   WriteMeal,
