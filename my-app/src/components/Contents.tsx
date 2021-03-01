@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Timetable, MiniNotice, MiniIndiNotice, MainMenu } from './Index';
+import { Timetable, MiniNotice, MIniIndiNotice, MainMenu } from './Index';
 
 export default function Contents() {
   const [clickedMenu, setClickedMenu] = useState(0);
@@ -38,12 +38,10 @@ export default function Contents() {
           <Name>{'박한솔'}</Name>
         </BookMark>
       </BookMarkWrap>
-      <ContentCard>
-        <Timetable></Timetable>
-        <MainMenu></MainMenu>
-        <MiniNotice></MiniNotice>
-        <MiniIndiNotice></MiniIndiNotice>
-      </ContentCard>
+      <Timetable></Timetable>
+      <MainMenu></MainMenu>
+      <MiniNotice></MiniNotice>
+      <MIniIndiNotice></MIniIndiNotice>
     </Wrap>
   );
 }
