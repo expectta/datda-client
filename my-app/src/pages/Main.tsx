@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { Router, Route, Switch } from 'react-router-dom';
+import {
+  withRouter,
+  Router,
+  Route,
+  Switch,
+  RouteComponentProps,
+} from 'react-router-dom';
 import styled from 'styled-components';
 import {
   TimetableList,
@@ -21,10 +27,8 @@ import {
   SubMenu,
   FooterContents,
 } from '../components/Index';
-interface propsType {
-  match: any;
-}
-function Main({ match }: propsType) {
+
+function Main({ match }: RouteComponentProps<any>) {
   return (
     <Wrap>
       <Header id="header">
@@ -43,18 +47,20 @@ function Main({ match }: propsType) {
         </ThirdPart>
       </Aside>
       <Section id="content">
-        <Switch>
-          <Route exact path={`${match.path}`} component={Contents} />
-          <Route path={`${match.path}/notice`} component={Notice} />
-          <Route path={`${match.path}/medicine`} component={Medicine} />
-          <Route path={`${match.path}/meal`} component={Meal} />
-          <Route path={`${match.path}/indi_notice`} component={IndiNotice} />
-          <Route path={`${match.path}/album`} component={Album} />
-          <Route path={`${match.path}/profile`} component={Profile} />
-          <Route path={`${match.path}/timetable`} component={TimetableList} />
-          <Route path={`${match.path}/education`} component={EducationList} />
-          <Route paht={`${match.path}/report`} component={Report} />
-        </Switch>
+        <ContentCard>
+          <Switch>
+            <Route exact path={`${match.path}`} component={Contents} />
+            <Route path={`${match.path}/notice`} component={Notice} />
+            <Route path={`${match.path}/medicine`} component={Medicine} />
+            <Route path={`${match.path}/meal`} component={Meal} />
+            <Route path={`${match.path}/indi_notice`} component={IndiNotice} />
+            <Route path={`${match.path}/album`} component={Album} />
+            <Route path={`${match.path}/profile`} component={Profile} />
+            <Route path={`${match.path}/timetable`} component={TimetableList} />
+            <Route path={`${match.path}/education`} component={EducationList} />
+            <Route paht={`${match.path}/report`} component={Report} />
+          </Switch>
+        </ContentCard>
       </Section>
       <Footer>
         <FooterContents></FooterContents>
@@ -153,6 +159,10 @@ const ThirdPart = styled.div`
   width: 100%;
   height: 50%;
   padding: 2%;
+`;
+const ContentCard = styled.div`
+  margin-bottom: 3%;
+  ${({ theme }) => theme.common.contentCardDiv}
 `;
 const TimetableSection = styled.div`
   width: 100%;

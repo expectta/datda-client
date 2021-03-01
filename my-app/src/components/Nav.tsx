@@ -1,20 +1,26 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter, Link, RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
-
-function Nav() {
+interface propsType {
+  location: RouteComponentProps['location'];
+  history: RouteComponentProps['history'];
+  match: RouteComponentProps['match'];
+}
+function Nav({ history }: propsType) {
   return (
     <Wrap>
       <WrapLinks>
         <Links to="/main">홈</Links>
         <Links to="/main/profile">프로필</Links>
+        {/* <label onClick={() => history.push('/main/profile')}>프로필</label> */}
         <Links to="/">로그아웃</Links>
       </WrapLinks>
     </Wrap>
   );
 }
-
-export default Nav;
+//해당 컴포넌트는 route컴포넌트가 아니기때문에
+//history를 사용 할 수 없어 withRouter사용
+export default withRouter(Nav);
 const Wrap = styled.div`
   width: 100%;
   height: 100%;

@@ -45,7 +45,7 @@ export default function WriteNotice() {
             </SubTitle>
             <Writer>{'작성자'}</Writer>
           </TitleWrapper>
-          <ImageWrapper isSelectedImage={image.previewURL}>
+          {/* <ImageWrapper isSelectedImage={image.previewURL}>
             <ImageContainer htmlFor="input_file">
               <SelectImageInput
                 type="file"
@@ -69,7 +69,7 @@ export default function WriteNotice() {
             >
               이미지 제거
             </RemoveImage>
-          </ImageWrapper>
+          </ImageWrapper> */}
           <TextBox placeholder="내용작성"></TextBox>
         </Container>
       </ContentCard>
