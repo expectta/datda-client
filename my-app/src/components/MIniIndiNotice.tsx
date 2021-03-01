@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListInnerCard } from './Index';
 
-export default function MiniNotice() {
+export default function MiniIndiNotice() {
   return (
     <Wrap>
       <NoticeWrap>
