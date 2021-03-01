@@ -19,6 +19,7 @@ import {
 import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
+import { userInfo } from 'os';
 
 function Signin() {
   //회원가입 필요한 정보
@@ -39,12 +40,9 @@ function Signin() {
 
   //에러메세지
   const [errormessage, setErrormessage] = useState<string>('');
-  //첫 페이지에서 기관을 눌렀을시
-  const [isInsti, setIsInsti] = useState<boolean>(false);
   //첫 페이지(회원 유형 선택)
   const [selection, setSelection] = useState<boolean>(true);
 
-  const [socialSelection, setSocialSelection] = useState<boolean>(false);
   //아이디 비밀번호 설정 페이지
   const [signup, setSignup] = useState<boolean>(false);
   //이름 이메일 전화번호
@@ -60,10 +58,11 @@ function Signin() {
 
   const history = useHistory();
   //학부모, 선생님을 선택할 시
-  const handleSelection = (value: string) => {
-    setSelection(false);
-    setSocialSelection(true);
-    setInputs({ ...inputs, permission: value });
+  const handleSelection = () => {
+    if (inputs.permission.length !== 0) {
+      setSelection(false);
+      setSignup(true);
+    }
   };
 
   // useEffect(() => {
@@ -72,17 +71,6 @@ function Signin() {
   //   }
   // }, [selection]);
 
-  const handleIsInsti = (value: string) => {
-    setSelection(false);
-    setSocialSelection(true);
-    setInputs({ ...inputs, permission: value });
-    setIsInsti(true);
-  };
-
-  const handleSocialSelection = () => {
-    setSocialSelection(false);
-    setSignup(true);
-  };
   //기관 가입을 선택할 시
 
   const handleSignup = (
@@ -117,7 +105,9 @@ function Signin() {
     } else {
       setSignupDetail(false);
       setErrormessage('');
-      isInsti ? setInstitution(true) : history.push('/login');
+      inputs.permission === 'institution'
+        ? setInstitution(true)
+        : history.push('/login');
     }
   };
   const handleInstitution = (institutionName: string, master: string) => {
@@ -132,14 +122,14 @@ function Signin() {
       : (history.push('/'), setErrormessage(''));
   };
 
-  const handleSearchInsti = () => {
-    setSearchInsti(false);
-    setSearchClass(true);
-  };
+  // const handleSearchInsti = () => {
+  //   setSearchInsti(false);
+  //   setSearchClass(true);
+  // };
 
-  const handleSearchClass = () => {
-    history.push('/login');
-  };
+  // const handleSearchClass = () => {
+  //   history.push('/login');
+  // };
 
   //인풋데이터 값 바꾸기
   const onChange = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -163,13 +153,9 @@ function Signin() {
     <SignupGlobal>
       <h1>Datda</h1>
       <Selection
-        handleIsInsti={handleIsInsti}
         selection={selection}
         handleSelection={handleSelection}
-      />
-      <SocialSelection
-        socialSelection={socialSelection}
-        handleSocialSelection={handleSocialSelection}
+        onChange={onChange}
       />
       <Signup
         inputs={inputs}
