@@ -12,7 +12,6 @@ import Profile from './Profile';
 import TimetableList from './TimetableList';
 import EducationList from './EducationList';
 import Report from './Report';
-
 export {
   Album,
   Meal,

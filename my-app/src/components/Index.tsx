@@ -23,12 +23,16 @@ import ReadForm from './ReadForm';
 import WriteMedicine from './WriteMedicine';
 import CardList from './CardList';
 import WriteMeal from './WriteMeal';
+import ProfileList from './ProfileList';
+import SelectInstitution from './SelectInstitution';
+import AddChildren from './AddChildren';
 import MIniIndiNotice from './MIniIndiNotice';
 import ImagePostForm from './ImagePostForm';
 import TextAreaForm from './TextAreaForm';
 import WriteForm from './WriteForm';
 import Carousel from './Carousel';
 import SecondSubMenu from './SecondSubMenu';
+
 
 export {
   Carousel,
@@ -62,4 +66,7 @@ export {
   WriteMedicine,
   CardList,
   WriteMeal,
+  ProfileList,
+  SelectInstitution,
+  AddChildren,
 };
