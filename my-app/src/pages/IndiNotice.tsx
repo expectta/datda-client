@@ -27,5 +27,5 @@ export default function IndiNotice({ match }: propsType) {
 }
 const Wrap = styled.div`
   width: 100%;
-  height: 100%;
+  height: 97%;
 `;
