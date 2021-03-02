@@ -18,6 +18,8 @@ import {
   IndiNotice,
   EducationList,
   Report,
+  Management,
+  Bus,
 } from './Index';
 import {
   Nav,
@@ -150,6 +152,7 @@ function Main({ match }: RouteComponentProps<any>) {
         </FristPart>
         <SecondPart id="state">
           <State
+            type="현재상태"
             isCheck={isCheck}
             isOk={isOk}
             isSleep={isSleep}
@@ -176,13 +179,15 @@ function Main({ match }: RouteComponentProps<any>) {
             <Route path={`${match.path}/profile`} component={Profile} />
             <Route path={`${match.path}/timetable`} component={TimetableList} />
             <Route path={`${match.path}/education`} component={EducationList} />
-            <Route paht={`${match.path}/report`} component={Report} />
+            <Route exact path={`${match.path}/report`} component={Report} />
+            <Route path={`${match.path}/management`} component={Management} />
+            <Route path={`${match.path}/bus`} component={Bus} />
           </Switch>
         </ContentCard>
       </Section>
-      <BottomSection>
+      {/* <BottomSection>
         <Carousel></Carousel>
-      </BottomSection>
+      </BottomSection> */}
       <Footer>
         <FooterContents></FooterContents>
       </Footer>
@@ -193,7 +198,7 @@ function Main({ match }: RouteComponentProps<any>) {
 export default Main;
 
 const Wrap = styled.div`
-  width: 800px;
+  width: 900px;
   margin: 0 auto;
   @media ${({ theme }) => theme.device.tablet} {
     width: 100%;
@@ -204,6 +209,7 @@ const Wrap = styled.div`
       bottom: 0px;
       background: #6f6eff;
       width: 100%;
+      z-index: 10;
       margin-bottom: 0px;
       div {
         display: none;
@@ -247,24 +253,22 @@ const Header = styled.div`
   margin-bottom: 7%;
 `;
 const Aside = styled.div`
-  width: 30%;
-  height: 700px;
+  width: 25%;
+  height: 800px;
   float: left;
-  padding: 2%;
+  padding: 1%;
 `;
 const Section = styled.div`
-  width: 70%;
-  height: 700px;
+  width: 75%;
+  height: 900px;
   float: left;
-  padding: 2%;
+  padding: 1%;
 `;
 const BottomSection = styled.div`
   width: 100%;
   height: 300px;
   clear: both;
-  padding-top: 6%;
-
-  padding: 2%;
+  padding-top: 10%;
   margin-bottom: 50px;
 `;
 const Footer = styled.div`
@@ -280,12 +284,12 @@ const TopSubNav = styled.div`
 `;
 const FristPart = styled.div`
   width: 100%;
-  height: 30%;
+  height: 25%;
   padding: 2%;
 `;
 const SecondPart = styled.div`
   width: 100%;
-  height: 13%;
+  height: 14%;
   display: flex;
   padding: 2%;
 `;
@@ -296,7 +300,7 @@ const ThirdPart = styled.div`
 `;
 const FourthPart = styled.div`
   width: 100%;
-  height: 44%;
+  height: 31%;
   padding: 2%;
 `;
 const ContentCard = styled.div`
