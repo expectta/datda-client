@@ -72,7 +72,6 @@ const common = {
 		border-radius: 20px;
 		outline:0px;
 		text-decoration: none;
-
 		cursor:pointer;
   &:hover {
     transition: all 0.3s ease-in-out;
@@ -117,10 +116,14 @@ const common = {
     color: #6f6eff;;
 	}
 	`,
+  stateCardDiv: `
+	border-radius: 15px 15px 15px 15px;
+  box-shadow: 0px 0px 5px #c8c8c8;	
+	`,
   avatarImageDiv: `
 	width: 100%;
 	height:100%;
-	border-radius: 0px 0px 60px;
+	border-radius: 12px 12px 60px 12px;
 	`,
   stateDiv: `
 	background:#6f6eff;
