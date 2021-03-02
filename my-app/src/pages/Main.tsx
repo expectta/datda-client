@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   withRouter,
@@ -26,9 +26,118 @@ import {
   State,
   SubMenu,
   FooterContents,
+  Carousel,
+  SecondSubMenu,
 } from '../components/Index';
+import firestore from '../common/utils/firebase';
 
 function Main({ match }: RouteComponentProps<any>) {
+  // 출석
+  const [isCheck, setIsCheck] = useState(false);
+  // 투약의뢰서
+  const [please, setPlease] = useState(false);
+  // 투약보고서
+  const [isOk, setIsOk] = useState(false);
+  // 낮잠
+  const [isSleep, setIsSleep] = useState(false);
+  // 식사
+  const [isEat, setIsEat] = useState(false);
+  // 기관 아이디 관련 변수
+  const institutionId = '0'; //! 여기서는 0이지만 Mysql의 institutionId
+  // 아이 아이디 관련 변수
+  const childrenId = '0'; //! 여기서는 0이지만 Mysql의 childrenId
+  // fireStore의 institution 찾는 쿼리
+  const institutionCol = firestore.collection('institution').doc(institutionId);
+  // fireStore의 institution&children 찾는 쿼리
+  const db = institutionCol.collection('children').doc(childrenId);
+  // 회원이 로그인 할 경우 실시간 상태를 업데이트
+  useEffect(() => {
+    handleLogin();
+  }, []);
+  // 로그인 했을 시 firebase 데이터 관리
+  const handleLogin = () => {
+    db.get().then((doc) => {
+      // 유저의 상태테이터가 firebase에 있다면
+      if (doc.data()) {
+        alert('datda에 오신것을 환영합니다!');
+        handleRealTime();
+      } else {
+        db.set({
+          Check: false,
+          Eat: false,
+          Ok: false,
+          Sleep: false,
+          please: false,
+        });
+      }
+    });
+  };
+  //friebase 실시간 감지
+  const handleRealTime = () => {
+    db.onSnapshot((doc) => {
+      setIsCheck(doc.data()?.Check);
+      setIsOk(doc.data()?.Ok);
+      setIsSleep(doc.data()?.Sleep);
+      setIsEat(doc.data()?.Eat);
+      setPlease(doc.data()?.Please);
+    });
+  };
+  const handleIsCheck = (e: any) => {
+    // 학부모가 '투약의뢰' 버튼을 눌렀을 시
+    if (e.target.id === 'please') {
+      db.update({
+        Please: true,
+      });
+      // 학부모가 '확인' 버튼을 눌렀을 시
+    } else if (e.target.id === 'donePlease') {
+      db.update({
+        Please: false,
+      });
+      // 선생님이 '등원' 버튼을 눌렀을 시
+    } else if (e.target.id === 'checkUp') {
+      // firebase에 있는 상태를 바꾼다.
+      db.update({
+        Check: true,
+      });
+      // 선생님이 '하원' 버튼을 눌렀을 시
+    } else if (e.target.id === 'checkDown') {
+      // firebase에 있는 상태를 바꾼다.
+      db.update({
+        Check: false,
+      });
+      // 선생님이 '투약보고서'를 전송하면
+    } else if (e.target.id === 'ok') {
+      db.update({
+        Ok: true,
+      });
+      // 선생님이 '확인' 버튼을 눌렀을 시
+    } else if (e.target.id === 'doneOk') {
+      db.update({
+        Ok: false,
+      });
+      // 선생님이 '취침' 버튼을 눌렀을 시
+    } else if (e.target.id === 'sleep') {
+      db.update({
+        Sleep: true,
+      });
+      // 선생님이 '기상' 버튼을 눌렀을 시
+    } else if (e.target.id === 'wakeUp') {
+      db.update({
+        Sleep: false,
+      });
+      // 선생님이 '식사 시작' 버튼을 눌렀을 시
+    } else if (e.target.id === 'eat') {
+      db.update({
+        Eat: true,
+      });
+      // 선생님이 '식사 끝' 버튼을 눌렀을 시
+    } else if (e.target.id === 'ate') {
+      db.update({
+        Eat: false,
+      });
+    }
+  };
+
   return (
     <Wrap>
       <Header id="header">
@@ -40,11 +149,20 @@ function Main({ match }: RouteComponentProps<any>) {
           <Avatar></Avatar>
         </FristPart>
         <SecondPart id="state">
-          <State></State>
+          <State
+            isCheck={isCheck}
+            isOk={isOk}
+            isSleep={isSleep}
+            isEat={isEat}
+            please={please}
+          ></State>
         </SecondPart>
         <ThirdPart id="submenu">
           <SubMenu></SubMenu>
         </ThirdPart>
+        <FourthPart>
+          <SecondSubMenu></SecondSubMenu>
+        </FourthPart>
       </Aside>
       <Section id="content">
         <ContentCard>
@@ -62,6 +180,9 @@ function Main({ match }: RouteComponentProps<any>) {
           </Switch>
         </ContentCard>
       </Section>
+      <BottomSection>
+        <Carousel></Carousel>
+      </BottomSection>
       <Footer>
         <FooterContents></FooterContents>
       </Footer>
@@ -72,7 +193,7 @@ function Main({ match }: RouteComponentProps<any>) {
 export default Main;
 
 const Wrap = styled.div`
-  width: 900px;
+  width: 800px;
   margin: 0 auto;
   @media ${({ theme }) => theme.device.tablet} {
     width: 100%;
@@ -84,6 +205,9 @@ const Wrap = styled.div`
       background: #6f6eff;
       width: 100%;
       margin-bottom: 0px;
+      div {
+        display: none;
+      }
     }
     #top-submenu {
       width: 100%;
@@ -117,21 +241,31 @@ const Wrap = styled.div`
 `;
 const Header = styled.div`
   width: 100%;
-  height: 50px;
+  height: 40px;
   padding: 1%;
+
   margin-bottom: 7%;
 `;
 const Aside = styled.div`
   width: 30%;
-  height: 900px;
+  height: 700px;
   float: left;
   padding: 2%;
 `;
 const Section = styled.div`
   width: 70%;
-  height: 900px;
+  height: 700px;
   float: left;
   padding: 2%;
+`;
+const BottomSection = styled.div`
+  width: 100%;
+  height: 300px;
+  clear: both;
+  padding-top: 6%;
+
+  padding: 2%;
+  margin-bottom: 50px;
 `;
 const Footer = styled.div`
   width: 100%;
@@ -151,17 +285,24 @@ const FristPart = styled.div`
 `;
 const SecondPart = styled.div`
   width: 100%;
-  height: 20%;
+  height: 13%;
   display: flex;
   padding: 2%;
 `;
 const ThirdPart = styled.div`
   width: 100%;
-  height: 50%;
+  height: 13%;
+  padding: 2%;
+`;
+const FourthPart = styled.div`
+  width: 100%;
+  height: 44%;
   padding: 2%;
 `;
 const ContentCard = styled.div`
   margin-bottom: 3%;
+  background: white;
+  height: 100%;
   ${({ theme }) => theme.common.contentCardDiv}
 `;
 const TimetableSection = styled.div`
