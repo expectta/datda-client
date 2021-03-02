@@ -55,12 +55,11 @@ const Title = styled.div`
 `;
 const Container = styled.div`
   width: 95%;
-  height: 88%;
+  height: 85%;
   display: grid;
   grid-gap: 1%;
   padding: 1%;
   margin: 0 auto;
-  margin-bottom: 7%;
 `;
 const TitleWrapper = styled.div`
   display: flex;
@@ -95,9 +94,7 @@ const TextBox = styled.textarea`
 `;
 const ButtonWrapper = styled.div`
   text-align: center;
-  width: 95%;
   height: auto;
-  margin: 3%;
   a {
     margin: 2%;
   }
