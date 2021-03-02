@@ -79,7 +79,7 @@ export default function Timetable() {
               >
                 <CurrentEducation id="state-box">
                   <EducationWrap>
-                    <Icon src="../images/nap.png" alt="아이콘"></Icon>
+                    <Icon src="../images/education.png" alt="아이콘"></Icon>
                     <CurrentState>
                       <Time>
                         <label>
@@ -135,7 +135,7 @@ const ProgressBar = styled.div<propsType>`
   height: 12px;
   left: -3px;
   border-radius: 10px;
-  background: #ff5722;
+  background: #6f6eff;
   display: inline-block;
   justify-content: flex-end;
   z-index: 2;
@@ -149,14 +149,14 @@ const ProgerssBarBack = styled.div`
   height: 14px;
   position: relative;
   border-radius: 10px;
-  top: 24px;
+  top: 37px;
   margin: 0 auto;
   border: 1px solid #d0cdcd;
   background: #f0ecec;
 `;
 const Icon = styled.img`
-  width: 48%;
-  height: 100%;
+  width: auto;
+  height: 51px;
 `;
 const EducationWrap = styled.div`
   width: 100%;
