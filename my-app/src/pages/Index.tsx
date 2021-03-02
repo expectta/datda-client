@@ -12,7 +12,11 @@ import Profile from './Profile';
 import TimetableList from './TimetableList';
 import EducationList from './EducationList';
 import Report from './Report';
+import Management from './ManagementChildren';
+import Bus from './Bus';
 export {
+  Bus,
+  Management,
   Album,
   Meal,
   Medicine,
