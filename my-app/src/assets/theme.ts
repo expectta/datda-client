@@ -16,7 +16,7 @@ const deviceSizes = {
   mobileS: '320px',
   mobileM: '375px',
   mobileL: '700px',
-  tablet: '900px',
+  tablet: '820px',
   tabletL: '1024px',
 };
 
@@ -81,16 +81,17 @@ const common = {
 		
   }
 	`,
+  //앨범 카드 스타일
   albumCardDiv: `
 	width:150px;
-	height:150px;
+	height:150px
 	border-radius: 15px 15px 15px 15px;
-	box-shadow: 0px 0px 5px;
+	box-shadow: 0px 0px 5px #c8c8c8;
 	`,
   //section 기본 스타일
   contentCardDiv: `
 	width:100%;
-	height:92%;
+	height:100%;
 	border: 0px;
 	border-radius: 15px 15px 15px 15px;
   box-shadow: 0px 0px 5px #c8c8c8;	`,
