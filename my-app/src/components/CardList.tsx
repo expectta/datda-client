@@ -19,7 +19,11 @@ function CardList({ title, imageTitle, createdAt, match }: propsType) {
             <FristMenu>{'월별'}</FristMenu>
             <SecondMenu>{'일별'}</SecondMenu>
           </SubMenu>
-        ) : null}
+        ) : (
+          <SubMenu>
+            <FristMenu>{'전체앨범'}</FristMenu>
+          </SubMenu>
+        )}
         <CardWrapper>
           <CardContainer>
             <Card>
@@ -78,12 +82,96 @@ function CardList({ title, imageTitle, createdAt, match }: propsType) {
                 <ImageCreatedAt>{createdAt}</ImageCreatedAt>
               </TextContainer>
             </Card>
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>{' '}
+            <Card>
+              <Image src="../images/nap.png"></Image>
+              <TextContainer>
+                <ImageTitle>{imageTitle}</ImageTitle>
+                <ImageCreatedAt>{createdAt}</ImageCreatedAt>
+              </TextContainer>
+            </Card>
           </CardContainer>
         </CardWrapper>
+        <ButtonWrapper>
+          <WirteButton to={`${match.path}/write`}>작성</WirteButton>
+        </ButtonWrapper>
       </Wrap>
-      <ButtonWrapper>
-        <WirteButton to={`${match.path}/write`}>작성</WirteButton>
-      </ButtonWrapper>
     </>
   );
 }
@@ -91,7 +179,6 @@ export default withRouter(CardList);
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
-  margin-bottom: 6%;
 `;
 
 const Card = styled.div`
@@ -122,7 +209,7 @@ const WirteButton = styled(Link)`
 
 const SubMenu = styled.div`
   width: 95%;
-  height: auto;
+  height: 3%;
   margin: 0 auto;
   display: flex;
   border-bottom: 1px solid lightgray;
@@ -165,8 +252,9 @@ const TextContainer = styled.div`
 
 const CardWrapper = styled.div`
   width: 98%;
-  height: 87%;
+  height: 82%;
   margin: 0 auto;
+  margin-bottom: 2%;
   overflow: auto;
   padding: 1%;
 `;
