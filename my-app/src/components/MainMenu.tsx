@@ -33,6 +33,7 @@ export default function MainMenu() {
 const Wrap = styled.div`
   width: 100%;
   height: 20%;
+  border-top: 1px solid #eeeeee;
 `;
 const MenuWrap = styled.div`
   width: 95%;
