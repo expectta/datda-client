@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Timetable, MiniNotice, MIniIndiNotice, MainMenu } from './Index';
+import {
+  Timetable,
+  Carousel,
+  MiniNotice,
+  MIniIndiNotice,
+  MainMenu,
+} from './Index';
 
 export default function Contents() {
   const [clickedMenu, setClickedMenu] = useState(0);
@@ -42,6 +48,7 @@ export default function Contents() {
       <MainMenu></MainMenu>
       <MiniNotice></MiniNotice>
       <MIniIndiNotice></MIniIndiNotice>
+      <Carousel></Carousel>
     </Wrap>
   );
 }
@@ -95,4 +102,9 @@ const Name = styled.div`
   transform: unset;
   margin-top: 6px;
   // transform: perspective(40px) rotateX(-15deg);
+`;
+const ListWrapper = styled.div`
+  width: 100%;
+  height: 37%;
+  padding: 2%;
 `;
