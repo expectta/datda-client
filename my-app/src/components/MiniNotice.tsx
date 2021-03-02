@@ -21,16 +21,16 @@ const Wrap = styled.div`
   margin: 0 auto;
 `;
 const NoticeWrap = styled.div`
-  widths: 95%;
+  width: 90%;
+  margin: 0 auto;
   height: 100%;
   border-radius: 15px 15px 15px 15px;
   box-shadow: 0px 0px 5px #c8c8c8;
 `;
-const Title = styled.h3`
+const Title = styled.h4`
   width: 95%;
-  height: 17%;
+  height: 16%;
   margin: 0 auto;
-  font-size: 1.3rem;
   padding: 10px;
   color: lightgray;
   text-align: center;
@@ -38,38 +38,11 @@ const Title = styled.h3`
 `;
 const NoticeContainar = styled.div`
   width: 95%;
-  height: 83%;
+  height: 84%;
   margin: 0 auto;
   overflow: auto;
 `;
-const NoticeCard = styled.div`
-  ${({ theme }) => theme.common.noticeCardDiv}
-`;
-const SubTitle = styled.div`
-  width: 100%;
-  display: flex;
 
-  border-bottom: 1px solid lightgray;
-  height: 35%;
-`;
-const Contents = styled.div`
-  width: 96%;
-  margin: 0 auto;
-  display: flex;
-`;
-const CreateAt = styled.div`
-  width: 96%;
-  margin: 0 auto;
-  color: #bcbbbb;
-  align-self: center;
-`;
-const Text = styled.span`
-  flex: 22 auto;
-  align-self: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
 const GoToPostButton = styled(Link)`
   flex: 1 auto;
   font-size: 3rem;
