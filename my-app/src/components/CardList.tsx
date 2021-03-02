@@ -106,9 +106,9 @@ const CardContainer = styled.div`
   margin: 0 auto;
   display: grid;
   //암시적 로우 크기 (아이템이 생성될떄마다 생성)
-  grid-auto-rows: 250px;
+  grid-auto-rows: 200px;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2%;
+  grid-gap: 5%;
 `;
 
 const ButtonWrapper = styled.div`

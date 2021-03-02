@@ -22,15 +22,16 @@ const Wrap = styled.div`
   margin-top: 15px;
 `;
 const NoticeWrap = styled.div`
-  widths: 94%;
+  width: 90%;
   height: 100%;
+  margin: 0 auto;
   border-radius: 15px 15px 15px 15px;
   box-shadow: 0px 0px 5px #c8c8c8;
 `;
-const Title = styled.h3`
+const Title = styled.h4`
   width: 95%;
+  height: 16%;
   margin: 0 auto;
-  font-size: 1.3rem;
   padding: 10px;
   color: lightgray;
   text-align: center;
@@ -38,7 +39,7 @@ const Title = styled.h3`
 `;
 const NoticeContainar = styled.div`
   width: 95%;
-  height: 83%;
+  height: 84%;
   margin: 0 auto;
   overflow: auto;
 `;

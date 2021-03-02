@@ -30,8 +30,12 @@ import MIniIndiNotice from './MIniIndiNotice';
 import ImagePostForm from './ImagePostForm';
 import TextAreaForm from './TextAreaForm';
 import WriteForm from './WriteForm';
+import Carousel from './Carousel';
+import SecondSubMenu from './SecondSubMenu';
 
 export {
+  Carousel,
+  SecondSubMenu,
   MainMenu,
   WriteForm,
   MIniIndiNotice,
