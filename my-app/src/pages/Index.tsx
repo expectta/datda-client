@@ -12,6 +12,7 @@ import Profile from './Profile';
 import TimetableList from './TimetableList';
 import EducationList from './EducationList';
 import Report from './Report';
+import CreateClass from './CreateClass';
 export {
   Album,
   Meal,
@@ -27,4 +28,5 @@ export {
   TimetableList,
   EducationList,
   Report,
+  CreateClass,
 };
