@@ -30,7 +30,15 @@ function App() {
           <Route exact path="/" component={Intro} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/main" component={Main} />
+          <Route
+            path="/main"
+            render={() => (
+              <Main
+                setModalMessage={setModalMessage}
+                setModalVisible={setModalVisible}
+              />
+            )}
+          />
           <Route path="/userinfo" component={UserInfo} />
         </Switch>
       </ThemeProvider>
