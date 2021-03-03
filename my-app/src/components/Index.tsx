@@ -33,7 +33,6 @@ import WriteForm from './WriteForm';
 import Carousel from './Carousel';
 import SecondSubMenu from './SecondSubMenu';
 
-
 export {
   Carousel,
   SecondSubMenu,
