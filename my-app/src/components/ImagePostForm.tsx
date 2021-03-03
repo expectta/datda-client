@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 interface propsType {
-  isSelectedImage: string;
+  userInfo: {
+    userId: string;
+    permission: string;
+    institution: string;
+    isLogin: boolean;
+  };
 }
-export default function ImagePostForm() {
+
+export default function ImagePostForm({ userInfo }: propsType) {
   const [image, setImage] = useState({
     file: '',
     previewURL: '',
@@ -74,7 +80,7 @@ const ImageContainer = styled.label`
   cursor: pointer;
 `;
 
-const RemoveImage = styled.div<propsType>`
+const RemoveImage = styled.div<any>`
   background: #6f6eff9e;
   text-align: center;
   width: 90%;
@@ -88,7 +94,7 @@ const RemoveImage = styled.div<propsType>`
       display: none;
     `}
 `;
-const ImageWrapper = styled.div<propsType>`
+const ImageWrapper = styled.div<any>`
   width: 100%;
   overflow: hidden;
   margin-top: 2%;
