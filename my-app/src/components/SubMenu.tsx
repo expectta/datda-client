@@ -5,7 +5,7 @@ import styled from 'styled-components';
 export default function SubMenu() {
   return (
     <Wrap>
-      <SubMenuBar to="/main">기관설정</SubMenuBar>
+      <SubMenuBar to="/main/director">기관설정</SubMenuBar>
       <SubMenuBar to="/main/management">원아 상태관리</SubMenuBar>
     </Wrap>
   );

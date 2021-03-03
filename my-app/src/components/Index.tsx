@@ -30,6 +30,9 @@ import MIniIndiNotice from './MIniIndiNotice';
 import ImagePostForm from './ImagePostForm';
 import TextAreaForm from './TextAreaForm';
 import WriteForm from './WriteForm';
+import ClassManage from './ClassManage';
+import TeacherManage from './TeacherManage';
+import StudentManage from './StudentManage';
 import Carousel from './Carousel';
 import SecondSubMenu from './SecondSubMenu';
 import StateListForm from './StateListForm';
@@ -72,4 +75,7 @@ export {
   ProfileList,
   SelectInstitution,
   AddChildren,
+  ClassManage,
+  TeacherManage,
+  StudentManage,
 };
