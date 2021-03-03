@@ -16,7 +16,7 @@ const deviceSizes = {
   mobileS: '320px',
   mobileM: '375px',
   mobileL: '700px',
-  tablet: '900px',
+  tablet: '820px',
   tabletL: '1024px',
 };
 
@@ -72,7 +72,6 @@ const common = {
 		border-radius: 20px;
 		outline:0px;
 		text-decoration: none;
-
 		cursor:pointer;
   &:hover {
     transition: all 0.3s ease-in-out;
@@ -81,16 +80,17 @@ const common = {
 		
   }
 	`,
+  //앨범 카드 스타일
   albumCardDiv: `
 	width:150px;
-	height:150px;
+	height:150px
 	border-radius: 15px 15px 15px 15px;
-	box-shadow: 0px 0px 5px;
+	box-shadow: 0px 0px 5px #c8c8c8;
 	`,
   //section 기본 스타일
   contentCardDiv: `
 	width:100%;
-	height:92%;
+	height:100%;
 	border: 0px;
 	border-radius: 15px 15px 15px 15px;
   box-shadow: 0px 0px 5px #c8c8c8;	`,
@@ -116,10 +116,14 @@ const common = {
     color: #6f6eff;;
 	}
 	`,
+  stateCardDiv: `
+	border-radius: 15px 15px 15px 15px;
+  box-shadow: 0px 0px 5px #c8c8c8;	
+	`,
   avatarImageDiv: `
 	width: 100%;
 	height:100%;
-	border-radius: 0px 0px 60px;
+	border-radius: 12px 12px 60px 12px;
 	`,
   stateDiv: `
 	background:#6f6eff;

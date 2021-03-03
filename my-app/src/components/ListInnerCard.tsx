@@ -29,7 +29,7 @@ export default function ListInnerCard(props: propsType) {
   );
 }
 const Point = styled.div`
-  flex: 0.5 auto;
+  width: 4%;
 `;
 
 const NoticeCard = styled.div`
@@ -38,12 +38,15 @@ const NoticeCard = styled.div`
 `;
 
 const CreateAt = styled.div`
+  width: 30%;
+  text-align: end;
+
   margin: 0 auto;
   color: #bcbbbb;
-  flex: inital;
   align-self: center;
 `;
 const Content = styled.div`
+  width: 66%;
   align-self: center;
   overflow: hidden;
   text-overflow: ellipsis;

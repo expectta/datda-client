@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Timetable, MiniNotice, MIniIndiNotice, MainMenu } from './Index';
+import {
+  Timetable,
+  Carousel,
+  MiniNotice,
+  MIniIndiNotice,
+  MainMenu,
+} from './Index';
 
 export default function Contents() {
   const [clickedMenu, setClickedMenu] = useState(0);
@@ -42,6 +48,7 @@ export default function Contents() {
       <MainMenu></MainMenu>
       <MiniNotice></MiniNotice>
       <MIniIndiNotice></MIniIndiNotice>
+      <Carousel></Carousel>
     </Wrap>
   );
 }
@@ -59,11 +66,10 @@ const ContentCard = styled.div`
 `;
 
 const BookMark = styled.button<Property>`
-  width: 80px;
-  height: 40px;
+  width: 60px;
   background: white;
-  border-radius: 15px 15px 0px 0px;
-  transform: perspective(100px) rotateX(45deg);
+  border-radius: 7px 7px 0px 0px;
+  // transform: perspective(100px) rotateX(45deg);
   cursor: pointer;
   border: 0;
   outline: 0;
@@ -77,7 +83,7 @@ const BookMarkWrap = styled.div`
   display: flex;
   padding-left: 20px;
   position: relative;
-  top: 3px;
+  top: -24px;
   button div {
     color: #bcbbbb;
   }
@@ -92,8 +98,13 @@ const BookMarkWrap = styled.div`
 `;
 const Name = styled.div`
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
   transform: unset;
   margin-top: 6px;
-  transform: perspective(40px) rotateX(-15deg);
+  // transform: perspective(40px) rotateX(-15deg);
+`;
+const ListWrapper = styled.div`
+  width: 100%;
+  height: 37%;
+  padding: 2%;
 `;

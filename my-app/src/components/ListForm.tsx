@@ -55,7 +55,7 @@ const Title = styled.div`
 `;
 const CategoryWrap = styled.div`
   width: 95%;
-  height: auto;
+  height: 3%;
   margin: 0 auto;
   display: flex;
   border-bottom: 1px solid lightgray;
@@ -73,8 +73,9 @@ const CategoryYear = styled.span`
 `;
 const CardWrapper = styled.div`
   width: 98%;
-  height: 94%;
+  height: 85%;
   margin: 0 auto;
+  margin-bottom: 3%;
   overflow: auto;
 `;
 

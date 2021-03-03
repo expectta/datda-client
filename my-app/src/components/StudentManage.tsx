@@ -32,7 +32,7 @@ function StudentManage({
       <div className="studentArea">
         {students.map((student: any) => (
           <div>
-            <input type="checkbox" name={student.className}></input>
+            <input type="checkbox" value={student.className}></input>
             <span>{student.className}</span>
             <span>{student.userName}</span>
           </div>

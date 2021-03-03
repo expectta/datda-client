@@ -9,7 +9,7 @@ function TeacherManage({ isTeacher, teachers }: Props) {
     <div id="teacher">
       {teachers.map((teacher: any) => (
         <div className="teacherArea">
-          <input type="checkbox"></input>
+          <input type="checkbox" value={teacher.userName}></input>
           <span className="indiTeacher">{teacher.userName}</span>
         </div>
       ))}

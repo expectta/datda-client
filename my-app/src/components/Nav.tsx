@@ -10,10 +10,14 @@ function Nav({ history }: propsType) {
   return (
     <Wrap>
       <WrapLinks>
-        <Links to="/main">홈</Links>
-        <Links to="/main/profile">프로필</Links>
+        <Space></Space>
+        <LogoWrapper to="/main">
+          <Logo src="../images/logo.png" alt="logo"></Logo>
+          <Name>{'datda'}</Name>
+        </LogoWrapper>
+
         {/* <label onClick={() => history.push('/main/profile')}>프로필</label> */}
-        <Links to="/">로그아웃</Links>
+        <Links to="/">Log out</Links>
       </WrapLinks>
     </Wrap>
   );
@@ -25,19 +29,22 @@ const Wrap = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-end;
-  background: #6f6eff;
+  background: white;
+  box-shadow: 0 4px 4px -1px #c8c8c8;
+`;
+const LogOut = styled.span`
+  flex: 1 auto;
 `;
 const Links = styled(Link)`
-  color: white;
+  color: black;
   align-self: center;
-  margin-right: 20px;
-  flex: 1 auto;
-  place-self: center;
+  padding-right: 2%;
   ${({ theme }) => theme.fontSizes.base};
 `;
 const WrapLinks = styled.div`
   align-self: center;
+  width: 100%;
+  display: flex;
   @media ${({ theme }) => theme.device.mobileL} {
     width: 100%;
     display: flex;
@@ -46,4 +53,22 @@ const WrapLinks = styled.div`
       text-align: center;
     }
   }
+`;
+
+const LogoWrapper = styled(Link)<any>`
+  display: flex;
+  justify-content: center;
+  flex: 22 auto;
+`;
+const Logo = styled.img`
+  width: 21px;
+  height: 20px;
+`;
+
+const Space = styled.span`
+  flex: 1 auto;
+`;
+
+const Name = styled.span`
+  font-size: 1.6rem;
 `;

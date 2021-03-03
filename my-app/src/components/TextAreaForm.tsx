@@ -12,7 +12,7 @@ export default function TextAreaForm() {
 const TextBox = styled.textarea`
   width: 100%;
   padding: 2%;
-  height: 100%;
+  height: 98%;
   outline: none;
   border: 0px;
   resize: none;
