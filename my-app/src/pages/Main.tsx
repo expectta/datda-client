@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 import {
   withRouter,
   Router,
+  match,
   Route,
   Switch,
   RouteComponentProps,
 } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   TimetableList,
   Profile,
@@ -32,8 +33,21 @@ import {
   SecondSubMenu,
 } from '../components/Index';
 import firestore from '../common/utils/firebase';
-
-function Main({ match }: RouteComponentProps<any>) {
+interface propsType {
+  handleLogout: any;
+  userInfo: {
+    userId: string;
+    permission: string;
+    institution: string;
+    isLogin: boolean;
+  };
+}
+interface routerType {
+  location: RouteComponentProps['location'];
+  history: RouteComponentProps['history'];
+  match: RouteComponentProps['match'];
+}
+function Main({ handleLogout, userInfo }: propsType, { match }: routerType) {
   // 출석
   const [isCheck, setIsCheck] = useState(false);
   // 투약의뢰서
@@ -143,25 +157,29 @@ function Main({ match }: RouteComponentProps<any>) {
   return (
     <Wrap>
       <Header id="header">
-        <Nav></Nav>
+        <Nav handleLogout={handleLogout}></Nav>
       </Header>
       <Aside id="aside">
         <TopSubNav id="top-submenu"></TopSubNav>
         <FristPart id="avatar">
-          <Avatar></Avatar>
+          <Avatar userInfo={userInfo}></Avatar>
         </FristPart>
-        <SecondPart id="state">
-          <State
-            type="현재상태"
-            isCheck={isCheck}
-            isOk={isOk}
-            isSleep={isSleep}
-            isEat={isEat}
-            please={please}
-          ></State>
+        <SecondPart id="state" permission={userInfo.permission}>
+          {userInfo.permission === 'parents' ? (
+            <>
+              <State
+                type="현재상태"
+                isCheck={isCheck}
+                isOk={isOk}
+                isSleep={isSleep}
+                isEat={isEat}
+                please={please}
+              ></State>
+            </>
+          ) : null}
         </SecondPart>
         <ThirdPart id="submenu">
-          <SubMenu></SubMenu>
+          <SubMenu permission={userInfo.permission}></SubMenu>
         </ThirdPart>
         <FourthPart>
           <SecondSubMenu></SecondSubMenu>
@@ -170,18 +188,35 @@ function Main({ match }: RouteComponentProps<any>) {
       <Section id="content">
         <ContentCard>
           <Switch>
-            <Route exact path={`${match.path}`} component={Contents} />
-            <Route path={`${match.path}/notice`} component={Notice} />
-            <Route path={`${match.path}/medicine`} component={Medicine} />
-            <Route path={`${match.path}/meal`} component={Meal} />
-            <Route path={`${match.path}/indi_notice`} component={IndiNotice} />
-            <Route path={`${match.path}/album`} component={Album} />
-            <Route path={`${match.path}/profile`} component={Profile} />
-            <Route path={`${match.path}/timetable`} component={TimetableList} />
-            <Route path={`${match.path}/education`} component={EducationList} />
-            <Route exact path={`${match.path}/report`} component={Report} />
-            <Route path={`${match.path}/management`} component={Management} />
-            <Route path={`${match.path}/bus`} component={Bus} />
+            <Route exact path={`/main`}>
+              <Contents userInfo={userInfo}></Contents>
+            </Route>
+            <Route
+              path={`/main/notice`}
+              render={() => <Notice userInfo={userInfo} />}
+            />
+            <Route
+              path={`/main/medicine`}
+              render={() => <Medicine userInfo={userInfo} />}
+            />
+            <Route
+              path={`/main/meal`}
+              render={() => <Meal userInfo={userInfo} />}
+            />
+            <Route
+              path={`/main/indi_notice`}
+              render={() => <IndiNotice userInfo={userInfo} />}
+            />
+            <Route
+              path={`/main/album`}
+              render={() => <Album userInfo={userInfo} />}
+            />
+            <Route path={`/main/profile`} component={Profile} />
+            <Route path={`/main/timetable`} component={TimetableList} />
+            <Route path={`/main/education`} component={EducationList} />
+            <Route exact path={`/main}/report`} component={Report} />
+            <Route exact path={`/main/management`} component={Management} />
+            <Route exact path={`/main/bus`} component={Bus} />
           </Switch>
         </ContentCard>
       </Section>
@@ -287,16 +322,21 @@ const FristPart = styled.div`
   height: 25%;
   padding: 2%;
 `;
-const SecondPart = styled.div`
+const SecondPart = styled.div<any>`
   width: 100%;
   height: 14%;
   display: flex;
   padding: 2%;
+  ${(props) =>
+    props.permission !== 'parents' &&
+    css`
+      display: none;
+    `}
 `;
 const ThirdPart = styled.div`
   width: 100%;
-  height: 13%;
   padding: 2%;
+  padding: 10px 0px 10px 0px;
 `;
 const FourthPart = styled.div`
   width: 100%;
@@ -309,32 +349,3 @@ const ContentCard = styled.div`
   height: 100%;
   ${({ theme }) => theme.common.contentCardDiv}
 `;
-const TimetableSection = styled.div`
-  width: 100%;
-  height: 25%;
-`;
-const MainMenuSection = styled.div`
-  width: 100%;
-  height: 25%;
-`;
-const MiniNoticeSection = styled.div`
-  width: 100%;
-  height: 25%;
-`;
-const MiniIndiNoticeSection = styled.div`
-  width: 100%;
-  height: 25%;
-`;
-
-// const Button = styled.button`
-//   ${({ theme }) => theme.common.defaultButton}
-// `;
-// const Input = styled.input`
-//   ${({ theme }) => theme.common.defaultInput}
-// `;
-// const Avatar = styled.img`
-//   ${({ theme }) => theme.common.profileImageDiv}
-// `;
-// const Card = styled.div`
-//   ${({ theme }) => theme.common.albumCardDiv}
-// `;
