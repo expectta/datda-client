@@ -18,6 +18,7 @@ import {
   IndiNotice,
   EducationList,
   Report,
+  CreateClass,
 } from './Index';
 import {
   Nav,
@@ -27,8 +28,12 @@ import {
   SubMenu,
   FooterContents,
 } from '../components/Index';
+interface Props {
+  setModalMessage: any;
+  setModalVisible: any;
+}
 
-function Main({ match }: RouteComponentProps<any>) {
+function Main({ setModalMessage, setModalVisible }: Props) {
   return (
     <Wrap>
       <Header id="header">
@@ -49,16 +54,26 @@ function Main({ match }: RouteComponentProps<any>) {
       <Section id="content">
         <ContentCard>
           <Switch>
-            <Route exact path={`${match.path}`} component={Contents} />
-            <Route path={`${match.path}/notice`} component={Notice} />
-            <Route path={`${match.path}/medicine`} component={Medicine} />
-            <Route path={`${match.path}/meal`} component={Meal} />
-            <Route path={`${match.path}/indi_notice`} component={IndiNotice} />
-            <Route path={`${match.path}/album`} component={Album} />
-            <Route path={`${match.path}/profile`} component={Profile} />
-            <Route path={`${match.path}/timetable`} component={TimetableList} />
-            <Route path={`${match.path}/education`} component={EducationList} />
-            <Route paht={`${match.path}/report`} component={Report} />
+            <Route exact path={'/main'} component={Contents} />
+            <Route path={'/main/notice'} component={Notice} />
+            <Route path={'/main/medicine'} component={Medicine} />
+            <Route path={'/main/meal'} component={Meal} />
+            <Route path={'/main/indi_notice'} component={IndiNotice} />
+            <Route path={'/main/album'} component={Album} />
+            <Route path={'/main/profile'} component={Profile} />
+            <Route path={'/main/timetable'} component={TimetableList} />
+            <Route path={'/main/education'} component={EducationList} />
+            <Route path={'/main/report'} component={Report} />
+            <Route
+              exact
+              path={'/main/director'}
+              render={() => (
+                <CreateClass
+                  setModalMessage={setModalMessage}
+                  setModalVisible={setModalVisible}
+                />
+              )}
+            />
           </Switch>
         </ContentCard>
       </Section>
