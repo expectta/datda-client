@@ -13,7 +13,7 @@ export default function SubMenu({ permission }: propsType) {
       {permission === 'teacher' ? (
         <SubMenuButton to="/main/management">원아 상태관리</SubMenuButton>
       ) : null}
-      <SubMenuButton to="/">프로필</SubMenuButton>
+      <SubMenuButton to="/main/profile">프로필</SubMenuButton>
     </Wrap>
   );
 }
