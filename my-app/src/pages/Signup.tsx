@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
+import { SignupCommon } from '../pages/Index';
 import {
   Signup,
   SignupDetail,
@@ -90,7 +92,7 @@ function Signin() {
       setErrormessage('비밀번호가 일치하지 않습니다.');
     } else {
       setSignup(false);
-      setSignupDetail(true);
+      history.push('/signup/common');
       setErrormessage('');
     }
   };
@@ -103,7 +105,6 @@ function Signin() {
     } else if (!isPhoneCheck(phone)) {
       setErrormessage('올바른 전화번호를 입력해주세요.');
     } else {
-      setSignupDetail(false);
       setErrormessage('');
       inputs.permission === 'institution'
         ? setInstitution(true)
@@ -121,15 +122,6 @@ function Signin() {
       ? setErrormessage('교습소 중 하나를 선택해주세요')
       : (history.push('/'), setErrormessage(''));
   };
-
-  // const handleSearchInsti = () => {
-  //   setSearchInsti(false);
-  //   setSearchClass(true);
-  // };
-
-  // const handleSearchClass = () => {
-  //   history.push('/login');
-  // };
 
   //인풋데이터 값 바꾸기
   const onChange = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -151,7 +143,10 @@ function Signin() {
 
   return (
     <SignupGlobal>
-      <h1>Datda</h1>
+      <Link to="/">
+        <h1>Datda</h1>
+      </Link>
+
       <Selection
         selection={selection}
         handleSelection={handleSelection}
@@ -164,13 +159,23 @@ function Signin() {
         errormessage={errormessage}
         onChange={onChange}
       />
-      <SignupDetail
-        inputs={inputs}
+      <Switch>
+        <Route exact path="/signup/common">
+          <SignupCommon
+            inputs={inputs}
+            handleSignupDetail={handleSignupDetail}
+            errormessage={errormessage}
+            onChange={onChange}
+          />
+        </Route>
+      </Switch>
+      {/* <SignupDetail
+      inputs={inputs}
         signupDetail={signupDetail}
         handleSignupDetail={handleSignupDetail}
         errormessage={errormessage}
-        onChange={onChange}
-      />
+        onChange={onChange}/> */}
+
       <Institution
         institution={institution}
         handleInstitution={handleInstitution}
@@ -200,5 +205,9 @@ function Signin() {
 export default Signin;
 
 const SignupGlobal = styled.div`
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
 `;

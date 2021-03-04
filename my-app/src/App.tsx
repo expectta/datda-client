@@ -6,7 +6,14 @@ import {
   withRouter,
   RouteComponentProps,
 } from 'react-router-dom';
-import { Main, Login, Intro, Signup, UserInfo } from './pages/Index';
+import {
+  Main,
+  Login,
+  Intro,
+  Signup,
+  UserInfo,
+  SignupCommon,
+} from './pages/Index';
 import { Modal } from './components/Index';
 import styled, {
   GlobalStyleComponent,

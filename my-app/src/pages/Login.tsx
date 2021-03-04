@@ -1,6 +1,11 @@
+import axios from 'axios';
+import { check } from 'prettier';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { checkLogin } from '../common/axios';
+
+axios.defaults.withCredentials = true;
 
 function Login() {
   const [inputs, setInputs] = useState({ email: '', password: '' });
@@ -15,13 +20,17 @@ function Login() {
     if (email.length === 0 || password.length === 0) {
       setErrormessage('이메일이나 비밀번호를 입력해주세요.');
     } else {
+      checkLogin(email);
       setErrormessage('');
     }
   };
 
   return (
     <LoginGlobal>
-      <Header>Datda</Header>
+      <Link to="/">
+        <Header>Datda</Header>
+      </Link>
+
       <InputBox>
         <span className="inputText">이메일</span>
         <input
