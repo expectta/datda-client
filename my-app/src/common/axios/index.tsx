@@ -29,3 +29,19 @@ export function checkLogin(email?: string) {
     }),
   );
 }
+
+export const isEmail = (email: string) => {
+  axios
+    .post('https://datda.link/auth/isemail', {
+      // axios.post('http://localhost:5000/auth/isemail', {
+      email: email,
+    })
+    .then((res) => {
+      console.log(res.status, res.data);
+      alert('콘솔창에 console.log(res.status, res.data)');
+    })
+    .catch((err) => {
+      console.log(err);
+      alert('콘솔창에 console.log(err)');
+    });
+};
