@@ -8,7 +8,7 @@ export default function SubMenu({ permission }: propsType) {
   return (
     <Wrap>
       {permission === 'director' ? (
-        <SubMenuButton to="/main">기관설정</SubMenuButton>
+        <SubMenuButton to="/main/director">기관설정</SubMenuButton>
       ) : null}
       {permission === 'teacher' ? (
         <SubMenuButton to="/main/management">원아 상태관리</SubMenuButton>

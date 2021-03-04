@@ -5,6 +5,7 @@ import {
   Router,
   match,
   Route,
+  Link,
   Switch,
   RouteComponentProps,
 } from 'react-router-dom';
@@ -19,6 +20,7 @@ import {
   IndiNotice,
   EducationList,
   Report,
+  CreateClass,
   Management,
   Bus,
 } from './Index';
@@ -33,7 +35,10 @@ import {
   SecondSubMenu,
 } from '../components/Index';
 import firestore from '../common/utils/firebase';
-interface propsType {
+
+interface Props {
+  setModalMessage: any;
+  setModalVisible: any;
   handleLogout: any;
   userInfo: {
     userId: string;
@@ -42,12 +47,11 @@ interface propsType {
     isLogin: boolean;
   };
 }
-interface routerType {
-  location: RouteComponentProps['location'];
-  history: RouteComponentProps['history'];
-  match: RouteComponentProps['match'];
-}
-function Main({ handleLogout, userInfo }: propsType, { match }: routerType) {
+
+export default function Main(
+  // { handleLogout, userInfo }: propsType,
+  { setModalMessage, setModalVisible, userInfo, handleLogout }: Props,
+) {
   // 출석
   const [isCheck, setIsCheck] = useState(false);
   // 투약의뢰서
@@ -215,8 +219,21 @@ function Main({ handleLogout, userInfo }: propsType, { match }: routerType) {
             <Route path={`/main/timetable`} component={TimetableList} />
             <Route path={`/main/education`} component={EducationList} />
             <Route exact path={`/main}/report`} component={Report} />
-            <Route exact path={`/main/management`} component={Management} />
-            <Route exact path={`/main/bus`} component={Bus} />
+            <Route path={'/main/timetable'} component={TimetableList} />
+            <Route path={'/main/education'} component={EducationList} />
+            <Route path={'/main/report'} component={Report} />
+            <Route
+              exact
+              path={'/main/director'}
+              render={() => (
+                <CreateClass
+                  setModalMessage={setModalMessage}
+                  setModalVisible={setModalVisible}
+                />
+              )}
+            />
+            <Route path={'/main/management'} component={Management} />
+            <Route path={'/main/bus'} component={Bus} />
           </Switch>
         </ContentCard>
       </Section>
@@ -229,8 +246,6 @@ function Main({ handleLogout, userInfo }: propsType, { match }: routerType) {
     </Wrap>
   );
 }
-
-export default Main;
 
 const Wrap = styled.div`
   width: 900px;

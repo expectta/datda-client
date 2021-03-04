@@ -31,6 +31,13 @@ function App() {
   const closeModal = () => {
     setModalVisible(false);
   };
+  const ok = (per: string) => {
+    setUserInfo({
+      ...userInfo,
+      permission: per,
+      isLogin: true,
+    });
+  };
   const handleLogout = () => {
     setUserInfo({
       userId: '',
@@ -71,14 +78,19 @@ function App() {
         <Switch>
           <Route exact path="/" component={Intro} />
           <Route path="/login">
-            <Login userInfo={userInfo} setUserInfo={setUserInfo}></Login>
+            <Login></Login>
           </Route>
           <Route path="/signup" component={Signup} />
           {/* 로그인이 됐을때만 화면 접속 가능 */}
           {userInfo.isLogin ? (
             <>
               <Route path="/main">
-                <Main userInfo={userInfo} handleLogout={handleLogout}></Main>
+                <Main
+                  userInfo={userInfo}
+                  handleLogout={handleLogout}
+                  setModalMessage={setModalMessage}
+                  setModalVisible={setModalVisible}
+                ></Main>
               </Route>
               <Route
                 path="/userinfo"
@@ -87,6 +99,7 @@ function App() {
               />
             </>
           ) : null}
+          <Route path="/userinfo" component={UserInfo} />
         </Switch>
       </ThemeProvider>
       <Modal visible={modalVisible} closable maskClosable onClose={closeModal}>

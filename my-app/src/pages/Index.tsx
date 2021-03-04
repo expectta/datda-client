@@ -12,6 +12,7 @@ import Profile from './Profile';
 import TimetableList from './TimetableList';
 import EducationList from './EducationList';
 import Report from './Report';
+import CreateClass from './CreateClass';
 import Management from './ManagementChildren';
 import Bus from './Bus';
 export {
@@ -31,4 +32,5 @@ export {
   TimetableList,
   EducationList,
   Report,
+  CreateClass,
 };

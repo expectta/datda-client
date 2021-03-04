@@ -2,24 +2,38 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 function Report() {
+  const [report, setReport] = useState({ title: '', content: '' });
+
+  const onChange = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setReport({ ...report, [key]: value });
+  };
   return (
     <Wrap>
       <ContentCard>
         <Title>닿다에게 알려주세요</Title>
-        <div className="report name">
-          <span>이름</span>
-          <input className="report name" type="text"></input>
-        </div>
         <div className="report title">
           <span>제목</span>
-          <input className="report title" type="text"></input>
+          <input
+            className="report title"
+            type="text"
+            onChange={(e) => {
+              onChange('title', e);
+            }}
+          ></input>
         </div>
         <div className="report contents">
           <span>내용</span>
-          <input className="report content" type="text"></input>
+          <input
+            className="report content"
+            type="text"
+            onChange={(e) => {
+              onChange('content', e);
+            }}
+          ></input>
         </div>
-        <div>
-          <button>제출</button>
+        <div id="buttonArea">
+          <Button>제출</Button>
         </div>
       </ContentCard>
     </Wrap>
@@ -34,13 +48,22 @@ const Wrap = styled.div`
 const ContentCard = styled.div`
   ${({ theme }) => theme.common.contentCardDiv}
   .report {
-    width: 61vw;
+    width: 40vw;
   }
   .content {
     height: 50vh;
   }
+  #buttonArea {
+    text-align: center;
+    margin-top: 10%;
+  }
+  padding-left: 5%;
 `;
 
 const Title = styled.div`
   ${({ theme }) => theme.common.contentTitle}
+`;
+
+const Button = styled.button`
+  ${({ theme }) => theme.common.defaultButton}
 `;
