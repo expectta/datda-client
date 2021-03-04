@@ -31,13 +31,6 @@ function App() {
   const closeModal = () => {
     setModalVisible(false);
   };
-  const ok = (per: string) => {
-    setUserInfo({
-      ...userInfo,
-      permission: per,
-      isLogin: true,
-    });
-  };
   const handleLogout = () => {
     setUserInfo({
       userId: '',
