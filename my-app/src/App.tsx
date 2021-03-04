@@ -47,7 +47,6 @@ function App() {
             )}
           />
           <Route path="/userinfo" component={UserInfo} />
-          <Route exact path="/signup/common" component={SignupCommon} />
         </Switch>
       </ThemeProvider>
       <Modal visible={modalVisible} closable maskClosable onClose={closeModal}>
