@@ -1,6 +1,9 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+axios.defaults.withCredentials = true;
 
 function Login() {
   const [inputs, setInputs] = useState({ email: '', password: '' });
@@ -21,7 +24,10 @@ function Login() {
 
   return (
     <LoginGlobal>
-      <Header>Datda</Header>
+      <Link to="/">
+        <Header>Datda</Header>
+      </Link>
+
       <InputBox>
         <span className="inputText">이메일</span>
         <input
