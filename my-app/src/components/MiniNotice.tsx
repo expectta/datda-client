@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ListInnerCard } from './Index';
 import { notice } from '../assets/testdata';
-
-export default function MiniNotice() {
+import { StringLiteral } from 'typescript';
+interface propsType {
+  permission: string;
+}
+export default function MiniNotice({ permission }: propsType) {
   return (
-    <Wrap>
+    <Wrap permission={permission}>
       <Title>공지사항</Title>
-      <NoticeContainar>
+      <NoticeContainar permission={permission}>
         {notice.data.map((element, index) => {
           return (
             <ListInnerCard
@@ -25,12 +28,19 @@ export default function MiniNotice() {
     </Wrap>
   );
 }
-const Wrap = styled.div`
+const Wrap = styled.div<propsType>`
   width: 95%;
   height: 20%;
   margin: 0 auto;
   margin-top: 2%;
+  //원장님이 로그인 했을경우
+  ${(props) =>
+    props.permission === 'director' &&
+    css`
+      height: 43%;
+    `}
 `;
+
 const NoticeWrap = styled.div`
   width: 90%;
   margin: 0 auto;
@@ -41,10 +51,16 @@ const NoticeWrap = styled.div`
 const Title = styled.label`
   font-size: 1.5rem;
 `;
-const NoticeContainar = styled.div`
+const NoticeContainar = styled.div<propsType>`
   width: 100%;
   height: 70%;
   overflow: auto;
+  //원장님이 로그인 했을경우
+  ${(props) =>
+    props.permission === 'director' &&
+    css`
+      height: 85%;
+    `}
 `;
 
 const GoToPostButton = styled(Link)`

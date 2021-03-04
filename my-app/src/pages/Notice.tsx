@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, Route, Switch, RouteComponentProps } from 'react-router-dom';
+import {
+  Link,
+  match,
+  Route,
+  Switch,
+  useRouteMatch,
+  RouteComponentProps,
+} from 'react-router-dom';
 import {
   ReadForm,
   ListForm,
@@ -8,25 +15,34 @@ import {
   WriteForm,
 } from '../components/Index';
 interface propsType {
-  location: RouteComponentProps['location'];
-  history: RouteComponentProps['history'];
-  match: RouteComponentProps['match'];
+  userInfo: {
+    userId: string;
+    permission: string;
+    institution: string;
+    isLogin: boolean;
+  };
 }
-function Notice({ match }: propsType) {
+function Notice({ userInfo }: propsType) {
+  const urlMatch = useRouteMatch();
   return (
     <Wrap>
       <Switch>
-        <Route exact path={`${match.path}`}>
+        <Route exact path={`${urlMatch.path}`}>
           <ListForm
+            permission={userInfo.permission}
             title="공지사항"
             fristCategory="공지사항"
             secondCategory="행사"
           ></ListForm>
         </Route>
-        <Route exact path={`${match.path}/write`}>
-          <WriteForm title="공지사항 작성" type="notice"></WriteForm>
+        <Route exact path={`${urlMatch.path}/write`}>
+          <WriteForm
+            userInfo={userInfo}
+            title="공지사항 작성"
+            type="notice"
+          ></WriteForm>
         </Route>
-        <Route exact path={`${match.path}/post`}>
+        <Route exact path={`${urlMatch.path}/post`}>
           <ReadForm title="공지사항"></ReadForm>
         </Route>
       </Switch>
