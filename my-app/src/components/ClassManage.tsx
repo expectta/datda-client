@@ -13,42 +13,23 @@ function ClassManage({
   setModalMessage,
   setModalVisible,
 }: Props) {
-  const [count, setCount] = useState<number>(classInfo.length);
-
   const onModalTeacher = () => {
     setModalVisible(true);
-    setModalMessage(
-      <div>
-        <h3 className="test">선생님 지정</h3>
-      </div>,
-    );
+    setModalMessage();
   };
   return isClass ? (
-    <div id="class">
-      <div className="classInputArea">
-        <input type="text"></input>
-        <button>검색</button>
-        <div id="count">
-          <span>총 반수 : </span>
-          <span>{count}</span>
-          <span> 명</span>
-        </div>
-      </div>
+    <div>
       {classInfo.map((classs: any) => (
         <div className="classArea">
-          <span>{classs.className}</span>
-          <span>{classs.userName}</span>
-          <Button
-            onClick={() => {
-              onModalTeacher();
-            }}
-          >
-            선생님 지정
-          </Button>
-          <Button>반 보기</Button>
-          <Button>반 삭제</Button>
+          <input type="radio" />
+          <span className="classList">{classs.className}</span>
         </div>
       ))}
+      <div id="classButtonArea">
+        <button>수정</button>
+        <button>추가</button>
+        <button>삭제</button>
+      </div>
     </div>
   ) : (
     <div></div>
