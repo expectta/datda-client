@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 function AddChildren() {
-  const [children, setChildren] = useState([
+  const [children, setChildren] = useState<any>([
     { name: '김철수' },
     { name: '영희' },
   ]);
@@ -13,18 +13,38 @@ function AddChildren() {
     const { value } = e.target;
     setInput({ ...input, name: value });
   };
-
-  const AddChild = (value: string) => {
+  //아이 추가
+  const addChild = (value: string) => {
     setChildren([...children, { name: value }]);
   };
+
+  //아이 삭제
+  const deleteChild = (value: string) => {
+    const filtered = children.filter((child: any) => {
+      return child.name !== value;
+    });
+    setChildren(filtered);
+  };
+
+  //axios 요청
+
   return (
     <Wrap>
       <ContentCard>
         <h1>아이를 추가하세요</h1>
         <div>
           <div>현재 아이들</div>
-          {children.map((child) => (
-            <span>{child.name}</span>
+          {children.map((child: any) => (
+            <div>
+              <span>{child.name}</span>
+              <button
+                onClick={() => {
+                  deleteChild(child.name);
+                }}
+              >
+                x
+              </button>
+            </div>
           ))}
         </div>
         <div>
@@ -32,7 +52,7 @@ function AddChildren() {
           <input type="text" onChange={(e) => onChange(e)}></input>
           <button
             onClick={() => {
-              AddChild(input.name);
+              addChild(input.name);
             }}
           >
             추가
