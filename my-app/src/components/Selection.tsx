@@ -5,8 +5,14 @@ interface Props {
   selection: boolean;
   handleSelection: any;
   onChange: any;
+  handleKakao: any;
 }
-function Selection({ selection, handleSelection, onChange }: Props) {
+function Selection({
+  selection,
+  handleSelection,
+  onChange,
+  handleKakao,
+}: Props) {
   return selection ? (
     <SelectionWrap>
       <div id="typePermission">가입유형</div>
@@ -23,7 +29,7 @@ function Selection({ selection, handleSelection, onChange }: Props) {
       </select>
       <div>
         <button onClick={() => handleSelection()}>일반가입</button>
-        <button>카카오톡 가입</button>
+        <button onClick={() => handleKakao()}>카카오톡 가입</button>
       </div>
     </SelectionWrap>
   ) : (

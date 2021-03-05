@@ -5,21 +5,20 @@ import { ListInnerCard } from './Index';
 import { notice } from '../assets/testdata';
 import { StringLiteral } from 'typescript';
 interface propsType {
-  permission: string;
+  userInfo: any;
 }
-export default function MiniNotice({ permission }: propsType) {
+export default function MiniNotice({ userInfo }: propsType) {
   return (
-    <Wrap permission={permission}>
+    <Wrap permission={userInfo.permission}>
       <Title>공지사항</Title>
-      <NoticeContainar permission={permission}>
-        {notice.data.map((element, index) => {
+      <NoticeContainar permission={userInfo.permission}>
+        {userInfo.mainData.data.notice.map((element: any, index: number) => {
           return (
             <ListInnerCard
               noticeId={element.noticeId}
               key={index}
               title={element.title}
-              category={element.category}
-              createAt={element.created_at}
+              createAt={element.create_at}
             ></ListInnerCard>
           );
         })}
@@ -28,14 +27,14 @@ export default function MiniNotice({ permission }: propsType) {
     </Wrap>
   );
 }
-const Wrap = styled.div<propsType>`
+const Wrap = styled.div<any>`
   width: 95%;
   height: 20%;
   margin: 0 auto;
   margin-top: 2%;
   //원장님이 로그인 했을경우
   ${(props) =>
-    props.permission === 'director' &&
+    props.permission === 'institution' &&
     css`
       height: 43%;
     `}
@@ -51,13 +50,13 @@ const NoticeWrap = styled.div`
 const Title = styled.label`
   font-size: 1.5rem;
 `;
-const NoticeContainar = styled.div<propsType>`
+const NoticeContainar = styled.div<any>`
   width: 100%;
   height: 70%;
   overflow: auto;
   //원장님이 로그인 했을경우
   ${(props) =>
-    props.permission === 'director' &&
+    props.permission === 'institution' &&
     css`
       height: 85%;
     `}

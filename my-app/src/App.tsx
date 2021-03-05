@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  useHistory,
   withRouter,
   RouteComponentProps,
 } from 'react-router-dom';
@@ -21,56 +22,52 @@ import styled, {
   createGlobalStyle,
 } from 'styled-components';
 import theme from './assets/theme';
+import { requestMainData } from '../src/common/axios';
 
 function App() {
+  const history = useHistory();
   // modal 상태
   const [modalMessage, setModalMessage] = useState('^___^  << 한솔님');
   const [modalVisible, setModalVisible] = useState(false);
   //로그인 한 유저정보
   //! 나중에 false로 바꿔야함
   const [userInfo, setUserInfo] = useState({
-    userId: '',
+    isLogin: false,
     permission: '',
-    institution: '',
-    isLogin: true,
+    mainData: {},
   });
   // modal창 제거
   const closeModal = () => {
     setModalVisible(false);
   };
-  const handleLogout = () => {
-    setUserInfo({
-      userId: '',
-      permission: '',
-      institution: '',
-      isLogin: false,
+  const hadleSetMainData = async (data: any) => {
+    const loginInfo = JSON.parse(localStorage.getItem('loginInfo')!);
+    console.log('최종 데이터 상태로 저장');
+    await setUserInfo({
+      ...userInfo,
+      isLogin: true,
+      permission: loginInfo.permission,
+      mainData: data,
     });
-    console.log('로그아웃 됨');
   };
-
   useEffect(() => {
-    if (userInfo.permission === 'director') {
+    console.log(userInfo, '로그인 유저 상태');
+  }, [userInfo.isLogin]);
+  useEffect(() => {
+    if (localStorage.getItem('loginInfo') && userInfo.isLogin === false) {
+      const loginData = JSON.parse(localStorage.getItem('loginInfo')!);
       setUserInfo({
         ...userInfo,
-        institution: '밀알어린이집',
-        userId: '1',
+        isLogin: loginData.isLogin,
+        permission: loginData.permission,
+        mainData: requestMainData(loginData.permission)!,
       });
     }
-    if (userInfo.permission === 'teacher') {
-      setUserInfo({
-        ...userInfo,
-        institution: '밀알어린이집',
-        userId: '2',
-      });
-    }
-    if (userInfo.permission === 'parents') {
-      setUserInfo({
-        ...userInfo,
-        userId: '3',
-      });
-    }
-    console.log(userInfo.permission, '= 권한', userInfo.institution, '=기관');
-  }, [userInfo.permission]);
+  }, []);
+  //회원 로그아웃 시
+  const handleLogout = (): void => {
+    localStorage.clear();
+  };
   return (
     <Router>
       <GlobalStyle />
@@ -78,20 +75,23 @@ function App() {
         <Switch>
           <Route exact path="/" component={Intro} />
           <Route path="/login">
-            <Login></Login>
+            <Login hadleSetMainData={hadleSetMainData}></Login>
           </Route>
           <Route path="/signup" component={Signup} />
           {/* 로그인이 됐을때만 화면 접속 가능 */}
           {userInfo.isLogin ? (
             <>
-              <Route path="/main">
-                <Main
-                  userInfo={userInfo}
-                  handleLogout={handleLogout}
-                  setModalMessage={setModalMessage}
-                  setModalVisible={setModalVisible}
-                ></Main>
-              </Route>
+              <Route
+                path={`/main`}
+                render={() => (
+                  <Main
+                    userInfo={userInfo}
+                    handleLogout={handleLogout}
+                    setModalMessage={setModalMessage}
+                    setModalVisible={setModalVisible}
+                  />
+                )}
+              />
               <Route
                 path="/userinfo"
                 component={UserInfo}

@@ -43,16 +43,16 @@ function ListForm({
       </CardWrapper>
       {(() => {
         console.log(title, ' = 타이틀 ', permission, '= 권한');
-        if (title === '알림장' && permission === 'director') {
+        if (title === '알림장' && permission === 'institution') {
           return null;
         }
         if (
           title === '투약의뢰서' &&
-          (permission === 'director' || permission === 'teacher')
+          (permission === 'institution' || permission === 'teacher')
         ) {
           return null;
         }
-        if (title === '공지사항' && permission === 'parents') {
+        if (title === '공지사항' && permission === 'parent') {
           return null;
         }
         return (

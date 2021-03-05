@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import { SignupCommon } from '../pages/Index';
+import { SignupCommon, SignupInstitution } from '../pages/Index';
 import {
   Signup,
   SignupDetail,
@@ -67,6 +67,12 @@ function Signin() {
     }
   };
 
+  const handleKakao = () => {
+    if (inputs.permission.length !== 0) {
+      setSelection(false);
+    }
+  };
+
   // useEffect(() => {
   //   if (selection === false) {
   //     setSocialSelection(true);
@@ -107,7 +113,7 @@ function Signin() {
     } else {
       setErrormessage('');
       inputs.permission === 'institution'
-        ? setInstitution(true)
+        ? (setInstitution(true), history.push('/signup/institution'))
         : history.push('/login');
     }
   };
@@ -151,6 +157,7 @@ function Signin() {
         selection={selection}
         handleSelection={handleSelection}
         onChange={onChange}
+        handleKakao={handleKakao}
       />
       <Signup
         inputs={inputs}
@@ -168,6 +175,19 @@ function Signin() {
             onChange={onChange}
           />
         </Route>
+        <Route exact path="/signup/institution">
+          <SignupInstitution
+            inputs={inputs}
+            institution={institution}
+            handleInstitution={handleInstitution}
+            onChangeInsti={onChangeInsti}
+            errormessage={errormessage}
+            instiInputs={instiInputs}
+            instiSelection={instiSelection}
+            handleInstiSelection={handleInstiSelection}
+            inputInstiInfo={inputInstiInfo}
+          />
+        </Route>
       </Switch>
       {/* <SignupDetail
       inputs={inputs}
@@ -176,13 +196,13 @@ function Signin() {
         errormessage={errormessage}
         onChange={onChange}/> */}
 
-      <Institution
+      {/* <Institution
         institution={institution}
         handleInstitution={handleInstitution}
         onChangeInsti={onChangeInsti}
         errormessage={errormessage}
         instiInputs={instiInputs}
-      />
+      /> */}
       {/* <SignupSearchInsti
         searchInsti={searchInsti}
         handleSearchInsti={handleSearchInsti}
@@ -191,13 +211,13 @@ function Signin() {
         searchClass={searchClass}
         handleSearchClass={handleSearchClass}
       /> */}
-      <InstiSelection
+      {/* <InstiSelection
         errormessage={errormessage}
         instiInputs={instiInputs}
         instiSelection={instiSelection}
         handleInstiSelection={handleInstiSelection}
         inputInstiInfo={inputInstiInfo}
-      />
+      /> */}
     </SignupGlobal>
   );
 }
