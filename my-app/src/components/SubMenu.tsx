@@ -7,7 +7,7 @@ interface propsType {
 export default function SubMenu({ permission }: propsType) {
   return (
     <Wrap>
-      {permission === 'director' ? (
+      {permission === 'institution' ? (
         <SubMenuButton to="/main/director">기관설정</SubMenuButton>
       ) : null}
       {permission === 'teacher' ? (

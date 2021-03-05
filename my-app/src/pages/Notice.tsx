@@ -16,10 +16,9 @@ import {
 } from '../components/Index';
 interface propsType {
   userInfo: {
-    userId: string;
     permission: string;
-    institution: string;
     isLogin: boolean;
+    mainData: any;
   };
 }
 function Notice({ userInfo }: propsType) {

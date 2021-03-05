@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 interface propsType {
   userInfo: {
-    userId: string;
     permission: string;
-    institution: string;
     isLogin: boolean;
+    mainData: any;
   };
 }
 

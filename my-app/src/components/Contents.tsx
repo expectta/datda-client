@@ -20,17 +20,26 @@ export default function Contents({ userInfo }: propsType) {
   };
   return (
     <Wrap>
-      {userInfo.permission === 'parents' ? (
+      {userInfo.permission === 'parent' ? (
         <BookMarkWrap>
-          <BookMark
-            checked={clickedMenu}
-            order={30}
-            className={clickedMenu === 0 ? 'active' : ''}
-            onClick={() => handleChangeMenu(0)}
-          >
-            <Name>{'이인수'}</Name>
-          </BookMark>
-          <BookMark
+          {userInfo.mainData.data.children.map(
+            (element: any, index: number) => {
+              return (
+                <BookMark
+                  key={index}
+                  childId={element.childrenId}
+                  checked={clickedMenu}
+                  order={`${userInfo.mainData.data.children.length}0`}
+                  className={clickedMenu === index ? 'active' : ''}
+                  onClick={() => handleChangeMenu(index)}
+                >
+                  <Name>{element.childrenName}</Name>
+                </BookMark>
+              );
+            },
+          )}
+
+          {/* <BookMark
             checked={clickedMenu}
             order={20}
             className={clickedMenu === 1 ? 'active' : ''}
@@ -47,27 +56,27 @@ export default function Contents({ userInfo }: propsType) {
           >
             {' '}
             <Name>{'박한솔'}</Name>
-          </BookMark>
+          </BookMark> */}
         </BookMarkWrap>
       ) : null}
       <Timetable></Timetable>
       <MainMenu></MainMenu>
-      <MiniNotice permission={userInfo.permission}></MiniNotice>
+      <MiniNotice userInfo={userInfo}></MiniNotice>
       {(() => {
         if (
           userInfo.permission === 'teacher' ||
-          userInfo.permission === 'parents'
+          userInfo.permission === 'parent'
         ) {
           return (
             <>
-              <MIniIndiNotice></MIniIndiNotice>
+              <MIniIndiNotice userInfo={userInfo}></MIniIndiNotice>
             </>
           );
         }
         return null;
       })()}
 
-      <Carousel></Carousel>
+      <Carousel userInfo={userInfo}></Carousel>
     </Wrap>
   );
 }
@@ -79,7 +88,7 @@ const Wrap = styled.div`
   width: 100%;
   height: 100%;
 `;
-const BookMark = styled.button<Property>`
+const BookMark = styled.button<any>`
   width: 60px;
   background: white;
   border-radius: 7px 7px 0px 0px;

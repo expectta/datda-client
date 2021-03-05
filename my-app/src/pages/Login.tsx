@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { check } from 'prettier';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { checkLogin } from '../common/axios';
+import { requestLogin } from '../common/axios';
 
-axios.defaults.withCredentials = true;
-
-function Login() {
+interface propType {
+  hadleSetMainData: (data: any) => void;
+}
+function Login({ hadleSetMainData }: propType) {
+  const history = useHistory();
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const [errormessage, setErrormessage] = useState<string>('');
 
@@ -16,12 +18,15 @@ function Login() {
     setInputs({ ...inputs, [key]: value });
   };
 
-  const handleLogin = (email: string, password: string) => {
+  const handleLogin = async (email: string, password: string) => {
     if (email.length === 0 || password.length === 0) {
       setErrormessage('이메일이나 비밀번호를 입력해주세요.');
     } else {
-      checkLogin(email);
+      // axios 로그인 요청
+      const mainData = await requestLogin(email, password);
+      hadleSetMainData(mainData);
       setErrormessage('');
+      history.push('/main');
     }
   };
 

@@ -5,30 +5,34 @@ interface propsType {
   userInfo: userInfoType;
 }
 interface userInfoType {
-  userId: string;
   permission: string;
-  institution: string;
   isLogin: boolean;
+  mainData: any;
 }
 export default function Avatar({ userInfo }: propsType) {
-  console.log(userInfo.institution, '=기관이름', userInfo.permission, '=권한');
   return (
     <Wrap>
       <AvatarCard src="../images/defaultAvatar.png" alt="avatar"></AvatarCard>{' '}
       <NameTagWrap>
         {(() => {
-          if (userInfo.permission === 'parents') {
+          if (userInfo.permission === 'parent') {
             return (
               <>
                 <ClassWrap>
-                  {'밀알어린이집'}
-                  {'새싹반'}
+                  {userInfo.mainData.data.children[0].institution}
+                  {userInfo.mainData.data.children[0].className}
                 </ClassWrap>
-                <NameTag>{'이유정'} 어린이</NameTag>
+                <NameTag>
+                  {userInfo.mainData.data.children[0].childrenName} 어린이
+                </NameTag>
               </>
             );
           }
-          return <NameTag id="institution">{userInfo.institution} </NameTag>;
+          return (
+            <NameTag id="institution">
+              {userInfo.mainData.data.children.institution}{' '}
+            </NameTag>
+          );
         })()}
       </NameTagWrap>
     </Wrap>
