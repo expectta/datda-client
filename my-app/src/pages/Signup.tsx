@@ -70,7 +70,6 @@ function Signin() {
   const handleKakao = () => {
     if (inputs.permission.length !== 0) {
       setSelection(false);
-      history.push('/signup/common');
     }
   };
 

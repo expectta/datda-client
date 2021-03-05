@@ -68,8 +68,11 @@ function Login({ hadleSetMainData }: propType) {
 export default Login;
 
 const LoginGlobal = styled.div`
-  text-align: center;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
 `;
 
 const InputBox = styled.div`
