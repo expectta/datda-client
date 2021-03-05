@@ -247,8 +247,8 @@ export const timetable = {
   ],
 };
 
-export const directorData = {
-  director: {
+export const director = {
+  data: {
     timetable: [
       {
         step: 'number',
@@ -268,12 +268,12 @@ export const directorData = {
     notice: [
       //10개
       {
-        noticeId: 'number',
+        noticeId: 22,
         title: 'string',
         create_at: 'string',
       },
       {
-        noticeId: 'number',
+        noticeId: 11,
         title: 'string',
         create_at: 'string',
       },
@@ -292,16 +292,16 @@ export const directorData = {
   },
 };
 
-export const teacherData = {
-  teacher: {
+export const teacher = {
+  data: {
     timetable: [
       {
-        step: 'number',
+        step: 1,
         time: '09:00 ~ 10:00',
         contents: 'stirng',
       },
       {
-        step: 'number',
+        step: 2,
         time: '10:00 ~ 10:30',
         contents: 'stirng',
       },
@@ -313,12 +313,12 @@ export const teacherData = {
     notice: [
       //5개
       {
-        noticeId: 'number',
+        noticeId: 11,
         title: 'string',
         create_at: 'string',
       },
       {
-        noticeId: 'number',
+        noticeId: 22,
         title: 'string',
         create_at: 'string',
       },
@@ -326,12 +326,12 @@ export const teacherData = {
     indiNotice: [
       // 5개
       {
-        noticeId: 'number',
+        noticeId: 33,
         contents: 'string',
         create_at: 'string',
       },
       {
-        noticeId: 'number',
+        noticeId: 44,
         contents: 'string',
         create_at: 'string',
       },
@@ -339,19 +339,19 @@ export const teacherData = {
     album: [
       //6개
       {
-        imageId: 'number',
+        imageId: 11,
         image_url: 'string',
       },
       {
-        imageId: 'number',
+        imageId: 22,
         image_url: 'string',
       },
     ],
   },
 };
 
-export const parentsData = {
-  parents: {
+export const parents = {
+  data: {
     timetable: [
       {
         step: 'number',
@@ -366,29 +366,29 @@ export const parentsData = {
     ],
     children: [
       {
-        childrenId: 'number',
-        childrenName: 'string',
+        childrenId: 1,
+        childrenName: '이유정',
         childrenImage: 'stirng',
-        className: 'string',
-        institution: 'string',
+        className: '새싹반',
+        institution: '밀알어린이집',
       },
       {
-        childrenId: 'number',
-        childrenName: 'string',
+        childrenId: 2,
+        childrenName: '이인수',
         childrenImage: 'stirng',
-        className: 'string',
-        institution: 'string',
+        className: '햇님반',
+        institution: '벧엘유치원',
       },
     ],
     notice: [
       //5개
       {
-        noticeId: 'number',
+        noticeId: 22,
         title: 'string',
         create_at: 'string',
       },
       {
-        noticeId: 'number',
+        noticeId: 11,
         title: 'string',
         create_at: 'string',
       },
@@ -396,12 +396,12 @@ export const parentsData = {
     indiNotice: [
       // 5개
       {
-        noticeId: 'number',
+        noticeId: 22,
         contents: 'string',
         create_at: 'string',
       },
       {
-        noticeId: 'number',
+        noticeId: 11,
         contents: 'string',
         create_at: 'string',
       },
@@ -409,11 +409,11 @@ export const parentsData = {
     album: [
       //6개
       {
-        imageId: 'number',
+        imageId: 22,
         image_url: 'string',
       },
       {
-        imageId: 'number',
+        imageId: 11,
         image_url: 'string',
       },
     ],
