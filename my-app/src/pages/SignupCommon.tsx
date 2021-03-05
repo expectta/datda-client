@@ -33,7 +33,14 @@ function SignupCommon({
       </div>
       <button
         onClick={() => {
-          handleSignupDetail(inputs.name, inputs.role, inputs.mobile);
+          handleSignupDetail(
+            inputs.name,
+            inputs.role,
+            inputs.mobile,
+            inputs.permission,
+            inputs.email,
+            inputs.password,
+          );
         }}
       >
         {inputs.permission === 'institution' ? '다음' : '완료'}
