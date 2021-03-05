@@ -5,6 +5,7 @@ interface Props {
   signup: boolean;
   errormessage: string;
   onChange: any;
+  handleIsEmail: any;
 }
 
 function Signup({
@@ -13,13 +14,20 @@ function Signup({
   errormessage,
   onChange,
   inputs,
+  handleIsEmail,
 }: Props) {
   return signup ? (
     <div className="signup">
       <div>
         <span>이메일 설정</span>
         <input type="text" onChange={(e) => onChange('email', e)}></input>
-        <button>중복 확인</button>
+        <button
+          onClick={() => {
+            handleIsEmail(inputs.email);
+          }}
+        >
+          중복 확인
+        </button>
       </div>
 
       <div>
