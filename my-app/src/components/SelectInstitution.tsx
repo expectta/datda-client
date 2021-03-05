@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function SelectionInstitution() {
   const [instiInfo, setInsti] = useState([
-    { institutionName: '원암유치원' },
-    { institutionName: '청암유치원' },
+    { institutionName: '원암유치원', institutionId: '1', institutionPhoto: '' },
+    { institutionName: '청암유치원', institutionId: '2', institutionPhoto: '' },
   ]);
+
+  //검색
+  const searchInsti = () => {
+    axios.get('https://datda');
+  };
   return (
     <Wrap>
       <ContentCard>
@@ -17,7 +23,11 @@ function SelectionInstitution() {
         </div>
         {instiInfo.map((insti) => (
           <div>
-            <input type="radio"></input>
+            <input
+              type="radio"
+              value={insti.institutionId}
+              name="institution"
+            ></input>
             <span>{insti.institutionName}</span>
           </div>
         ))}
