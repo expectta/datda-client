@@ -61,7 +61,7 @@ const LogoWrapper = styled(Link)<any>`
   flex: 22 auto;
 `;
 const Logo = styled.img`
-  width: 30px;
+  width: 21px;
   height: 20px;
 `;
 

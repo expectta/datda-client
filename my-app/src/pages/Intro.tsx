@@ -38,6 +38,7 @@ function Intro() {
         </Section1Box>
         <div id="section1Image" data-aos="fade-up" data-aos-duration="1500">
           <img id="section1Image1" src="../images/web/intro2_graphic.svg"></img>
+          <img id="section1Image1App" src="123"></img>
         </div>
       </Section1>
 
@@ -196,7 +197,7 @@ const IntroGlobal = styled.div`
   
   width : 70%
   margin: 0 auto;
-}
+ 
 `;
 
 const SectionIntro = styled.div`
@@ -211,6 +212,8 @@ const SectionIntro = styled.div`
     font-size : 2.5rem;
     color : white
   }
+
+  
     
   }
 `;
@@ -220,6 +223,11 @@ const Section1 = styled.div`
   #section1Image {
     padding-right: 10vw;
     text-align: right;
+  }
+  @media ${({ theme }) => theme.device.mobileL} {
+    #section1Image1App {
+      display: none;
+    }
   }
 `;
 

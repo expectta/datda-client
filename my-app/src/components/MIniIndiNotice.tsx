@@ -2,45 +2,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListInnerCard } from './Index';
-
+import { notice } from '../assets/testdata';
 export default function MiniIndiNotice() {
   return (
     <Wrap>
-      <NoticeWrap>
-        <Title>알림장</Title>
-        <NoticeContainar>
-          <ListInnerCard></ListInnerCard>
-        </NoticeContainar>
-      </NoticeWrap>
+      <Title>알림장</Title>
+      <NoticeContainar>
+        {notice.data.map((element, index) => {
+          return (
+            <ListInnerCard
+              noticeId={element.noticeId}
+              key={index}
+              title={element.title}
+              category={element.category}
+              createAt={element.created_at}
+            ></ListInnerCard>
+          );
+        })}
+      </NoticeContainar>
+      <More to="/main/indi_notice">더보기</More>
     </Wrap>
   );
 }
 const Wrap = styled.div`
   width: 95%;
-  height: 29%;
+  height: 20%;
   margin: 0 auto;
-  margin-top: 15px;
 `;
-const NoticeWrap = styled.div`
-  width: 90%;
-  height: 100%;
-  margin: 0 auto;
-  border-radius: 15px 15px 15px 15px;
-  box-shadow: 0px 0px 5px #c8c8c8;
-`;
-const Title = styled.h4`
+const Title = styled.label`
   width: 95%;
-  height: 16%;
   margin: 0 auto;
-  padding: 10px;
-  color: lightgray;
+  font-size: 1.5rem;
   text-align: center;
-  border-bottom: 1px solid lightgray;
 `;
 const NoticeContainar = styled.div`
-  width: 95%;
-  height: 84%;
-  margin: 0 auto;
+  width: 100%;
+  height: 80%;
   overflow: auto;
 `;
 const NoticeCard = styled.div`
@@ -49,7 +46,6 @@ const NoticeCard = styled.div`
 const SubTitle = styled.div`
   width: 100%;
   display: flex;
-
   border-bottom: 1px solid lightgray;
   height: 35%;
 `;
@@ -76,4 +72,9 @@ const GoToPostButton = styled(Link)`
   flex: 1 auto;
   font-size: 3rem;
   color: #bcbbbb;
+`;
+const More = styled(Link)<any>`
+  display: block;
+  padding: 2%;
+  text-align: end;
 `;

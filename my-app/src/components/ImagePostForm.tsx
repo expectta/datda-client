@@ -46,7 +46,7 @@ export default function ImagePostForm() {
           />
           <Image
             src={
-              image.previewURL ? image.previewURL : '../../images/addImage.png'
+              image.previewURL ? image.previewURL : '../../images/add-image.png'
             }
             alt="프로필사진"
           ></Image>
