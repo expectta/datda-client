@@ -19,18 +19,18 @@ export default function Avatar({ userInfo }: propsType) {
             return (
               <>
                 <ClassWrap>
-                  {userInfo.mainData.data.children[0].institution}
-                  {userInfo.mainData.data.children[0].className}
+                  {/* {userInfo.mainData.data.children[0].institution}
+                  {userInfo.mainData.data.children[0].className} */}
                 </ClassWrap>
                 <NameTag>
-                  {userInfo.mainData.data.children[0].childrenName} 어린이
+                  {/* {userInfo.mainData.data.children[0].childrenName} 어린이 */}
                 </NameTag>
               </>
             );
           }
           return (
             <NameTag id="institution">
-              {userInfo.mainData.data.children.institution}{' '}
+              {/* {userInfo.mainData.data.children.institution}{' '} */}
             </NameTag>
           );
         })()}
