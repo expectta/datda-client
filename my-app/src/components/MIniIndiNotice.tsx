@@ -3,22 +3,26 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListInnerCard } from './Index';
 import { notice } from '../assets/testdata';
-export default function MiniIndiNotice() {
+interface propsType {
+  userInfo: any;
+}
+export default function MiniIndiNotice({ userInfo }: propsType) {
   return (
     <Wrap>
       <Title>알림장</Title>
       <NoticeContainar>
-        {notice.data.map((element, index) => {
-          return (
-            <ListInnerCard
-              noticeId={element.noticeId}
-              key={index}
-              title={element.title}
-              category={element.category}
-              createAt={element.created_at}
-            ></ListInnerCard>
-          );
-        })}
+        {userInfo.mainData.data.indiNotice.map(
+          (element: any, index: number) => {
+            return (
+              <ListInnerCard
+                noticeId={element.noticeId}
+                key={element.noticeId}
+                title={element.contents}
+                createAt={element.create_at}
+              ></ListInnerCard>
+            );
+          },
+        )}
       </NoticeContainar>
       <More to="/main/indi_notice">더보기</More>
     </Wrap>

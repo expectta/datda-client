@@ -169,7 +169,7 @@ function CardList({ title, imageTitle, createdAt, userInfo }: propsType) {
         </CardWrapper>
         {(() => {
           console.log(userInfo.permission, 'cardlist권한 확인');
-          if (userInfo.permission === 'parents') {
+          if (userInfo.permission === 'parent') {
             return null;
           }
           return (

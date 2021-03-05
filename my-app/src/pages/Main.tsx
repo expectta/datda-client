@@ -41,10 +41,9 @@ interface Props {
   setModalVisible: any;
   handleLogout: any;
   userInfo: {
-    userId: string;
     permission: string;
-    institution: string;
     isLogin: boolean;
+    mainData: any;
   };
 }
 
@@ -169,7 +168,7 @@ export default function Main(
           <Avatar userInfo={userInfo}></Avatar>
         </FristPart>
         <SecondPart id="state" permission={userInfo.permission}>
-          {userInfo.permission === 'parents' ? (
+          {userInfo.permission === 'parent' ? (
             <>
               <State
                 type="현재상태"
@@ -343,7 +342,7 @@ const SecondPart = styled.div<any>`
   display: flex;
   padding: 2%;
   ${(props) =>
-    props.permission !== 'parents' &&
+    props.permission !== 'parent' &&
     css`
       display: none;
     `}

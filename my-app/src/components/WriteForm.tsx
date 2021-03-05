@@ -6,10 +6,9 @@ interface propsType {
   title: string;
   type: string;
   userInfo: {
-    userId: string;
     permission: string;
-    institution: string;
     isLogin: boolean;
+    mainData: any;
   };
 }
 //object 사용시 key와 value의 type을 지정해야한다.
