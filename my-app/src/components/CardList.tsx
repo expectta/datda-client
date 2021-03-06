@@ -1,15 +1,14 @@
 import React from 'react';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link, useRouteMatch, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 interface propsType {
   title: string;
   imageTitle: string;
   createdAt: string;
-  location: RouteComponentProps['location'];
-  history: RouteComponentProps['history'];
-  match: RouteComponentProps['match'];
+  userInfo: any;
 }
-function CardList({ title, imageTitle, createdAt, match }: propsType) {
+function CardList({ title, imageTitle, createdAt, userInfo }: propsType) {
+  const urlMatch = useRouteMatch();
   return (
     <>
       <Wrap>
@@ -168,14 +167,22 @@ function CardList({ title, imageTitle, createdAt, match }: propsType) {
             </Card>
           </CardContainer>
         </CardWrapper>
-        <ButtonWrapper>
-          <WirteButton to={`${match.path}/write`}>작성</WirteButton>
-        </ButtonWrapper>
+        {(() => {
+          console.log(userInfo.permission, 'cardlist권한 확인');
+          if (userInfo.permission === 'parent') {
+            return null;
+          }
+          return (
+            <ButtonWrapper>
+              <WirteButton to={`${urlMatch.path}/write`}>작성</WirteButton>
+            </ButtonWrapper>
+          );
+        })()}
       </Wrap>
     </>
   );
 }
-export default withRouter(CardList);
+export default CardList;
 const Wrap = styled.div`
   width: 100%;
   height: 100%;

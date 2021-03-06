@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import { Link, RouteComponentProps, withRouter } from 'react-router-dom';
+import { Link, useRouteMatch, withRouter } from 'react-router-dom';
 import { ImagePostForm, TextAreaForm } from './Index';
 interface propsType {
   title: string;
   type: string;
-  location: RouteComponentProps['location'];
-  history: RouteComponentProps['history'];
-  match: RouteComponentProps['match'];
+  userInfo: {
+    permission: string;
+    isLogin: boolean;
+    mainData: any;
+  };
 }
 //object 사용시 key와 value의 type을 지정해야한다.
 interface objectType {
   [key: string]: JSX.Element;
 }
-function WriteForm({ match, title, type }: propsType) {
+function WriteForm({ title, type, userInfo }: propsType) {
+  const urlMatch = useRouteMatch();
   const PREVIOUS_PAGE = -1;
   //메뉴별 선택적으로 화면 구성
   const printContent: objectType = {
     medicine: <TextAreaForm />,
     notice: <TextAreaForm />,
-    meal: <ImagePostForm />,
+    meal: <ImagePostForm userInfo={userInfo} />,
     indiNotice: <TextAreaForm />,
-    album: <ImagePostForm />,
+    album: <ImagePostForm userInfo={userInfo} />,
   };
   return (
     <Wrap>
@@ -42,7 +45,7 @@ function WriteForm({ match, title, type }: propsType) {
     </Wrap>
   );
 }
-export default withRouter(WriteForm);
+export default WriteForm;
 const Wrap = styled.div`
   width: 100%;
   height: 100%;

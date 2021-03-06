@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import React, { useRef, useEffect, useState } from 'react';
-export default function Carousel() {
+interface propType {
+  userInfo: any;
+}
+export default function Carousel({ userInfo }: propType) {
   // carousel 상태
   const slideRef = useRef<HTMLDivElement>(null);
   const TOTAL_SLIDES = 1;
@@ -34,29 +37,18 @@ export default function Carousel() {
     <>
       <CarouselContainer>
         <Title>앨범</Title>
-
         <SliderContainer ref={slideRef}>
-          <AlbumCard>
-            <AlbumImg src="../images/album1.png" alt="앨범사진"></AlbumImg>
-          </AlbumCard>
-          <AlbumCard>
-            <AlbumImg src="../images/album2.png" alt="앨범사진"></AlbumImg>
-          </AlbumCard>
-          <AlbumCard>
-            <AlbumImg src="../images/album1.png" alt="앨범사진"></AlbumImg>
-          </AlbumCard>
-          <AlbumCard>
-            <AlbumImg src="../images/album2.png" alt="앨범사진"></AlbumImg>
-          </AlbumCard>
-          <AlbumCard>
-            <AlbumImg src="../images/album2.png" alt="앨범사진"></AlbumImg>
-          </AlbumCard>
-          <AlbumCard></AlbumCard>
-          <AlbumCard></AlbumCard>
-          <AlbumCard></AlbumCard>
-          <AlbumCard></AlbumCard>
-          <AlbumCard></AlbumCard>
-          <AlbumCard></AlbumCard>
+          {userInfo.mainData.data.album.map((element: any, index: number) => {
+            return (
+              <AlbumCard key={element.imageId}>
+                <AlbumImg
+                  key={index}
+                  src={element.image_url}
+                  alt="앨범사진"
+                ></AlbumImg>
+              </AlbumCard>
+            );
+          })}
         </SliderContainer>
 
         <More to="/main/album">더보기</More>

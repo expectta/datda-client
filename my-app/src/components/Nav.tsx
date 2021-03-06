@@ -5,8 +5,9 @@ interface propsType {
   location: RouteComponentProps['location'];
   history: RouteComponentProps['history'];
   match: RouteComponentProps['match'];
+  handleLogout: any;
 }
-function Nav({ history }: propsType) {
+function Nav({ history, handleLogout }: propsType) {
   return (
     <Wrap>
       <WrapLinks>
@@ -17,7 +18,9 @@ function Nav({ history }: propsType) {
         </LogoWrapper>
 
         {/* <label onClick={() => history.push('/main/profile')}>프로필</label> */}
-        <Links to="/">Log out</Links>
+        <Links to="/" onClick={() => handleLogout()}>
+          Log out
+        </Links>
       </WrapLinks>
     </Wrap>
   );
@@ -31,9 +34,6 @@ const Wrap = styled.div`
   display: flex;
   background: white;
   box-shadow: 0 4px 4px -1px #c8c8c8;
-`;
-const LogOut = styled.span`
-  flex: 1 auto;
 `;
 const Links = styled(Link)`
   color: black;

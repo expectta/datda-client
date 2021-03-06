@@ -1,22 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ListInnerCard } from './Index';
 import { notice } from '../assets/testdata';
-
-export default function MiniNotice() {
+import { StringLiteral } from 'typescript';
+interface propsType {
+  userInfo: any;
+}
+export default function MiniNotice({ userInfo }: propsType) {
   return (
-    <Wrap>
+    <Wrap permission={userInfo.permission}>
       <Title>공지사항</Title>
-      <NoticeContainar>
-        {notice.data.map((element, index) => {
+      <NoticeContainar permission={userInfo.permission}>
+        {userInfo.mainData.data.notice.map((element: any, index: number) => {
           return (
             <ListInnerCard
               noticeId={element.noticeId}
               key={index}
               title={element.title}
-              category={element.category}
-              createAt={element.created_at}
+              createAt={element.create_at}
             ></ListInnerCard>
           );
         })}
@@ -25,12 +27,19 @@ export default function MiniNotice() {
     </Wrap>
   );
 }
-const Wrap = styled.div`
+const Wrap = styled.div<any>`
   width: 95%;
   height: 20%;
   margin: 0 auto;
   margin-top: 2%;
+  //원장님이 로그인 했을경우
+  ${(props) =>
+    props.permission === 'institution' &&
+    css`
+      height: 43%;
+    `}
 `;
+
 const NoticeWrap = styled.div`
   width: 90%;
   margin: 0 auto;
@@ -41,10 +50,16 @@ const NoticeWrap = styled.div`
 const Title = styled.label`
   font-size: 1.5rem;
 `;
-const NoticeContainar = styled.div`
+const NoticeContainar = styled.div<any>`
   width: 100%;
   height: 70%;
   overflow: auto;
+  //원장님이 로그인 했을경우
+  ${(props) =>
+    props.permission === 'institution' &&
+    css`
+      height: 85%;
+    `}
 `;
 
 const GoToPostButton = styled(Link)`

@@ -6,15 +6,18 @@ interface Props {
   setModalVisible: any;
 }
 function CreateClass({ setModalMessage, setModalVisible }: Props) {
-  const [isClass, setIsClass] = useState<boolean>(true);
-  const [isTeacher, setIsTeacher] = useState<boolean>(false);
+  const [isClass, setIsClass] = useState<boolean>(false);
+  const [isTeacher, setIsTeacher] = useState<boolean>(true);
   const [isStudent, setIsStudent] = useState<boolean>(false);
 
   const [classInfo, setClassInfo] = useState([
-    { className: 'a', classId: '1', userName: 'a' },
+    { className: '새싹반', classId: '1', userName: 'a' },
+    { className: '별빛반', classId: '2', userName: 'a' },
   ]);
 
-  const [teachers, setTeachers] = useState([{ userName: 'a', userId: '1' }]);
+  const [teachers, setTeachers] = useState([
+    { userName: '이인수', userId: '1', created_at: '2021-03-01' },
+  ]);
 
   const [students, setStudents] = useState([
     { userName: 'a', userId: '1', className: 'a', classId: '1' },
@@ -41,26 +44,28 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
     <Wrap>
       <h3>{isClass ? '반 구성' : isTeacher ? '선생님 관리' : '원아 관리'}</h3>
       <div>
-        <span className="manageType" onClick={() => toggleClass()}>
-          반
-        </span>
-        <span className="manageType" onClick={() => toggleTeacher()}>
-          선생님
-        </span>
-        <span className="manageType" onClick={() => toggleStudent()}>
+        <button className="manageType" onClick={() => toggleTeacher()}>
+          교사관리
+        </button>
+        <button className="manageType" onClick={() => toggleStudent()}>
           원아관리
-        </span>
+        </button>
+        <button className="manageType" onClick={() => toggleClass()}>
+          반관리
+        </button>
       </div>
-      <ClassManage
-        isClass={isClass}
+
+      <TeacherManage isTeacher={isTeacher} teachers={teachers} />
+      <StudentManage
         classInfo={classInfo}
+        isStudent={isStudent}
+        students={students}
         setModalMessage={setModalMessage}
         setModalVisible={setModalVisible}
       />
-      <TeacherManage isTeacher={isTeacher} teachers={teachers} />
-      <StudentManage
-        isStudent={isStudent}
-        students={students}
+      <ClassManage
+        isClass={isClass}
+        classInfo={classInfo}
         setModalMessage={setModalMessage}
         setModalVisible={setModalVisible}
       />
@@ -72,15 +77,52 @@ export default CreateClass;
 const Wrap = styled.div`
   width: 100%;
   height: 97%;
-  .classArea {
-    background-color: pink;
-    border-radius: 10px;
-  }
   .teacherArea {
     background-color: pink;
   }
-  .studentArea {
-    background-color: pink;
+  .classList {
+    display: inline-block;
+    border: solid 1px;
+    border-radius: 5px;
+    width: 60%;
+    height: 5%;
+    padding-left: 2%;
+  }
+  #student {
+    #studentListArea {
+      border: solid 1px;
+      height: 400px;
+      border-radius: 5px;
+      overflow: scroll;
+    }
+    #studentTitleList {
+      border-bottom: solid 1px;
+    }
+    #studentButtonArea {
+      text-align: center;
+      bottom: 0px;
+    }
+  }
+  #teacher {
+    #teacherWaitingTitle {
+      border-bottom: solid 1px;
+    }
+    #teacherWaiting {
+      border: solid 1px;
+      border-radius: 5px;
+    }
+    #teacherManage {
+      border: solid 1px;
+      border-radius: 5px;
+    }
+    #teacherManageTitle {
+      border-bottom: solid 1px;
+    }
+    .teacherButtonArea1 {
+    }
+    #teacherButtonArea2 {
+      text-align: center;
+    }
   }
   .manageType {
     margin: 2%;

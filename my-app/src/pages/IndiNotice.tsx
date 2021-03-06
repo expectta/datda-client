@@ -1,25 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Switch, Route, RouteComponentProps } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { ListForm, WriteForm } from '../components/Index';
 interface propsType {
-  location: RouteComponentProps['location'];
-  history: RouteComponentProps['history'];
-  match: RouteComponentProps['match'];
+  userInfo: any;
 }
-export default function IndiNotice({ match }: propsType) {
+export default function IndiNotice({ userInfo }: propsType) {
+  const urlMatch = useRouteMatch();
   return (
     <Wrap>
       <Switch>
-        <Route exact path={`${match.path}`}>
+        <Route exact path={`${urlMatch.path}`}>
           <ListForm
             title="알림장"
             fristCategory="월별"
             secondCategory="일별"
+            permission={userInfo.permission}
           ></ListForm>
         </Route>
-        <Route exact path={`${match.path}/write`}>
-          <WriteForm title="알림장 작성" type="indiNotice"></WriteForm>
+        <Route exact path={`${urlMatch.path}/write`}>
+          <WriteForm
+            userInfo={userInfo}
+            title="알림장 작성"
+            type="indiNotice"
+          ></WriteForm>
         </Route>
       </Switch>
     </Wrap>

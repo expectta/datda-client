@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
-interface propsType {
-  isSelectedImage: string;
-}
+
 export default function WriteNotice() {
   const [image, setImage] = useState({
     file: '',
@@ -110,7 +108,7 @@ const Writer = styled.span`
   flex: 1 auto;
   text-align: right;
 `;
-const ImageWrapper = styled.div<propsType>`
+const ImageWrapper = styled.div<any>`
   width: 100%;
   overflow: hidden;
   height: 48%;
@@ -178,7 +176,7 @@ const ImageContainer = styled.label`
   cursor: pointer;
 `;
 
-const RemoveImage = styled.div<propsType>`
+const RemoveImage = styled.div<any>`
   background: #6f6eff9e;
   text-align: center;
   width: 90%;

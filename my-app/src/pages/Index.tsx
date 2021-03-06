@@ -15,6 +15,8 @@ import Report from './Report';
 import CreateClass from './CreateClass';
 import Management from './ManagementChildren';
 import Bus from './Bus';
+import SignupCommon from './SignupCommon';
+import SignupInstitution from './SignupInstitution';
 export {
   Bus,
   Management,
@@ -33,4 +35,6 @@ export {
   EducationList,
   Report,
   CreateClass,
+  SignupCommon,
+  SignupInstitution,
 };

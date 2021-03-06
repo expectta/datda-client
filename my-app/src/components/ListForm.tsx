@@ -7,11 +7,18 @@ interface propsType {
   title: string;
   fristCategory?: string;
   secondCategory?: string;
+  permission: string;
   location: RouteComponentProps['location'];
   history: RouteComponentProps['history'];
   match: RouteComponentProps['match'];
 }
-function ListForm({ title, fristCategory, secondCategory, match }: propsType) {
+function ListForm({
+  permission,
+  title,
+  fristCategory,
+  secondCategory,
+  match,
+}: propsType) {
   console.log('현재 url', match.path);
   return (
     <Wrap>
@@ -34,9 +41,26 @@ function ListForm({ title, fristCategory, secondCategory, match }: propsType) {
           );
         })}
       </CardWrapper>
-      <ButtonWrapper>
-        <WireButton to={`${match.path}/write`}>작성</WireButton>
-      </ButtonWrapper>
+      {(() => {
+        console.log(title, ' = 타이틀 ', permission, '= 권한');
+        if (title === '알림장' && permission === 'institution') {
+          return null;
+        }
+        if (
+          title === '투약의뢰서' &&
+          (permission === 'institution' || permission === 'teacher')
+        ) {
+          return null;
+        }
+        if (title === '공지사항' && permission === 'parent') {
+          return null;
+        }
+        return (
+          <ButtonWrapper>
+            <WireButton to={`${match.path}/write`}>작성</WireButton>
+          </ButtonWrapper>
+        );
+      })()}
     </Wrap>
   );
 }

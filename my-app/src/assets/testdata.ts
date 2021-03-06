@@ -246,3 +246,176 @@ export const timetable = {
     },
   ],
 };
+
+export const director = {
+  data: {
+    timetable: [
+      {
+        step: 'number',
+        time: '09:00 ~ 10:00',
+        contents: 'stirng',
+      },
+      {
+        step: 'number',
+        time: '10:00 ~ 10:30',
+        contents: 'stirng',
+      },
+    ],
+    institution: {
+      name: 'stirng',
+      image: 'string',
+    },
+    notice: [
+      //10개
+      {
+        noticeId: 22,
+        title: 'string',
+        create_at: 'string',
+      },
+      {
+        noticeId: 11,
+        title: 'string',
+        create_at: 'string',
+      },
+    ],
+    album: [
+      //6개
+      {
+        imageId: 'number',
+        image_url: 'string',
+      },
+      {
+        imageId: 'number',
+        image_url: 'string',
+      },
+    ],
+  },
+};
+
+export const teacher = {
+  data: {
+    timetable: [
+      {
+        step: 1,
+        time: '09:00 ~ 10:00',
+        contents: 'stirng',
+      },
+      {
+        step: 2,
+        time: '10:00 ~ 10:30',
+        contents: 'stirng',
+      },
+    ],
+    institution: {
+      name: 'stirng',
+      image: 'string',
+    },
+    notice: [
+      //5개
+      {
+        noticeId: 11,
+        title: 'string',
+        create_at: 'string',
+      },
+      {
+        noticeId: 22,
+        title: 'string',
+        create_at: 'string',
+      },
+    ],
+    indiNotice: [
+      // 5개
+      {
+        noticeId: 33,
+        contents: 'string',
+        create_at: 'string',
+      },
+      {
+        noticeId: 44,
+        contents: 'string',
+        create_at: 'string',
+      },
+    ],
+    album: [
+      //6개
+      {
+        imageId: 11,
+        image_url: 'string',
+      },
+      {
+        imageId: 22,
+        image_url: 'string',
+      },
+    ],
+  },
+};
+
+export const parents = {
+  data: {
+    timetable: [
+      {
+        step: 'number',
+        time: '09:00 ~ 10:00',
+        contents: 'stirng',
+      },
+      {
+        step: 'number',
+        time: '10:00 ~ 10:30',
+        contents: 'stirng',
+      },
+    ],
+    children: [
+      {
+        childrenId: 1,
+        childrenName: '이유정',
+        childrenImage: 'stirng',
+        className: '새싹반',
+        institution: '밀알어린이집',
+      },
+      {
+        childrenId: 2,
+        childrenName: '이인수',
+        childrenImage: 'stirng',
+        className: '햇님반',
+        institution: '벧엘유치원',
+      },
+    ],
+    notice: [
+      //5개
+      {
+        noticeId: 22,
+        title: 'string',
+        create_at: 'string',
+      },
+      {
+        noticeId: 11,
+        title: 'string',
+        create_at: 'string',
+      },
+    ],
+    indiNotice: [
+      // 5개
+      {
+        noticeId: 22,
+        contents: 'string',
+        create_at: 'string',
+      },
+      {
+        noticeId: 11,
+        contents: 'string',
+        create_at: 'string',
+      },
+    ],
+    album: [
+      //6개
+      {
+        imageId: 22,
+        image_url: 'string',
+      },
+      {
+        imageId: 11,
+        image_url: 'string',
+      },
+    ],
+  },
+};

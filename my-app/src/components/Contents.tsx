@@ -8,47 +8,75 @@ import {
   MIniIndiNotice,
   MainMenu,
 } from './Index';
-
-export default function Contents() {
+interface propsType {
+  userInfo: any;
+}
+export default function Contents({ userInfo }: propsType) {
+  //탭 메뉴 상태
   const [clickedMenu, setClickedMenu] = useState(0);
+  //탭 메뉴 클릭 이벤트
   const handleChangeMenu = (menu: number) => {
     setClickedMenu(menu);
   };
   return (
     <Wrap>
-      <BookMarkWrap>
-        <BookMark
-          checked={clickedMenu}
-          order={30}
-          className={clickedMenu === 0 ? 'active' : ''}
-          onClick={() => handleChangeMenu(0)}
-        >
-          <Name>{'이인수'}</Name>
-        </BookMark>
-        <BookMark
-          checked={clickedMenu}
-          order={20}
-          className={clickedMenu === 1 ? 'active' : ''}
-          onClick={() => handleChangeMenu(1)}
-        >
-          {' '}
-          <Name>{'심종훈'}</Name>
-        </BookMark>
-        <BookMark
-          checked={clickedMenu}
-          order={10}
-          className={clickedMenu === 2 ? 'active' : ''}
-          onClick={() => handleChangeMenu(2)}
-        >
-          {' '}
-          <Name>{'박한솔'}</Name>
-        </BookMark>
-      </BookMarkWrap>
+      {userInfo.permission === 'parent' ? (
+        <BookMarkWrap>
+          {userInfo.mainData.data.children.map(
+            (element: any, index: number) => {
+              return (
+                <BookMark
+                  key={index}
+                  childId={element.childrenId}
+                  checked={clickedMenu}
+                  order={`${userInfo.mainData.data.children.length}0`}
+                  className={clickedMenu === index ? 'active' : ''}
+                  onClick={() => handleChangeMenu(index)}
+                >
+                  <Name>{element.childrenName}</Name>
+                </BookMark>
+              );
+            },
+          )}
+
+          {/* <BookMark
+            checked={clickedMenu}
+            order={20}
+            className={clickedMenu === 1 ? 'active' : ''}
+            onClick={() => handleChangeMenu(1)}
+          >
+            {' '}
+            <Name>{'심종훈'}</Name>
+          </BookMark>
+          <BookMark
+            checked={clickedMenu}
+            order={10}
+            className={clickedMenu === 2 ? 'active' : ''}
+            onClick={() => handleChangeMenu(2)}
+          >
+            {' '}
+            <Name>{'박한솔'}</Name>
+          </BookMark> */}
+        </BookMarkWrap>
+      ) : null}
       <Timetable></Timetable>
       <MainMenu></MainMenu>
-      <MiniNotice></MiniNotice>
-      <MIniIndiNotice></MIniIndiNotice>
-      <Carousel></Carousel>
+      <MiniNotice userInfo={userInfo}></MiniNotice>
+      {(() => {
+        if (
+          userInfo.permission === 'teacher' ||
+          userInfo.permission === 'parent'
+        ) {
+          return (
+            <>
+              <MIniIndiNotice userInfo={userInfo}></MIniIndiNotice>
+            </>
+          );
+        }
+        return null;
+      })()}
+
+      <Carousel userInfo={userInfo}></Carousel>
     </Wrap>
   );
 }
@@ -60,12 +88,7 @@ const Wrap = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-const ContentCard = styled.div`
-  ${({ theme }) => theme.common.contentCardDiv}
-`;
-
-const BookMark = styled.button<Property>`
+const BookMark = styled.button<any>`
   width: 60px;
   background: white;
   border-radius: 7px 7px 0px 0px;

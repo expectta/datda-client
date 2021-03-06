@@ -1,25 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Switch, RouteComponentProps } from 'react-router-dom';
+import {
+  Route,
+  Switch,
+  RouteComponentProps,
+  useRouteMatch,
+} from 'react-router-dom';
 import { CardList, StateListForm, WriteForm } from '../components/Index';
 interface propsType {
-  location: RouteComponentProps['location'];
-  history: RouteComponentProps['history'];
-  match: RouteComponentProps['match'];
+  userInfo: any;
 }
-export default function Management({ match }: propsType) {
+export default function Management({ userInfo }: propsType) {
+  const urlMatch = useRouteMatch();
   return (
     <Wrap>
       <Switch>
-        <Route exact path={`${match.path}`}>
+        <Route exact path={`${urlMatch.path}`}>
           <StateListForm
             title="원아 상태관리"
             fristCategory="전체"
             secondCategory="반별"
           ></StateListForm>
         </Route>
-        <Route pasth={`${match.path}/write`}>
-          <WriteForm title="급식표 등록" type="meal"></WriteForm>
+        <Route pasth={`${urlMatch.path}/write`}>
+          <WriteForm
+            userInfo={userInfo}
+            title="급식표 등록"
+            type="meal"
+          ></WriteForm>
         </Route>
       </Switch>
     </Wrap>
