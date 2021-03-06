@@ -21,8 +21,17 @@ import {
 import { useHistory } from 'react-router-dom';
 import 'dotenv/config';
 import axios from 'axios';
+
+import { isEmail } from '../common/axios';
+
 import styled from 'styled-components';
 import { userInfo } from 'os';
+import { AnyMxRecord } from 'dns';
+
+interface Props {
+  setModalMessage: any;
+  setModalVisible: any;
+}
 
 axios.defaults.withCredentials = true;
 
@@ -33,7 +42,7 @@ const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 후에 서버�
 const redirectUri = 'http://localhost:3000/signup'; //! 후에 datda 주소로 변경
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
-function Signin() {
+function Signin({ setModalMessage, setModalVisible }: Props) {
   //회원가입 필요한 정보
   const [inputs, setInputs] = useState({
     email: null,
@@ -54,6 +63,8 @@ function Signin() {
   const [errormessage, setErrormessage] = useState<string>('');
   //첫 페이지(회원 유형 선택)
   const [selection, setSelection] = useState<boolean>(true);
+
+  const [isEmail, setIsEmail] = useState<boolean>(false);
 
   //아이디 비밀번호 설정 페이지
   const [signup, setSignup] = useState<boolean>(false);
@@ -103,6 +114,35 @@ function Signin() {
     }
   }, [isKakao, userEmail]);
 
+  const handleIsEmail = async (email: string) => {
+    axios
+      .post('https://datda.link/auth/isemail', {
+        // axios.post('http://localhost:5000/auth/isemail', {
+        email: email,
+      })
+      .then((res) => {
+        if (res.status === 201) {
+          setModalVisible(true);
+          setModalMessage('이미 가입된 아이디입니다');
+          setIsEmail(false);
+        } else if (res.status === 200) {
+          setModalVisible(true);
+          setModalMessage('이미 가입된 아이디입니다');
+          setIsEmail(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('콘솔창에 console.log(err)');
+      });
+  };
+
+  // useEffect(() => {
+  //   if (selection === false) {
+  //     setSocialSelection(true);
+  //   }
+  // }, [selection]);
+
   //! 카카오 회원가입 API 요청
   const handleKakaoSignup = (authorizationCode: string) => {
     axios
@@ -130,11 +170,14 @@ function Signin() {
     email: string,
     password: string,
     passwordCheck: string,
+    isEmail: boolean,
   ) => {
     if (email === null) {
       setErrormessage('정보를 입력하서야 합니다');
     } else if (!isIdCheck(email)) {
       setErrormessage('올바르지 못한 이메일입니다');
+    } else if (!isEmail) {
+      setErrormessage('이메일 중복을 확인해주세요');
     } else if (!isPasswordCheck(password)) {
       setErrormessage(
         '최소 8자 이상의, 특수문자와 숫자, 문자를 포함한 비밀번호를 입력하셔야 합니다',
@@ -148,18 +191,25 @@ function Signin() {
     }
   };
 
-  const handleSignupDetail = (name: string, role: string, phone: string) => {
+  const handleSignupDetail = (
+    name: string,
+    role: string,
+    phone: string,
+    permission: string,
+    email: string,
+    password: string,
+  ) => {
     if (name === null || role === null || phone === null) {
       setErrormessage('모든 항목은 필수입니다');
     } else if (!isNameCHeck(name)) {
-      setErrormessage('이름을 확인해주세요/');
+      setErrormessage('이름을 확인해주세요');
     } else if (!isPhoneCheck(phone)) {
       setErrormessage('올바른 전화번호를 입력해주세요.');
     } else {
       setErrormessage('');
       inputs.permission === 'institution'
         ? (setInstitution(true), history.push('/signup/institution'))
-        : history.push('/login');
+        : postSignup(name, role, phone, permission, email, password);
     }
   };
   const handleInstitution = (institutionName: string, master: string) => {
@@ -172,6 +222,32 @@ function Signin() {
     info.length === 0
       ? setErrormessage('교습소 중 하나를 선택해주세요')
       : (history.push('/'), setErrormessage(''));
+  };
+
+  const postSignup = (
+    name: string,
+    role: string,
+    phone: string,
+    permission: string,
+    email: string,
+    password: string,
+  ) => {
+    axios
+      .post('https://datda.link/auth/signup', {
+        userName: name,
+        role: role,
+        mobile: phone,
+        permission: permission,
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          history.push('/login');
+        } else {
+          alert('이미 아이디가 있습니다.');
+        }
+      });
   };
 
   //인풋데이터 값 바꾸기
@@ -210,6 +286,7 @@ function Signin() {
         handleSignup={handleSignup}
         errormessage={errormessage}
         onChange={onChange}
+        handleIsEmail={handleIsEmail}
       />
       <Switch>
         <Route exact path="/signup/common">

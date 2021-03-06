@@ -77,7 +77,12 @@ function App() {
           <Route path="/login">
             <Login hadleSetMainData={hadleSetMainData}></Login>
           </Route>
-          <Route path="/signup" component={Signup} />
+          <Route path="/signup">
+            <Signup
+              setModalMessage={setModalMessage}
+              setModalVisible={setModalVisible}
+            />
+          </Route>
           {/* 로그인이 됐을때만 화면 접속 가능 */}
           {userInfo.isLogin ? (
             <>
