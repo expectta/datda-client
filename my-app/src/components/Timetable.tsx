@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { timetable } from '../assets/testdata';
+import { isConstructorDeclaration } from 'typescript';
 import { findStepEducation } from '../common/utils/findCurrentEducation';
 
 interface propsType {
   step: number;
   previousStep: number;
 }
-export default function Timetable() {
+interface props {
+  userInfo: any;
+}
+export default function Timetable({ userInfo }: props) {
   // 현재 시간 상태
   const [time, setTime] = useState('');
   // timetable 상태
@@ -17,11 +20,15 @@ export default function Timetable() {
     previousStep: 0,
     currentTime: '',
     currentEducation: '',
-    totalTimetable: timetable.data,
+    totalTimetable: `${
+      userInfo.permission === 'parent'
+        ? userInfo.mainData[userInfo.currentChild].timetable!
+        : userInfo.mainData.timetable
+    }`,
   });
   // 현재 진행중인 교육상태 업데이트
   useEffect(() => {
-    // console.log(time, ' 현재시간');
+    console.log(time);
     const currentEducation = findStepEducation(
       time,
       currentTimeTable.totalTimetable,
@@ -29,19 +36,19 @@ export default function Timetable() {
     setCurrentTimeTable({
       ...currentTimeTable,
       // currentTime: currentEducation!.time,
-      step: currentEducation?.step,
+      step: currentEducation?.step || 0,
       currentTime: currentEducation?.timetable,
       currentEducation: currentEducation?.currentEducation,
     });
+    console.log('현재시간');
   }, [time]);
 
   // 현재 시간 업데이트
   const tick = () => {
     const date = new Date();
     const hour: string = date.getHours().toString();
-    let minute: string = date.getSeconds().toString();
+    let minute: string = date.getMinutes().toString();
     // let minute: string = date.getMinutes().toString();
-
     if (minute.length === 1) {
       minute = '0' + minute;
       // console.log('분이 이상', hour, '시', minute, '분');
@@ -84,7 +91,7 @@ export default function Timetable() {
                       <Time>
                         <label>
                           {currentTimeTable.currentTime ||
-                            '정규수업시간이 아닙니다'}
+                            '수업시간이 아니에요'}
                         </label>
                       </Time>
                       <Education>
@@ -131,7 +138,7 @@ const CurrentEducation = styled.div`
   box-shadow: 0px 0px 5px #c8c8c8;
 `;
 const ProgressBar = styled.div<propsType>`
-  width: 75%;
+  width: 0;
   height: 12px;
   left: -3px;
   border-radius: 10px;
@@ -141,8 +148,8 @@ const ProgressBar = styled.div<propsType>`
   z-index: 2;
   margin-left: 3px;
   position: relative;
-  animation: ${(props) => progerssBar(props.previousStep * 10, props.step * 10)}
-    2s ease-in-out;
+  animation: ${(props) => progerssBar(props.previousStep, props.step)} 2s
+    ease-in-out;
   animation-fill-mode: forwards;
 `;
 const ProgerssBarBack = styled.div`
@@ -155,19 +162,21 @@ const ProgerssBarBack = styled.div`
   background: #f0ecec;
 `;
 const Icon = styled.img`
-  width: auto;
-  height: 51px;
+  width: 3rem;
+  height: auto;
 `;
 const EducationWrap = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
+  text-align: center;
   padding: 5px;
   height: 100%;
 `;
 const CurrentState = styled.span`
-  width: 50%;
   height: 100%;
   display: inline-grid;
+  place-items: center;
 `;
 const Time = styled.div`
   width: 100%;
