@@ -19,6 +19,7 @@ import {
   isPhoneCheck,
 } from '../common/utils/validation';
 import { useHistory } from 'react-router-dom';
+import 'dotenv/config';
 import axios from 'axios';
 
 import { isEmail } from '../common/axios';
@@ -31,6 +32,15 @@ interface Props {
   setModalMessage: any;
   setModalVisible: any;
 }
+
+axios.defaults.withCredentials = true;
+
+//!카카오톡 REST api key 리액트는 환경변수(.env)에서 'REACT_APP_'을 붙여줘야 함
+const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
+//!카카오 로그인&회원가입 관련 url
+const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 후에 서버의 datda 카카오회원가입 주소로 변경
+const redirectUri = 'http://localhost:3000/signup'; //! 후에 datda 주소로 변경
+const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
 function Signin({ setModalMessage, setModalVisible }: Props) {
   //회원가입 필요한 정보
@@ -68,6 +78,9 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   const [searchInsti, setSearchInsti] = useState<boolean>(false);
 
   const [searchClass, setSearchClass] = useState<boolean>(false);
+  //! 카카오로그인 상태(isKakao->useEffact, userEmail->서버에서 쏴주는 유저메일)
+  const [isKakao, setIsKakao] = useState<boolean>(false);
+  const [userEmail, setUserEmail] = useState(null);
 
   const history = useHistory();
   //학부모, 선생님을 선택할 시
@@ -78,11 +91,28 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
     }
   };
 
+  //! 버튼을 누르면 카카오 정보제공 동의화면으로 넘어감
   const handleKakao = () => {
     if (inputs.permission.length !== 0) {
-      setSelection(false);
+      window.location.assign(kakaoUrl);
     }
   };
+
+  //! 이것은 카카오 회원가입 할때 필요한 사이드이펙트
+  useEffect(() => {
+    if (!isKakao) {
+      const url = new URL(window.location.href);
+      // console.log(url);
+      const authorizationCode = url.searchParams.get('code');
+      if (authorizationCode) {
+        handleKakaoSignup(authorizationCode);
+      }
+      setIsKakao(true);
+    } else if (userEmail) {
+      setInputs({ ...inputs, email: userEmail });
+      history.push('/signup/common');
+    }
+  }, [isKakao, userEmail]);
 
   const handleIsEmail = async (email: string) => {
     axios
@@ -113,8 +143,29 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   //   }
   // }, [selection]);
 
-  //기관 가입을 선택할 시
+  //! 카카오 회원가입 API 요청
+  const handleKakaoSignup = (authorizationCode: string) => {
+    axios
+      .post(serverSignupUrl, {
+        authorizationCode: authorizationCode,
+      })
+      .then((res: any) => {
+        // 만약 회원가입이 되었으면 res = 이메일 + 200상태
+        // 만약 기존 이메일이 있어 회원가입이 안되었으면 res = 200상태
+        if (res.status === 200) {
+          alert('카카오 회원가입이 되었습니다. 세부항목을 입력해주세요.');
+          setUserEmail(res.data.email);
+        } else if (res.status === 201) {
+          alert('이미 계정이 있습니다. 로그인 하시기 바랍니다.');
+          setUserEmail(res.data.email);
+        }
+      })
+      .catch((error) => {
+        console.log('error : ', error);
+      });
+  };
 
+  //기관 가입을 선택할 시
   const handleSignup = (
     email: string,
     password: string,
