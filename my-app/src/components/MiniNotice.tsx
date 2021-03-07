@@ -12,16 +12,29 @@ export default function MiniNotice({ userInfo }: propsType) {
     <Wrap permission={userInfo.permission}>
       <Title>공지사항</Title>
       <NoticeContainar permission={userInfo.permission}>
-        {userInfo.mainData.data.notice.map((element: any, index: number) => {
-          return (
-            <ListInnerCard
-              noticeId={element.noticeId}
-              key={index}
-              title={element.title}
-              createAt={element.create_at}
-            ></ListInnerCard>
-          );
-        })}
+        {userInfo.permission === 'parent'
+          ? userInfo.mainData[userInfo.currentChild].notice.map(
+              (element: any, index: number) => {
+                return (
+                  <ListInnerCard
+                    noticeId={element.noticeId}
+                    key={index}
+                    title={element.title}
+                    createAt={element.create_at}
+                  ></ListInnerCard>
+                );
+              },
+            )
+          : userInfo.mainData.notice.map((element: any, index: number) => {
+              return (
+                <ListInnerCard
+                  noticeId={element.noticeId}
+                  key={index}
+                  title={element.title}
+                  createAt={element.create_at}
+                ></ListInnerCard>
+              );
+            })}
       </NoticeContainar>
       <More to="/main/notice">더보기</More>
     </Wrap>

@@ -17,7 +17,9 @@ import Management from './ManagementChildren';
 import Bus from './Bus';
 import SignupCommon from './SignupCommon';
 import SignupInstitution from './SignupInstitution';
+import ApproveChildren from './ApproveChildren';
 export {
+  ApproveChildren,
   Bus,
   Management,
   Album,

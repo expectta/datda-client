@@ -24,19 +24,39 @@ export default function State({
       <Container type={type}>
         <StateWrap nowState={isCheck}>
           <StateText>출석</StateText>
-          <StateIcons src="../images/check.png" alt="출석"></StateIcons>
+          <StateIcons
+            src={
+              isCheck ? '../images/check-white.png' : '../images/check-gray.png'
+            }
+            alt="출석"
+          ></StateIcons>
         </StateWrap>
         <StateWrap nowState={isOk}>
           <StateText>투약</StateText>
-          <StateIcons src="../images/medicine.png" alt="투약"></StateIcons>
+          <StateIcons
+            src={
+              isOk
+                ? '../images/medicine-white.png'
+                : '../images/medicine-gray.png'
+            }
+            alt="투약"
+          ></StateIcons>
         </StateWrap>
         <StateWrap nowState={isSleep}>
           <StateText>낮잠</StateText>
-          <StateIcons src="../images/sleep.png" alt="낮잠"></StateIcons>
+          <StateIcons
+            src={
+              isSleep ? '../images/nap-white.png' : '../images/sleep-gray.png'
+            }
+            alt="낮잠"
+          ></StateIcons>
         </StateWrap>
         <StateWrap nowState={isEat}>
           <StateText>식사</StateText>
-          <StateIcons src="../images/meal.png" alt="낮잠"></StateIcons>
+          <StateIcons
+            src={isEat ? '../images/meal-white.png' : '../images/meal-gray.png'}
+            alt="낮잠"
+          ></StateIcons>
         </StateWrap>
       </Container>
     </Wrap>
@@ -64,29 +84,29 @@ const Container = styled.div<any>`
 const StateWrap = styled.div<any>`
   height: 100%;
   width: 100%;
-  border: 2px solid #d4d4d4;
+  align-items: center;
+  text-align: center;
   border-radius: 5px;
+  box-shadow: 0px 0px 5px #c8c8c8;
   display: flex;
   ${(props) =>
     props.nowState &&
     css`
-      border: 2px solid #6f6eff;
-      div {
-        color: #6f6eff;
+      background: #6f6eff;
+      span {
+        color: white;
       }
     `}
 `;
 const StateIcons = styled.img`
-  width: 0px;
-  height: auto;
-  display: block;
+  width: 2rem;
+  height: 2rem;
   margin: 4%;
-  flex: 1 auto;
 `;
-const StateText = styled.div`
+
+const StateText = styled.span`
   flex: 1 auto;
-  text-align: center;
+
   color: #7f7b7b;
   font-size: 1.2rem;
-  place-self: center;
 `;

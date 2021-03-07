@@ -1,33 +1,47 @@
-import { isConstructorDeclaration } from 'typescript';
-//시간표의 시간과 현재 시간을 비교
-export const findStepEducation = (
-  currentTime: string,
-  totalTimetable: Array<any>,
-) => {
+//시간표의 시간과 현재 시간을 비교해서 시간표 progess bar의 %를 반환
+export const findStepEducation = (currentTime: string, totalTimetable: any) => {
+  console.log(totalTimetable, '타임테이블');
   let currentStep = 0;
-  const calculatedCurrentTime = Number(currentTime);
+  const data = totalTimetable
+    .replace(/\s/g, '')
+    .replace(/\[/g, '')
+    .replace(/\]/g, '')
+    .replace(/\{/g, '')
+    .replace(/\}/g, '')
+    .replace(/\},{/g, '}|{')
+    .replace(/step:/g, '')
+    .replace(/time:/g, '')
+    .replace(/contents:/g, '')
+    .split(',');
 
-  for (const element of totalTimetable) {
+  const newArr = [];
+  for (let i = 0; i < data.length; i += 3) {
+    newArr.push(
+      Object.assign(
+        {},
+        { step: data[i], time: data[i + 1], contents: data[i + 2] },
+      ),
+    );
+  }
+  console.log(newArr);
+  const calculatedCurrentTime = Number(currentTime);
+  for (const element of newArr) {
     const fristTime = element.time.split('~')[0];
     const secondTime = element.time.split('~')[1];
     const startTime = Number(fristTime.replace(':', ''));
     const endTime = Number(secondTime.replace(':', ''));
-    // console.log(
-    //   startTime,
-    //   '  시작',
-    //   endTime,
-    //   ' 끝',
-    //   calculatedCurrentTime,
-    //   '현재',
-    // );
+
+    console.log(startTime, ' 시작', endTime, '끝');
+    console.log(calculatedCurrentTime, '현재');
     if (
       calculatedCurrentTime >= startTime &&
       calculatedCurrentTime <= endTime
     ) {
-      currentStep = element.step;
-      // console.log(currentStep, '반환되는 스텝');
+      currentStep = (Number(element.step) / newArr.length) * 100;
+      console.log(currentStep, '현재스탭');
+
       return {
-        step: element.step,
+        step: currentStep,
         timetable: element.time,
         currentEducation: element.contents,
       };
