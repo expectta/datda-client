@@ -15,13 +15,24 @@ function StudentManage({
   setModalMessage,
   classInfo,
 }: Props) {
-  const [count, setCount] = useState<number>(students.length);
+  const [inputs, setInputs] = useState('');
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInputs(value);
+  };
 
   return isStudent ? (
     <div id="student">
       <div id="studentInputArea">
         <div>원아검색</div>
-        <input type="text" placeholder="원아를 입력해주세요"></input>
+        <input
+          type="text"
+          placeholder="원아를 입력해주세요"
+          onChange={(e) => {
+            onChange(e);
+          }}
+        ></input>
         <Button>검색</Button>
       </div>
       <div className="studentArea">

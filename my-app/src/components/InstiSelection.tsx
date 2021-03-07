@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 interface Props {
+  inputs: Record<string, unknown>;
   instiInputs: Record<string, unknown>;
   instiSelection: boolean;
   handleInstiSelection: any;
   errormessage: string;
   inputInstiInfo: any;
+  postInsti: any;
 }
 function instiSelection({
+  inputs,
   instiInputs,
   instiSelection,
   handleInstiSelection,
   errormessage,
   inputInstiInfo,
+  postInsti,
 }: Props) {
-  const history = useHistory();
-
   return instiSelection ? (
     <div>
       <h1>교습소 유형을 선택해주세요</h1>
@@ -27,7 +29,17 @@ function instiSelection({
       <div>{errormessage}</div>
       <button
         onClick={() => {
-          handleInstiSelection(instiInputs.info);
+          postInsti(
+            inputs.name,
+            inputs.role,
+            inputs.phone,
+            inputs.permission,
+            inputs.email,
+            inputs.password,
+            instiInputs.info,
+            instiInputs.master,
+            instiInputs.institutionName,
+          );
         }}
       >
         기관 가입 완료

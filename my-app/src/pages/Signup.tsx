@@ -19,11 +19,30 @@ import {
   isPhoneCheck,
 } from '../common/utils/validation';
 import { useHistory } from 'react-router-dom';
+import 'dotenv/config';
+import axios from 'axios';
+
+import { isEmailExist } from '../common/axios';
 
 import styled from 'styled-components';
 import { userInfo } from 'os';
+import { AnyMxRecord } from 'dns';
 
-function Signin() {
+interface Props {
+  setModalMessage: any;
+  setModalVisible: any;
+}
+
+axios.defaults.withCredentials = true;
+
+//!카카오톡 REST api key 리액트는 환경변수(.env)에서 'REACT_APP_'을 붙여줘야 함
+const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
+//!카카오 로그인&회원가입 관련 url
+const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 후에 서버의 datda 카카오회원가입 주소로 변경
+const redirectUri = 'http://localhost:3000/signup'; //! 후에 datda 주소로 변경
+const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
+
+function Signin({ setModalMessage, setModalVisible }: Props) {
   //회원가입 필요한 정보
   const [inputs, setInputs] = useState({
     email: null,
@@ -45,6 +64,8 @@ function Signin() {
   //첫 페이지(회원 유형 선택)
   const [selection, setSelection] = useState<boolean>(true);
 
+  const [isEmail, setIsEmail] = useState<boolean>(false);
+
   //아이디 비밀번호 설정 페이지
   const [signup, setSignup] = useState<boolean>(false);
   //이름 이메일 전화번호
@@ -57,6 +78,9 @@ function Signin() {
   const [searchInsti, setSearchInsti] = useState<boolean>(false);
 
   const [searchClass, setSearchClass] = useState<boolean>(false);
+  //! 카카오로그인 상태(isKakao->useEffact, userEmail->서버에서 쏴주는 유저메일)
+  const [isKakao, setIsKakao] = useState<boolean>(false);
+  const [userEmail, setUserEmail] = useState(null);
 
   const history = useHistory();
   //학부모, 선생님을 선택할 시
@@ -67,9 +91,39 @@ function Signin() {
     }
   };
 
+  //! 버튼을 누르면 카카오 정보제공 동의화면으로 넘어감
   const handleKakao = () => {
     if (inputs.permission.length !== 0) {
-      setSelection(false);
+      window.location.assign(kakaoUrl);
+    }
+  };
+
+  //! 이것은 카카오 회원가입 할때 필요한 사이드이펙트
+  useEffect(() => {
+    if (!isKakao) {
+      const url = new URL(window.location.href);
+      // console.log(url);
+      const authorizationCode = url.searchParams.get('code');
+      if (authorizationCode) {
+        handleKakaoSignup(authorizationCode);
+      }
+      setIsKakao(true);
+    } else if (userEmail) {
+      setInputs({ ...inputs, email: userEmail });
+      history.push('/signup/common');
+    }
+  }, [isKakao, userEmail]);
+
+  const handleIsEmail = async (email: string) => {
+    const results = await isEmailExist(email);
+    if (results === false) {
+      setModalVisible(true);
+      setModalMessage('이미 가입된 아이디입니다');
+      setIsEmail(false);
+    } else if (results === true) {
+      setModalVisible(true);
+      setModalMessage('이 이메일은 사용가능합니다');
+      setIsEmail(true);
     }
   };
 
@@ -79,17 +133,41 @@ function Signin() {
   //   }
   // }, [selection]);
 
-  //기관 가입을 선택할 시
+  //! 카카오 회원가입 API 요청
+  const handleKakaoSignup = (authorizationCode: string) => {
+    axios
+      .post(serverSignupUrl, {
+        authorizationCode: authorizationCode,
+      })
+      .then((res: any) => {
+        // 만약 회원가입이 되었으면 res = 이메일 + 200상태
+        // 만약 기존 이메일이 있어 회원가입이 안되었으면 res = 200상태
+        if (res.status === 200) {
+          alert('카카오 회원가입이 되었습니다. 세부항목을 입력해주세요.');
+          setUserEmail(res.data.email);
+        } else if (res.status === 201) {
+          alert('이미 계정이 있습니다. 로그인 하시기 바랍니다.');
+          setUserEmail(res.data.email);
+        }
+      })
+      .catch((error) => {
+        console.log('error : ', error);
+      });
+  };
 
+  //기관 가입을 선택할 시
   const handleSignup = (
     email: string,
     password: string,
     passwordCheck: string,
+    isEmail: boolean,
   ) => {
     if (email === null) {
       setErrormessage('정보를 입력하서야 합니다');
     } else if (!isIdCheck(email)) {
       setErrormessage('올바르지 못한 이메일입니다');
+    } else if (isEmail === false) {
+      setErrormessage('이메일 중복을 확인해주세요');
     } else if (!isPasswordCheck(password)) {
       setErrormessage(
         '최소 8자 이상의, 특수문자와 숫자, 문자를 포함한 비밀번호를 입력하셔야 합니다',
@@ -103,18 +181,25 @@ function Signin() {
     }
   };
 
-  const handleSignupDetail = (name: string, role: string, phone: string) => {
+  const handleSignupDetail = (
+    name: string,
+    role: string,
+    phone: string,
+    permission: string,
+    email: string,
+    password: string,
+  ) => {
     if (name === null || role === null || phone === null) {
       setErrormessage('모든 항목은 필수입니다');
     } else if (!isNameCHeck(name)) {
-      setErrormessage('이름을 확인해주세요/');
+      setErrormessage('이름을 확인해주세요');
     } else if (!isPhoneCheck(phone)) {
       setErrormessage('올바른 전화번호를 입력해주세요.');
     } else {
       setErrormessage('');
       inputs.permission === 'institution'
         ? (setInstitution(true), history.push('/signup/institution'))
-        : history.push('/login');
+        : postSignup(name, role, phone, permission, email, password);
     }
   };
   const handleInstitution = (institutionName: string, master: string) => {
@@ -127,6 +212,32 @@ function Signin() {
     info.length === 0
       ? setErrormessage('교습소 중 하나를 선택해주세요')
       : (history.push('/'), setErrormessage(''));
+  };
+
+  const postSignup = (
+    name: string,
+    role: string,
+    phone: string,
+    permission: string,
+    email: string,
+    password: string,
+  ) => {
+    axios
+      .post('https://datda.link/auth/signup', {
+        userName: name,
+        role: role,
+        mobile: phone,
+        permission: permission,
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          history.push('/login');
+        } else {
+          alert('이미 아이디가 있습니다.');
+        }
+      });
   };
 
   //인풋데이터 값 바꾸기
@@ -150,7 +261,8 @@ function Signin() {
   return (
     <SignupGlobal>
       <Link to="/">
-        <h1>Datda</h1>
+        <img id="logo" src="../images/logo.png" />
+        <span id="header">Datda</span>
       </Link>
 
       <Selection
@@ -165,6 +277,7 @@ function Signin() {
         handleSignup={handleSignup}
         errormessage={errormessage}
         onChange={onChange}
+        handleIsEmail={handleIsEmail}
       />
       <Switch>
         <Route exact path="/signup/common">
@@ -186,6 +299,7 @@ function Signin() {
             instiSelection={instiSelection}
             handleInstiSelection={handleInstiSelection}
             inputInstiInfo={inputInstiInfo}
+            setErrormessage={setErrormessage}
           />
         </Route>
       </Switch>
@@ -230,4 +344,11 @@ const SignupGlobal = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 50vh;
+  #header {
+    font-size: 3rem;
+  }
+  #logo {
+    resize: both;
+    width: 40px;
+  }
 `;

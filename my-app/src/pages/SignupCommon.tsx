@@ -14,8 +14,11 @@ function SignupCommon({
   onChange,
   errormessage,
 }: Props) {
+  // const handleCheck = () => {
+  //   console.log(inputs.email);
+  // };
   if (inputs.email === null) {
-    return <Redirect to="/signup" />;
+    return <div>loding</div>;
   }
   return (
     <div className="signupDetail">
@@ -33,7 +36,14 @@ function SignupCommon({
       </div>
       <button
         onClick={() => {
-          handleSignupDetail(inputs.name, inputs.role, inputs.mobile);
+          handleSignupDetail(
+            inputs.name,
+            inputs.role,
+            inputs.mobile,
+            inputs.permission,
+            inputs.email,
+            inputs.password,
+          );
         }}
       >
         {inputs.permission === 'institution' ? '다음' : '완료'}
