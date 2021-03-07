@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { requestLogin } from '../common/axios';
 
 interface propType {
-  hadleSetMainData: (data: any) => void;
+  hadleSetMainData: (mainData: any) => void;
 }
 function Login({ hadleSetMainData }: propType) {
   const history = useHistory();
@@ -23,10 +23,14 @@ function Login({ hadleSetMainData }: propType) {
       setErrormessage('이메일이나 비밀번호를 입력해주세요.');
     } else {
       // axios 로그인 요청
+      //!await로 동기적 실행 필요함.
       const mainData = await requestLogin(email, password);
-      hadleSetMainData(mainData);
+      console.log(mainData, 'main Data는??');
+      if (mainData !== undefined) {
+        hadleSetMainData(mainData);
+        history.push('/main');
+      }
       setErrormessage('');
-      history.push('/main');
     }
   };
 
