@@ -2,35 +2,62 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 interface propsType {
-  userInfo: userInfoType;
+  userInfo: any;
 }
-interface userInfoType {
-  permission: string;
-  isLogin: boolean;
-  mainData: any;
-}
+
 export default function Avatar({ userInfo }: propsType) {
   return (
     <Wrap>
-      <AvatarCard src="../images/defaultAvatar.png" alt="avatar"></AvatarCard>{' '}
+      {(() => {
+        if (userInfo.permission === 'parent') {
+          if (userInfo.mainData[userInfo.currentChild].profileImg) {
+            return (
+              <AvatarCard
+                src={userInfo.mainData[userInfo.currentChild].profileImg}
+                alt={userInfo.mainData[userInfo.currentChild].profileImg}
+              ></AvatarCard>
+            );
+          }
+          return (
+            <AvatarCard
+              src="../images/defaultAvatar.png"
+              alt="avatar"
+            ></AvatarCard>
+          );
+        }
+        if (userInfo.mainData.profileImg) {
+          return (
+            <AvatarCard
+              src={userInfo.mainData.profileImg}
+              alt={userInfo.mainData.profileImg}
+            ></AvatarCard>
+          );
+        }
+        return (
+          <AvatarCard
+            src="../images/defaultAvatar.png"
+            alt="avatar"
+          ></AvatarCard>
+        );
+      })()}
       <NameTagWrap>
         {(() => {
           if (userInfo.permission === 'parent') {
             return (
               <>
                 <ClassWrap>
-                  {userInfo.mainData.data.children[0].institution}
-                  {userInfo.mainData.data.children[0].className}
+                  {userInfo.mainData[userInfo.currentChild].institutionName}
+                  {userInfo.mainData[userInfo.currentChild].className}
                 </ClassWrap>
                 <NameTag>
-                  {userInfo.mainData.data.children[0].childrenName} 어린이
+                  {userInfo.mainData[userInfo.currentChild].childName} 어린이
                 </NameTag>
               </>
             );
           }
           return (
             <NameTag id="institution">
-              {userInfo.mainData.data.children.institution}{' '}
+              {userInfo.mainData.institutionName}
             </NameTag>
           );
         })()}
