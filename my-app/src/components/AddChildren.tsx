@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-function AddChildren() {
-  const [children, setChildren] = useState<any>([
-    { name: '김철수' },
-    { name: '영희' },
-  ]);
+interface Props {
+  children: any;
+  setChildren: any;
+}
+function AddChildren({ children, setChildren }: Props) {
   const [input, setInput] = useState({ name: '' });
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
