@@ -33,32 +33,34 @@ function Login({ hadleSetMainData }: propType) {
   return (
     <LoginGlobal>
       <Link to="/">
+        <img id="logo" src="../images/logo.png" />
         <Header>Datda</Header>
       </Link>
 
       <InputBox>
-        <span className="inputText">이메일</span>
         <input
           className="inputBox"
           type="text"
+          placeholder="이메일"
           onChange={(e) => onChange('email', e)}
         ></input>
       </InputBox>
       <InputBox>
-        <span className="inputText">비밀번호</span>
         <input
           className="inputBox"
           type="password"
+          placeholder="비밀번호"
           onChange={(e) => onChange('password', e)}
         ></input>
       </InputBox>
       <div>{errormessage}</div>
-      <button onClick={() => handleLogin(inputs.email, inputs.password)}>
+      <Button onClick={() => handleLogin(inputs.email, inputs.password)}>
         로그인
-      </button>
+      </Button>
+      <Button>카카오로 로그인</Button>
       <Link to="/signup">
         <div>
-          <button>회원가입</button>
+          <Button>회원가입</Button>
         </div>
       </Link>
     </LoginGlobal>
@@ -73,6 +75,11 @@ const LoginGlobal = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 50vh;
+
+  #logo {
+    resize: both;
+    width: 40px;
+  }
 `;
 
 const InputBox = styled.div`
@@ -83,10 +90,11 @@ const InputBox = styled.div`
   margin: 5px 0px 5px 0px;
 `;
 
-const Header = styled.h1`
+const Header = styled.span`
   margin-bottom: 0px;
+  font-size: 3rem;
 `;
-
-const SmallHead = styled.h3`
-  margin-top: 10px;
+const Button = styled.button`
+  ${({ theme }) => theme.common.defaultButton}
+  margin : 2vh 0 3vh 0;
 `;
