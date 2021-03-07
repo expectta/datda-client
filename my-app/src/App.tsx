@@ -29,6 +29,8 @@ function App() {
   // modal 상태
   const [modalMessage, setModalMessage] = useState('^___^  << 한솔님');
   const [modalVisible, setModalVisible] = useState(false);
+  // loading 상태
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   //로그인 한 유저정보
   //! 나중에 false로 바꿔야함
   const [userInfo, setUserInfo] = useState({
