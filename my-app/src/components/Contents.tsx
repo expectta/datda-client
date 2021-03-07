@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -10,34 +10,34 @@ import {
 } from './Index';
 interface propsType {
   userInfo: any;
+  handleChangeChild: (index: number) => void;
 }
-export default function Contents({ userInfo }: propsType) {
+export default function Contents({ userInfo, handleChangeChild }: propsType) {
   //탭 메뉴 상태
   const [clickedMenu, setClickedMenu] = useState(0);
   //탭 메뉴 클릭 이벤트
   const handleChangeMenu = (menu: number) => {
     setClickedMenu(menu);
+    handleChangeChild(menu);
   };
   return (
     <Wrap>
       {userInfo.permission === 'parent' ? (
         <BookMarkWrap>
-          {userInfo.mainData.data.children.map(
-            (element: any, index: number) => {
-              return (
-                <BookMark
-                  key={index}
-                  childId={element.childrenId}
-                  checked={clickedMenu}
-                  order={`${userInfo.mainData.data.children.length}0`}
-                  className={clickedMenu === index ? 'active' : ''}
-                  onClick={() => handleChangeMenu(index)}
-                >
-                  <Name>{element.childrenName}</Name>
-                </BookMark>
-              );
-            },
-          )}
+          {userInfo.mainData.map((element: any, index: number) => {
+            return (
+              <BookMark
+                key={index}
+                childId={element.childId}
+                checked={clickedMenu}
+                order={`${userInfo.mainData.length}0`}
+                className={clickedMenu === index ? 'active' : ''}
+                onClick={() => handleChangeMenu(index)}
+              >
+                <Name>{element.childName}</Name>
+              </BookMark>
+            );
+          })}
 
           {/* <BookMark
             checked={clickedMenu}
@@ -59,7 +59,7 @@ export default function Contents({ userInfo }: propsType) {
           </BookMark> */}
         </BookMarkWrap>
       ) : null}
-      <Timetable></Timetable>
+      <Timetable userInfo={userInfo}></Timetable>
       <MainMenu></MainMenu>
       <MiniNotice userInfo={userInfo}></MiniNotice>
       {(() => {

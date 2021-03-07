@@ -53,7 +53,7 @@ const IconWrap = styled(Link)`
   align-self: center;
 `;
 const IconImage = styled.img`
-  width: 4rem;
+  width: 3rem;
   height: auto;
 `;
 

@@ -32,7 +32,7 @@ const device = {
 // 자주 사용하는 색
 const colors = {
   black: '#000000',
-  grey: '#999999',
+  gray: '#bcbcbc',
   green: '#3cb46e',
   blue: '#8c80ff',
 };

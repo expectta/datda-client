@@ -15,7 +15,7 @@ const redirectUri = 'http://localhost:3000/login'; //! 후에 datda 주소로 �
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
 interface propType {
-  hadleSetMainData: (data: any) => void;
+  hadleSetMainData: (mainData: any) => void;
 }
 function Login({ hadleSetMainData }: propType) {
   const history = useHistory();
@@ -34,10 +34,14 @@ function Login({ hadleSetMainData }: propType) {
       setErrormessage('이메일이나 비밀번호를 입력해주세요.');
     } else {
       // axios 로그인 요청
+      //!await로 동기적 실행 필요함.
       const mainData = await requestLogin(email, password);
-      hadleSetMainData(mainData);
+      console.log(mainData, 'main Data는??');
+      if (mainData !== undefined) {
+        hadleSetMainData(mainData);
+        history.push('/main');
+      }
       setErrormessage('');
-      history.push('/main');
     }
   };
 

@@ -11,7 +11,10 @@ export default function SubMenu({ permission }: propsType) {
         <SubMenuButton to="/main/director">기관설정</SubMenuButton>
       ) : null}
       {permission === 'teacher' ? (
-        <SubMenuButton to="/main/management">원아 상태관리</SubMenuButton>
+        <>
+          <SubMenuButton to="/main/management">원아 상태관리</SubMenuButton>
+          <SubMenuButton to="/main/approve">원아승인</SubMenuButton>
+        </>
       ) : null}
       <SubMenuButton to="/main/profile">프로필</SubMenuButton>
     </Wrap>
@@ -19,16 +22,14 @@ export default function SubMenu({ permission }: propsType) {
 }
 const Wrap = styled.div`
   width: 100%;
-  display: grid;
-  grid-gap: 10%;
   padding: 2%;
-
   text-align: center;
 `;
 
 const SubMenuButton = styled(Link)`
   display: block;
   width: 100%;
+  margin: 2% 0% 2% 0%;
   padding: 3px 0px 3px 0px;
   ${({ theme }) => theme.common.defaultButton}
 `;
