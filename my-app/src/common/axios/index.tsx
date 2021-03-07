@@ -48,7 +48,7 @@ export async function requestLogin(email: string, password: string) {
   return mainData;
 }
 
-export const isEmail = async (email: string) => {
+export const isEmailExist = async (email: string) => {
   const results = await axios
     .post('https://datda.link/auth/isemail', {
       // axios.post('http://localhost:5000/auth/isemail', {
@@ -56,12 +56,12 @@ export const isEmail = async (email: string) => {
     })
     .then((res) => {
       if (res.status === 201) {
-        return 'no';
+        return false;
       } else if (res.status === 200) {
         console.log(res.data);
-        return 'yes';
+        return true;
       } else {
-        return 'hmm';
+        return false;
       }
     })
     .catch((err) => {
@@ -96,3 +96,13 @@ export function requestMainData(permission: string) {
   //   alert('콘솔창에 console.log(err)');
   // });
 }
+
+export const getProfile = (): void => {
+  axios.get('https://datda.link/userinfo').then((res) => {
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      alert('잘못된 요청입니다.');
+    }
+  });
+};
