@@ -11,18 +11,29 @@ export default function MiniIndiNotice({ userInfo }: propsType) {
     <Wrap>
       <Title>알림장</Title>
       <NoticeContainar>
-        {userInfo.mainData.data.indiNotice.map(
-          (element: any, index: number) => {
-            return (
-              <ListInnerCard
-                noticeId={element.noticeId}
-                key={element.noticeId}
-                title={element.contents}
-                createAt={element.create_at}
-              ></ListInnerCard>
-            );
-          },
-        )}
+        {userInfo.permission === 'parent'
+          ? userInfo.mainData[userInfo.currentChild].indiNotice.map(
+              (element: any, index: number) => {
+                return (
+                  <ListInnerCard
+                    noticeId={element.noticeId}
+                    key={element.noticeId}
+                    title={element.contents}
+                    createAt={element.create_at}
+                  ></ListInnerCard>
+                );
+              },
+            )
+          : userInfo.mainData.indiNotice.map((element: any, index: number) => {
+              return (
+                <ListInnerCard
+                  noticeId={element.noticeId}
+                  key={element.noticeId}
+                  title={element.contents}
+                  createAt={element.create_at}
+                ></ListInnerCard>
+              );
+            })}
       </NoticeContainar>
       <More to="/main/indi_notice">더보기</More>
     </Wrap>
