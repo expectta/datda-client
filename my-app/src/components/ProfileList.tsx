@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { getProfile } from '../common/axios';
 export default function Profile() {
   const [userInfo, setUserInfo] = useState({
-    userName: '김철수',
-    permission: 'teacher',
-    email: '철수@네이버',
+    userName: '',
+    email: '',
     mobile: '',
-    role: '선생님',
-    childrenName: ['김민수', '김연야'],
-    institution: '원암유치원',
+    role: '',
+    childrenName: ['', ''],
+    institution: '',
   });
+
+  useEffect(() => {
+    if (userInfo.email.length === 0) {
+      console.log('음메');
+      //getProfile();
+    }
+  }, []);
+
+  const onChange = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setUserInfo({ ...userInfo, [key]: value });
+  };
+
   return (
     <Wrap>
       <ContentCard>
@@ -22,21 +35,37 @@ export default function Profile() {
                 src="../images/defaultAvatar.png"
                 alt="avatar"
               ></AvatarCard>
-              <div id="profileButton">
-                <Link to="/main/profile/institution">
-                  <Button>기관등록</Button>
-                </Link>
-                <Link to="/main/profile/children">
-                  <Button>아이등록</Button>
-                </Link>
-              </div>
+              {JSON.parse(localStorage.getItem('loginInfo')!).permission ===
+              'teacher' ? (
+                <div id="profileButton">
+                  <Link to="/main/profile/institution">
+                    <Button>기관등록</Button>
+                  </Link>
+                </div>
+              ) : JSON.parse(localStorage.getItem('loginInfo')!).permission ===
+                'parent' ? (
+                <div id="profileButton">
+                  <Link to="/main/profile/institution">
+                    <Button>아이등록</Button>
+                  </Link>
+                </div>
+              ) : (
+                <div></div>
+              )}
             </div>
             <div id="contentsWrap">
-              {userInfo.permission !== 'institution' ? (
+              {JSON.parse(localStorage.getItem('loginInfo')!).permission !==
+              'institution' ? (
                 <>
                   <div className="profile name">
                     <span className="blue">이름 </span>
-                    <span>{userInfo.userName}</span>
+                    <input
+                      type="text"
+                      placeholder={userInfo.userName}
+                      onChange={(e) => {
+                        onChange('userName', e);
+                      }}
+                    ></input>
                   </div>
                   <div className="profile email">
                     <span className="blue">이메일 </span>
@@ -44,11 +73,17 @@ export default function Profile() {
                   </div>
                   <div className="profile mobile">
                     <span className="blue">전화번호 </span>
-                    <span>{userInfo.mobile}</span>
+                    <input
+                      type="text"
+                      placeholder={userInfo.mobile}
+                      onChange={(e) => {
+                        onChange('mobile', e);
+                      }}
+                    ></input>
                   </div>
                   <div className="profile role">
                     <span className="blue">저는 </span>
-                    <span>{userInfo.role}</span>
+                    <input type="text" placeholder={userInfo.role}></input>
                     <span className="blue">입니다.</span>
                   </div>
                 </>
@@ -56,7 +91,17 @@ export default function Profile() {
                 <>
                   <div className="profile name">
                     <span className="blue">기관이름 </span>
-                    <span>{userInfo.institution}</span>
+                    <input
+                      type="text"
+                      placeholder={
+                        userInfo.institution.length === 0
+                          ? '기관명을 적어주세요'
+                          : userInfo.institution
+                      }
+                      onChange={(e) => {
+                        onChange('institution', e);
+                      }}
+                    ></input>
                   </div>
                   <div className="profile email">
                     <span className="blue">이메일 </span>
@@ -64,7 +109,13 @@ export default function Profile() {
                   </div>
                   <div className="profile mobile">
                     <span className="blue">전화번호 </span>
-                    <span>{userInfo.mobile}</span>
+                    <input
+                      type="text"
+                      placeholder={userInfo.mobile}
+                      onChange={(e) => {
+                        onChange('mobile', e);
+                      }}
+                    ></input>
                   </div>
                   <div className="profile role">
                     <span className="blue">지위 </span>
@@ -75,7 +126,8 @@ export default function Profile() {
             </div>
           </div>
 
-          {userInfo.permission !== 'institution' ? (
+          {JSON.parse(localStorage.getItem('loginInfo')!).permission !==
+          'institution' ? (
             <>
               <div className="blue">원아관리</div>
               <div id="profileChildList">

@@ -93,7 +93,7 @@ export async function requestKakaoLogin(authorizationCode: string) {
   return mainData;
 }
 
-export const isEmail = async (email: string) => {
+export const isEmailExist = async (email: string) => {
   const results = await axios
     .post('https://datda.link/auth/isemail', {
       // axios.post('http://localhost:5000/auth/isemail', {
@@ -101,12 +101,12 @@ export const isEmail = async (email: string) => {
     })
     .then((res) => {
       if (res.status === 201) {
-        return 'no';
+        return false;
       } else if (res.status === 200) {
         console.log(res.data);
-        return 'yes';
+        return true;
       } else {
-        return 'hmm';
+        return false;
       }
     })
     .catch((error) => {
@@ -117,27 +117,37 @@ export const isEmail = async (email: string) => {
 
 export function requestMainData(permission: string) {
   // const mainData =
-  // // axios
-  // //   .get('https://datda.link/main')
-  // //   .then((res) => {
-  // //     console.log(res.status, res.data);
-  // //     alert('콘솔창에 console.log(res.status, res.data)');
-  // if (permission === 'institution') {
-  //   console.log('원장 데이터 반환');
-  //   return director;
-  // }
-  // if (permission === 'parent') {
-  //   console.log('부모  데이터 반환');
-  //   return parents;
-  // }
-  // if (permission === 'teacher') {
-  //   console.log('선생 데이터 반환');
-  //   return teacher;
-  // }
-  // // })
-  // // .catch((err) => {
-  // //   console.log(err);
-  // //   alert('콘솔창에 console.log(err)');
-  // // });
+  // axios
+  //   .get('https://datda.link/main')
+  //   .then((res) => {
+  //     console.log(res.status, res.data);
+  //     alert('콘솔창에 console.log(res.status, res.data)');
+  if (permission === 'institution') {
+    console.log('원장 데이터 반환');
+    return director;
+  }
+  if (permission === 'parent') {
+    console.log('부모  데이터 반환');
+    return parents;
+  }
+  if (permission === 'teacher') {
+    console.log('선생 데이터 반환');
+    return teacher;
+  }
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  //   alert('콘솔창에 console.log(err)');
+  // });
   // return mainData;
 }
+
+export const getProfile = (): void => {
+  axios.get('https://datda.link/userinfo').then((res) => {
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      alert('잘못된 요청입니다.');
+    }
+  });
+};

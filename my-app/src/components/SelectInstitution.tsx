@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function SelectionInstitution() {
-  const [instiInfo, setInsti] = useState([
-    { institutionName: '원암유치원', institutionId: '1', institutionPhoto: '' },
-    { institutionName: '청암유치원', institutionId: '2', institutionPhoto: '' },
-  ]);
+interface Props {
+  instiInfo: any;
+  setInsti: any;
+}
 
+function SelectionInstitution({ instiInfo, setInsti }: Props) {
   //검색
   const searchInsti = () => {
     axios.get('https://datda');
@@ -21,7 +21,7 @@ function SelectionInstitution() {
           <input type="text"></input>
           <button>검색</button>
         </div>
-        {instiInfo.map((insti) => (
+        {instiInfo.map((insti: any) => (
           <div>
             <input
               type="radio"
@@ -32,9 +32,16 @@ function SelectionInstitution() {
           </div>
         ))}
         <div>
-          <Link to="/main/profile">
-            <Button>선택 완료</Button>
-          </Link>
+          {JSON.parse(localStorage.getItem('loginInfo')!).permission ===
+          'teacher' ? (
+            <Link to="/main/profile">
+              <Button>선택 완료</Button>
+            </Link>
+          ) : (
+            <Link to="/main/profile/children">
+              <Button>아이 등록</Button>
+            </Link>
+          )}
         </div>
       </ContentCard>
     </Wrap>
