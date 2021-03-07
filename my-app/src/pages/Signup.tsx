@@ -21,7 +21,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-import { isEmail } from '../common/axios';
+import { isEmailExist } from '../common/axios';
 
 import styled from 'styled-components';
 import { userInfo } from 'os';
@@ -85,33 +85,17 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   };
 
   const handleIsEmail = async (email: string) => {
-    axios
-      .post('https://datda.link/auth/isemail', {
-        // axios.post('http://localhost:5000/auth/isemail', {
-        email: email,
-      })
-      .then((res) => {
-        if (res.status === 201) {
-          setModalVisible(true);
-          setModalMessage('이미 가입된 아이디입니다');
-          setIsEmail(false);
-        } else if (res.status === 200) {
-          setModalVisible(true);
-          setModalMessage('이미 가입된 아이디입니다');
-          setIsEmail(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        alert('콘솔창에 console.log(err)');
-      });
+    const results = await isEmailExist(email);
+    if (results === false) {
+      setModalVisible(true);
+      setModalMessage('이미 가입된 아이디입니다');
+      setIsEmail(false);
+    } else if (results === true) {
+      setModalVisible(true);
+      setModalMessage('이 이메일은 사용가능합니다');
+      setIsEmail(true);
+    }
   };
-
-  // useEffect(() => {
-  //   if (selection === false) {
-  //     setSocialSelection(true);
-  //   }
-  // }, [selection]);
 
   //기관 가입을 선택할 시
 
@@ -125,7 +109,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       setErrormessage('정보를 입력하서야 합니다');
     } else if (!isIdCheck(email)) {
       setErrormessage('올바르지 못한 이메일입니다');
-    } else if (!isEmail) {
+    } else if (isEmail === false) {
       setErrormessage('이메일 중복을 확인해주세요');
     } else if (!isPasswordCheck(password)) {
       setErrormessage(
@@ -220,7 +204,8 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   return (
     <SignupGlobal>
       <Link to="/">
-        <h1>Datda</h1>
+        <img id="logo" src="../images/logo.png" />
+        <span id="header">Datda</span>
       </Link>
 
       <Selection
@@ -257,6 +242,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
             instiSelection={instiSelection}
             handleInstiSelection={handleInstiSelection}
             inputInstiInfo={inputInstiInfo}
+            setErrormessage={setErrormessage}
           />
         </Route>
       </Switch>
@@ -301,4 +287,11 @@ const SignupGlobal = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 50vh;
+  #header {
+    font-size: 3rem;
+  }
+  #logo {
+    resize: both;
+    width: 40px;
+  }
 `;
