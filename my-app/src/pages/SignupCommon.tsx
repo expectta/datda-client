@@ -14,8 +14,11 @@ function SignupCommon({
   onChange,
   errormessage,
 }: Props) {
+  // const handleCheck = () => {
+  //   console.log(inputs.email);
+  // };
   if (inputs.email === null) {
-    return <Redirect to="/signup" />;
+    return <div>loding</div>;
   }
   return (
     <div className="signupDetail">

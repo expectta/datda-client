@@ -170,7 +170,7 @@ function Intro() {
 }
 
 export default Intro;
-
+// 어느 id or classname인지만
 const IntroGlobal = styled.div`
   .section {
     width : 100vw;
@@ -179,19 +179,18 @@ const IntroGlobal = styled.div`
       width : 100%;
     }
   }
-  
   .bold {
     font-weight: bold;
   }
+
   .bigText{
     font-size : ${({ theme }) => theme.fontSizes.titleSize};
     @media ${({ theme }) => theme.device.mobileL} {
       font-size: 2em;
     }
-   .section2{
-     font-size : 2rem;
-   }
-    
+    .section2{
+      font-size : 2rem;
+    }
   }
   .smallText{
     font-size : ${({ theme }) => theme.fontSizes.small};
@@ -205,31 +204,29 @@ const IntroGlobal = styled.div`
   width : 70%
   margin: 0 auto;
   overflow : hidden;
-
-
 `;
 
 const SectionIntro = styled.div`
-  background-image : url('../images/web/intro1_crop_dark.png');
-  background-repeat : no-repeat;
+  background-image: url('../images/web/intro1_crop_dark.png');
+  background-repeat: no-repeat;
   text-align: center;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
+  background-size: cover;
 
-  #introText{
-    font-size : 2.5rem;
-    color : white;
+  #introText {
+    font-size: 2.5rem;
+    color: white;
     @media ${({ theme }) => theme.device.mobileL} {
-    font-size : 2.0rem;
+      font-size: 2rem;
     }
   }
   @media ${({ theme }) => theme.device.mobileL} {
-    background-image : url('../images/mobile/intro1_crop_dark.png');
-    background-size : 100% 100%;
-    background-repeat : no-repeat;
-  }
+    background-image: url('../images/mobile/intro1_crop_dark.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
 `;
 
@@ -245,6 +242,11 @@ const Section1 = styled.div`
         resize: both;
         width: 70%;
       }
+    }
+  }
+  @media ${({ theme }) => theme.device.mobileL} {
+    #section1Image1App {
+      display: none;
     }
   }
 `;
