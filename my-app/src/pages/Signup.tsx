@@ -38,7 +38,7 @@ axios.defaults.withCredentials = true;
 //!카카오톡 REST api key 리액트는 환경변수(.env)에서 'REACT_APP_'을 붙여줘야 함
 const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
 //!카카오 로그인&회원가입 관련 url
-const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 후에 서버의 datda 카카오회원가입 주소로 변경
+const serverSignupUrl = 'https://datda.link/kakao/signup'; //! datda 카카오회원가입 주소
 const redirectUri = 'http://localhost:3000/signup'; //! 후에 datda 주소로 변경
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
@@ -81,6 +81,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   //! 카카오로그인 상태(isKakao->useEffact, userEmail->서버에서 쏴주는 유저메일)
   const [isKakao, setIsKakao] = useState<boolean>(false);
   const [userEmail, setUserEmail] = useState(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const history = useHistory();
   //학부모, 선생님을 선택할 시
@@ -105,11 +106,13 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       // console.log(url);
       const authorizationCode = url.searchParams.get('code');
       if (authorizationCode) {
+        setIsLoading(true);
         handleKakaoSignup(authorizationCode);
       }
       setIsKakao(true);
     } else if (userEmail) {
       setInputs({ ...inputs, email: userEmail });
+      setIsLoading(false);
       history.push('/signup/common');
     }
   }, [isKakao, userEmail]);
@@ -145,9 +148,12 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
         if (res.status === 200) {
           alert('카카오 회원가입이 되었습니다. 세부항목을 입력해주세요.');
           setUserEmail(res.data.email);
+          setIsLoading(false);
         } else if (res.status === 201) {
           alert('이미 계정이 있습니다. 로그인 하시기 바랍니다.');
           setUserEmail(res.data.email);
+          setIsLoading(false);
+          history.push('/');
         }
       })
       .catch((error) => {
@@ -332,6 +338,11 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
         handleInstiSelection={handleInstiSelection}
         inputInstiInfo={inputInstiInfo}
       /> */}
+      {!isLoading ? (
+        <div></div>
+      ) : (
+        <img id="loadingImage" src="../images/loading.gif"></img>
+      )}
     </SignupGlobal>
   );
 }
@@ -350,5 +361,9 @@ const SignupGlobal = styled.div`
   #logo {
     resize: both;
     width: 40px;
+  }
+  #loadingImage {
+    width: 25%;
+    height: auto;
   }
 `;
