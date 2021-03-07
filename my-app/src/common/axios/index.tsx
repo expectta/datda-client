@@ -117,28 +117,28 @@ export const isEmailExist = async (email: string) => {
 
 export function requestMainData(permission: string) {
   // const mainData =
-  // // axios
-  // //   .get('https://datda.link/main')
-  // //   .then((res) => {
-  // //     console.log(res.status, res.data);
-  // //     alert('콘솔창에 console.log(res.status, res.data)');
-  // if (permission === 'institution') {
-  //   console.log('원장 데이터 반환');
-  //   return director;
-  // }
-  // if (permission === 'parent') {
-  //   console.log('부모  데이터 반환');
-  //   return parents;
-  // }
-  // if (permission === 'teacher') {
-  //   console.log('선생 데이터 반환');
-  //   return teacher;
-  // }
-  // // })
-  // // .catch((err) => {
-  // //   console.log(err);
-  // //   alert('콘솔창에 console.log(err)');
-  // // });
+  // axios
+  //   .get('https://datda.link/main')
+  //   .then((res) => {
+  //     console.log(res.status, res.data);
+  //     alert('콘솔창에 console.log(res.status, res.data)');
+  if (permission === 'institution') {
+    console.log('원장 데이터 반환');
+    return director;
+  }
+  if (permission === 'parent') {
+    console.log('부모  데이터 반환');
+    return parents;
+  }
+  if (permission === 'teacher') {
+    console.log('선생 데이터 반환');
+    return teacher;
+  }
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  //   alert('콘솔창에 console.log(err)');
+  // });
   // return mainData;
 }
 
