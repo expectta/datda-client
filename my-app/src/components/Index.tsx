@@ -37,8 +37,10 @@ import Carousel from './Carousel';
 import SecondSubMenu from './SecondSubMenu';
 import StateListForm from './StateListForm';
 import StateCardForm from './StateCardForm';
+import TimeTableCard from './TimeTableCard';
 
 export {
+  TimeTableCard,
   StateCardForm,
   StateListForm,
   Carousel,
