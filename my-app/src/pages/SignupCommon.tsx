@@ -35,10 +35,16 @@ function SignupCommon({
                   onChange('permission', e);
                 }}
               >
-                <option value="">가입유형을 선택해주세요</option>
-                <option value="parent">학부모</option>
-                <option value="teacher">선생님</option>
-                <option value="institution">기관</option>
+                <option className="frameEl" value=""></option>
+                <option className="frameEl" value="parent">
+                  학부모
+                </option>
+                <option className="frameEl" value="teacher">
+                  선생님
+                </option>
+                <option className="frameEl" value="institution">
+                  기관
+                </option>
               </select>
             </div>
           </div>
@@ -137,6 +143,12 @@ const Common = styled.div`
     font-size: 20px;
     border: solid 0px;
     border-bottom: solid 1.5px;
+    background-color: white;
+    font-color: #959595;
+  }
+  #selectPermission {
+    text-align: center;
+    font-color: #959595;
   }
   .submitFrame {
     display: flex;
@@ -144,7 +156,7 @@ const Common = styled.div`
   }
   .submit {
     width: 80px;
-    margin-top: 40px;
+    margin-top: 28px;
   }
   .error {
     color: red;
