@@ -68,7 +68,7 @@ function Login({ hadleSetMainData }: propType) {
             history.push('/main');
           }
           setIsLoading(false);
-          alert('회원가입을 해주세요.');
+          alert('아직 승인대기 중입니다.');
           // handleLoading();
           return;
         });
@@ -104,7 +104,11 @@ function Login({ hadleSetMainData }: propType) {
       <Button onClick={() => handleLogin(inputs.email, inputs.password)}>
         로그인
       </Button>
-      <button onClick={handleKakao}>카카오 로그인</button>
+      <img
+        id="kakaoImg"
+        src="../images/kakaoLogin.png"
+        onClick={handleKakao}
+      ></img>
       <Link to="/signup">
         <div>
           <Button>회원가입</Button>
@@ -134,6 +138,11 @@ const LoginGlobal = styled.div`
   }
 
   #loadingImage {
+    width: 50%;
+    height: auto;
+  }
+
+  #kakaoImg {
     width: 50%;
     height: auto;
   }
