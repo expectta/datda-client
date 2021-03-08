@@ -26,19 +26,19 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
   const toggleClass = () => {
     setIsClass(true);
     setIsTeacher(false);
-    setIsStudent(false);
+    // setIsStudent(false);
   };
 
   const toggleTeacher = () => {
     setIsClass(false);
     setIsTeacher(true);
-    setIsStudent(false);
+    // setIsStudent(false);
   };
 
   const toggleStudent = () => {
     setIsClass(false);
     setIsTeacher(false);
-    setIsStudent(true);
+    // setIsStudent(true);
   };
   return (
     <Wrap>
@@ -47,22 +47,28 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
         <button className="manageType" onClick={() => toggleTeacher()}>
           교사관리
         </button>
-        <button className="manageType" onClick={() => toggleStudent()}>
+        {/* <button className="manageType" onClick={() => toggleStudent()}>
           원아관리
-        </button>
+        </button> */}
         <button className="manageType" onClick={() => toggleClass()}>
           반관리
         </button>
       </div>
 
-      <TeacherManage isTeacher={isTeacher} teachers={teachers} />
-      <StudentManage
+      <TeacherManage
+        isTeacher={isTeacher}
+        teachers={teachers}
+        classInfo={classInfo}
+        setModalMessage={setModalMessage}
+        setModalVisible={setModalVisible}
+      />
+      {/* <StudentManage
         classInfo={classInfo}
         isStudent={isStudent}
         students={students}
         setModalMessage={setModalMessage}
         setModalVisible={setModalVisible}
-      />
+      /> */}
       <ClassManage
         isClass={isClass}
         classInfo={classInfo}

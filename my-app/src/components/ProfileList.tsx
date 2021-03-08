@@ -145,8 +145,9 @@ export default function Profile() {
           )}
 
           <div id="complete">
+            <Button>수정</Button>
             <Link to="/main">
-              <Button>완료</Button>
+              <Button>확인</Button>
             </Link>
           </div>
         </div>
