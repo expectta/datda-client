@@ -143,7 +143,6 @@ const GlobalStyle = createGlobalStyle`
           -webkit-box-shadow : 0 0 1px rgba(255,255,255,0.5);
         }
     }
-    
 	}
 	a{
 		text-decoration:none;
