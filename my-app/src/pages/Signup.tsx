@@ -38,8 +38,8 @@ axios.defaults.withCredentials = true;
 //!카카오톡 REST api key 리액트는 환경변수(.env)에서 'REACT_APP_'을 붙여줘야 함
 const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
 //!카카오 로그인&회원가입 관련 url
-// const serverSignupUrl = 'https://datda.link/kakao/signup'; //! datda 카카오회원가입 주소
-const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 서버 카카오회원가입 주소
+const serverSignupUrl = 'https://datda.link/kakao/signup'; //! datda 카카오회원가입 주소
+// const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 서버 카카오회원가입 주소
 const redirectUri = 'http://localhost:3000/signup'; //! 후에 datda 주소로 변경
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
@@ -268,8 +268,16 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   return (
     <SignupGlobal>
       <Link to="/">
-        <img id="logo" src="../images/logo.png" />
-        <span id="header">Datda</span>
+        <div className="mobileHeader">
+          <img id="logo" src="../images/logo.png" />
+          <div className="logoText">datda</div>
+        </div>
+        <div id="header">
+          <span className="headerFont">
+            <span className="headerFont1">닿다에 </span>
+            <span>오신 것을 환영합니다!</span>
+          </span>
+        </div>
       </Link>
 
       <Selection
@@ -354,9 +362,28 @@ const SignupGlobal = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  min-height: 100vh;
+  background-image: url('../images/signbackground.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
+  .mobileHeader {
+    display: none;
+  }
   #header {
-    font-size: 3rem;
+    width: 500px;
+    text-align: center;
+  }
+  .headerFont {
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+  }
+  .headerFont1 {
+    color: #6e6eff;
   }
   #logo {
     resize: both;
@@ -365,5 +392,27 @@ const SignupGlobal = styled.div`
   #loadingImage {
     width: 25%;
     height: auto;
+  }
+  @media ${({ theme }) => theme.device.mobileL} {
+    background-image: none;
+    .mobileHeader {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+    .logoText {
+      font-size: 30px;
+      color: #3c3c3c;
+    }
+    #header {
+      margin-top: 30px;
+    }
+    .headerFont {
+      font-size: 20px;
+      color: rgb(0, 0, 0);
+    }
+    .signup {
+      margin-top: 50px;
+    }
   }
 `;
