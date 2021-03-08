@@ -20,7 +20,7 @@ function instiSelection({
 }: Props) {
   return instiSelection ? (
     <div>
-      <h1>교습소 유형을 선택해주세요</h1>
+      <h1>기관 유형을 선택해주세요</h1>
       <div>
         <button onClick={() => inputInstiInfo('유치원')}>유치원</button>
         <button onClick={() => inputInstiInfo('어린이집')}>어린이집</button>

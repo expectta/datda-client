@@ -12,12 +12,12 @@ function Selection({ selection, handleSelection, handleKakao }: Props) {
       <div className="button">
         <img
           className="normal"
-          src="../images/normalSignup.svg"
+          src="../images/normalSignup.png"
           onClick={() => handleSelection()}
         ></img>
         <img
           className="kakao"
-          src="../images/kakaoSignup.svg"
+          src="../images/kakaoSignup.png"
           onClick={() => handleKakao()}
         ></img>
       </div>
@@ -35,14 +35,16 @@ const SelectionWrap = styled.div`
   justify-content: center;
   flex-direction: column;
   .normal {
-    border: 1px solid rgb(0, 0, 0);
     cursor: pointer;
+    height: 30px;
+    width: auto;
   }
   .kakao {
     margin-top: 10px;
-    border: 1px solid rgb(0, 0, 0);
     cursor: pointer;
     margin-left: 50px;
+    height: 30px;
+    width: auto;
   }
   .button {
     text-align: center;
