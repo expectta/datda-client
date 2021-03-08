@@ -20,26 +20,28 @@ export default function Timetable({ userInfo }: props) {
     previousStep: 0,
     currentTime: '',
     currentEducation: '',
-    totalTimetable: `${
+    totalTimetable:
       userInfo.permission === 'parent'
         ? userInfo.mainData[userInfo.currentChild].timetable!
-        : userInfo.mainData.timetable
-    }`,
+        : userInfo.mainData.timetable,
   });
   // 현재 진행중인 교육상태 업데이트
   useEffect(() => {
     console.log(time);
-    const currentEducation = findStepEducation(
-      time,
-      currentTimeTable.totalTimetable,
-    );
-    setCurrentTimeTable({
-      ...currentTimeTable,
-      // currentTime: currentEducation!.time,
-      step: currentEducation?.step || 0,
-      currentTime: currentEducation?.timetable,
-      currentEducation: currentEducation?.currentEducation,
-    });
+    //시간표를 등록했을경우
+    if (currentTimeTable.totalTimetable !== null) {
+      const currentEducation = findStepEducation(
+        time,
+        currentTimeTable.totalTimetable,
+      );
+      setCurrentTimeTable({
+        ...currentTimeTable,
+        // currentTime: currentEducation!.time,
+        step: currentEducation?.step || 0,
+        currentTime: currentEducation?.timetable,
+        currentEducation: currentEducation?.currentEducation,
+      });
+    }
     console.log('현재시간');
   }, [time]);
 
@@ -90,8 +92,14 @@ export default function Timetable({ userInfo }: props) {
                     <CurrentState>
                       <Time>
                         <label>
-                          {currentTimeTable.currentTime ||
-                            '수업시간이 아니에요'}
+                          {(() => {
+                            if (currentTimeTable.currentTime) {
+                              return currentTimeTable.currentTime;
+                            }
+                            if (currentTimeTable.totalTimetable === null) {
+                              return '시간표를 등록하세요';
+                            }
+                          })()}
                         </label>
                       </Time>
                       <Education>
