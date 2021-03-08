@@ -38,7 +38,8 @@ axios.defaults.withCredentials = true;
 //!카카오톡 REST api key 리액트는 환경변수(.env)에서 'REACT_APP_'을 붙여줘야 함
 const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
 //!카카오 로그인&회원가입 관련 url
-const serverSignupUrl = 'https://datda.link/kakao/signup'; //! datda 카카오회원가입 주소
+// const serverSignupUrl = 'https://datda.link/kakao/signup'; //! datda 카카오회원가입 주소
+const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 서버 카카오회원가입 주소
 const redirectUri = 'http://localhost:3000/signup'; //! 후에 datda 주소로 변경
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
@@ -103,12 +104,14 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       const authorizationCode = url.searchParams.get('code');
       if (authorizationCode) {
         setIsLoading(true);
+        setSelection(false);
         handleKakaoSignup(authorizationCode);
       }
       setIsKakao(true);
     } else if (userEmail) {
-      setInputs({ ...inputs, email: userEmail });
       setIsLoading(false);
+      setSelection(false);
+      setInputs({ ...inputs, email: userEmail });
       history.push('/signup/common');
     }
   }, [isKakao, userEmail]);
@@ -147,7 +150,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
           setIsLoading(false);
         } else if (res.status === 201) {
           alert('이미 계정이 있습니다. 로그인 하시기 바랍니다.');
-          setUserEmail(res.data.email);
+          // setUserEmail(res.data.email);
           setIsLoading(false);
           history.push('/');
         }
