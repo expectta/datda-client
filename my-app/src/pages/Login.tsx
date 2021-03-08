@@ -23,6 +23,7 @@ function Login({ hadleSetMainData }: propType) {
   const [errormessage, setErrormessage] = useState<string>('');
   //! 카카오 관련 상태
   const [isKakao, setIsKakao] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onChange = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -33,6 +34,7 @@ function Login({ hadleSetMainData }: propType) {
     if (email.length === 0 || password.length === 0) {
       setErrormessage('이메일이나 비밀번호를 입력해주세요.');
     } else {
+      setIsLoading(true);
       // axios 로그인 요청
       //!await로 동기적 실행 필요함.
       const mainData = await requestLogin(email, password);
@@ -56,10 +58,19 @@ function Login({ hadleSetMainData }: propType) {
       const url = new URL(window.location.href);
       const authorizationCode = url.searchParams.get('code');
       if (authorizationCode) {
+        setIsLoading(true);
         requestKakaoLogin(authorizationCode).then((mainData) => {
-          hadleSetMainData(mainData);
-          setErrormessage('');
-          history.push('/main');
+          if (mainData) {
+            // handleLoading();
+            hadleSetMainData(mainData);
+            setErrormessage('');
+            setIsLoading(false);
+            history.push('/main');
+          }
+          setIsLoading(false);
+          alert('아직 승인대기 중입니다.');
+          // handleLoading();
+          return;
         });
       }
       setIsKakao(true);
@@ -93,12 +104,21 @@ function Login({ hadleSetMainData }: propType) {
       <Button onClick={() => handleLogin(inputs.email, inputs.password)}>
         로그인
       </Button>
-      <button onClick={handleKakao}>카카오 로그인</button>
+      <img
+        id="kakaoImg"
+        src="../images/kakaoLogin.png"
+        onClick={handleKakao}
+      ></img>
       <Link to="/signup">
         <div>
           <Button>회원가입</Button>
         </div>
       </Link>
+      {!isLoading ? (
+        <div></div>
+      ) : (
+        <img id="loadingImage" src="../images/loading.gif"></img>
+      )}
     </LoginGlobal>
   );
 }
@@ -115,6 +135,16 @@ const LoginGlobal = styled.div`
   #logo {
     resize: both;
     width: 40px;
+  }
+
+  #loadingImage {
+    width: 50%;
+    height: auto;
+  }
+
+  #kakaoImg {
+    width: 50%;
+    height: auto;
   }
 `;
 

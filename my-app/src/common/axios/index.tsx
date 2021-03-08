@@ -5,7 +5,8 @@ axios.defaults.withCredentials = true;
 import 'dotenv/config';
 
 //! 서버 카카오 로그인 url
-const serverLoginUrl = 'http://localhost:5000/kakao/login'; //! 후에 서버의 datda 카카오로그인 주소로 변경
+const serverLoginUrl = 'https://datda.link/kakao/login'; //! datda 카카오로그인 주소
+// const serverLoginUrl = 'http://localhost:5000/kakao/login'; //! 로컬서버의 카카오로그인 주소
 
 if (localStorage.getItem('loginInfo')) {
   console.log(
@@ -54,7 +55,7 @@ export async function requestKakaoLogin(authorizationCode: string) {
     })
     .then((res) => {
       if (res.status === 201) {
-        alert('회원가입을 해주세요.');
+        console.log('회원가입을 해주세요.');
       } else if (res.status === 200) {
         localStorage.setItem(
           'loginInfo',
@@ -64,26 +65,26 @@ export async function requestKakaoLogin(authorizationCode: string) {
             permission: res.data.permission,
           }),
         );
-        console.log('로그인됨');
-        //TODO : main 화면에 사용될 데이터 요청
-        //main 화면 용 데이터가 정상적으로 받아진다면 상태를 저장
-        //저장 후 화면 랜더링
-        if (res.data.permission === 'institution') {
-          console.log('원장 데이터 반환');
-          return director;
-        }
-        if (res.data.permission === 'parent') {
-          console.log('부모  데이터 반환');
-          return parents;
-        }
-        if (res.data.permission === 'teacher') {
-          console.log('선생 데이터 반환');
-          return teacher;
-        }
+      }
+      console.log('로그인됨');
+      //TODO : main 화면에 사용될 데이터 요청
+      //main 화면 용 데이터가 정상적으로 받아진다면 상태를 저장
+      //저장 후 화면 랜더링
+      if (res.data.permission === 'institution') {
+        console.log('원장 데이터 반환');
+        return director;
+      }
+      if (res.data.permission === 'parent') {
+        console.log('부모  데이터 반환');
+        return parents;
+      }
+      if (res.data.permission === 'teacher') {
+        console.log('선생 데이터 반환');
+        return teacher;
       }
     })
     .catch((error) => {
-      alert(error);
+      console.log(error);
     });
   return mainData;
 }
