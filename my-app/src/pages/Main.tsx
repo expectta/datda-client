@@ -271,7 +271,7 @@ export default function Main({
                 <Route path={`/main/profile`} component={Profile} />
                 <Route path={`/main/timetable`} component={TimetableList} />
                 <Route path={`/main/education`} component={EducationList} />
-                <Route exact path={`/main}/report`} component={Report} />
+                <Route exact path={`/main/report`} component={Report} />
                 <Route path={'/main/timetable'} component={TimetableList} />
                 <Route path={'/main/education'} component={EducationList} />
                 <Route path={'/main/report'} component={Report} />
@@ -295,7 +295,7 @@ export default function Main({
           </Footer>
         </>
       ) : (
-        <div> 로딩중</div>
+        <img id="loading" src="../images/loading.gif" />
       )}
     </Wrap>
   );

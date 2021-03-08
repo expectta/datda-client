@@ -29,12 +29,12 @@ function TeacherManage({
   //radio class 버튼;
   const onCheckedClass = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setCheckedClass({ className: value });
+    setCheckedClass({ ...checkedClass, className: value });
   };
 
   const onCheckedTeacher = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setCheckedTeacher({ userName: value });
+    setCheckedTeacher({ ...checkedTeacher, userName: value });
   };
 
   //곧 승인 요청을 내려줄 함수;
