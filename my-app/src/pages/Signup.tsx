@@ -87,17 +87,13 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   const history = useHistory();
   //학부모, 선생님을 선택할 시
   const handleSelection = () => {
-    if (inputs.permission.length !== 0) {
-      setSelection(false);
-      setSignup(true);
-    }
+    setSelection(false);
+    setSignup(true);
   };
 
   //! 버튼을 누르면 카카오 정보제공 동의화면으로 넘어감
   const handleKakao = () => {
-    if (inputs.permission.length !== 0) {
-      window.location.assign(kakaoUrl);
-    }
+    window.location.assign(kakaoUrl);
   };
 
   //! 이것은 카카오 회원가입 할때 필요한 사이드이펙트
@@ -200,6 +196,8 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   ) => {
     if (name === null || role === null || phone === null) {
       setErrormessage('모든 항목은 필수입니다');
+    } else if (inputs.permission.length === 0) {
+      setErrormessage('가입 유형을 확인해주세요');
     } else if (!isNameCHeck(name)) {
       setErrormessage('이름을 확인해주세요');
     } else if (!isPhoneCheck(phone)) {
@@ -277,7 +275,6 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       <Selection
         selection={selection}
         handleSelection={handleSelection}
-        onChange={onChange}
         handleKakao={handleKakao}
       />
       <Signup
