@@ -81,9 +81,8 @@ function Login({ hadleSetMainData }: propType) {
     <LoginGlobal>
       <Link to="/">
         <img id="logo" src="../images/logo.png" />
-        <Header>Datda</Header>
+        <Header>datda</Header>
       </Link>
-
       <InputBox>
         <input
           className="inputBox"
@@ -130,7 +129,7 @@ const LoginGlobal = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  min-height: 100vh;
 
   #logo {
     resize: both;
@@ -146,6 +145,12 @@ const LoginGlobal = styled.div`
     width: 50%;
     height: auto;
   }
+
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
 `;
 
 const InputBox = styled.div`
@@ -154,6 +159,11 @@ const InputBox = styled.div`
     border-bottom: solid 1px;
   }
   margin: 5px 0px 5px 0px;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
 `;
 
 const Header = styled.span`

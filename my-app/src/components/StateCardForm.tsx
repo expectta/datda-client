@@ -1,8 +1,11 @@
 import react from 'react';
 import styled from 'styled-components';
 import { State } from './Index';
-
-export default function StateCardForm() {
+interface propsType {
+  childInfo: any;
+}
+export default function StateCardForm({ childInfo }: propsType) {
+  // console.log(childInfo, '카드 속 아이정보');
   return (
     <>
       <StateCard>
@@ -12,17 +15,18 @@ export default function StateCardForm() {
           </Avatar>
           <StateWrapper>
             <NameWrapper>
-              <Institution>{'밀알어린이집'}</Institution>
-              <Class>{'새싹반'}</Class>
-              <Name>{'이유정'}</Name>
+              <Institution>{childInfo.institutionId}</Institution>
+              <Class>{childInfo.childClassId}</Class>
+              <Name>{childInfo.childName}</Name>
             </NameWrapper>
             <State
               type={'원아 상태관리'}
-              isCheck={false}
-              isOk={false}
-              isSleep={false}
-              isEat={false}
-              please={false}
+              childInfo={childInfo}
+              isCheck={childInfo.state.isCheck}
+              isOk={childInfo.state.isOk}
+              isSleep={childInfo.state.isSleep}
+              isEat={childInfo.state.isEat}
+              please={childInfo.state.please}
             ></State>
           </StateWrapper>
         </Wrapper>
@@ -32,8 +36,8 @@ export default function StateCardForm() {
 }
 const StateCard = styled.div`
   width: 100%;
-  margin-top: 1%;
-  margin-bottom: 1%;
+  margin-top: 3%;
+  margin-bottom: 3%;
   height: fit-content;
   display: flex;
   ${({ theme }) => theme.common.stateCardDiv}

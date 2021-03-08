@@ -5,6 +5,7 @@ import { notice } from '../assets/testdata';
 import { ListInnerCard, StateCardForm } from './Index';
 interface propsType {
   title: string;
+  childInfo: any;
   fristCategory?: string;
   secondCategory?: string;
   location: RouteComponentProps['location'];
@@ -13,6 +14,7 @@ interface propsType {
 }
 function StateListForm({
   title,
+  childInfo,
   fristCategory,
   secondCategory,
   match,
@@ -31,23 +33,21 @@ function StateListForm({
           <Sreach>검색</Sreach>
         </FourthCategory>
       </CategoryWrap>
-      <CardWrapper>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-        <StateCardForm></StateCardForm>
-      </CardWrapper>
+      {childInfo.childrenList.length !== 0 ? (
+        <CardWrapper>
+          {childInfo.childrenList.map((element: any, index: number) => {
+            console.log(element, '현재 엘리먼트');
+            return (
+              <StateCardForm
+                key={element.childId}
+                childInfo={element}
+              ></StateCardForm>
+            );
+          })}
+        </CardWrapper>
+      ) : (
+        <div>등록된 원아가 없습니다</div>
+      )}
     </Wrap>
   );
 }
@@ -94,7 +94,6 @@ const CardWrapper = styled.div`
   height: 83%;
   margin: 0 auto;
   overflow: auto;
-  display: grid;
   padding: 2%;
   margin-bottom: 2%;
 `;

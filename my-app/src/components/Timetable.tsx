@@ -28,6 +28,7 @@ export default function Timetable({ userInfo }: props) {
   // 현재 진행중인 교육상태 업데이트
   useEffect(() => {
     console.log(time);
+    //시간표를 등록했을경우
     if (currentTimeTable.totalTimetable !== null) {
       const currentEducation = findStepEducation(
         time,
@@ -41,7 +42,6 @@ export default function Timetable({ userInfo }: props) {
         currentEducation: currentEducation?.currentEducation,
       });
     }
-
     console.log('현재시간');
   }, [time]);
 
@@ -92,8 +92,14 @@ export default function Timetable({ userInfo }: props) {
                     <CurrentState>
                       <Time>
                         <label>
-                          {currentTimeTable.currentTime ||
-                            '수업시간이 아니에요'}
+                          {(() => {
+                            if (currentTimeTable.currentTime) {
+                              return currentTimeTable.currentTime;
+                            }
+                            if (currentTimeTable.totalTimetable === null) {
+                              return '시간표를 등록하세요';
+                            }
+                          })()}
                         </label>
                       </Time>
                       <Education>

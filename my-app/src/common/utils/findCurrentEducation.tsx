@@ -31,14 +31,14 @@ export const findStepEducation = (currentTime: string, totalTimetable: any) => {
     const startTime = Number(fristTime.replace(':', ''));
     const endTime = Number(secondTime.replace(':', ''));
 
-    console.log(startTime, ' 시작', endTime, '끝');
-    console.log(calculatedCurrentTime, '현재');
+    // console.log(startTime, ' 시작', endTime, '끝');
+    // console.log(calculatedCurrentTime, '현재');
     if (
       calculatedCurrentTime >= startTime &&
       calculatedCurrentTime <= endTime
     ) {
       currentStep = (Number(element.step) / newArr.length) * 100;
-      console.log(currentStep, '현재스탭');
+      // console.log(currentStep, '현재스탭');
 
       return {
         step: currentStep,
