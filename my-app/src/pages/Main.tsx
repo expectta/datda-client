@@ -244,8 +244,9 @@ export default function Main({
           </Footer>
         </>
       ) : (
-        <img id="loading" src="../images/loading.gif" />
+        <Loading id="loading" src="../images/loading.gif" />
       )}
+      {/* <Loading id="loading" src="../images/loading.gif" /> */}
     </Wrap>
   );
 }
@@ -358,4 +359,11 @@ const ContentCard = styled.div`
   background: white;
   height: 100%;
   ${({ theme }) => theme.common.contentCardDiv}
+`;
+const Loading = styled.img`
+  width: 150px;
+  height: auto;
+  position: absolute;
+  top: 42vh;
+  left: 42vw;
 `;
