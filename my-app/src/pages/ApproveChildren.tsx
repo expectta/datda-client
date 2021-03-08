@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { requestApproveChild } from '../common/axios';
-
-export default function ApproveChildren() {
+import {
+  handleAddChild,
+  handleDeleteChild,
+  handleGetAllChildByInstitution,
+} from '../common/utils/firebaseFunction';
+interface propType {
+  userInfo: any;
+}
+export default function ApproveChildren({ userInfo }: propType) {
   // 승인된 원아들
   const [approveChildren, setApproveChildren] = useState({
     approved: [],
@@ -11,8 +18,8 @@ export default function ApproveChildren() {
     unapproved: [],
   });
   //승인,미승인 원아 리스트 요청
-  async function handleApproveChildren() {
-    const chilrenList = await requestApproveChild();
+  async function handleApproveChildren(childId?: number) {
+    const chilrenList = await requestApproveChild(childId);
     if (chilrenList) {
       setApproveChildren({
         approved: chilrenList.approved,
@@ -21,13 +28,24 @@ export default function ApproveChildren() {
       });
     }
   }
-  // 승인,미승인 원아 상태 확인
-  useEffect(() => {
-    console.log(approveChildren, '승인');
-  }, [approveChildren]);
+  //미승인 -> 승인
+  function handleApproveChild(institutionId: number, childId?: number) {
+    handleApproveChildren(childId);
+    //firebase 원아 추가
+    handleAddChild(String(institutionId), String(childId));
+  }
+  //승인 > 미승인
+  function handleUnapproveChild(institutionId: number, childId?: number) {
+    handleApproveChildren(childId);
+    // firebase 원아 삭제
+    handleDeleteChild(String(institutionId), String(childId));
+  }
+
   // 해당 페이지 랜딩 후 1회 승인, 미승인 원아 리스트 요청
+  //! cleanup function으로 랜더링 타이밍 확인 필요
   useEffect(() => {
     handleApproveChildren();
+    handleGetAllChildByInstitution(userInfo.institutionId);
   }, []);
   return (
     <>
@@ -42,20 +60,28 @@ export default function ApproveChildren() {
               <ThirdCategory>보호자</ThirdCategory>
             </CategoryWrapper>
             <Contents>
-              {approveChildren.approved.map((element: any, index: number) => {
+              {approveChildren.unapproved.map((element: any, index: number) => {
+                console.log(element.childId, '아이 id');
                 return (
-                  <>
-                    <CardWrapper key={element.childId}>
-                      <Wrapper>
-                        <CardName>{element.childName} 어린이</CardName>
-                        <CardTime>{element.createdAt}</CardTime>
-                        <CardParent>{element.user.parentName}</CardParent>
-                      </Wrapper>
-                      <CardButtonWrapper>
-                        <CardAllowButton>수락</CardAllowButton>
-                      </CardButtonWrapper>
-                    </CardWrapper>
-                  </>
+                  <CardWrapper key={element.childId}>
+                    <Wrapper>
+                      <CardName>{element.childName} 어린이</CardName>
+                      <CardTime>{element.createdAt}</CardTime>
+                      <CardParent>{element.user.parentName}</CardParent>
+                    </Wrapper>
+                    <CardButtonWrapper>
+                      <CardAllowButton
+                        onClick={() =>
+                          handleApproveChild(
+                            element.institutionId,
+                            element.childId,
+                          )
+                        }
+                      >
+                        수락
+                      </CardAllowButton>
+                    </CardButtonWrapper>
+                  </CardWrapper>
                 );
               })}
             </Contents>
@@ -68,20 +94,27 @@ export default function ApproveChildren() {
               <ThirdCategory>보호자</ThirdCategory>
             </CategoryWrapper>
             <Contents>
-              {approveChildren.unapproved.map((element: any, index: number) => {
+              {approveChildren.approved.map((element: any, index: number) => {
                 return (
-                  <>
-                    <CardWrapper key={element.childId}>
-                      <Wrapper>
-                        <CardName>{element.childName} 어린이</CardName>
-                        <CardTime>{element.createdAt}</CardTime>
-                        <CardParent>{element.user.parentName}</CardParent>
-                      </Wrapper>
-                      <CardButtonWrapper>
-                        <CardAllowButton>승인해제</CardAllowButton>{' '}
-                      </CardButtonWrapper>
-                    </CardWrapper>
-                  </>
+                  <CardWrapper key={element.childId}>
+                    <Wrapper>
+                      <CardName>{element.childName} 어린이</CardName>
+                      <CardTime>{element.createdAt}</CardTime>
+                      <CardParent>{element.user.parentName}</CardParent>
+                    </Wrapper>
+                    <CardButtonWrapper>
+                      <CardAllowButton
+                        onClick={() =>
+                          handleUnapproveChild(
+                            element.institutionId,
+                            element.childId,
+                          )
+                        }
+                      >
+                        승인해제
+                      </CardAllowButton>
+                    </CardButtonWrapper>
+                  </CardWrapper>
                 );
               })}
             </Contents>
