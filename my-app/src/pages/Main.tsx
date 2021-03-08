@@ -214,10 +214,13 @@ export default function Main({
                   render={() => <ApproveChildren userInfo={userInfo} />}
                 />
                 <Route path={`/main/profile`} component={Profile} />
-                <Route path={`/main/timetable`} component={TimetableList} />
                 <Route path={`/main/education`} component={EducationList} />
                 <Route exact path={`/main/report`} component={Report} />
-                <Route path={'/main/timetable'} component={TimetableList} />
+                <Route
+                  exact
+                  path={'/main/timetable'}
+                  render={() => <TimetableList userInfo={userInfo} />}
+                />
                 <Route path={'/main/education'} component={EducationList} />
                 <Route path={'/main/report'} component={Report} />
                 <Route
