@@ -114,7 +114,9 @@ export default function Timetable({ userInfo }: props) {
           <TimeTable to="/main/timetable">전체시간표 보기</TimeTable>
         </>
       ) : (
-        <Loader>로딩중</Loader>
+        <LoadingWrapper>
+          <Loader id="loadingImage" src="../images/loading.gif"></Loader>
+        </LoadingWrapper>
       )}
     </Wrap>
   );
@@ -203,9 +205,16 @@ const TimeTable = styled(Link)`
   float: right;
 `;
 
-const Loader = styled.div`
-  width: 100%;
+const Loader = styled.img`
+  width: 50px;
   text-align: center;
   font-size: 2rem;
-  padding-top: 10%;
+  align-self: center;
+`;
+const LoadingWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
