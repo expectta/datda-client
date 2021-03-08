@@ -270,8 +270,10 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   return (
     <SignupGlobal>
       <Link to="/">
-        <img id="logo" src="../images/logo.png" />
-        <span id="header">Datda</span>
+        <div id="header">
+          <img id="logo" src="../images/logo.png" />
+          <span id="header">Datda</span>
+        </div>
       </Link>
 
       <Selection
@@ -358,6 +360,8 @@ const SignupGlobal = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 50vh;
+  background-image: url('../images/signbackground.png');
+  background-size: cover;
   #header {
     font-size: 3rem;
   }
