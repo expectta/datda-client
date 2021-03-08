@@ -127,7 +127,7 @@ export function requestMainData(token?: string) {
   console.log('반환값', mainData);
   return mainData;
 }
-
+// 승인, 미승인 원아 리스트 요청
 export function requestApproveChild(childId?: number | null) {
   axios.defaults.headers.common[
     'authorization'

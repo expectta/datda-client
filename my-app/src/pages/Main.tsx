@@ -96,11 +96,11 @@ export default function Main({
       .collection('children')
       .doc(String(childId))
       .onSnapshot((doc) => {
-        setIsOk(doc.data()?.Ok);
-        setIsEat(doc.data()?.Eat);
-        setIsSleep(doc.data()?.Sleep);
-        setIsCheck(doc.data()?.Check);
-        setPlease(doc.data()?.Please);
+        setIsOk(doc.data()?.isOk);
+        setIsEat(doc.data()?.isEat);
+        setIsSleep(doc.data()?.isSleep);
+        setIsCheck(doc.data()?.isCheck);
+        setPlease(doc.data()?.please);
       });
   }
   //메인 화면에서 사용될 data 요청
@@ -145,62 +145,6 @@ export default function Main({
       );
     }
   }, [userInfo.permission]);
-  // const handleIsCheck = (e: any) => {
-  //   // 학부모가 '투약의뢰' 버튼을 눌렀을 시
-  //   if (e === 'please') {
-  //     db.update({
-  //       Please: true,
-  //     });
-  //     // 학부모가 '확인' 버튼을 눌렀을 시
-  //   } else if (e === 'donePlease') {
-  //     db.update({
-  //       Please: false,
-  //     });
-  //     // 선생님이 '등원' 버튼을 눌렀을 시
-  //   } else if (e === 'checkUp') {
-  //     // firebase에 있는 상태를 바꾼다.
-  //     db.update({
-  //       Check: true,
-  //     });
-  //     // 선생님이 '하원' 버튼을 눌렀을 시
-  //   } else if (e === 'checkDown') {
-  //     // firebase에 있는 상태를 바꾼다.
-  //     db.update({
-  //       Check: false,
-  //     });
-  //     // 선생님이 '투약보고서'를 전송하면
-  //   } else if (e === 'ok') {
-  //     db.update({
-  //       Ok: true,
-  //     });
-  //     // 선생님이 '확인' 버튼을 눌렀을 시
-  //   } else if (e === 'doneOk') {
-  //     db.update({
-  //       Ok: false,
-  //     });
-  //     // 선생님이 '취침' 버튼을 눌렀을 시
-  //   } else if (e === 'sleep') {
-  //     db.update({
-  //       Sleep: true,
-  //     });
-  //     // 선생님이 '기상' 버튼을 눌렀을 시
-  //   } else if (e === 'wakeUp') {
-  //     db.update({
-  //       Sleep: false,
-  //     });
-  //     // 선생님이 '식사 시작' 버튼을 눌렀을 시
-  //   } else if (e === 'eat') {
-  //     db.update({
-  //       Eat: true,
-  //     });
-  //     // 선생님이 '식사 끝' 버튼을 눌렀을 시
-  //   } else if (e === 'ate') {
-  //     db.update({
-  //       Eat: false,
-  //     });
-  //   }
-  // };
-
   return (
     <Wrap>
       {userInfo.isLogin === true ? (
@@ -219,6 +163,7 @@ export default function Main({
                 <>
                   <State
                     type="현재상태"
+                    childInfo={userInfo}
                     isCheck={isCheck}
                     isOk={isOk}
                     isSleep={isSleep}
@@ -266,7 +211,7 @@ export default function Main({
                 />
                 <Route
                   path={`/main/approve`}
-                  render={() => <ApproveChildren />}
+                  render={() => <ApproveChildren userInfo={userInfo} />}
                 />
                 <Route path={`/main/profile`} component={Profile} />
                 <Route path={`/main/timetable`} component={TimetableList} />
@@ -285,7 +230,11 @@ export default function Main({
                     />
                   )}
                 />
-                <Route path={'/main/management'} component={Management} />
+                <Route
+                  exact
+                  path={'/main/management'}
+                  render={() => <Management userInfo={userInfo} />}
+                />
                 <Route path={'/main/bus'} component={Bus} />
               </Switch>
             </ContentCard>
