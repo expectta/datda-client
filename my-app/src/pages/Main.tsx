@@ -35,6 +35,7 @@ interface Props {
   handleLogout: any;
   handleChangeChild: (index: number) => void;
   hadleSetMainData: (data: any) => void;
+  handleTimetableChange: any;
   userInfo: {
     permission: string;
     isLogin: boolean;
@@ -48,6 +49,7 @@ export default function Main({
   setModalVisible,
   hadleSetMainData,
   handleChangeChild,
+  handleTimetableChange,
   userInfo,
   handleLogout,
 }: Props) {
@@ -217,9 +219,13 @@ export default function Main({
                 <Route path={`/main/education`} component={EducationList} />
                 <Route exact path={`/main/report`} component={Report} />
                 <Route
-                  exact
-                  path={'/main/timetable'}
-                  render={() => <TimetableList userInfo={userInfo} />}
+                  path={`/main/timetable`}
+                  render={() => (
+                    <TimetableList
+                      userInfo={userInfo}
+                      handleTimetableChange={handleTimetableChange}
+                    />
+                  )}
                 />
                 <Route path={'/main/education'} component={EducationList} />
                 <Route path={'/main/report'} component={Report} />
