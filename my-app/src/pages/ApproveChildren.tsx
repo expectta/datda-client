@@ -7,6 +7,7 @@ import {
   handleDeleteChild,
   handleGetAllChildByInstitution,
 } from '../common/utils/firebaseFunction';
+import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 interface propType {
   userInfo: any;
 }
@@ -66,7 +67,7 @@ export default function ApproveChildren({ userInfo }: propType) {
                   <CardWrapper key={element.childId}>
                     <Wrapper>
                       <CardName>{element.childName} 어린이</CardName>
-                      <CardTime>{element.createdAt}</CardTime>
+                      <CardTime>{changeTimeStamp(element.createdAt)}</CardTime>
                       <CardParent>{element.user.parentName}</CardParent>
                     </Wrapper>
                     <CardButtonWrapper>
@@ -99,7 +100,7 @@ export default function ApproveChildren({ userInfo }: propType) {
                   <CardWrapper key={element.childId}>
                     <Wrapper>
                       <CardName>{element.childName} 어린이</CardName>
-                      <CardTime>{element.createdAt}</CardTime>
+                      <CardTime>{changeTimeStamp(element.createdAt)}</CardTime>
                       <CardParent>{element.user.parentName}</CardParent>
                     </Wrapper>
                     <CardButtonWrapper>

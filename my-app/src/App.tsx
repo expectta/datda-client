@@ -62,6 +62,20 @@ function App() {
       mainData: data,
     });
   };
+  //시간표를 등록하고 mainData.timetable 업데이트
+  const handleTimetableChange = (timetable: any) => {
+    const newTimetable = {
+      timetable: timetable,
+    };
+    console.log('시간표업데이트 ');
+    setUserInfo({
+      ...userInfo,
+      mainData: {
+        ...userInfo.mainData,
+        ...newTimetable,
+      },
+    });
+  };
   useEffect(() => {
     if (Object.keys(userInfo.mainData).length !== 0) {
       console.log(userInfo, ' 이펙트 안');
@@ -96,6 +110,7 @@ function App() {
               render={() => (
                 <Main
                   userInfo={userInfo}
+                  handleTimetableChange={handleTimetableChange}
                   handleChangeChild={handleChangeChild}
                   hadleSetMainData={hadleSetMainData}
                   handleLogout={handleLogout}

@@ -7,11 +7,11 @@ export default function SecondSubMenu() {
     <Wrap>
       <Container>
         <Card>
-          <Text>
+          {/* <Text>
             <b>닿다</b>에게 <br />
             <b>궁금</b>한게 <br />
             있어요
-          </Text>
+          </Text> */}
         </Card>
         <Card></Card>
       </Container>

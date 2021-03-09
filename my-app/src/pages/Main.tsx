@@ -35,6 +35,7 @@ interface Props {
   handleLogout: any;
   handleChangeChild: (index: number) => void;
   hadleSetMainData: (data: any) => void;
+  handleTimetableChange: any;
   userInfo: {
     permission: string;
     isLogin: boolean;
@@ -48,6 +49,7 @@ export default function Main({
   setModalVisible,
   hadleSetMainData,
   handleChangeChild,
+  handleTimetableChange,
   userInfo,
   handleLogout,
 }: Props) {
@@ -214,10 +216,17 @@ export default function Main({
                   render={() => <ApproveChildren userInfo={userInfo} />}
                 />
                 <Route path={`/main/profile`} component={Profile} />
-                <Route path={`/main/timetable`} component={TimetableList} />
                 <Route path={`/main/education`} component={EducationList} />
                 <Route exact path={`/main/report`} component={Report} />
-                <Route path={'/main/timetable'} component={TimetableList} />
+                <Route
+                  path={`/main/timetable`}
+                  render={() => (
+                    <TimetableList
+                      userInfo={userInfo}
+                      handleTimetableChange={handleTimetableChange}
+                    />
+                  )}
+                />
                 <Route path={'/main/education'} component={EducationList} />
                 <Route path={'/main/report'} component={Report} />
                 <Route
@@ -244,8 +253,9 @@ export default function Main({
           </Footer>
         </>
       ) : (
-        <img id="loading" src="../images/loading.gif" />
+        <Loading id="loading" src="../images/loading.gif" />
       )}
+      {/* <Loading id="loading" src="../images/loading.gif" /> */}
     </Wrap>
   );
 }
@@ -358,4 +368,11 @@ const ContentCard = styled.div`
   background: white;
   height: 100%;
   ${({ theme }) => theme.common.contentCardDiv}
+`;
+const Loading = styled.img`
+  width: 150px;
+  height: auto;
+  position: absolute;
+  top: 42vh;
+  left: 42vw;
 `;
