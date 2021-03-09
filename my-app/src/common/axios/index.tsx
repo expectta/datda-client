@@ -39,8 +39,9 @@ export async function requestLogin(email: string, password: string) {
           }),
         );
         return requestMainData(accessToken);
+      } else {
+        alert('회원정보가 없습니다');
       }
-      alert('회원정보가 없습니다');
     })
     .catch((error) => {
       alert(error);
@@ -118,8 +119,13 @@ export function requestMainData(token?: string) {
     .then((res) => {
       if (res.status === 200) {
         return res.data;
+      } else if (res.status === 201) {
+        return true;
+      } else if (res.status === 202) {
+        return false;
+      } else {
+        return undefined;
       }
-      return false;
     })
     .catch((err) => {
       alert(err);
@@ -211,6 +217,71 @@ export function requestChangeTeacherClass(teacherId: number, classId: number) {
       alert(err);
     });
   return changeClass;
+}
+
+export function requestSearchInsti(value: string) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+
+  const instiData = axios
+    .post('https://datda.link/guest/searchinstitution', { inputValue: value })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+      return false;
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return instiData;
+}
+
+export function requestGuestTeacherRegister(institutionId: string) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const result = axios
+    .post('https://datda.link/guest/teacherregister', {
+      institutionId: Number(institutionId),
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return result;
+}
+
+export function requestGuestParentRegister(
+  childName: string,
+  institutionId: string,
+) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const result = axios
+    .post('https://datda.link/guest/parentregister', {
+      childName: childName,
+      institutionId: Number(institutionId),
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return result;
 }
 
 export const getProfile = (): void => {
