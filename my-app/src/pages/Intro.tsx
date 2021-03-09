@@ -158,6 +158,9 @@ function Intro() {
           <Link to="/waiting">
             <LinkButton>웨이팅</LinkButton>
           </Link>
+          <Link to="/waiting/approving">
+            <LinkButton>기다리는 중</LinkButton>
+          </Link>
         </LinkArea>
       </LinkAgain>
       <button
