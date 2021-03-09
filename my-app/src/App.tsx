@@ -14,6 +14,7 @@ import {
   Signup,
   UserInfo,
   SignupCommon,
+  GuestWaiting,
 } from './pages/Index';
 import { Modal } from './components/Index';
 import styled, {
@@ -108,6 +109,7 @@ function App() {
               component={UserInfo}
               userPermission={userInfo.permission}
             />
+            <Route path="/waiting" component={GuestWaiting} />
           </>
           <Route path="/userinfo" component={UserInfo} />
         </Switch>
