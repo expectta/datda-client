@@ -155,6 +155,9 @@ function Intro() {
           <Link to="/signup">
             <LinkButton>회원가입</LinkButton>
           </Link>
+          <Link to="/waiting">
+            <LinkButton>웨이팅</LinkButton>
+          </Link>
         </LinkArea>
       </LinkAgain>
       <button
