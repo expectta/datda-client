@@ -217,7 +217,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
 
   const handleInstiSelection = (info: string) => {
     info.length === 0
-      ? setErrormessage('교습소 중 하나를 선택해주세요')
+      ? setErrormessage('기관 유형을 선택해주세요')
       : (history.push('/'), setErrormessage(''));
   };
 
@@ -267,56 +267,57 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
 
   return (
     <SignupGlobal>
-      <Link to="/">
-        <div className="mobileHeader">
-          <img id="logo" src="../images/logo.png" />
-          <div className="logoText">datda</div>
-        </div>
-        <div id="header">
-          <span className="headerFont">
-            <span className="headerFont1">닿다에 </span>
-            <span>오신 것을 환영합니다!</span>
-          </span>
-        </div>
-      </Link>
-
-      <Selection
-        selection={selection}
-        handleSelection={handleSelection}
-        handleKakao={handleKakao}
-      />
-      <Signup
-        inputs={inputs}
-        signup={signup}
-        handleSignup={handleSignup}
-        errormessage={errormessage}
-        onChange={onChange}
-        handleIsEmail={handleIsEmail}
-      />
-      <Switch>
-        <Route exact path="/signup/common">
-          <SignupCommon
-            inputs={inputs}
-            handleSignupDetail={handleSignupDetail}
-            errormessage={errormessage}
-            onChange={onChange}
-          />
-        </Route>
-        <Route exact path="/signup/institution">
-          <SignupInstitution
-            inputs={inputs}
-            institution={institution}
-            handleInstitution={handleInstitution}
-            onChangeInsti={onChangeInsti}
-            errormessage={errormessage}
-            instiInputs={instiInputs}
-            instiSelection={instiSelection}
-            handleInstiSelection={handleInstiSelection}
-            inputInstiInfo={inputInstiInfo}
-            setErrormessage={setErrormessage}
-          />
-        </Route>
-      </Switch>
+      <div className="signGlobalFrame">
+        <Link to="/">
+          <div className="mobileHeader">
+            <img id="logo" src="../images/logo.png" />
+            <div className="logoText">datda</div>
+          </div>
+          <div id="header">
+            <span className="headerFont">
+              <span className="headerFont1">닿다에 </span>
+              <span>오신 것을 환영합니다!</span>
+            </span>
+          </div>
+        </Link>
+        <Selection
+          selection={selection}
+          handleSelection={handleSelection}
+          handleKakao={handleKakao}
+        />
+        <Signup
+          inputs={inputs}
+          signup={signup}
+          handleSignup={handleSignup}
+          errormessage={errormessage}
+          onChange={onChange}
+          handleIsEmail={handleIsEmail}
+        />
+        <Switch>
+          <Route exact path="/signup/common">
+            <SignupCommon
+              inputs={inputs}
+              handleSignupDetail={handleSignupDetail}
+              errormessage={errormessage}
+              onChange={onChange}
+            />
+          </Route>
+          <Route exact path="/signup/institution">
+            <SignupInstitution
+              inputs={inputs}
+              institution={institution}
+              handleInstitution={handleInstitution}
+              onChangeInsti={onChangeInsti}
+              errormessage={errormessage}
+              instiInputs={instiInputs}
+              instiSelection={instiSelection}
+              handleInstiSelection={handleInstiSelection}
+              inputInstiInfo={inputInstiInfo}
+              setErrormessage={setErrormessage}
+            />
+          </Route>
+        </Switch>
+      </div>
       {/* <SignupDetail
       inputs={inputs}
         signupDetail={signupDetail}
@@ -358,11 +359,6 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
 export default Signin;
 
 const SignupGlobal = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
   background-image: url('../images/signbackground.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -371,6 +367,13 @@ const SignupGlobal = styled.div`
     src: url('../fonts/NanumSquareOTFLight.otf');
   }
   font-family: 'NanumSquareWeb';
+  .signGlobalFrame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
   .mobileHeader {
     display: none;
   }
@@ -386,7 +389,7 @@ const SignupGlobal = styled.div`
     color: #6e6eff;
   }
   #logo {
-    resize: both;
+    height: auto;
     width: 40px;
   }
   #loadingImage {
@@ -395,25 +398,31 @@ const SignupGlobal = styled.div`
   }
   @media ${({ theme }) => theme.device.mobileL} {
     background-image: none;
-    min-height: 90vh;
+    .signGlobalFrame {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 0;
+      margin-top: 50px;
+    }
     .mobileHeader {
       display: flex;
       justify-content: center;
       text-align: center;
+      margin-bottom: 50px;
     }
     .logoText {
       font-size: 30px;
       color: #3c3c3c;
     }
     #header {
-      margin-top: 30px;
+      display: none;
+      cursor: none;
     }
     .headerFont {
       font-size: 20px;
       color: rgb(0, 0, 0);
-    }
-    .signup {
-      margin-top: 50px;
     }
   }
 `;
