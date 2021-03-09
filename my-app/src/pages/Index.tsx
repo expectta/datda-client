@@ -18,6 +18,8 @@ import Bus from './Bus';
 import SignupCommon from './SignupCommon';
 import SignupInstitution from './SignupInstitution';
 import ApproveChildren from './ApproveChildren';
+import GuestWaiting from './GuestWaiting';
+import GuestApproving from './GuestApproving';
 export {
   ApproveChildren,
   Bus,
@@ -39,4 +41,6 @@ export {
   CreateClass,
   SignupCommon,
   SignupInstitution,
+  GuestWaiting,
+  GuestApproving,
 };

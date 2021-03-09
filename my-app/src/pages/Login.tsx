@@ -39,9 +39,17 @@ function Login({ hadleSetMainData }: propType) {
       //!await로 동기적 실행 필요함.
       const mainData = await requestLogin(email, password);
       console.log(mainData, 'main Data는??');
-      if (mainData !== undefined) {
-        hadleSetMainData(mainData);
-        history.push('/main');
+      if (typeof mainData !== 'boolean') {
+        if (mainData !== undefined) {
+          hadleSetMainData(mainData);
+          history.push('/main');
+        } else {
+          setErrormessage('잘못된 요청입니다');
+        }
+      } else if (mainData === true) {
+        history.push('/waiting');
+      } else if (mainData === false) {
+        history.push('/waiting/approving');
       }
       setErrormessage('');
     }

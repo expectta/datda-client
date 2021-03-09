@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  requestApproveTeacher,
+  requestGetClassList,
+  requestChangeTeacherClass,
+} from '../common/axios';
 import styled from 'styled-components';
 import { ClassManage, TeacherManage, StudentManage } from '../components/Index';
+import axios from 'axios';
 interface Props {
   setModalMessage: any;
   setModalVisible: any;
@@ -10,18 +16,69 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
   const [isTeacher, setIsTeacher] = useState<boolean>(true);
   const [isStudent, setIsStudent] = useState<boolean>(false);
 
-  const [classInfo, setClassInfo] = useState([
-    { className: '새싹반', classId: '1', userName: 'a' },
-    { className: '별빛반', classId: '2', userName: 'a' },
-  ]);
+  const [message, setMessage] = useState<number>();
 
-  const [teachers, setTeachers] = useState([
-    { userName: '이인수', userId: '1', created_at: '2021-03-01' },
-  ]);
+  const [classInfo, setClassInfo] = useState([]);
+
+  const [teachers, setTeachers] = useState({
+    approved: [],
+    changedTeacherId: '',
+    unapproved: [],
+  });
 
   const [students, setStudents] = useState([
     { userName: 'a', userId: '1', className: 'a', classId: '1' },
   ]);
+
+  const initGetClass = async () => {
+    const classList = await requestGetClassList();
+    if (classList) {
+      setClassInfo(classList);
+    }
+  };
+
+  const initApproveTeacher = async () => {
+    const teacherList = await requestApproveTeacher();
+    if (teacherList) {
+      setTeachers({
+        approved: teacherList.approved,
+        changedTeacherId: teacherList.changedChildId,
+        unapproved: teacherList.unapproved,
+      });
+    }
+  };
+
+  const approveButton = async (teacherId: number) => {
+    const results = await requestApproveTeacher(teacherId);
+    if (results) {
+      setTeachers(results);
+    }
+  };
+
+  const changeClassButton = async (teacherId: number, classId: number) => {
+    const request = await requestChangeTeacherClass(teacherId, classId);
+    if (request) {
+      setMessage(classId);
+    }
+  };
+
+  useEffect(() => {
+    console.log(message);
+    initApproveTeacher();
+  }, [message]);
+
+  useEffect(() => {
+    initGetClass();
+    initApproveTeacher();
+  }, []);
+
+  useEffect(() => {
+    console.log(classInfo);
+  }, [classInfo]);
+
+  useEffect(() => {
+    console.log(teachers);
+  }, [teachers]);
 
   const toggleClass = () => {
     setIsClass(true);
@@ -61,6 +118,8 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
         classInfo={classInfo}
         setModalMessage={setModalMessage}
         setModalVisible={setModalVisible}
+        approveButton={approveButton}
+        changeClassButton={changeClassButton}
       />
       {/* <StudentManage
         classInfo={classInfo}

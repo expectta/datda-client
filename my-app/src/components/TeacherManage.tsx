@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { requestApproveTeacher, requestGetClassList } from '../common/axios';
+
 interface Props {
   classInfo: any;
   isTeacher: boolean;
-  teachers: Array<Record<string, unknown>>;
+  teachers: any;
   setModalMessage: any;
   setModalVisible: any;
+  approveButton: (teacherId: number) => void;
+  changeClassButton: (teacherId: any, classId: any) => void;
 }
 function TeacherManage({
   isTeacher,
@@ -13,14 +17,12 @@ function TeacherManage({
   classInfo,
   setModalMessage,
   setModalVisible,
+  approveButton,
+  changeClassButton,
 }: Props) {
-  const [waitingList, setWaitingList] = useState([
-    { userName: '이인수', created_at: '2010-10-10', Id: '1' },
-  ]);
+  const [checkedClass, setCheckedClass] = useState({ classId: '' });
 
-  const [checkedClass, setCheckedClass] = useState({ className: '' });
-
-  const [checkedTeacher, setCheckedTeacher] = useState({ userName: '' });
+  const [checkedTeacher, setCheckedTeacher] = useState({ teacherId: '' });
 
   const onModal = (value: any) => {
     setModalVisible(true);
@@ -29,18 +31,15 @@ function TeacherManage({
   //radio class 버튼;
   const onCheckedClass = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setCheckedClass({ ...checkedClass, className: value });
+    setCheckedClass({ ...checkedClass, classId: value });
   };
 
   const onCheckedTeacher = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setCheckedTeacher({ ...checkedTeacher, userName: value });
+    setCheckedTeacher({ ...checkedTeacher, teacherId: value });
   };
 
   //곧 승인 요청을 내려줄 함수;
-  const checkValue = (value: any) => {
-    console.log(value);
-  };
 
   return isTeacher ? (
     <div id="teacher">
@@ -51,14 +50,14 @@ function TeacherManage({
           <span>시간</span>
         </div>
         <div id="teacherWaitionList">
-          {waitingList.map((teacher: any) => (
+          {teachers.unapproved.map((teacher: any) => (
             <div>
-              <span>{teacher.userName}</span>
-              <span>{teacher.created_at}</span>
+              <span>{teacher.teacherName}</span>
+              <span>{teacher.createdAt}</span>
               <span className="teacherButtonArea1">
                 <button
                   onClick={() => {
-                    checkValue(teacher);
+                    approveButton(teacher.teacherId);
                   }}
                 >
                   수락
@@ -79,7 +78,7 @@ function TeacherManage({
           <span>반</span>
         </div>
         <div id="teacherManageList">
-          {teachers.map((teacher: any) => (
+          {teachers.approved.map((teacher: any) => (
             <div className="teacherList">
               <input
                 type="radio"
@@ -87,10 +86,21 @@ function TeacherManage({
                   onCheckedTeacher(e);
                 }}
                 name="teacherList"
-                value={teacher.userName}
+                value={teacher.teacherId}
               ></input>
-              <span className="indiTeacher">{teacher.userName}</span>
-              <span>햇님반</span>
+              <span className="indiTeacher">{teacher.teacherName}</span>
+              <span>
+                {!teacher.classs
+                  ? '아직 반 없음'
+                  : teacher.classs.teacherClassName}
+              </span>
+              <button
+                onClick={() => {
+                  approveButton(teacher.teacherId);
+                }}
+              >
+                너해고
+              </button>
             </div>
           ))}
           <div id="teacherButtonArea2">
@@ -103,22 +113,32 @@ function TeacherManage({
                         <input
                           type="radio"
                           name="classInfo"
-                          value={classs.className}
+                          value={classs.classId}
                           onChange={(e) => {
                             onCheckedClass(e);
+                            console.log(checkedClass.classId);
                           }}
                         ></input>
                         <span>{classs.className}</span>
                       </div>
                     ))}
-                    <button>보내기</button>
                   </div>,
                 );
               }}
             >
               반 변경
             </button>
-            <button>퇴직</button>
+            <button
+              onClick={() => {
+                console.log(checkedTeacher, checkedClass);
+                changeClassButton(
+                  checkedTeacher.teacherId,
+                  checkedClass.classId,
+                );
+              }}
+            >
+              보내기
+            </button>
           </div>
         </div>
       </div>
