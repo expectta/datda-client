@@ -11,7 +11,7 @@ axios.defaults.withCredentials = true;
 //!카카오톡 REST api key 리액트는 환경변수(.env)에서 'REACT_APP_'을 붙여줘야 함
 const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
 //!카카오 로그인&회원가입 관련 url
-const redirectUri = 'http://localhost:3000/login'; //! 후에 datda 주소로 변경
+const redirectUri = 'https://datda.net/login'; //! 후에 datda 주소로 변경
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
 interface propType {
@@ -81,9 +81,8 @@ function Login({ hadleSetMainData }: propType) {
     <LoginGlobal>
       <Link to="/">
         <img id="logo" src="../images/logo.png" />
-        <Header>Datda</Header>
+        <Header>datda</Header>
       </Link>
-
       <InputBox>
         <input
           className="inputBox"
@@ -130,7 +129,7 @@ const LoginGlobal = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  min-height: 100vh;
 
   #logo {
     resize: both;
@@ -146,6 +145,12 @@ const LoginGlobal = styled.div`
     width: 50%;
     height: auto;
   }
+
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
 `;
 
 const InputBox = styled.div`
@@ -154,6 +159,11 @@ const InputBox = styled.div`
     border-bottom: solid 1px;
   }
   margin: 5px 0px 5px 0px;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
 `;
 
 const Header = styled.span`
