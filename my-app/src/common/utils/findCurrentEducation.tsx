@@ -1,3 +1,5 @@
+import { time } from 'console';
+
 //시간표의 시간과 현재 시간을 비교해서 시간표 progess bar의 %를 반환
 export const findStepEducation = (currentTime: string, totalTimetable: any) => {
   console.log(totalTimetable, '타임테이블');
@@ -8,6 +10,8 @@ export const findStepEducation = (currentTime: string, totalTimetable: any) => {
     .replace(/\]/g, '')
     .replace(/\{/g, '')
     .replace(/\}/g, '')
+    .replace(/\"/g, '')
+    .replace(/\'/g, '')
     .replace(/\},{/g, '}|{')
     .replace(/step:/g, '')
     .replace(/time:/g, '')
@@ -23,7 +27,6 @@ export const findStepEducation = (currentTime: string, totalTimetable: any) => {
       ),
     );
   }
-  console.log(newArr);
   const calculatedCurrentTime = Number(currentTime);
   for (const element of newArr) {
     const fristTime = element.time.split('~')[0];
@@ -49,3 +52,30 @@ export const findStepEducation = (currentTime: string, totalTimetable: any) => {
   }
   return;
 };
+// 서버로 부터 받은 문자열의 시간표를 배열로 변경
+export function ChangeToArray(timetable: string) {
+  console.log(timetable, '타임테이블 ');
+  const data = timetable
+    .replace(/\s/g, '')
+    .replace(/\[/g, '')
+    .replace(/\]/g, '')
+    .replace(/\{/g, '')
+    .replace(/\"/g, '')
+    .replace(/\'/g, '')
+    .replace(/\}/g, '')
+    .replace(/\},{/g, '}|{')
+    .replace(/step:/g, '')
+    .replace(/time:/g, '')
+    .replace(/contents:/g, '')
+    .split(',');
+  const arr = [];
+  for (let i = 0; i < data.length; i += 3) {
+    arr.push(
+      Object.assign(
+        {},
+        { step: data[i], time: data[i + 1], contents: data[i + 2] },
+      ),
+    );
+  }
+  return arr;
+}
