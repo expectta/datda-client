@@ -21,7 +21,7 @@ function SignupSearchInsti({ searchInsti, handleSearchInsti }: Props) {
 
   return searchInsti ? (
     <div>
-      <h1>교습소 정보</h1>
+      <h1>기관 정보</h1>
       <div>
         <input type="text"></input>
         <button>검색</button>

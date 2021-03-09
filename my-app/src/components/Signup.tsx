@@ -20,50 +20,55 @@ function Signup({
   return signup ? (
     <Setemail>
       <div className="signupCom">이메일과 비밀번호를 설정해주세요</div>
-      <div className="signup">
-        <div className="signupFrame">
-          <input
-            className="signupEl"
-            type="text"
-            placeholder="이메일 설정"
-            onChange={(e) => onChange('email', e)}
-          ></input>
-          <Button
-            className="check"
-            onClick={() => {
-              handleIsEmail(inputs.email);
-            }}
-          >
-            중복 확인
-          </Button>
-        </div>
-
-        <div className="signupFrame">
-          <input
-            className="signupEl"
-            type="password"
-            placeholder="비밀번호 설정"
-            onChange={(e) => onChange('password', e)}
-          ></input>
-        </div>
-        <div className="signupFrame">
-          <input
-            className="signupEl"
-            type="password"
-            placeholder="비밀번호 확인"
-            onChange={(e) => onChange('passwordCheck', e)}
-          ></input>
-        </div>
-        <div className="error">{errormessage}</div>
-        <div className="nextFrame">
-          <Button
-            className="next"
-            onClick={() => {
-              handleSignup(inputs.email, inputs.password, inputs.passwordCheck);
-            }}
-          >
-            다음
-          </Button>
+      <div className="frameCenter">
+        <div className="signup">
+          <div className="signupFrame">
+            <input
+              className="signupEl"
+              type="text"
+              placeholder="이메일 설정"
+              onChange={(e) => onChange('email', e)}
+            ></input>
+            <Button
+              className="check"
+              onClick={() => {
+                handleIsEmail(inputs.email);
+              }}
+            >
+              중복 확인
+            </Button>
+          </div>
+          <div className="signupFrame">
+            <input
+              className="signupEl"
+              type="password"
+              placeholder="비밀번호 설정"
+              onChange={(e) => onChange('password', e)}
+            ></input>
+          </div>
+          <div className="signupFrame">
+            <input
+              className="signupEl"
+              type="password"
+              placeholder="비밀번호 확인"
+              onChange={(e) => onChange('passwordCheck', e)}
+            ></input>
+          </div>
+          <div className="error">{errormessage}</div>
+          <div className="nextFrame">
+            <Button
+              className="next"
+              onClick={() => {
+                handleSignup(
+                  inputs.email,
+                  inputs.password,
+                  inputs.passwordCheck,
+                );
+              }}
+            >
+              다음
+            </Button>
+          </div>
         </div>
       </div>
     </Setemail>
@@ -87,7 +92,7 @@ const Setemail = styled.label`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 380px;
+    width: 400px;
   }
   .signupEl {
     font-size: 20px;
@@ -124,6 +129,10 @@ const Setemail = styled.label`
   @media ${({ theme }) => theme.device.mobileL} {
     .signupFrame {
       width: 200px;
+    }
+    .frameCenter {
+      display: flex;
+      justify-content: center;
     }
     .signupEl {
       width: 200px;
