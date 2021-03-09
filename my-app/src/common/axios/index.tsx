@@ -154,6 +154,65 @@ export function requestApproveChild(childId?: number | null) {
   return childrenList;
 }
 
+export function requestApproveTeacher(teacherId?: number | null) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const id = teacherId || null;
+  const teacherList = axios
+    .post('https://datda.link/institution/approve', { teacherId: id })
+    .then((res) => {
+      if (res.status === 200) {
+        console.log(res.data, '선생님');
+        return res.data;
+      }
+      console.log(res.data, '승인요쳥');
+      alert('선생님의 정보가 없습니다');
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return teacherList;
+}
+
+export function requestGetClassList() {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const classList = axios
+    .get('https://datda.link/institution/classList')
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        alert('데이터가 없습니다');
+      }
+    })
+    .catch((err) => console.log(err));
+  return classList;
+}
+
+export function requestChangeTeacherClass(teacherId: number, classId: number) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const changeClass = axios
+    .post('https://datda.link/institution/changeteacherclass', {
+      teacherId: teacherId,
+      classId: classId,
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data.message;
+      }
+      alert('반을 변경할 수 업습니다');
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return changeClass;
+}
+
 export const getProfile = (): void => {
   axios.get('https://datda.link/userinfo').then((res) => {
     if (res.status === 200) {
