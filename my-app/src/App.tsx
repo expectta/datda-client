@@ -14,6 +14,8 @@ import {
   Signup,
   UserInfo,
   SignupCommon,
+  GuestWaiting,
+  GuestApproving,
 } from './pages/Index';
 import { Modal } from './components/Index';
 import styled, {
@@ -22,7 +24,6 @@ import styled, {
   createGlobalStyle,
 } from 'styled-components';
 import theme from './assets/theme';
-import { requestMainData } from '../src/common/axios';
 
 function App() {
   const history = useHistory();
@@ -108,8 +109,9 @@ function App() {
               component={UserInfo}
               userPermission={userInfo.permission}
             />
+            <Route exact path="/waiting" component={GuestWaiting} />
+            <Route path="/waiting/approving" component={GuestApproving} />
           </>
-          <Route path="/userinfo" component={UserInfo} />
         </Switch>
       </ThemeProvider>
       <Modal visible={modalVisible} closable maskClosable onClose={closeModal}>

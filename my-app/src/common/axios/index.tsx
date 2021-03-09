@@ -39,8 +39,9 @@ export async function requestLogin(email: string, password: string) {
           }),
         );
         return requestMainData(accessToken);
+      } else {
+        alert('회원정보가 없습니다');
       }
-      alert('회원정보가 없습니다');
     })
     .catch((error) => {
       alert(error);
@@ -118,8 +119,13 @@ export function requestMainData(token?: string) {
     .then((res) => {
       if (res.status === 200) {
         return res.data;
+      } else if (res.status === 201) {
+        return true;
+      } else if (res.status === 202) {
+        return false;
+      } else {
+        return undefined;
       }
-      return false;
     })
     .catch((err) => {
       alert(err);
@@ -152,6 +158,130 @@ export function requestApproveChild(childId?: number | null) {
       alert(error);
     });
   return childrenList;
+}
+
+export function requestApproveTeacher(teacherId?: number | null) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const id = teacherId || null;
+  const teacherList = axios
+    .post('https://datda.link/institution/approve', { teacherId: id })
+    .then((res) => {
+      if (res.status === 200) {
+        console.log(res.data, '선생님');
+        return res.data;
+      }
+      console.log(res.data, '승인요쳥');
+      alert('선생님의 정보가 없습니다');
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return teacherList;
+}
+
+export function requestGetClassList() {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const classList = axios
+    .get('https://datda.link/institution/classList')
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        alert('데이터가 없습니다');
+      }
+    })
+    .catch((err) => console.log(err));
+  return classList;
+}
+
+export function requestChangeTeacherClass(teacherId: number, classId: number) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const changeClass = axios
+    .post('https://datda.link/institution/changeteacherclass', {
+      teacherId: teacherId,
+      classId: classId,
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data.message;
+      }
+      alert('반을 변경할 수 업습니다');
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return changeClass;
+}
+
+export function requestSearchInsti(value: string) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+
+  const instiData = axios
+    .post('https://datda.link/guest/searchinstitution', { inputValue: value })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+      return false;
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return instiData;
+}
+
+export function requestGuestTeacherRegister(institutionId: string) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const result = axios
+    .post('https://datda.link/guest/teacherregister', {
+      institutionId: Number(institutionId),
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return result;
+}
+
+export function requestGuestParentRegister(
+  childName: string,
+  institutionId: string,
+) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const result = axios
+    .post('https://datda.link/guest/parentregister', {
+      childName: childName,
+      institutionId: Number(institutionId),
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return result;
 }
 
 export const getProfile = (): void => {
