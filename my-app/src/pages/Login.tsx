@@ -73,7 +73,7 @@ function Login({ hadleSetMainData }: propType) {
             hadleSetMainData(mainData);
             setErrormessage('');
             setIsLoading(false);
-            history.push('/main');
+            history.push('/main'); // 바로 너 때문이야.
           }
           setIsLoading(false);
           alert('아직 승인대기 중입니다.');
@@ -87,40 +87,52 @@ function Login({ hadleSetMainData }: propType) {
 
   return (
     <LoginGlobal>
-      <Link to="/">
-        <img id="logo" src="../images/logo.png" />
-        <Header>datda</Header>
-      </Link>
-      <InputBox>
-        <input
-          className="inputBox"
-          type="text"
-          placeholder="이메일"
-          onChange={(e) => onChange('email', e)}
-        ></input>
-      </InputBox>
-      <InputBox>
-        <input
-          className="inputBox"
-          type="password"
-          placeholder="비밀번호"
-          onChange={(e) => onChange('password', e)}
-        ></input>
-      </InputBox>
-      <div>{errormessage}</div>
-      <Button onClick={() => handleLogin(inputs.email, inputs.password)}>
-        로그인
-      </Button>
-      <img
-        id="kakaoImg"
-        src="../images/kakaoLogin.png"
-        onClick={handleKakao}
-      ></img>
-      <Link to="/signup">
-        <div>
-          <Button>회원가입</Button>
+      <div className="LoginGlobalFrame">
+        <div className="headerFrame">
+          <Link to="/">
+            <img id="logo" src="../images/logo.png" />
+            <Header>datda</Header>
+          </Link>
         </div>
-      </Link>
+        <InputBox>
+          <input
+            className="inputBox"
+            type="text"
+            placeholder="이메일"
+            onChange={(e) => onChange('email', e)}
+          ></input>
+        </InputBox>
+        <InputBox>
+          <input
+            className="inputBox"
+            type="password"
+            placeholder="비밀번호"
+            onChange={(e) => onChange('password', e)}
+          ></input>
+        </InputBox>
+        <div className="error">{errormessage}</div>
+        <div className="buttonSession">
+          <div className="buttonEl">
+            <Button onClick={() => handleLogin(inputs.email, inputs.password)}>
+              로그인
+            </Button>
+          </div>
+          <div className="buttonEl">
+            <img
+              id="kakaoImg"
+              src="../images/kakaoLogin.png"
+              onClick={handleKakao}
+            ></img>
+          </div>
+          <div className="buttonEl">
+            <Link to="/signup">
+              <div>
+                <Button>회원가입</Button>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </div>
       {!isLoading ? (
         <div></div>
       ) : (
@@ -133,14 +145,22 @@ function Login({ hadleSetMainData }: propType) {
 export default Login;
 
 const LoginGlobal = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
+  .LoginGlobalFrame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .headerFrame {
+    margin: 150px 0 60px 0;
+  }
   #logo {
-    resize: both;
+    height: auto;
     width: 40px;
   }
 
@@ -148,10 +168,13 @@ const LoginGlobal = styled.div`
     width: 50%;
     height: auto;
   }
-
+  .error {
+    color: red;
+  }
   #kakaoImg {
-    width: 50%;
-    height: auto;
+    width: auto;
+    height: 30px;
+    margin-bottom: 30px;
   }
 
   @font-face {
@@ -159,12 +182,31 @@ const LoginGlobal = styled.div`
     src: url('../fonts/NanumSquareOTFLight.otf');
   }
   font-family: 'NanumSquareWeb';
+
+  .buttonSession {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .buttonEl {
+    display: flex;
+    justify-content: center;
+  }
+  @media ${({ theme }) => theme.device.mobileL} {
+    .headerFrame {
+      margin: 100px 0 60px 0;
+    }
+  }
 `;
 
 const InputBox = styled.div`
   .inputBox {
     border: solid 0px;
     border-bottom: solid 1px;
+    width: 300px;
+    margin-bottom: 30px;
   }
   margin: 5px 0px 5px 0px;
   @font-face {
@@ -172,6 +214,11 @@ const InputBox = styled.div`
     src: url('../fonts/NanumSquareOTFLight.otf');
   }
   font-family: 'NanumSquareWeb';
+  @media ${({ theme }) => theme.device.mobileL} {
+    .inputBox {
+      width: 216px;
+    }
+  }
 `;
 
 const Header = styled.span`
@@ -181,4 +228,5 @@ const Header = styled.span`
 const Button = styled.button`
   ${({ theme }) => theme.common.defaultButton}
   margin : 2vh 0 3vh 0;
+  width: 216px;
 `;
