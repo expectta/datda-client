@@ -80,12 +80,12 @@ function Login({ hadleSetMainData }: propType) {
   return (
     <LoginGlobal>
       <div className="LoginGlobalFrame">
-        <div className="headerFrame">
-          <Link to="/">
+        <Link to="/">
+          <div className="headerFrame">
             <img id="logo" src="../images/logo.png" />
-            <Header>datda</Header>
-          </Link>
-        </div>
+            <div className="header">datda</div>
+          </div>
+        </Link>
         <InputBox>
           <input
             className="inputBox"
@@ -149,15 +149,26 @@ const LoginGlobal = styled.div`
     align-items: center;
   }
   .headerFrame {
+    display: flex;
+    justify-content: center;
     margin: 150px 0 60px 0;
   }
   #logo {
-    height: auto;
+    height: 40px;
     width: 40px;
   }
-
+  .header {
+    margin-bottom: 0px;
+    font-size: 30px;
+    font-weight: bold;
+    @font-face {
+      font-family: 'NanumSquareWeb';
+      src: url('../fonts/NanumSquareOTFLight.otf');
+    }
+    font-family: 'NanumSquareWeb';
+  }
   #loadingImage {
-    width: 50%;
+    width: 25%;
     height: auto;
   }
   .error {
@@ -213,10 +224,6 @@ const InputBox = styled.div`
   }
 `;
 
-const Header = styled.span`
-  margin-bottom: 0px;
-  font-size: 3rem;
-`;
 const Button = styled.button`
   ${({ theme }) => theme.common.defaultButton}
   margin : 2vh 0 3vh 0;

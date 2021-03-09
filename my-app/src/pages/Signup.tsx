@@ -389,8 +389,8 @@ const SignupGlobal = styled.div`
     color: #6e6eff;
   }
   #logo {
-    height: auto;
-    width: 40px;
+    height: 40px;
+    max-width: 40px;
   }
   #loadingImage {
     width: 25%;
@@ -405,6 +405,10 @@ const SignupGlobal = styled.div`
       align-items: center;
       min-height: 0;
       margin-top: 50px;
+    }
+    #logo {
+      height: 40px;
+      max-width: 40px;
     }
     .mobileHeader {
       display: flex;
