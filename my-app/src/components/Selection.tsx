@@ -9,17 +9,19 @@ interface Props {
 function Selection({ selection, handleSelection, handleKakao }: Props) {
   return selection ? (
     <SelectionWrap>
-      <div className="button">
-        <img
-          className="normal"
-          src="../images/normalSignup.png"
-          onClick={() => handleSelection()}
-        ></img>
-        <img
-          className="kakao"
-          src="../images/kakaoSignup.png"
-          onClick={() => handleKakao()}
-        ></img>
+      <div className="selectionFrame">
+        <div className="button">
+          <img
+            className="normal"
+            src="../images/normalSignup.png"
+            onClick={() => handleSelection()}
+          ></img>
+          <img
+            className="kakao"
+            src="../images/kakaoSignup.png"
+            onClick={() => handleKakao()}
+          ></img>
+        </div>
       </div>
     </SelectionWrap>
   ) : (
@@ -30,10 +32,11 @@ function Selection({ selection, handleSelection, handleKakao }: Props) {
 export default Selection;
 
 const SelectionWrap = styled.div`
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  .selectionFrame {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+  }
   .normal {
     cursor: pointer;
     height: 30px;
@@ -51,7 +54,12 @@ const SelectionWrap = styled.div`
   }
   @media ${({ theme }) => theme.device.mobileL} {
     .kakao {
-      margin-left: 0;
+      margin: 30px 0 0 0;
+    }
+    .button {
+      display: flex;
+      flex-direction: column;
+      margin-top: 90px;
     }
   }
 `;
