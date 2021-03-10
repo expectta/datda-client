@@ -39,8 +39,11 @@ axios.defaults.withCredentials = true;
 const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
 //!카카오 로그인&회원가입 관련 url
 const serverSignupUrl = 'https://datda.link/kakao/signup'; //! datda 카카오회원가입 주소
-// const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 서버 카카오회원가입 주소
 const redirectUri = 'https://datda.net/signup'; //! 후에 datda 주소로 변경
+//!테스트용 서버 url
+// const serverSignupUrl = 'http://localhost:5000/kakao/signup'; //! 서버 카카오회원가입 주소
+// const redirectUri = 'http://localhost:3000/signup'; //! 후에 datda 주소로 변경
+
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
 function Signin({ setModalMessage, setModalVisible }: Props) {
@@ -109,7 +112,6 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       }
       setIsKakao(true);
     } else if (userEmail) {
-      setIsLoading(false);
       setSelection(false);
       setInputs({ ...inputs, email: userEmail });
       history.push('/signup/common');
@@ -270,8 +272,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       <div className="signGlobalFrame">
         <Link to="/">
           <div className="mobileHeader">
-            <img id="logo" src="../images/logo.png" />
-            <div className="logoText">datda</div>
+            <img id="logo" src="../images/datda_symbol_text_main.png" />
           </div>
           <div id="header">
             <span className="headerFont">
@@ -350,7 +351,9 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       {!isLoading ? (
         <div></div>
       ) : (
-        <img id="loadingImage" src="../images/loading.gif"></img>
+        <div className="loadingFrame">
+          <img id="loadingImage" src="../images/loading.gif"></img>
+        </div>
       )}
     </SignupGlobal>
   );
@@ -390,11 +393,15 @@ const SignupGlobal = styled.div`
   }
   #logo {
     height: 40px;
-    max-width: 40px;
+    width: auto;
   }
   #loadingImage {
-    width: 25%;
+    width: 100px;
     height: auto;
+  }
+  .loadingFrame {
+    display: flex;
+    justify-content: center;
   }
   @media ${({ theme }) => theme.device.mobileL} {
     background-image: none;
@@ -408,7 +415,7 @@ const SignupGlobal = styled.div`
     }
     #logo {
       height: 40px;
-      max-width: 40px;
+      width: auto;
     }
     .mobileHeader {
       display: flex;

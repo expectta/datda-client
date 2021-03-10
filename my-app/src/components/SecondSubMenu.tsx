@@ -7,13 +7,11 @@ export default function SecondSubMenu() {
     <Wrap>
       <Container>
         <Card>
-          <Text>
-            <b>닿다</b>에게 <br />
-            <b>궁금</b>한게 <br />
-            있어요
-          </Text>
+          <img className="bugReport" src="../images/bugReport.png"></img>
         </Card>
-        <Card></Card>
+        <Card>
+          <img className="eduCoding" src="../images/eduCoding.png"></img>
+        </Card>
       </Container>
     </Wrap>
   );
@@ -30,23 +28,31 @@ const SubMenuBar = styled(Link)`
 `;
 
 const Container = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  grid-gap: 6%;
-  grid-auto-rows: repeat(auto-fill);
 `;
 const Card = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 15px 15px 15px 15px;
-  box-shadow: 0px 0px 5px #c8c8c8;
-  background: black;
+  .bugReport {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px 15px 15px 15px;
+  }
+  .eduCoding {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px 15px 15px 15px;
+  }
 `;
 
 const Text = styled.div`
   position: absolute;
-  font-size: 2rem;
   padding: 10px;
   color: white;
+
+  // grid-gap: 6%;
+  // grid-auto-rows: repeat(auto-fill);
+  // border-radius: 15px 15px 15px 15px;
+  // box-shadow: 0px 0px 5px #c8c8c8;
 `;
