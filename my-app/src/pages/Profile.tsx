@@ -7,25 +7,47 @@ import {
   AddChildren,
 } from '../components/Index';
 
-function Profile() {
-  const [instiInfo, setInsti] = useState([
-    { institutionName: '원암유치원', institutionId: '1', institutionPhoto: '' },
-  ]);
+interface Props {
+  userInfo: {
+    permission: string;
+    isLogin: boolean;
+    mainData: any;
+    currentChild: number;
+  };
+}
 
-  const [children, setChildren] = useState<any>([
-    { name: '김철수' },
-    { name: '영희' },
-  ]);
+function Profile({ userInfo }: Props) {
+  const [instiInfo, setInsti] = useState([]);
 
+  const [instiSelect, setInstiSelect] = useState<string>('');
+
+  const [children, setChildren] = useState<string>('');
+
+  const [errorMessage, setErrorMessage] = useState<string>('');
   return (
     <Wrap>
       <Switch>
-        <Route exact path="/main/profile" component={ProfileList} />
+        <Route exact path="/main/profile">
+          <ProfileList userInfo={userInfo} />
+        </Route>
         <Route exact path="/main/profile/institution">
-          <SelectInstitution instiInfo={instiInfo} setInsti={setInsti} />
+          <SelectInstitution
+            instiInfo={instiInfo}
+            setInsti={setInsti}
+            instiSelect={instiSelect}
+            setInstiSelect={setInstiSelect}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </Route>
         <Route exact path="/main/profile/children">
-          <AddChildren children={children} setChildren={setChildren} />
+          <AddChildren
+            children={children}
+            setChildren={setChildren}
+            instiSelect={instiSelect}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+          />
         </Route>
       </Switch>
     </Wrap>

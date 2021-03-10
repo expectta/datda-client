@@ -236,6 +236,50 @@ export function requestSearchInsti(value: string) {
   return instiData;
 }
 
+export function requestGetProfile(childId?: string | null) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const profile = axios
+    .post('https://datda.link/profile', { childId: Number(childId) })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+      return false;
+    })
+    .catch((err) => {
+      alert(err);
+    });
+
+  return profile;
+}
+
+export function requestProfileParentRegister(
+  institutionId: string,
+  childName: string,
+) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+
+  const results = axios
+    .post('https://datda.link/profile/parentregister', {
+      institutionId: Number(institutionId),
+      childName: childName,
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return true;
+      }
+      return false;
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return results;
+}
+
 export function requestGuestTeacherRegister(institutionId: string) {
   axios.defaults.headers.common['authorization'] = JSON.parse(
     localStorage.getItem('loginInfo')!,
