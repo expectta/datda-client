@@ -20,7 +20,9 @@ import SignupInstitution from './SignupInstitution';
 import ApproveChildren from './ApproveChildren';
 import GuestWaiting from './GuestWaiting';
 import GuestApproving from './GuestApproving';
+import Program from './Program';
 export {
+  Program,
   ApproveChildren,
   Bus,
   Management,
