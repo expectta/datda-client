@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import {
   ApproveChildren,
@@ -16,7 +16,6 @@ import {
   CreateClass,
   Management,
   Bus,
-  Program,
 } from './Index';
 import {
   Nav,
@@ -50,7 +49,6 @@ export default function Main({
   setModalVisible,
   hadleSetMainData,
   handleChangeChild,
-  handleTimetableChange,
   userInfo,
   handleLogout,
 }: Props) {
@@ -155,7 +153,6 @@ export default function Main({
           <Header id="header">
             <Nav handleLogout={handleLogout}></Nav>
           </Header>
-
           <Aside id="aside">
             <TopSubNav id="top-submenu"></TopSubNav>
             <FristPart id="avatar">
@@ -177,10 +174,15 @@ export default function Main({
               ) : null}
             </SecondPart>
             <ThirdPart id="submenu">
-              <SubMenu permission={userInfo.permission}></SubMenu>
+              <SubMenu
+                permission={userInfo.permission}
+                handleLogout={handleLogout}
+              ></SubMenu>
             </ThirdPart>
             <FourthPart>
-              <SecondSubMenu></SecondSubMenu>
+              <div className="forDesk">
+                <SecondSubMenu></SecondSubMenu>
+              </div>
             </FourthPart>
           </Aside>
           <Section id="content">
@@ -221,15 +223,7 @@ export default function Main({
                 </Route>
                 <Route path={`/main/education`} component={EducationList} />
                 <Route exact path={`/main/report`} component={Report} />
-                <Route
-                  path={`/main/timetable`}
-                  render={() => (
-                    <TimetableList
-                      userInfo={userInfo}
-                      handleTimetableChange={handleTimetableChange}
-                    />
-                  )}
-                />
+                <Route path={'/main/timetable'} component={TimetableList} />
                 <Route path={'/main/education'} component={EducationList} />
                 <Route path={'/main/report'} component={Report} />
                 <Route
@@ -248,18 +242,33 @@ export default function Main({
                   render={() => <Management userInfo={userInfo} />}
                 />
                 <Route path={'/main/bus'} component={Bus} />
-                <Route path={'/main/program'} component={Program} />
               </Switch>
             </ContentCard>
           </Section>
+          <FourthPart>
+            <div className="forMobile">
+              <SecondSubMenu></SecondSubMenu>
+            </div>
+          </FourthPart>
           <Footer>
-            <FooterContents></FooterContents>
+            <div className="mobileFooter">
+              <FooterContents></FooterContents>
+            </div>
           </Footer>
+          <div className="bottomNav">
+            <ThirdPart id="bottomSub">
+              <SubMenu
+                permission={userInfo.permission}
+                handleLogout={handleLogout}
+              ></SubMenu>
+            </ThirdPart>
+          </div>
         </>
       ) : (
-        <Loading id="loading" src="../images/loading.gif" />
+        <Loding>
+          <img id="loading" src="../images/loading.gif" />
+        </Loding>
       )}
-      {/* <Loading id="loading" src="../images/loading.gif" /> */}
     </Wrap>
   );
 }
@@ -267,21 +276,13 @@ export default function Main({
 const Wrap = styled.div`
   width: 900px;
   margin: 0 auto;
+  .bottomNav {
+    display: none;
+  }
   @media ${({ theme }) => theme.device.tablet} {
     width: 100%;
   }
   @media ${({ theme }) => theme.device.mobileL} {
-    #header {
-      position: fixed;
-      bottom: 0px;
-      background: #6f6eff;
-      width: 100%;
-      z-index: 10;
-      margin-bottom: 0px;
-      div {
-        display: none;
-      }
-    }
     #top-submenu {
       width: 100%;
     }
@@ -291,6 +292,9 @@ const Wrap = styled.div`
     }
     #content {
       width: 100%;
+    }
+    #submenu {
+      display: none;
     }
     #avatar {
       width: 90%;
@@ -307,10 +311,26 @@ const Wrap = styled.div`
         gap: 1%;
       }
     }
-    #submenu {
+    .bottomNav {
+      position: fixed;
+      bottom: 0px;
+      background: #6f6eff;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+    }
+    #header {
       display: none;
     }
-  } ;
+    .back {
+      height: 30px;
+      width: auto;
+    }
+    .logout {
+      flex: 1 auto;
+    }
+  }
 `;
 const Header = styled.div`
   width: 100%;
@@ -326,7 +346,7 @@ const Aside = styled.div`
 `;
 const Section = styled.div`
   width: 75%;
-  height: 900px;
+  height: 1000px;
   float: left;
   padding: 1%;
 `;
@@ -336,6 +356,11 @@ const Footer = styled.div`
   clear: both;
   padding: 5%;
   margin-bottom: 50px;
+  @media ${({ theme }) => theme.device.mobileL} {
+    .mobileFooter {
+      display: none;
+    }
+  }
 `;
 const TopSubNav = styled.div`
   width: 100%;
@@ -361,11 +386,24 @@ const ThirdPart = styled.div`
   width: 100%;
   padding: 2%;
   padding: 10px 0px 10px 0px;
+  @media ${({ theme }) => theme.device.mobileL} {
+    flex: 1 auto;
+  }
 `;
 const FourthPart = styled.div`
   width: 100%;
   height: 31%;
   padding: 2%;
+  @media only screen and (min-width: 700px) {
+    .forMobile {
+      display: none;
+    }
+  }
+  @media ${({ theme }) => theme.device.mobileL} {
+    .forDesk {
+      display: none;
+    }
+  }
 `;
 const ContentCard = styled.div`
   margin-bottom: 3%;
@@ -373,10 +411,25 @@ const ContentCard = styled.div`
   height: 100%;
   ${({ theme }) => theme.common.contentCardDiv}
 `;
-const Loading = styled.img`
-  width: 150px;
-  height: auto;
-  position: absolute;
-  top: 42vh;
-  left: 42vw;
+const Loding = styled.div`
+  margin-top: 25%;
+  display: flex;
+  justify-content: center;
+  #loading {
+    text-align: center;
+    width: 25%;
+    height: auto;
+  }
+`;
+const Back = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 auto;
+`;
+const Home = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 auto;
 `;

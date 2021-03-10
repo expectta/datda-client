@@ -6,15 +6,9 @@ export default function SecondSubMenu() {
   return (
     <Wrap>
       <Container>
-        {/* <Card> */}
-        {/* <Text>
-            <b>닿다</b>에게 <br />
-            <b>궁금</b>한게 <br />
-            있어요
-          </Text> */}
-        {/* </Card> */}
         <ImageWrapper to="/main/program">
-          <Image src="../images/program.png" alt="프로그램"></Image>
+          <Image className="bugReport" src="../images/bugReport.png"></Image>
+          <Image className="eduCoding" src="../images/eduCoding.png"></Image>
         </ImageWrapper>
       </Container>
     </Wrap>
@@ -23,6 +17,10 @@ export default function SecondSubMenu() {
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
+  @media ${({ theme }) => theme.device.mobileL} {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const SubMenuBar = styled(Link)`
@@ -32,9 +30,12 @@ const SubMenuBar = styled(Link)`
 `;
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
 `;
+
 const Card = styled.div`
   width: 100%;
   border-radius: 15px 15px 15px 15px;
@@ -44,14 +45,35 @@ const Card = styled.div`
 
 const Text = styled.div`
   position: absolute;
-  font-size: 2rem;
   padding: 10px;
   color: white;
-`;
-const Image = styled.img`
-  width: 100%;
-  border-radius: 15px 15px 15px 15px;
-  box-shadow: 0px 0px 5px #c8c8c8;
+  // grid-gap: 6%;
+  // grid-auto-rows: repeat(auto-fill);
+  // border-radius: 15px 15px 15px 15px;
+  // box-shadow: 0px 0px 5px #c8c8c8;
 `;
 
-const ImageWrapper = styled(Link)``;
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 15px 15px 15px 15px;
+  .eduCoding {
+    width: 90%;
+    height: 90%;
+  }
+`;
+
+const ImageWrapper = styled(Link)`
+  @media ${({ theme }) => theme.device.mobileL} {
+    display: flex;
+    flex-direction: column;
+  }
+  .bugReport {
+    width: 100%;
+    height: auto;
+  }
+  .eduCoding {
+    width: 100%;
+    height: auto;
+  }
+`;
