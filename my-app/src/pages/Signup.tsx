@@ -165,7 +165,6 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
     email: string,
     password: string,
     passwordCheck: string,
-    isEmail: boolean,
   ) => {
     if (email === null) {
       setErrormessage('정보를 입력하서야 합니다');
