@@ -1,68 +1,68 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { requestProfileParentRegister } from '../common/axios';
+import { isNameCHeck } from '../common/utils/validation';
 
 interface Props {
-  children: any;
+  children: string;
   setChildren: any;
+  instiSelect: string;
+  errorMessage: string;
+  setErrorMessage: any;
 }
-function AddChildren({ children, setChildren }: Props) {
-  const [input, setInput] = useState({ name: '' });
+function AddChildren({
+  children,
+  setChildren,
+  instiSelect,
+  errorMessage,
+  setErrorMessage,
+}: Props) {
+  const history = useHistory();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setInput({ ...input, name: value });
-  };
-  //아이 추가
-  const addChild = (value: string) => {
-    setChildren([...children, { name: value }]);
-  };
-
-  //아이 삭제
-  const deleteChild = (value: string) => {
-    const filtered = children.filter((child: any) => {
-      return child.name !== value;
-    });
-    setChildren(filtered);
+    setChildren(value);
   };
 
   //axios 요청
+  const profileRegister = async (institutionId: string, childName: string) => {
+    if (childName.length === 0) {
+      setErrorMessage('이름을 입력해주세요');
+    } else if (!isNameCHeck) {
+      setErrorMessage('이름을 올바르게 입력하였는지 확인해주세요');
+    } else {
+      const results = await requestProfileParentRegister(
+        institutionId,
+        childName,
+      );
+      if (results) {
+        history.push('/main/profile');
+        setErrorMessage('');
+      } else {
+        setErrorMessage('올바른 요청을 보내지 못했습니다.');
+      }
+    }
+  };
 
   return (
     <Wrap>
       <ContentCard>
         <h1>아이를 추가하세요</h1>
         <div>
-          <div>현재 아이들</div>
-          {children.map((child: any) => (
-            <div>
-              <span>{child.name}</span>
-              <button
-                onClick={() => {
-                  deleteChild(child.name);
-                }}
-              >
-                x
-              </button>
-            </div>
-          ))}
-        </div>
-        <div>
           <span>이름</span>
           <input type="text" onChange={(e) => onChange(e)}></input>
-          <button
-            onClick={() => {
-              addChild(input.name);
-            }}
-          >
-            추가
-          </button>
         </div>
         <div>
-          <Link to="/main/profile">
-            <Button>완료</Button>
-          </Link>
+          <Button
+            onClick={() => {
+              profileRegister(instiSelect, children);
+            }}
+          >
+            완료
+          </Button>
         </div>
+        <div>{errorMessage}</div>
       </ContentCard>
     </Wrap>
   );
