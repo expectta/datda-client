@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 
@@ -15,13 +15,18 @@ interface propsType {
 }
 
 export default function ListInnerCard(props: propsType) {
+  const urlMatch = useRouteMatch();
+
   // 공지사항 리스트 상태
   const { content, title, category, createdAt } = props;
   // 투약의뢰서 리스트 상태
   const { userId, userName, classId, className } = props;
   return (
     <>
-      <NoticeCard>
+      <NoticeCard
+        id={content.contentId}
+        to={`${urlMatch.path}/post/${content.noticeId}`}
+      >
         <Point>* </Point>
         <Content> {title}</Content>
         <Writer>{content.writer}</Writer>
@@ -36,9 +41,10 @@ const Point = styled.div`
   width: 4%;
 `;
 
-const NoticeCard = styled.div`
+const NoticeCard = styled(Link)<any>`
   display: flex;
   padding: 1%;
+  cursor: pointer;
 `;
 
 const CreateAt = styled.div`

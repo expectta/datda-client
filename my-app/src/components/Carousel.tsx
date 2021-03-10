@@ -42,24 +42,16 @@ export default function Carousel({ userInfo }: propType) {
             ? userInfo.mainData[userInfo.currentChild].album.map(
                 (element: any, index: number) => {
                   return (
-                    <AlbumCard>
-                      <AlbumImg
-                        key={element.albumId}
-                        src={element.photo}
-                        alt="앨범사진"
-                      ></AlbumImg>
+                    <AlbumCard key={element.albumId}>
+                      <AlbumImg src={element.photo} alt="앨범사진"></AlbumImg>
                     </AlbumCard>
                   );
                 },
               )
             : userInfo.mainData.album.map((element: any, index: number) => {
                 return (
-                  <AlbumCard>
-                    <AlbumImg
-                      key={element.albumId}
-                      src={element.photo}
-                      alt="앨범사진"
-                    ></AlbumImg>
+                  <AlbumCard key={element.albumId}>
+                    <AlbumImg src={element.photo} alt="앨범사진"></AlbumImg>
                   </AlbumCard>
                 );
               })}

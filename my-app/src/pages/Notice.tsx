@@ -28,6 +28,7 @@ function Notice({ userInfo }: propsType) {
     event: [],
     notice: [],
     all: [],
+    currentList: [],
   });
   //notice 상태 업데이트
   const handleUpdateNotice = async () => {
@@ -43,6 +44,24 @@ function Notice({ userInfo }: propsType) {
         event: result.ElEvent,
         notice: result.ElNotice,
         all: result.noticeInfo,
+        currentList: result.noticeInfo,
+      });
+    }
+  };
+  // catgegory 선택에 따른 list 내용 변경
+  const handleChangeNotice = (category?: string) => {
+    console.log('현재 선택한 카테고리', category);
+
+    if (category === '공지사항') {
+      setNotice({
+        ...notice,
+        currentList: notice.notice,
+      });
+    }
+    if (category === '행사') {
+      setNotice({
+        ...notice,
+        currentList: notice.event,
       });
     }
   };
@@ -58,7 +77,8 @@ function Notice({ userInfo }: propsType) {
           <ListForm
             permission={userInfo.permission}
             title="공지사항"
-            contents={notice.notice}
+            contents={notice.currentList}
+            handleChangeNotice={handleChangeNotice}
             fristCategory="공지사항"
             secondCategory="행사"
           ></ListForm>
@@ -70,8 +90,8 @@ function Notice({ userInfo }: propsType) {
             type="notice"
           ></WriteForm>
         </Route>
-        <Route exact path={`${urlMatch.path}/post`}>
-          <ReadForm title="공지사항"></ReadForm>
+        <Route exact path={`${urlMatch.path}/post/:no`}>
+          <ReadForm contents={notice.currentList} title="공지사항"></ReadForm>
         </Route>
       </Switch>
     </Wrap>
