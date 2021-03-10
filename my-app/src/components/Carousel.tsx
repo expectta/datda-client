@@ -44,8 +44,8 @@ export default function Carousel({ userInfo }: propType) {
                   return (
                     <AlbumCard>
                       <AlbumImg
-                        key={element.imageId}
-                        src={element.image_url}
+                        key={element.albumId}
+                        src={element.photo}
                         alt="앨범사진"
                       ></AlbumImg>
                     </AlbumCard>
@@ -56,8 +56,8 @@ export default function Carousel({ userInfo }: propType) {
                 return (
                   <AlbumCard>
                     <AlbumImg
-                      key={element.imageId}
-                      src={element.image_url}
+                      key={element.albumId}
+                      src={element.photo}
                       alt="앨범사진"
                     ></AlbumImg>
                   </AlbumCard>
