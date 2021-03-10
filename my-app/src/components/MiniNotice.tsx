@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import { ListInnerCard } from './Index';
 import { notice } from '../assets/testdata';
 import { StringLiteral } from 'typescript';
+import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 interface propsType {
   userInfo: any;
 }
@@ -17,10 +18,9 @@ export default function MiniNotice({ userInfo }: propsType) {
               (element: any, index: number) => {
                 return (
                   <ListInnerCard
-                    noticeId={element.noticeId}
+                    content={element}
                     key={index}
                     title={element.title}
-                    createAt={element.create_at}
                   ></ListInnerCard>
                 );
               },
@@ -28,10 +28,9 @@ export default function MiniNotice({ userInfo }: propsType) {
           : userInfo.mainData.notice.map((element: any, index: number) => {
               return (
                 <ListInnerCard
-                  noticeId={element.noticeId}
+                  content={element}
                   key={index}
                   title={element.title}
-                  createAt={element.create_at}
                 ></ListInnerCard>
               );
             })}
