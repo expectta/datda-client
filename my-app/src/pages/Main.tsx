@@ -16,6 +16,7 @@ import {
   CreateClass,
   Management,
   Bus,
+  Program,
 } from './Index';
 import {
   Nav,
@@ -245,6 +246,7 @@ export default function Main({
                   render={() => <Management userInfo={userInfo} />}
                 />
                 <Route path={'/main/bus'} component={Bus} />
+                <Route path={'/main/program'} component={Program} />
               </Switch>
             </ContentCard>
           </Section>
