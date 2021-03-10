@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListInnerCard } from './Index';
 import { notice } from '../assets/testdata';
+import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 interface propsType {
   userInfo: any;
 }
@@ -16,10 +17,9 @@ export default function MiniIndiNotice({ userInfo }: propsType) {
               (element: any, index: number) => {
                 return (
                   <ListInnerCard
-                    noticeId={element.noticeId}
+                    content={element}
                     key={element.noticeId}
                     title={element.contents}
-                    createAt={element.create_at}
                   ></ListInnerCard>
                 );
               },
@@ -27,10 +27,9 @@ export default function MiniIndiNotice({ userInfo }: propsType) {
           : userInfo.mainData.indiNotice.map((element: any, index: number) => {
               return (
                 <ListInnerCard
-                  noticeId={element.noticeId}
+                  content={element}
                   key={element.noticeId}
                   title={element.contents}
-                  createAt={element.create_at}
                 ></ListInnerCard>
               );
             })}

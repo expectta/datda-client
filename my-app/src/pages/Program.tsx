@@ -2,7 +2,7 @@ import styled from 'styled-components';
 export default function Program() {
   return (
     <Wrap>
-      <Loading id="loading" src="../images/outOfService.png" />;
+      <Loading id="loading" src="../images/outOfService.png" />
     </Wrap>
   );
 }

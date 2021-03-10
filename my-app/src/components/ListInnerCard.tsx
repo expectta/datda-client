@@ -1,21 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 
 interface propsType {
   userId?: string;
   userName?: string;
-  createAt?: string;
+  createdAt?: string;
   classId?: string;
   className?: string;
-  noticeId?: string;
+  content?: any;
   title?: string;
   category?: string;
 }
 
 export default function ListInnerCard(props: propsType) {
   // 공지사항 리스트 상태
-  const { noticeId, title, category, createAt } = props;
+  const { content, title, category, createdAt } = props;
   // 투약의뢰서 리스트 상태
   const { userId, userName, classId, className } = props;
   return (
@@ -23,7 +24,10 @@ export default function ListInnerCard(props: propsType) {
       <NoticeCard>
         <Point>* </Point>
         <Content> {title}</Content>
-        <CreateAt>{createAt}</CreateAt>
+        <Writer>{content.writer}</Writer>
+        <CreateAt>
+          {content ? changeTimeStamp(content.createdAt) : '누구냐'}
+        </CreateAt>
       </NoticeCard>
     </>
   );
@@ -58,4 +62,12 @@ const GoToPostButton = styled(Link)`
   font-size: 3rem;
   color: #bcbbbb;
   text-decoration: none;
+`;
+const Writer = styled.div`
+  width: 30%;
+  text-align: end;
+
+  margin: 0 auto;
+  color: #bcbbbb;
+  align-self: center;
 `;

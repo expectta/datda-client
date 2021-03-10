@@ -7,12 +7,14 @@ interface propsType {
   title: string;
   fristCategory?: string;
   secondCategory?: string;
+  contents: any;
   permission: string;
   location: RouteComponentProps['location'];
   history: RouteComponentProps['history'];
   match: RouteComponentProps['match'];
 }
 function ListForm({
+  contents,
   permission,
   title,
   fristCategory,
@@ -26,17 +28,17 @@ function ListForm({
       <CategoryWrap>
         <CategoryNotice>{fristCategory}</CategoryNotice>
         <CategoryEvent>{secondCategory}</CategoryEvent>
-        <CategoryYear>년도별 검색</CategoryYear>
+        {/* <CategoryYear>년도별 검색</CategoryYear> */}
       </CategoryWrap>
       <CardWrapper>
-        {notice.data.map((notice, index) => {
+        {contents.map((element: any, index: number) => {
           return (
             <ListInnerCard
               key={index}
-              noticeId={notice.noticeId}
-              title={notice.title}
-              category={notice.category}
-              createAt={notice.created_at}
+              content={element}
+              title={element.title}
+              // category={notice.category}
+              // createAt={notice.created_at}
             ></ListInnerCard>
           );
         })}

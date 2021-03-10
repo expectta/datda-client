@@ -13,6 +13,7 @@ export default function Medicine({ userInfo }: propsType) {
       <Switch>
         <Route exact path={`${urlMatch.path}`}>
           <ListForm
+            contents={'임시'}
             permission={userInfo.permission}
             title="투약의뢰서"
             fristCategory="투약의뢰서"
