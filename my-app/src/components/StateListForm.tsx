@@ -46,7 +46,9 @@ function StateListForm({
           })}
         </CardWrapper>
       ) : (
-        <div>등록된 원아가 없습니다</div>
+        <LoadingWrapper>
+          <Loader id="loadingImage" src="../images/loading.gif"></Loader>
+        </LoadingWrapper>
       )}
     </Wrap>
   );
@@ -115,4 +117,17 @@ const TitleInput = styled.input`
 
 const Sreach = styled.span`
   ${({ theme }) => theme.common.defaultButton}
+`;
+const Loader = styled.img`
+  width: 200px;
+  text-align: center;
+  font-size: 2rem;
+  align-self: center;
+`;
+const LoadingWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;

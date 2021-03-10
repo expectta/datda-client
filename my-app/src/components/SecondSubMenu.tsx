@@ -6,12 +6,10 @@ export default function SecondSubMenu() {
   return (
     <Wrap>
       <Container>
-        <Card>
-          <img className="bugReport" src="../images/bugReport.png"></img>
-        </Card>
-        <Card>
-          <img className="eduCoding" src="../images/eduCoding.png"></img>
-        </Card>
+        <ImageWrapper to="/main/program">
+          <Image className="bugReport" src="../images/bugReport.png"></Image>
+          <Image className="eduCoding" src="../images/eduCoding.png"></Image>
+        </ImageWrapper>
       </Container>
     </Wrap>
   );
@@ -19,6 +17,10 @@ export default function SecondSubMenu() {
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
+  @media ${({ theme }) => theme.device.mobileL} {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const SubMenuBar = styled(Link)`
@@ -33,26 +35,45 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
+
 const Card = styled.div`
-  .bugReport {
-    width: 100%;
-    height: 100%;
-    border-radius: 15px 15px 15px 15px;
-  }
-  .eduCoding {
-    width: 100%;
-    height: 100%;
-    border-radius: 15px 15px 15px 15px;
-  }
+  width: 100%;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 0px 0px 5px #c8c8c8;
+  overflow: auto;
 `;
 
 const Text = styled.div`
   position: absolute;
   padding: 10px;
   color: white;
-
   // grid-gap: 6%;
   // grid-auto-rows: repeat(auto-fill);
   // border-radius: 15px 15px 15px 15px;
   // box-shadow: 0px 0px 5px #c8c8c8;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 15px 15px 15px 15px;
+  .eduCoding {
+    width: 90%;
+    height: 90%;
+  }
+`;
+
+const ImageWrapper = styled(Link)`
+  @media ${({ theme }) => theme.device.mobileL} {
+    display: flex;
+    flex-direction: column;
+  }
+  .bugReport {
+    width: 100%;
+    height: auto;
+  }
+  .eduCoding {
+    width: 100%;
+    height: auto;
+  }
 `;

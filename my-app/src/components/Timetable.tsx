@@ -27,9 +27,9 @@ export default function Timetable({ userInfo }: props) {
   });
   // 현재 진행중인 교육상태 업데이트
   useEffect(() => {
-    console.log(time);
+    console.log(time, '현재시간');
     //시간표를 등록했을경우
-    if (currentTimeTable.totalTimetable !== null) {
+    if (currentTimeTable.totalTimetable !== "'[]'") {
       const currentEducation = findStepEducation(
         time,
         currentTimeTable.totalTimetable,
@@ -62,6 +62,7 @@ export default function Timetable({ userInfo }: props) {
   }, []);
   //09시부터 ~ 18시까지 정규수업
   if (Number(time) > 900 && Number(time) < 1700) {
+    console.log('정규시간 아님');
     setInterval(tick, 1000);
   }
   useEffect(() => {
@@ -114,7 +115,9 @@ export default function Timetable({ userInfo }: props) {
           <TimeTable to="/main/timetable">전체시간표 보기</TimeTable>
         </>
       ) : (
-        <Loader>로딩중</Loader>
+        <LoadingWrapper>
+          <Loader id="loadingImage" src="../images/loading.gif"></Loader>
+        </LoadingWrapper>
       )}
     </Wrap>
   );
@@ -195,7 +198,7 @@ const Education = styled.div`
   height: 50%;
 `;
 const Container = styled.div`
-  width: 85%;
+  width: 65%;
   height: 80%;
   margin: 0 auto;
 `;
@@ -203,9 +206,16 @@ const TimeTable = styled(Link)`
   float: right;
 `;
 
-const Loader = styled.div`
-  width: 100%;
+const Loader = styled.img`
+  width: 50px;
   text-align: center;
   font-size: 2rem;
-  padding-top: 10%;
+  align-self: center;
+`;
+const LoadingWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;

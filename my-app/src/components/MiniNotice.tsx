@@ -45,12 +45,22 @@ const Wrap = styled.div<any>`
   height: 20%;
   margin: 0 auto;
   margin-top: 2%;
+  margin-bottom: 2%;
   //원장님이 로그인 했을경우
   ${(props) =>
     props.permission === 'institution' &&
     css`
       height: 43%;
     `}
+  border: solid 1px #eeeeee;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px 15px 15px 15px;
 `;
 
 const NoticeWrap = styled.div`
@@ -62,6 +72,10 @@ const NoticeWrap = styled.div`
 `;
 const Title = styled.label`
   font-size: 1.5rem;
+  text-align: center;
+  margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: solid 1px #eeeeee;
 `;
 const NoticeContainar = styled.div<any>`
   width: 100%;
@@ -82,6 +96,6 @@ const GoToPostButton = styled(Link)`
 `;
 const More = styled(Link)<any>`
   display: block;
-  padding: 2%;
+  padding: 1%;
   text-align: end;
 `;

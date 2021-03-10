@@ -135,9 +135,7 @@ export function requestMainData(token?: string) {
 }
 // 승인, 미승인 원아 리스트 요청
 export function requestApproveChild(childId?: number | null) {
-  axios.defaults.headers.common[
-    'authorization'
-  ] = axios.defaults.headers.common['authorization'] = JSON.parse(
+  axios.defaults.headers.common['authorization'] = JSON.parse(
     localStorage.getItem('loginInfo')!,
   ).accessToken;
   const id = childId || null;
@@ -292,4 +290,24 @@ export const getProfile = (): void => {
       alert('잘못된 요청입니다.');
     }
   });
+};
+//시간표 등록(원장)
+export const requestUploadTimetable = async (timetable: any) => {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const result = await axios
+    .post('https://datda.link/institution/timetable', {
+      timetable: `'${JSON.stringify(timetable)}'`,
+    })
+    .then((res) => {
+      console.log(res.status, res.data);
+
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      alert('콘솔창에 console.log(err)');
+    });
+  return result;
 };

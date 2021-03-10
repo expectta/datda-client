@@ -44,8 +44,8 @@ export default function Carousel({ userInfo }: propType) {
                   return (
                     <AlbumCard>
                       <AlbumImg
-                        key={element.imageId}
-                        src={element.image_url}
+                        key={element.albumId}
+                        src={element.photo}
                         alt="앨범사진"
                       ></AlbumImg>
                     </AlbumCard>
@@ -56,8 +56,8 @@ export default function Carousel({ userInfo }: propType) {
                 return (
                   <AlbumCard>
                     <AlbumImg
-                      key={element.imageId}
-                      src={element.image_url}
+                      key={element.albumId}
+                      src={element.photo}
                       alt="앨범사진"
                     ></AlbumImg>
                   </AlbumCard>
@@ -105,11 +105,16 @@ const Arrow = styled.span`
   z-index: 9;
 `;
 const CarouselContainer = styled.div`
-  width: 89%%;
+  width: 90%;
   overflow: hidden;
   height: auto;
   margin: 5%;
   margin-top: 2%;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
 `;
 const SliderContainer = styled.div`
   display: flex;
