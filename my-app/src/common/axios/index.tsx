@@ -236,6 +236,50 @@ export function requestSearchInsti(value: string) {
   return instiData;
 }
 
+export function requestGetProfile(childId?: string | null) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const profile = axios
+    .post('https://datda.link/profile', { childId: Number(childId) })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+      return false;
+    })
+    .catch((err) => {
+      alert(err);
+    });
+
+  return profile;
+}
+
+export function requestProfileParentRegister(
+  institutionId: string,
+  childName: string,
+) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+
+  const results = axios
+    .post('https://datda.link/profile/parentregister', {
+      institutionId: Number(institutionId),
+      childName: childName,
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return true;
+      }
+      return false;
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return results;
+}
+
 export function requestGuestTeacherRegister(institutionId: string) {
   axios.defaults.headers.common['authorization'] = JSON.parse(
     localStorage.getItem('loginInfo')!,
@@ -311,3 +355,28 @@ export const requestUploadTimetable = async (timetable: any) => {
     });
   return result;
 };
+// 공지사항 요청
+// childId: 2, // ! optional. 부모의 경우 required
+// category: 'notice', // ! optional 이긴 하나 글 업로드 시에는 required
+// ! => category 는 notice / event 둘 중 하나
+// title: '제목이다.', // ! optional 이긴 하나 글 업로드 시에는 required
+// content: '내용이다. 그러하다.', // ! optional 이긴 하나 글 업로드 시에는 required
+// ! < 주의 >
+// ! 하나의 API로 작성하다 보니, title 이 빈칸인 상태로 작성하기 버튼을 클릭하는 상황은 client 에서 막아주셔야 합니다.
+export async function requestNotice(childId?: number) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const result = await axios
+    .post('https://datda.link/notice', {
+      childId: childId || null,
+    })
+    .then((res) => {
+      console.log(res.status, res.data);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return result;
+}

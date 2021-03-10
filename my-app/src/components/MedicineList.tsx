@@ -22,7 +22,7 @@ export default function MedicineList(props: propsType) {
                 key={index}
                 userId={element.userId}
                 userName={element.userName}
-                createAt={element.created_at}
+                createdAt={element.created_at}
                 classId={element.classId}
                 className={element.className}
               ></ListInnerCard>

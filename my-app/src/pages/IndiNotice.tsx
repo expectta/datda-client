@@ -13,6 +13,7 @@ export default function IndiNotice({ userInfo }: propsType) {
         <Route exact path={`${urlMatch.path}`}>
           <ListForm
             title="알림장"
+            contents={'임시!!!!!!!!!!!!!!!!!!!!!!!!!!!!'}
             fristCategory="월별"
             secondCategory="일별"
             permission={userInfo.permission}

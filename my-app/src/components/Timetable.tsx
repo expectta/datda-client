@@ -30,6 +30,7 @@ export default function Timetable({ userInfo }: props) {
     console.log(time, '현재시간');
     //시간표를 등록했을경우
     if (currentTimeTable.totalTimetable !== "'[]'") {
+      console.log('시간표가 없을경우');
       const currentEducation = findStepEducation(
         time,
         currentTimeTable.totalTimetable,
@@ -42,6 +43,7 @@ export default function Timetable({ userInfo }: props) {
         currentEducation: currentEducation?.currentEducation,
       });
     }
+
     console.log('현재시간');
   }, [time]);
 
@@ -104,7 +106,10 @@ export default function Timetable({ userInfo }: props) {
                         </label>
                       </Time>
                       <Education>
-                        <label>{currentTimeTable.currentEducation}</label>
+                        <label>
+                          {currentTimeTable.currentEducation ||
+                            '시간표를 확인해주세요'}
+                        </label>
                       </Education>
                     </CurrentState>
                   </EducationWrap>

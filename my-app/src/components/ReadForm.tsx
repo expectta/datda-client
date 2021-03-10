@@ -1,27 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 interface propsType {
   title: string;
+  contents: any;
 }
-export default function ReadForm({ title }: propsType) {
+export default function ReadForm({ title, contents }: propsType) {
+  const { no }: any = useParams();
+  const PREVIOUS_PAGE = -1;
+  console.log(no, 'match');
+  const postView = contents.filter((element: any, index: number) => {
+    if (element.noticeId === Number(no)) {
+      return element;
+    }
+  });
   return (
     <Wrap>
       <ContentCard>
         <Title>{title}</Title>
         <Container>
           <TitleWrapper>
-            <SubTitle>{'제목'}</SubTitle>
-            <Writer>{'작성자'}</Writer>
+            <SubTitle>제목 : {postView[0].title}</SubTitle>
+            <Writer>작성자 : {postView[0].writer}</Writer>
           </TitleWrapper>
-          <TextBox></TextBox>
+          <TextBox readOnly defaultValue={postView[0].content}></TextBox>
         </Container>
       </ContentCard>
       <ButtonWrapper>
         <PostButton to="/main/notice">수정</PostButton>
         <PostButton to="/main/notice">삭제</PostButton>
-        <PostButton to="/main/notice">목록</PostButton>
+        <GoListButton onClick={() => history.go(PREVIOUS_PAGE)}>
+          {' '}
+          목록
+        </GoListButton>
       </ButtonWrapper>
     </Wrap>
   );
@@ -31,7 +43,7 @@ const Wrap = styled.div`
   height: 100%;
 `;
 const ContentCard = styled.div`
-  ${({ theme }) => theme.common.contentCardDiv}
+  height: 98%;
 `;
 const Title = styled.div`
   ${({ theme }) => theme.common.contentTitle}
@@ -79,5 +91,8 @@ const PostButton = styled(Link)`
   ${({ theme }) => theme.common.defaultButton}
 `;
 const CancleButton = styled(Link)`
+  ${({ theme }) => theme.common.defaultButton}
+`;
+const GoListButton = styled.span`
   ${({ theme }) => theme.common.defaultButton}
 `;

@@ -1,25 +1,72 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
+import { requestSearchInsti } from '../common/axios';
 
 interface Props {
   instiInfo: any;
   setInsti: any;
+  instiSelect: string;
+  setInstiSelect: any;
+  errorMessage: string;
+  setErrorMessage: any;
 }
 
-function SelectionInstitution({ instiInfo, setInsti }: Props) {
+function SelectionInstitution({
+  instiInfo,
+  setInsti,
+  instiSelect,
+  setInstiSelect,
+  errorMessage,
+  setErrorMessage,
+}: Props) {
+  const history = useHistory();
   //검색
-  const searchInsti = () => {
-    axios.get('https://datda');
+  const [instiInput, setInstiInput] = useState<string>('');
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInstiInput(value);
+  };
+
+  const onChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInstiSelect(value);
+  };
+
+  const searchInsti = async (value: string) => {
+    const results = await requestSearchInsti(value);
+    if (results) {
+      setInsti(results);
+    }
+  };
+
+  const nextStep = (institutinId: string) => {
+    if (institutinId.length === 0) {
+      setErrorMessage('기관을 선택해주세요');
+    } else {
+      history.push('/main/profile/children');
+      setErrorMessage('');
+    }
   };
   return (
     <Wrap>
       <ContentCard>
         <h1>기관을 선택해주세요</h1>
         <div>
-          <input type="text"></input>
-          <button>검색</button>
+          <input
+            type="text"
+            onChange={(e) => {
+              onChange(e);
+            }}
+          ></input>
+          <button
+            onClick={() => {
+              searchInsti(instiInput);
+            }}
+          >
+            검색
+          </button>
         </div>
         {instiInfo.map((insti: any) => (
           <div>
@@ -27,6 +74,9 @@ function SelectionInstitution({ instiInfo, setInsti }: Props) {
               type="radio"
               value={insti.institutionId}
               name="institution"
+              onChange={(e) => {
+                onChecked(e);
+              }}
             ></input>
             <span>{insti.institutionName}</span>
           </div>
@@ -38,11 +88,16 @@ function SelectionInstitution({ instiInfo, setInsti }: Props) {
               <Button>선택 완료</Button>
             </Link>
           ) : (
-            <Link to="/main/profile/children">
-              <Button>아이 등록</Button>
-            </Link>
+            <Button
+              onClick={() => {
+                nextStep(instiSelect);
+              }}
+            >
+              아이 등록
+            </Button>
           )}
         </div>
+        <div>{errorMessage}</div>
       </ContentCard>
     </Wrap>
   );
