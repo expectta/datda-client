@@ -1,30 +1,57 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { getProfile } from '../common/axios';
-export default function Profile() {
-  const [userInfo, setUserInfo] = useState({
-    userName: '',
-    email: '',
-    mobile: '',
-    role: '',
-    childrenName: ['', ''],
-    institution: '',
+import { requestGetProfile } from '../common/axios';
+
+interface Props {
+  userInfo: {
+    permission: string;
+    isLogin: boolean;
+    mainData: any;
+    currentChild: number;
+  };
+}
+
+export default function ProfileList({ userInfo }: Props) {
+  const permission = JSON.parse(localStorage.getItem('loginInfo')!).permission;
+
+  const [profileInfo, setProfileInfo] = useState<any>({
+    basicInfo: '',
+    approved: '',
+    unapproved: '',
   });
 
   useEffect(() => {
-    if (userInfo.email.length === 0) {
-      console.log('음메');
-      //getProfile();
+    if (permission === 'teacher' || permission === 'institution') {
+      getProfile();
+    } else {
+      getProfile(userInfo.mainData[userInfo.currentChild].childId);
     }
+    console.log(profileInfo.approved);
   }, []);
 
-  const onChange = (key: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setUserInfo({ ...userInfo, [key]: value });
+  const getProfile = async (childId?: string | null) => {
+    const results = await requestGetProfile(childId);
+    if (results) {
+      setProfileInfo({
+        ...profileInfo,
+        basicInfo: results.basicInfo,
+        approved: results.approved,
+        unapproved: results.unapproved,
+      });
+    }
   };
 
-  return (
+  const onChange = (key: any, e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setProfileInfo({ ...profileInfo.basicInfo, [key]: value });
+  };
+
+  return profileInfo.basicInfo.length === 0 ? (
+    <div>
+      <img id="loading" src="../images/loading.gif" />
+    </div>
+  ) : (
     <Wrap>
       <ContentCard>
         <Title>프로필</Title>
@@ -32,7 +59,11 @@ export default function Profile() {
           <div id="profileArea">
             <div id="flexLeft">
               <AvatarCard
-                src="../images/defaultAvatar.png"
+                src={
+                  permission !== 'parent'
+                    ? userInfo.mainData.profileImg
+                    : userInfo.mainData[userInfo.currentChild].profileImg
+                }
                 alt="avatar"
               ></AvatarCard>
               {JSON.parse(localStorage.getItem('loginInfo')!).permission ===
@@ -58,33 +89,34 @@ export default function Profile() {
               'institution' ? (
                 <>
                   <div className="profile name">
-                    <span className="blue">이름 </span>
+                    <span className="blue">
+                      {permission === 'teacher' ? '이름' : '아이이름'}
+                    </span>
                     <input
+                      className="textBox"
                       type="text"
-                      placeholder={userInfo.userName}
+                      placeholder={profileInfo.basicInfo.name}
                       onChange={(e) => {
-                        onChange('userName', e);
+                        onChange('name', e);
                       }}
                     ></input>
                   </div>
                   <div className="profile email">
                     <span className="blue">이메일 </span>
-                    <span>{userInfo.email}</span>
+                    <span className="emailText">
+                      {profileInfo.basicInfo.email}
+                    </span>
                   </div>
                   <div className="profile mobile">
                     <span className="blue">전화번호 </span>
                     <input
+                      className="textBox"
                       type="text"
-                      placeholder={userInfo.mobile}
+                      placeholder={profileInfo.basicInfo.mobile}
                       onChange={(e) => {
                         onChange('mobile', e);
                       }}
                     ></input>
-                  </div>
-                  <div className="profile role">
-                    <span className="blue">저는 </span>
-                    <input type="text" placeholder={userInfo.role}></input>
-                    <span className="blue">입니다.</span>
                   </div>
                 </>
               ) : (
@@ -92,12 +124,9 @@ export default function Profile() {
                   <div className="profile name">
                     <span className="blue">기관이름 </span>
                     <input
+                      className="textBox"
                       type="text"
-                      placeholder={
-                        userInfo.institution.length === 0
-                          ? '기관명을 적어주세요'
-                          : userInfo.institution
-                      }
+                      placeholder={profileInfo.basicInfo.name}
                       onChange={(e) => {
                         onChange('institution', e);
                       }}
@@ -105,39 +134,47 @@ export default function Profile() {
                   </div>
                   <div className="profile email">
                     <span className="blue">이메일 </span>
-                    <span>{userInfo.email}</span>
+                    <span className="emailText">
+                      {profileInfo.basicInfo.email}
+                    </span>
                   </div>
                   <div className="profile mobile">
                     <span className="blue">전화번호 </span>
                     <input
+                      className="textBox"
                       type="text"
-                      placeholder={userInfo.mobile}
+                      placeholder={profileInfo.basicInfo.mobile}
                       onChange={(e) => {
                         onChange('mobile', e);
                       }}
                     ></input>
-                  </div>
-                  <div className="profile role">
-                    <span className="blue">지위 </span>
-                    <span>원장</span>
                   </div>
                 </>
               )}
             </div>
           </div>
 
-          {JSON.parse(localStorage.getItem('loginInfo')!).permission !==
-          'institution' ? (
+          {JSON.parse(localStorage.getItem('loginInfo')!).permission ===
+          'parent' ? (
             <>
-              <div className="blue">원아관리</div>
-              <div id="profileChildList">
-                {userInfo.childrenName.map((child) => (
-                  <div>{child}</div>
+              <div className="blue">승인된 내 아이들</div>
+              <div id="profileApprovedList">
+                {profileInfo.approved.map((child: any) => (
+                  <div>
+                    <span>{child.name}</span>
+                    <span>{child.classs.className}</span>
+                    <span>{child.institution.institutionName}</span>
+                  </div>
                 ))}
               </div>
-              <div className="blue">기관목록</div>
-              <div id="profileInstiList">
-                <div>{userInfo.institution}</div>
+              <div className="blue">승인 대기중인 내 아이들</div>
+              <div id="profileUnapprovedList">
+                {profileInfo.unapproved.map((child: any) => (
+                  <div>
+                    <span>{child.name}</span>
+                    <span>{child.institution.institutionName}</span>
+                  </div>
+                ))}
               </div>
             </>
           ) : (
@@ -182,13 +219,20 @@ const Wrap = styled.div`
   .blue {
     color: blue;
   }
-  #profileChildList {
+  #profileApprovedList {
     border: solid 1px;
     border-radius: 10px;
   }
-  #profileInstiList {
+  #profileUnapprovedList {
     border: solid 1px;
     border-radius: 10px;
+  }
+  .textBox {
+    border: solid 0px;
+    border-bottom: solid 1px;
+  }
+  .emailText {
+    margin-left: 18px;
   }
 `;
 const ContentCard = styled.div`
@@ -199,11 +243,12 @@ const Title = styled.div`
 `;
 const Button = styled.button`
   ${({ theme }) => theme.common.defaultButton}
-  margin : 0 2% 0 2%;
+  margin : 4% 2% 0 2%;
 `;
 
 const AvatarCard = styled.img`
   overflow: hidden;
   resize: both;
   width: 200px;
+  height: 200px;
 `;
