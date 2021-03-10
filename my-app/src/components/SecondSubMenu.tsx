@@ -6,14 +6,16 @@ export default function SecondSubMenu() {
   return (
     <Wrap>
       <Container>
-        <Card>
-          {/* <Text>
+        {/* <Card> */}
+        {/* <Text>
             <b>닿다</b>에게 <br />
             <b>궁금</b>한게 <br />
             있어요
           </Text> */}
-        </Card>
-        <Card></Card>
+        {/* </Card> */}
+        <ImageWrapper to="/main/program">
+          <Image src="../images/program.png" alt="프로그램"></Image>
+        </ImageWrapper>
       </Container>
     </Wrap>
   );
@@ -30,18 +32,14 @@ const SubMenuBar = styled(Link)`
 `;
 
 const Container = styled.div`
-  display: grid;
   width: 100%;
   height: 100%;
-  grid-gap: 6%;
-  grid-auto-rows: repeat(auto-fill);
 `;
 const Card = styled.div`
   width: 100%;
-  height: 100%;
   border-radius: 15px 15px 15px 15px;
   box-shadow: 0px 0px 5px #c8c8c8;
-  background: black;
+  overflow: auto;
 `;
 
 const Text = styled.div`
@@ -50,3 +48,10 @@ const Text = styled.div`
   padding: 10px;
   color: white;
 `;
+const Image = styled.img`
+  width: 100%;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 0px 0px 5px #c8c8c8;
+`;
+
+const ImageWrapper = styled(Link)``;
