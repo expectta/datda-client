@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ImagePostForm } from '../components/Index';
 //첫 페이지
 function Intro() {
   return (
     <IntroGlobal id="intro_global">
       <SectionIntro className="section intro">
         <div id="introText" data-aos="fade-down" data-aos-duration="2000">
-          <div>우리 아이 유치원 생활</div>
-          <div>더욱 스마트하게 관리하기</div>
+          <div className="text">우리 아이 유치원 생활</div>
+          <div className="text">더욱 스마트하게 관리하기</div>
         </div>
         <LinkArea>
           <Link to="/signup">
@@ -22,18 +23,20 @@ function Intro() {
 
       <Section1 className="section 1">
         <Section1Box>
-          <div className="bigText">
-            <div>
+          <div className="bigText big1">
+            <div className="text">
               <span className="bold">정확한 공지사항</span>
               <span>과 </span>
             </div>
-            <span className="bold">알림장</span>
-            <span> 전달받기</span>
+            <div className="text">
+              <span className="bold">알림장</span>
+              <span> 전달받기</span>
+            </div>
           </div>
           <div className="smallText">
-            <div>잘못된 공지를 받고 혼란스러웠던</div>
-            <div>경험이 있나요? 닿다는 정확한</div>
-            <div>공지 내용을 가장 빠르게 전달합니다.</div>
+            <div className="text">잘못된 공지를 받고 혼란스러웠던</div>
+            <div className="text">경험이 있나요? 닿다는 정확한</div>
+            <div className="text">공지 내용을 가장 빠르게 전달합니다.</div>
           </div>
         </Section1Box>
         <div id="section1Image" data-aos="fade-up" data-aos-duration="1500">
@@ -46,19 +49,20 @@ function Intro() {
           <div id="section2Left">
             <Section2Box>
               <div className="bigText section2">
-                <div>
-                  <span className="bold">아이들의 모든 일상</span>
-                  <span>을</span>
+                <div className="text">
+                  <span className="bold">아이들의 모든 일상을</span>
                 </div>
-                <div>
+                <div className="text">
                   <span className="bold">실시간</span>
                   <span>으로 공유하기</span>
                 </div>
               </div>
               <div className="smallText">
-                <div>아이들이 보고싶은 순간순간에 닿다는</div>
-                <div>아이들의 생생한 일상사진을 실시간으로</div>
-                <div>공유합니다</div>
+                <div className="text">아이들이 보고싶은 순간순간에 닿다는</div>
+                <div className="text">
+                  아이들의 생생한 일상사진을 실시간으로
+                </div>
+                <div className="text">공유합니다</div>
               </div>
             </Section2Box>
           </div>
@@ -79,12 +83,14 @@ function Intro() {
       <Section3 className="section 3">
         <div className="section3Box">
           <div className="bigText bold">
-            <div>아이들이 먹는 음식은</div>
-            <div>너무나도 중요하니까</div>
+            <div className="text">아이들이 먹는 음식은</div>
+            <div className="text">너무나도 중요하니까</div>
           </div>
           <div className="smallText">
-            <div>아이들이 건강한 몸을 위해 닿다는</div>
-            <div>오늘의 식단들을 공유합니다. 쑥쑥 성장할 우리 아이들!</div>
+            <div className="text">아이들이 건강한 몸을 위해 닿다는</div>
+            <div className="text section3">
+              오늘의 식단들을 공유합니다. 쑥쑥 성장할 우리 아이들!
+            </div>
           </div>
         </div>
         <div id="section3Image" data-aos="fade-right" data-aos-duration="2000">
@@ -95,12 +101,14 @@ function Intro() {
         <div id="section4Flex">
           <div id="section4Box">
             <div className="bigText section4 bold">
-              <div>간단하게 선생님과 원아</div>
-              <div>관리하기</div>
+              <div className="text">간단하게 선생님과 </div>
+              <div className="text">원아 관리하기</div>
             </div>
             <div className="smallText">
-              <div>간편하게 선생님과 원아를 반배정 하기</div>
-              <div>자유롭게 반배정하기 너무 편하지 않나요?</div>
+              <div className="text">간편하게 선생님과 원아를 반배정 하기</div>
+              <div className="text">
+                자유롭게 반배정하기 너무 편하지 않나요?
+              </div>
             </div>
           </div>
           <div id="section4Right">
@@ -116,13 +124,15 @@ function Intro() {
       <Section5 className="section 5">
         <div id="section5Box">
           <div className="bigText bold">
-            <div>투약 의뢰서로</div>
-            <div>아이건강 챙기기</div>
+            <div className="text">투약 의뢰서로</div>
+            <div className="text">아이건강 챙기기</div>
           </div>
           <div className="smallText">
-            <div>닿다는 투약의로서를 온라인으로 접수하여</div>
-            <div>아이들의 건강한 생활을 위한 정확한 투약을</div>
-            <div>진행하도록 돕습니다</div>
+            <div className="text">닿다는 투약의로서를 온라인으로 접수하여</div>
+            <div className="text">
+              아이들의 건강한 생활을 위한 정확한 투약을
+            </div>
+            <div className="text">진행하도록 돕습니다</div>
           </div>
         </div>
         <div id="section5Image" data-aos="fade-up" data-aos-duration="1000">
@@ -133,13 +143,15 @@ function Intro() {
         <div id="section6Left">
           <div id="section6Box">
             <div className="bigText bold">
-              <div>빠르게 차량정보</div>
-              <div>확인하기</div>
+              <div className="text">빠르게 차량정보</div>
+              <div className="text">확인하기</div>
             </div>
             <div className="smallText">
-              <div>우리 아이 무슨 버스 타야 좋을까</div>
-              <div>우리 아이는 언제쯤 집에 도착하는지 궁금할 때</div>
-              <div>닿다를 통해 빠르게 확인하세요</div>
+              <div className="text">우리 아이 무슨 버스 타야 좋을까</div>
+              <div className="text">
+                우리 아이는 언제쯤 집에 도착하는지 궁금할 때
+              </div>
+              <div className="text">닿다를 통해 빠르게 확인하세요</div>
             </div>
           </div>
         </div>
@@ -157,14 +169,13 @@ function Intro() {
           </Link>
         </LinkArea>
       </LinkAgain>
-      <button
+      <img
+        src="../images/TO_THE_TOP2.png"
         id="goToTop"
         onClick={() => {
           window.scrollTo({ top: 0 });
         }}
-      >
-        맨 위로
-      </button>
+      ></img>
     </IntroGlobal>
   );
 }
@@ -195,15 +206,30 @@ const IntroGlobal = styled.div`
   .smallText{
     font-size : ${({ theme }) => theme.fontSizes.small};
   }
+  .text{
+    margin : 2vh 0 2vh 0;
+  }
   #goToTop{
     position: fixed;
-    left: 93vw;
-    top: 97vh;
+    left: 95vw;
+    top: 70vh;
+    width : 5%;
+    cursor: pointer;
+    @media ${({ theme }) => theme.device.mobileL} {
+      width : 15%;
+      left: 80vw;
+    }
   }
   
   width : 70%
   margin: 0 auto;
   overflow : hidden;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFRegular.otf');
+  }
+  font-family: 'NanumSquareWeb';
+
 `;
 
 const SectionIntro = styled.div`
@@ -225,7 +251,7 @@ const SectionIntro = styled.div`
   }
   @media ${({ theme }) => theme.device.mobileL} {
     background-image: url('../images/mobile/intro1_crop_dark.png');
-    background-size: 100% 100%;
+    background-size: 100%;
     background-repeat: no-repeat;
   }
 `;
@@ -257,9 +283,12 @@ const Section1Box = styled.div`
   text-align: left;
   color: white;
   height: 79%;
-  padding: 10%;
+  padding: 5%;
   @media ${({ theme }) => theme.device.mobileL} {
-    padding: 50% 10% 10% 20%;
+    padding: 10% 10% 10% 10%;
+    .big1 {
+      font-size: 2.2rem;
+    }
   }
 `;
 
@@ -271,7 +300,7 @@ const Section2 = styled.div`
   }
   #section2Left {
     position: relative;
-    padding-top: 30vh;
+    padding-top: 5%;
   }
   #section2Image {
     position: relative;
@@ -281,11 +310,11 @@ const Section2 = styled.div`
     }
   }
   #section2Image1 {
-    margin-top: -10%;
+    margin-top: -15%;
     @media ${({ theme }) => theme.device.mobileL} {
       resize: both;
-      width: 350px;
-      margin-top: 10vh;
+      width: 400px;
+      margin-top: 30%;
     }
   }
 `;
@@ -293,7 +322,8 @@ const Section2 = styled.div`
 const Section2Box = styled.div`
   color: rgb(63, 100, 29);
   .section2 {
-    font-size: 2.5rem;
+    margin-top: 10%;
+    font-size: 2.2rem;
   }
 `;
 
@@ -305,7 +335,10 @@ const Section3 = styled.div`
     color: rgb(123, 118, 109);
     padding-left: 5%;
     @media ${({ theme }) => theme.device.mobileL} {
-      margin-top: 50%;
+      margin-top: 10%;
+      .section3 {
+        width: 104%;
+      }
     }
   }
   #section3Image {
@@ -315,7 +348,7 @@ const Section3 = styled.div`
     @media ${({ theme }) => theme.device.mobileL} {
       margin-top: 30%;
       resize: both;
-      width: 300px;
+      width: 500px;
     }
   }
 `;
@@ -326,7 +359,7 @@ const Section4 = styled.div`
   #section4Box {
     color: rgb(123, 118, 109);
     @media ${({ theme }) => theme.device.mobileL} {
-      margin-top: 40%;
+      margin-top: 10%;
     }
   }
   #section4Image {
@@ -336,17 +369,16 @@ const Section4 = styled.div`
     }
   }
   #section4Image1 {
-    margin-top: 10%;
     @media ${({ theme }) => theme.device.mobileL} {
       resize: both;
-      width: 350px;
+      width: 400px;
     }
   }
 `;
 
 const Section5 = styled.div`
   background-color: rgb(229, 242, 250);
-  padding: 7%;
+  padding: 5%;
   #section5Box {
     position: relative;
     background: rgb(229, 229, 229);
@@ -358,8 +390,8 @@ const Section5 = styled.div`
     padding-left: 5%;
     @media ${({ theme }) => theme.device.mobileL} {
       margin-top: 10%;
-      width: 92%;
-      height: 30%;
+      width: 100%;
+      height: 50%;
     }
   }
   #section5Image {
@@ -367,7 +399,7 @@ const Section5 = styled.div`
     margin-top: -55vh;
     padding-right: 10%;
     @media ${({ theme }) => theme.device.mobileL} {
-      margin-top: -4vh;
+      margin-top: -13vh;
     }
   }
 
@@ -384,7 +416,7 @@ const Section5 = styled.div`
 const Section6 = styled.div`
   background-color: rgb(237, 237, 237);
   display: flex;
-  padding: 4%;
+  padding: 5%;
   @media ${({ theme }) => theme.device.mobileL} {
     flex-flow: column;
   }
@@ -393,7 +425,7 @@ const Section6 = styled.div`
     width: 30%;
     @media ${({ theme }) => theme.device.mobileL} {
       width: 100%;
-      margin-top: 40%;
+      margin-top: 10%;
     }
   }
 
@@ -406,10 +438,8 @@ const Section6 = styled.div`
     }
   }
   #section6Image1 {
-    resize: both;
-    width: 85%;
     @media ${({ theme }) => theme.device.mobileL} {
-      width: 400px;
+      width: 650px;
       text-align: left;
     }
   }
@@ -426,7 +456,8 @@ const LinkAgain = styled.div`
 const LinkDetail = styled.button`
   ${({ theme }) => theme.common.defaultButton}
   color : black;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0.9;
   margin: 0vh 2vw 0vh 2vw;
 `;
 
