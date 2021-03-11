@@ -234,7 +234,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       .post('https://datda.link/auth/signup', {
         userName: name,
         role: role,
-        mobile: phone,
+        mobile: Number(phone),
         permission: permission,
         email: email,
         password: password,
