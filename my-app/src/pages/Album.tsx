@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Route, Switch, useRouteMatch, withRouter } from 'react-router-dom';
 import { CardList, WriteForm } from '../components/Index';
@@ -8,6 +8,18 @@ interface propsType {
 }
 export default function Album({ userInfo }: propsType) {
   const urlMatch = useRouteMatch();
+  const [inputVlaue, setInputValue] = useState({
+    title: '',
+    content: '',
+  });
+  // 사용자 입력 값 핸들러
+  const handleInputValue = (name: string, content: string) => {
+    console.log(name, ' 제목은?', content, '내용은?');
+    setInputValue({
+      ...inputVlaue,
+      [name]: content,
+    });
+  };
   return (
     <Wrap>
       <Switch>
@@ -21,6 +33,8 @@ export default function Album({ userInfo }: propsType) {
         </Route>
         <Route exact pasth={`${urlMatch.path}/write`}>
           <WriteForm
+            handleInputValue={handleInputValue}
+            inputVlaue={inputVlaue}
             userInfo={userInfo}
             title="앨범 등록"
             type="album"

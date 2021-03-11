@@ -54,7 +54,6 @@ function App() {
   // 회원이 로그인 하고 유저 상태를 변경!
   const hadleSetMainData = async (data: any) => {
     const loginInfo = JSON.parse(localStorage.getItem('loginInfo')!);
-    console.log(data, ' 인자값은?');
     setUserInfo({
       ...userInfo,
       isLogin: true,

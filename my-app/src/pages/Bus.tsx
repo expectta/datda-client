@@ -15,9 +15,7 @@ export default function Bus() {
     </Wrap>
   );
 }
-const Loading = styled.img`
-  width: 40vw;
-`;
+
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
@@ -31,4 +29,7 @@ const CancleButton = styled.span`
 `;
 const ButtonWrapper = styled.div`
   text-align: center;
+`;
+const Loading = styled.img`
+  width: 40vw;
 `;

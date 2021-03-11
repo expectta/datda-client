@@ -1,11 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-
-export default function TextAreaForm() {
+interface propType {
+  handleInputValue: any;
+  type: string;
+}
+export default function TextAreaForm({ handleInputValue, type }: propType) {
+  const handleTextArea = (e: any, category: string) => {
+    const { name, value } = e.target;
+    console.log(value, 'text 입력값', name, ' 이름은??');
+    handleInputValue(name, value, category);
+  };
   return (
     <>
       {' '}
-      <TextBox placeholder="내용작성"></TextBox>
+      <TextBox
+        placeholder="내용작성"
+        name="content"
+        onChange={(e: any) => handleTextArea(e, type)}
+      ></TextBox>
     </>
   );
 }
