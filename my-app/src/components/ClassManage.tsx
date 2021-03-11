@@ -78,13 +78,13 @@ function ClassManage({
                     }}
                   />
                 </div>
-                <button
+                <Button
                   onClick={() => {
                     manageClass(classInputs.className, 'add');
                   }}
                 >
                   반 추가
-                </button>
+                </Button>
               </div>,
             );
           }}
