@@ -19,6 +19,7 @@ import {
   Program,
 } from './Index';
 import {
+  ReadForm,
   Nav,
   Avatar,
   Contents,
@@ -28,7 +29,11 @@ import {
   SecondSubMenu,
 } from '../components/Index';
 import { firestore } from '../common/utils/firebase';
-import { requestMainData } from '../common/axios';
+import {
+  requestMainData,
+  requestNotice,
+  requestIndiNotice,
+} from '../common/axios';
 
 interface Props {
   setModalMessage: any;
@@ -44,7 +49,6 @@ interface Props {
     currentChild: number;
   };
 }
-
 export default function Main({
   setModalMessage,
   setModalVisible,
@@ -72,6 +76,79 @@ export default function Main({
     institutionId: '0',
     id: '0',
   });
+  //List 상태 업데이트
+  const [list, setList] = useState({
+    event: [],
+    notice: [],
+    all: [],
+    currentList: [],
+    medicineRequest: [],
+    medicineReport: [],
+    IndiNotice: [],
+  });
+  // 메인에서 관리하는 list 목록들을 선택적으로 업데이트
+  const handleUpdateList = async (title: string) => {
+    const childId =
+      userInfo.permission === 'parent'
+        ? userInfo.mainData[userInfo.currentChild].childId
+        : null;
+    console.log('업데이트 요청 들어옴');
+    console.log(title, '현재 타이틀');
+    if (title === '공지사항') {
+      console.log(childId, '메인화면에서 애기 아이디');
+      const result = await requestNotice(childId);
+      console.log(result, '결과값은?');
+      console.log(childId, ' 지금 아이는??');
+      if (result) {
+        setList({
+          ...list,
+          event: result.ElEvent,
+          notice: result.ElNotice,
+          all: result.noticeInfo,
+          currentList: result.noticeInfo,
+        });
+      }
+      return;
+    }
+    if (title === '알림장') {
+      const result = await requestIndiNotice();
+      console.log(result, ' 요청 결과값');
+      if (result) {
+        setList({
+          ...list,
+          IndiNotice: result,
+        });
+      }
+    }
+  };
+  useEffect(() => {
+    console.log(list, ' == 리스트 모니터링');
+  }, [list]);
+  // catgegory 선택에 따른 list 내용 변경
+  const handleChangeNotice = (category?: string) => {
+    console.log('현재 선택한 카테고리', category);
+    if (category === '공지사항') {
+      setList({
+        ...list,
+        currentList: list.notice,
+      });
+      return;
+    } else if (category === '행사') {
+      console.log('행사가 들어옴??');
+      setList({
+        ...list,
+        currentList: list.event,
+      });
+    }
+    if (category === '투약의뢰서') {
+    }
+    if (category === '투약보고서') {
+    }
+  };
+  // useEffect(() => {
+  //   console.log('시작');
+  //   handleUpdateNotice();
+  // }, []);
   // 기관에 소속되어 승인이 완료된 원아는 실시간 상태 확인을 할 수있다.
   function handleCheckData(institutionId: string, childId: string) {
     firestore
@@ -91,7 +168,7 @@ export default function Main({
         alert('원아의 정보가 없습니다');
       });
   }
-  // 실시간 데이터베이스에 등록되어 있는 원아 일경우 실시간을 현재 상태를 추적 monitoring 한다.
+  // 실시간 데이터베이스에 등록되어 있는 원아일경우 실시간을 현재 상태를 추적 monitoring 한다.
   function handleRealTimeState(institutionId: string, childId: string) {
     firestore
       .collection('institution')
@@ -106,6 +183,7 @@ export default function Main({
         setPlease(doc.data()?.please);
       });
   }
+
   //메인 화면에서 사용될 data 요청
   const setMainData = async () => {
     const token = JSON.parse(localStorage.getItem('loginInfo')!).accessToken;
@@ -194,11 +272,23 @@ export default function Main({
                 </Route>
                 <Route
                   path={`/main/notice`}
-                  render={() => <Notice userInfo={userInfo} />}
+                  render={() => (
+                    <Notice
+                      userInfo={userInfo}
+                      list={list}
+                      handleChangeNotice={handleChangeNotice}
+                      handleUpdateList={handleUpdateList}
+                    />
+                  )}
                 />
                 <Route
                   path={`/main/medicine`}
-                  render={() => <Medicine userInfo={userInfo} />}
+                  render={() => (
+                    <Medicine
+                      handleUpdateList={handleUpdateList}
+                      userInfo={userInfo}
+                    />
+                  )}
                 />
                 <Route
                   path={`/main/meal`}
@@ -206,7 +296,13 @@ export default function Main({
                 />
                 <Route
                   path={`/main/indi_notice`}
-                  render={() => <IndiNotice userInfo={userInfo} />}
+                  render={() => (
+                    <IndiNotice
+                      handleUpdateList={handleUpdateList}
+                      userInfo={userInfo}
+                      list={list}
+                    />
+                  )}
                 />
                 <Route
                   path={`/main/album`}
