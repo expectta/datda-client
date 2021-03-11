@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { requestApproveTeacher, requestGetClassList } from '../common/axios';
+import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 
 interface Props {
   classInfo: any;
@@ -42,18 +42,20 @@ function TeacherManage({
   //곧 승인 요청을 내려줄 함수;
 
   return isTeacher ? (
-    <div id="teacher">
+    <TeacherManageWrap id="teacher">
       <div>승인대기중</div>
       <div id="teacherWaiting">
         <div id="teacherWaitingTitle">
-          <span>교사</span>
-          <span>시간</span>
+          <span className="titleTeacher">교사</span>
+          <span className="titleTime">시간</span>
         </div>
-        <div id="teacherWaitionList">
+        <div id="teacherWaitingList">
           {teachers.unapproved.map((teacher: any) => (
-            <div>
-              <span>{teacher.teacherName}</span>
-              <span>{teacher.createdAt}</span>
+            <div className="waitingEl">
+              <span className="nameResults">{teacher.teacherName}</span>
+              <span className="timeResults">
+                {changeTimeStamp(teacher.createdAt)}
+              </span>
               <span className="teacherButtonArea1">
                 <button
                   onClick={() => {
@@ -73,15 +75,16 @@ function TeacherManage({
       <div>교사관리</div>
       <div id="teacherManage">
         <div id="teacherManageTitle">
-          <span>선택</span>
-          <span>교사</span>
-          <span>반</span>
+          <span className="titleSelect">선택</span>
+          <span className="titleTeacherr">교사</span>
+          <span className="titleClass">반</span>
         </div>
         <div id="teacherManageList">
           {teachers.approved.map((teacher: any) => (
-            <div className="teacherList">
+            <div className="waitingEl">
               <input
                 type="radio"
+                className=""
                 onChange={(e) => {
                   onCheckedTeacher(e);
                 }}
@@ -142,13 +145,68 @@ function TeacherManage({
           </div>
         </div>
       </div>
-    </div>
+    </TeacherManageWrap>
   ) : (
     <div></div>
   );
 }
 
 export default TeacherManage;
+
+const TeacherManageWrap = styled.div`
+  #teacherWaitingTitle {
+    border-bottom: solid 1px;
+    display: flex;
+    .titleTeacher {
+      margin-left: 30px;
+      flex: 1 0 auto;
+    }
+    .titleTime {
+      flex: 3 0 auto;
+    }
+  }
+  #teacherWaiting {
+    border: solid 1px;
+    border-radius: 5px;
+  }
+
+  #teacherWaitingList {
+    margin-left: 20px;
+    .waitingEl {
+      display: flex;
+    }
+    .nameResults {
+      flex: 1 0 auto;
+    }
+    .timeResults {
+      flex: 3 0 auto;
+    }
+  }
+  #teacherManage {
+    border: solid 1px;
+    border-radius: 5px;
+  }
+
+  #teacherManageTitle {
+    border-bottom: solid 1px;
+    display: flex;
+    .titleSelect {
+      flex: 1 0 auto;
+      margin-left: 30px;
+    }
+    .titleTeacherr {
+      flex: 1 0 auto;
+    }
+    .titleClass {
+      flex: 2 0 auto;
+    }
+  }
+  .teacherButtonArea1 {
+  }
+  #teacherButtonArea2 {
+    text-align: center;
+  }
+`;
 
 const Button = styled.button`
   ${({ theme }) => theme.common.defaultButton}

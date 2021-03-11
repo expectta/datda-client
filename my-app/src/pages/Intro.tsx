@@ -161,11 +161,11 @@ function Intro() {
       </Section6>
       <LinkAgain className="linkAgain">
         <LinkArea>
-          <Link to="/login">
-            <LinkButton>로그인</LinkButton>
-          </Link>
           <Link to="/signup">
             <LinkButton>회원가입</LinkButton>
+          </Link>
+          <Link to="/login">
+            <LinkButton>로그인</LinkButton>
           </Link>
         </LinkArea>
       </LinkAgain>
@@ -259,6 +259,7 @@ const Section1 = styled.div`
   #section1Image {
     padding-right: 10vw;
     text-align: right;
+
     #section1Image1 {
       position: relative;
       top: -20rem;
