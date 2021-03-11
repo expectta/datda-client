@@ -90,10 +90,10 @@ export default function ProfileList({ userInfo }: Props) {
                 <>
                   <div className="profile name">
                     <span className="blue">
-                      {permission === 'teacher' ? '이름' : '아이이름'}
+                      {permission === 'teacher' ? '이름' : '이름'}
                     </span>
                     <input
-                      className="textBox"
+                      className="textBox username"
                       type="text"
                       placeholder={profileInfo.basicInfo.name}
                       onChange={(e) => {
@@ -110,7 +110,7 @@ export default function ProfileList({ userInfo }: Props) {
                   <div className="profile mobile">
                     <span className="blue">전화번호 </span>
                     <input
-                      className="textBox"
+                      className="textBox phone"
                       type="text"
                       placeholder={profileInfo.basicInfo.mobile}
                       onChange={(e) => {
@@ -141,7 +141,7 @@ export default function ProfileList({ userInfo }: Props) {
                   <div className="profile mobile">
                     <span className="blue">전화번호 </span>
                     <input
-                      className="textBox"
+                      className="textBox phone"
                       type="text"
                       placeholder={profileInfo.basicInfo.mobile}
                       onChange={(e) => {
@@ -231,8 +231,18 @@ const Wrap = styled.div`
     border: solid 0px;
     border-bottom: solid 1px;
   }
+  .username {
+    margin-left: 35px;
+  }
+  .phone {
+    margin-left: 6px;
+  }
+
   .emailText {
     margin-left: 18px;
+  }
+  #profileButton {
+    padding-left: 40px;
   }
 `;
 const ContentCard = styled.div`
