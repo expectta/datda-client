@@ -83,35 +83,37 @@ function TeacherManage({
             <span className="titleButton"></span>
           </div>
           <div id="teacherManageList">
-            {teachers.approved.map((teacher: any) => (
-              <div className="managingEl">
-                <input
-                  className="manageRadio"
-                  type="radio"
-                  onChange={(e) => {
-                    onCheckedTeacher(e);
-                  }}
-                  name="teacherList"
-                  value={teacher.teacherId}
-                ></input>
-                <span className="manageTeacher">{teacher.teacherName}</span>
-                <span className="manageClass">
-                  {!teacher.classs
-                    ? '아직 반 없음'
-                    : teacher.classs.teacherClassName}
-                </span>
-                <UnclickedButton
-                  className="unapprovedButton"
-                  onClick={() => {
-                    approveButton(teacher.teacherId);
-                  }}
-                >
-                  미승인
-                </UnclickedButton>
-              </div>
-            ))}
+            <div id="manageListArea">
+              {teachers.approved.map((teacher: any) => (
+                <div className="managingEl">
+                  <input
+                    className="manageRadio"
+                    type="radio"
+                    onChange={(e) => {
+                      onCheckedTeacher(e);
+                    }}
+                    name="teacherList"
+                    value={teacher.teacherId}
+                  ></input>
+                  <span className="manageTeacher">{teacher.teacherName}</span>
+                  <span className="manageClass">
+                    {!teacher.classs
+                      ? '아직 반 없음'
+                      : teacher.classs.teacherClassName}
+                  </span>
+                  <UnclickedButton
+                    className="unapprovedButton"
+                    onClick={() => {
+                      approveButton(teacher.teacherId);
+                    }}
+                  >
+                    미승인
+                  </UnclickedButton>
+                </div>
+              ))}
+            </div>
             <div id="teacherButtonArea2">
-              <button
+              <PostButton
                 onClick={() => {
                   onModal(
                     <div id="classInfoModal">
@@ -134,8 +136,8 @@ function TeacherManage({
                 }}
               >
                 반 변경
-              </button>
-              <button
+              </PostButton>
+              <PostButton
                 onClick={() => {
                   console.log(checkedTeacher, checkedClass);
                   changeClassButton(
@@ -145,7 +147,7 @@ function TeacherManage({
                 }}
               >
                 보내기
-              </button>
+              </PostButton>
             </div>
           </div>
         </div>
@@ -186,6 +188,7 @@ const TeacherManageWrap = styled.div`
   #teacherWaiting {
     border: solid 1px;
     border-radius: 5px;
+    overflow: scroll;
   }
 
   #teacherWaitingList {
@@ -212,31 +215,38 @@ const TeacherManageWrap = styled.div`
   #teacherManage {
     border: solid 1px;
     border-radius: 5px;
+    height: 50vh;
+    #teacherManageList {
+      overflow: scroll;
+      #manageListArea {
+        height: 42vh;
+      }
+    }
+    #teacherManageTitle {
+      border-bottom: solid 1px;
+      display: flex;
+      .titleSelect {
+        text-align: center;
+        width: 100%;
+        flex: 1 auto;
+      }
+      .titleTeacherr {
+        text-align: center;
+        width: 100%;
+        flex: 1 auto;
+      }
+      .titleClass {
+        text-align: center;
+        width: 100%;
+        flex: 1 auto;
+      }
+      .titleButton {
+        width: 100%;
+        flex: 1 auto;
+      }
+    }
   }
 
-  #teacherManageTitle {
-    border-bottom: solid 1px;
-    display: flex;
-    .titleSelect {
-      text-align: center;
-      width: 100%;
-      flex: 1 auto;
-    }
-    .titleTeacherr {
-      text-align: center;
-      width: 100%;
-      flex: 1 auto;
-    }
-    .titleClass {
-      text-align: center;
-      width: 100%;
-      flex: 1 auto;
-    }
-    .titleButton {
-      width: 100%;
-      flex: 1 auto;
-    }
-  }
   .managingEl {
     display: flex;
     margin-bottom: 2px;
@@ -269,6 +279,11 @@ const UnclickedButton = styled.button`
   ${({ theme }) => theme.common.unclickedButtonStyle}
   margin : 0 2% 0 2%;
   width: 100%;
+`;
+
+const PostButton = styled.button`
+  ${({ theme }) => theme.common.unclickedButtonStyle}
+  margin : 0 2% 0 2%;
 `;
 
 const UnapprovedArea = styled.div`

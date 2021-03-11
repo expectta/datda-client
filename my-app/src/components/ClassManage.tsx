@@ -63,8 +63,8 @@ function ClassManage({
           <span className="classList">{classs.className}</span>
         </div>
       ))}
-      <div id="classButtonArea">
-        <button
+      <ButtonArea>
+        <UnclickedButton
           onClick={() => {
             onModalClass(
               <div>
@@ -78,27 +78,27 @@ function ClassManage({
                     }}
                   />
                 </div>
-                <Button
-                  onClick={() => {
-                    manageClass(classInputs.className, 'add');
-                  }}
-                >
-                  반 추가
-                </Button>
               </div>,
             );
           }}
         >
-          추가
-        </button>
-        <button
+          추가할 반 이름
+        </UnclickedButton>
+        <Button
+          onClick={() => {
+            manageClass(classInputs.className, 'add');
+          }}
+        >
+          반 추가
+        </Button>
+        <Button
           onClick={() => {
             manageClass(classInputs.className, 'delete');
           }}
         >
           삭제
-        </button>
-      </div>
+        </Button>
+      </ButtonArea>
     </div>
   ) : (
     <div></div>
@@ -110,4 +110,13 @@ export default ClassManage;
 const Button = styled.button`
   ${({ theme }) => theme.common.defaultButton}
   margin : 0 2% 0 2%;
+`;
+
+const UnclickedButton = styled.button`
+  ${({ theme }) => theme.common.unclickedButtonStyle}
+  margin : 0 2% 0 2%;
+`;
+
+const ButtonArea = styled.div`
+  margin-top: 2%;
 `;

@@ -65,7 +65,7 @@ function instiSelection({
               postInsti(
                 inputs.name,
                 inputs.role,
-                inputs.phone,
+                inputs.mobile,
                 inputs.permission,
                 inputs.email,
                 inputs.password,
