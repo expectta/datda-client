@@ -16,7 +16,13 @@ interface propsType {
 
 export default function ListInnerCard(props: propsType) {
   const urlMatch = useRouteMatch();
+  let destination = '';
+  // console.log(urlMatch, '현재 위치');
+  if (urlMatch.path === '/main') {
+    destination = '/main/notice';
 
+    console.log(destination, '도착지 위치');
+  }
   // 공지사항 리스트 상태
   const { content, title, category, createdAt } = props;
   // 투약의뢰서 리스트 상태
@@ -25,7 +31,7 @@ export default function ListInnerCard(props: propsType) {
     <>
       <NoticeCard
         id={content.contentId}
-        to={`${urlMatch.path}/post/${content.noticeId}`}
+        to={`${destination}/post/${content.noticeId}`}
       >
         <Point>* </Point>
         <Content> {title}</Content>
