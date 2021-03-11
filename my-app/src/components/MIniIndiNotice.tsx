@@ -11,7 +11,7 @@ export default function MiniIndiNotice({ userInfo }: propsType) {
   return (
     <Wrap>
       <Title>알림장</Title>
-      {userInfo.mainData[userInfo.currentChild].indiNotice ? (
+      {userInfo.mainData[userInfo.currentChild] ? (
         <NoticeContainar>
           {userInfo.permission === 'parent'
             ? userInfo.mainData[userInfo.currentChild].indiNotice.map(
