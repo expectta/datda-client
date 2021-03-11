@@ -319,13 +319,22 @@ export const requestUploadTimetable = async (timetable: any) => {
 // content: '내용이다. 그러하다.', // ! optional 이긴 하나 글 업로드 시에는 required
 // ! < 주의 >
 // ! 하나의 API로 작성하다 보니, title 이 빈칸인 상태로 작성하기 버튼을 클릭하는 상황은 client 에서 막아주셔야 합니다.
-export async function requestNotice(childId?: number) {
+export async function requestNotice(
+  childId?: number,
+  title?: string,
+  content?: string,
+  category?: string,
+) {
   axios.defaults.headers.common['authorization'] = JSON.parse(
     localStorage.getItem('loginInfo')!,
   ).accessToken;
+  console.log('공지사항 요청', childId, '=어린이 아이디');
   const result = await axios
     .post('https://datda.link/notice', {
       childId: childId || null,
+      title: title || null,
+      content: content || null,
+      category: category || null,
     })
     .then((res) => {
       console.log(res.status, res.data);
@@ -336,3 +345,72 @@ export async function requestNotice(childId?: number) {
     });
   return result;
 }
+//이미지 등록 요청
+export const handleReqeustUploadImage = async (
+  imageFile: any,
+  title: string,
+  content: string,
+) => {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const formData = new FormData();
+  formData.append('img', imageFile);
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    withCredentials: true,
+  };
+  await axios
+    .post(
+      'https://homemade2021.ml/avatarimage',
+      {
+        title: title,
+        content: content,
+        imageInfo: formData,
+      },
+      config,
+    )
+    .then((res) => {
+      const { avatarUrl } = res.data;
+      console.log(avatarUrl);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+// childId: 2, // ! optional.
+// ! (1) parent 일 때는 required
+// ! (2) teacher 가 작성 시에도 required
+// content: '선생님이 쓴 알림장의 내용입니다.123123' // ! optional. 글 작성 시에는 required
+export const requestIndiNotice = async (childId?: number, content?: string) => {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const result = await axios
+    .post('https://datda.link/indinotice', {
+      childId: childId || null,
+      content: content || null,
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+      console.log(res.status, res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  return result;
+};
+export const IndiNoticeChildrenList = () => {
+  axios
+    .get('https://datda.link/indinotice/childrenlist', {})
+    .then((res) => {
+      console.log(res.status, res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
