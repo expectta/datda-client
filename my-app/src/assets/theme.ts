@@ -97,10 +97,10 @@ const common = {
   // section title 기본 슽타일
   contentTitle: `
 	font-size:${fontSizes.xl};
-	width:95%; 
+	width:100%; 
 	height:10%;
 	color:#bcbcbc;
-	padding:4%;
+	padding-top:30px;
 	`,
   // 기본 Input 태그
   defaultInput: `

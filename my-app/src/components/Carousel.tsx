@@ -125,12 +125,12 @@ const AlbumImg = styled.img`
   border-radius: 15px;
 `;
 const Title = styled.label`
-  width: 95%;
+  width: 100%;
   height: 16%;
-  margin: 0 auto;
   margin-bottom: 3%;
   font-size: 1.5rem;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 `;
 const More = styled(Link)<any>`
   display: block;

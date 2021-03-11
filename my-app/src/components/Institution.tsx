@@ -66,6 +66,7 @@ const SignupInstitution = styled.div`
     font-size: 20px;
     border: solid 0px;
     border-bottom: solid 1.5px;
+    ${({ theme }) => theme.common.defaultInput};
   }
   .error {
     color: red;

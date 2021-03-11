@@ -229,7 +229,6 @@ const IntroGlobal = styled.div`
     src: url('../fonts/NanumSquareOTFRegular.otf');
   }
   font-family: 'NanumSquareWeb';
-
 `;
 
 const SectionIntro = styled.div`

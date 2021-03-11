@@ -145,6 +145,7 @@ const Common = styled.div`
     border-bottom: solid 1.5px;
     background-color: white;
     font-color: #959595;
+    ${({ theme }) => theme.common.defaultInput};
   }
   #selectPermission {
     text-align: center;
