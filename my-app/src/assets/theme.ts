@@ -105,7 +105,8 @@ const common = {
   // 기본 Input 태그
   defaultInput: `
 	border: none;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #bcbcbc;
+	color:#bcbcbc;
 	outline: none;
 	&:focus{
   ::placeholder,
