@@ -4,6 +4,9 @@ import { time } from 'console';
 export const findStepEducation = (currentTime: string, totalTimetable: any) => {
   // console.log(totalTimetable, '타임테이블');
   let currentStep = 0;
+  if (totalTimetable === null || totalTimetable === undefined) {
+    return;
+  }
   const data = totalTimetable
     .replace(/\s/g, '')
     .replace(/\[/g, '')
@@ -54,6 +57,9 @@ export const findStepEducation = (currentTime: string, totalTimetable: any) => {
 };
 // 서버로 부터 받은 문자열의 시간표를 배열로 변경
 export function ChangeToArray(timetable: string) {
+  if (timetable === null || timetable === undefined) {
+    return;
+  }
   // console.log(timetable, '타임테이블 ');
   const data = timetable
     .replace(/\s/g, '')

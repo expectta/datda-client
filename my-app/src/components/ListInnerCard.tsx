@@ -27,6 +27,16 @@ export default function ListInnerCard(props: propsType) {
   const { content, title, category, createdAt } = props;
   // 투약의뢰서 리스트 상태
   const { userId, userName, classId, className } = props;
+  let writer = '';
+  if (title === '알림장') {
+    writer = content.user.writterName;
+  }
+  if (title === '공지사항') {
+    writer = content.writer;
+  }
+  console.log(title, ' 현재 타이틀');
+
+  console.log(writer, ' 작성자');
   return (
     <>
       <NoticeCard
@@ -36,8 +46,13 @@ export default function ListInnerCard(props: propsType) {
         <Point>
           <img className="pointer" src="../images/point.png" />
         </Point>
-        <Content>{title}</Content>
-        <Writer>{content.writer}</Writer>
+        {title === '알림장' ? (
+          <Content>{content.content}</Content>
+        ) : (
+          <Content>{title}</Content>
+        )}
+
+        <Writer>{writer}</Writer>
         <CreateAt>
           {content ? changeTimeStamp(content.createdAt) : '누구냐'}
         </CreateAt>

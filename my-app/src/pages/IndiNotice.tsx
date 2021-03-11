@@ -6,10 +6,12 @@ interface propsType {
   userInfo: any;
   handleUpdateList: any;
   list: any;
+  handleChangeNotice: any;
 }
 export default function IndiNotice({
   userInfo,
   list,
+  handleChangeNotice,
   handleUpdateList,
 }: propsType) {
   const urlMatch = useRouteMatch();
@@ -41,9 +43,10 @@ export default function IndiNotice({
           <ListForm
             title="알림장"
             handleUpdateList={handleUpdateList}
+            handleChangeNotice={handleChangeNotice}
             contents={list}
-            fristCategory="월별"
-            secondCategory="일별"
+            fristCategory="수신"
+            secondCategory="발송"
             permission={userInfo.permission}
           ></ListForm>
         </Route>
