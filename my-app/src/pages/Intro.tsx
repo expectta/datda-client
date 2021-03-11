@@ -50,11 +50,11 @@ function Intro() {
             <Section2Box>
               <div className="bigText section2">
                 <div className="text">
-                  <span className="bold">아이들의 모든 일상을</span>
+                  <span className="bold bigText">아이들의 모든 일상을</span>
                 </div>
                 <div className="text">
-                  <span className="bold">실시간</span>
-                  <span>으로 공유하기</span>
+                  <span className="bold bigText">실시간</span>
+                  <span className="bigText">으로 공유하기</span>
                 </div>
               </div>
               <div className="smallText">
@@ -87,10 +87,11 @@ function Intro() {
             <div className="text">너무나도 중요하니까</div>
           </div>
           <div className="smallText">
-            <div className="text">아이들이 건강한 몸을 위해 닿다는</div>
+            <div className="text">아이들이 건강한 몸을 위해</div>
             <div className="text section3">
-              오늘의 식단들을 공유합니다. 쑥쑥 성장할 우리 아이들!
+              닿다는 오늘의 식단들을 공유합니다.
             </div>
+            <div className="text">쑥쑥 성장할 우리 아이들!</div>
           </div>
         </div>
         <div id="section3Image" data-aos="fade-right" data-aos-duration="2000">
@@ -143,15 +144,16 @@ function Intro() {
         <div id="section6Left">
           <div id="section6Box">
             <div className="bigText bold">
-              <div className="text">빠르게 차량정보</div>
+              <div className="text">빠르게</div>
+              <div className="text">차량정보</div>
               <div className="text">확인하기</div>
             </div>
             <div className="smallText">
               <div className="text">우리 아이 무슨 버스 타야 좋을까</div>
+              <div className="text">우리 아이는 언제쯤 집에 도착하는지</div>
               <div className="text">
-                우리 아이는 언제쯤 집에 도착하는지 궁금할 때
+                궁금할 때 닿다를 통해 빠르게 확인하세요
               </div>
-              <div className="text">닿다를 통해 빠르게 확인하세요</div>
             </div>
           </div>
         </div>
@@ -195,16 +197,19 @@ const IntroGlobal = styled.div`
   }
 
   .bigText{
-    font-size : ${({ theme }) => theme.fontSizes.titleSize};
+    font-size : 100px;
     @media ${({ theme }) => theme.device.mobileL} {
-      font-size: 2em;
+      font-size: 25px;
     }
     .section2{
       font-size : 2rem;
     }
   }
   .smallText{
-    font-size : ${({ theme }) => theme.fontSizes.small};
+    font-size : 30px;
+    @media ${({ theme }) => theme.device.mobileL} {
+      font-size : 16px;
+    }
   }
   .text{
     margin : 2vh 0 2vh 0;
@@ -250,7 +255,7 @@ const SectionIntro = styled.div`
   }
   @media ${({ theme }) => theme.device.mobileL} {
     background-image: url('../images/mobile/intro1_crop_dark.png');
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
   }
 `;
@@ -262,11 +267,13 @@ const Section1 = styled.div`
 
     #section1Image1 {
       position: relative;
-      top: -20rem;
+      height: 600px;
+      top: -30rem;
       @media ${({ theme }) => theme.device.mobileL} {
-        top: -9rem;
+        top: -18rem;
         resize: both;
         width: 70%;
+        height: 400px;
       }
     }
   }
@@ -311,6 +318,7 @@ const Section2 = styled.div`
   }
   #section2Image1 {
     margin-top: -15%;
+    width: 800px;
     @media ${({ theme }) => theme.device.mobileL} {
       resize: both;
       width: 400px;
@@ -336,6 +344,7 @@ const Section3 = styled.div`
     padding-left: 5%;
     @media ${({ theme }) => theme.device.mobileL} {
       margin-top: 10%;
+      padding-top; 50px;
       .section3 {
         width: 104%;
       }
@@ -345,10 +354,13 @@ const Section3 = styled.div`
     text-align: right;
   }
   #section3Image1 {
+    height: 500px;
+    margin-top: -5%;
     @media ${({ theme }) => theme.device.mobileL} {
       margin-top: 30%;
       resize: both;
-      width: 500px;
+      width: auto;
+      height: 300px;
     }
   }
 `;
@@ -364,12 +376,15 @@ const Section4 = styled.div`
   }
   #section4Image {
     text-align: right;
+    height: 500px;
     @media ${({ theme }) => theme.device.mobileL} {
       padding-top: 30%;
     }
   }
   #section4Image1 {
+    height: 400px;
     @media ${({ theme }) => theme.device.mobileL} {
+      margin-top: -40%;
       resize: both;
       width: 400px;
     }

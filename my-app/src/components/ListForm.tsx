@@ -124,7 +124,8 @@ const ContentCard = styled.div`
   ${({ theme }) => theme.common.contentCardDiv}
 `;
 const Title = styled.div`
-  text-align: center;
+  justify-content: start;
+  margin-left: 15px;
   width: 100%;
   ${({ theme }) => theme.common.contentTitle}
 `;
