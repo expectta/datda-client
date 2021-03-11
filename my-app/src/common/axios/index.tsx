@@ -6,8 +6,8 @@ import 'dotenv/config';
 import { stringify } from 'querystring';
 
 //! 서버 카카오 로그인 url
-const serverLoginUrl = 'https://datda.link/kakao/login'; //! datda 카카오로그인 주소
-// const serverLoginUrl = 'http://localhost:5000/kakao/login'; //! 로컬서버의 카카오로그인 주소
+// const serverLoginUrl = 'https://datda.link/kakao/login'; //! datda 카카오로그인 주소
+const serverLoginUrl = 'http://localhost:5000/kakao/login'; //! 로컬서버의 카카오로그인 주소
 
 if (localStorage.getItem('loginInfo')) {
   console.log(

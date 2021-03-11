@@ -203,6 +203,11 @@ const CardContainer = styled.div`
   grid-auto-rows: 200px;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 5%;
+  @media ${({ theme }) => theme.device.mobileL} {
+    grid-auto-rows: 200px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5%;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -230,7 +235,12 @@ const SecondMenu = styled.span`
   flex: 11 auto;
 `;
 const Title = styled.div`
-  ${({ theme }) => theme.common.contentTitle}
+  font-size: 35px;
+  width: 100%;
+  height: 10%;
+  color: black;
+  padding-top: 30px;
+  margin-left: 15px;
 `;
 const Image = styled.img`
   width: 100%;
@@ -240,14 +250,14 @@ const Image = styled.img`
 `;
 const ImageTitle = styled.div`
   width: 95%;
-  height: 80%;
+  height: 60%;
   margin: 0 auto;
   font-size: 1.6rem;
 `;
 const ImageCreatedAt = styled.div`
-  width: 95%;
+  width: 100%;
   height: 20%;
-  text-align: right;
+  text-align: end;
   color: #d5d5d5;
 `;
 
