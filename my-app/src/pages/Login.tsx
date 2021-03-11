@@ -11,8 +11,8 @@ axios.defaults.withCredentials = true;
 //!카카오톡 REST api key 리액트는 환경변수(.env)에서 'REACT_APP_'을 붙여줘야 함
 const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
 //!카카오 로그인&회원가입 관련 url
-// const redirectUri = 'https://datda.net/login'; //! 후에 datda 주소로 변경
-const redirectUri = 'http://localhost:3000/login'; //! 후에 datda 주소로 변경
+const redirectUri = 'https://datda.net/login'; //! 후에 datda 주소로 변경
+// const redirectUri = 'http://localhost:3000/login'; //! 후에 datda 주소로 변경
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
 interface propType {
@@ -69,17 +69,31 @@ function Login({ hadleSetMainData }: propType) {
       if (authorizationCode) {
         setIsLoading(true);
         requestKakaoLogin(authorizationCode).then((mainData) => {
-          if (mainData) {
-            // handleLoading();
-            hadleSetMainData(mainData);
-            setErrormessage('');
+          if (typeof mainData !== 'boolean') {
+            if (mainData !== undefined) {
+              hadleSetMainData(mainData);
+              setIsLoading(false);
+              history.push('/main');
+            } else {
+              setErrormessage('잘못된 요청입니다');
+              setIsLoading(false);
+            }
+          } else if (mainData === true) {
             setIsLoading(false);
-            history.push('/main'); // 바로 너 때문이야.
+            history.push('/waiting');
+          } else if (mainData === false) {
+            setIsLoading(false);
+            history.push('/waiting/approving');
+            // if (mainData) {
+            //   // handleLoading();
+            //   hadleSetMainData(mainData);
+            //   setErrormessage('');
+            //   setIsLoading(false);
+            //   history.push('/main'); // 바로 너 때문이야.
           }
-          setIsLoading(false);
-          alert('아직 승인대기 중입니다.');
-          // handleLoading();
-          return;
+          // setIsLoading(false);
+          // // handleLoading();
+          // return;
         });
       }
       setIsKakao(true);

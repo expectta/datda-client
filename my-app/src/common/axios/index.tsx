@@ -6,8 +6,8 @@ import 'dotenv/config';
 import { stringify } from 'querystring';
 
 //! 서버 카카오 로그인 url
-// const serverLoginUrl = 'https://datda.link/kakao/login'; //! datda 카카오로그인 주소
-const serverLoginUrl = 'http://localhost:5000/kakao/login'; //! 로컬서버의 카카오로그인 주소
+const serverLoginUrl = 'https://datda.link/kakao/login'; //! datda 카카오로그인 주소
+// const serverLoginUrl = 'http://localhost:5000/kakao/login'; //! 로컬서버의 카카오로그인 주소
 
 if (localStorage.getItem('loginInfo')) {
   console.log(
@@ -68,22 +68,7 @@ export async function requestKakaoLogin(authorizationCode: string) {
           }),
         );
       }
-      console.log('로그인됨');
-      //TODO : main 화면에 사용될 데이터 요청
-      //main 화면 용 데이터가 정상적으로 받아진다면 상태를 저장
-      //저장 후 화면 랜더링
-      if (res.data.permission === 'institution') {
-        console.log('원장 데이터 반환');
-        return director;
-      }
-      if (res.data.permission === 'parent') {
-        console.log('부모  데이터 반환');
-        return parents;
-      }
-      if (res.data.permission === 'teacher') {
-        console.log('선생 데이터 반환');
-        return teacher;
-      }
+      return requestMainData(res.data.accessToken);
     })
     .catch((error) => {
       console.log(error);

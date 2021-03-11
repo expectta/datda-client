@@ -55,6 +55,7 @@ const SelectionWrap = styled.div`
   @media ${({ theme }) => theme.device.mobileL} {
     .kakao {
       margin: 30px 0 0 0;
+      cursor: pointer;
     }
     .button {
       display: flex;
