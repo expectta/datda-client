@@ -26,6 +26,7 @@ import {
   SubMenu,
   FooterContents,
   SecondSubMenu,
+  Timetable,
 } from '../components/Index';
 import { firestore } from '../common/utils/firebase';
 import {
@@ -53,6 +54,7 @@ export default function Main({
   setModalVisible,
   hadleSetMainData,
   handleChangeChild,
+  handleTimetableChange,
   userInfo,
   handleLogout,
 }: Props) {
@@ -82,7 +84,7 @@ export default function Main({
     currentList: [],
     medicineRequest: [],
     medicineReport: [],
-    IndiNotice: [],
+    IndiNotice: {} as any,
   });
   // 메인에서 관리하는 list 목록들을 선택적으로 업데이트
   const handleUpdateList = async (title: string) => {
@@ -90,20 +92,15 @@ export default function Main({
       userInfo.permission === 'parent'
         ? userInfo.mainData[userInfo.currentChild].childId
         : null;
-    console.log('업데이트 요청 들어옴');
-    console.log(title, '현재 타이틀');
     if (title === '공지사항') {
-      console.log(childId, '메인화면에서 애기 아이디');
       const result = await requestNotice(childId);
-      console.log(result, '결과값은?');
-      console.log(childId, ' 지금 아이는??');
       if (result) {
         setList({
           ...list,
           event: result.ElEvent,
           notice: result.ElNotice,
           all: result.noticeInfo,
-          currentList: result.noticeInfo,
+          currentList: result.ElNotice,
         });
       }
       return;
@@ -115,6 +112,7 @@ export default function Main({
         setList({
           ...list,
           IndiNotice: result,
+          currentList: result.teacherRead,
         });
       }
     }
@@ -125,6 +123,7 @@ export default function Main({
   // catgegory 선택에 따른 list 내용 변경
   const handleChangeNotice = (category?: string) => {
     console.log('현재 선택한 카테고리', category);
+    //공지사항
     if (category === '공지사항') {
       setList({
         ...list,
@@ -136,6 +135,21 @@ export default function Main({
       setList({
         ...list,
         currentList: list.event,
+      });
+    }
+    //알림장
+    if (category === '수신') {
+      console.log('수신인가요??');
+      setList({
+        ...list,
+        currentList: list.IndiNotice.teacherRead,
+      });
+    }
+    if (category === '발송') {
+      console.log('발송했다');
+      setList({
+        ...list,
+        currentList: list.IndiNotice.teacherWrite,
       });
     }
     if (category === '투약의뢰서') {
@@ -300,9 +314,10 @@ export default function Main({
                   path={`/main/indi_notice`}
                   render={() => (
                     <IndiNotice
+                      handleChangeNotice={handleChangeNotice}
                       handleUpdateList={handleUpdateList}
                       userInfo={userInfo}
-                      list={list}
+                      list={list.currentList}
                     />
                   )}
                 />
@@ -319,7 +334,15 @@ export default function Main({
                 </Route>
                 <Route path={`/main/education`} component={EducationList} />
                 <Route exact path={`/main/report`} component={Report} />
-                <Route path={'/main/timetable'} component={TimetableList} />
+                <Route
+                  path={'/main/timetable'}
+                  render={() => (
+                    <TimetableList
+                      userInfo={userInfo}
+                      handleTimetableChange={handleTimetableChange}
+                    />
+                  )}
+                />
                 <Route path={'/main/education'} component={EducationList} />
                 <Route path={'/main/report'} component={Report} />
                 <Route
