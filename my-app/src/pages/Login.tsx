@@ -225,6 +225,7 @@ const InputBox = styled.div`
     width: 500px;
     margin-bottom: 30px;
     font-size: 20px;
+    ${({ theme }) => theme.common.defaultInput};
   }
   margin: 5px 0px 5px 0px;
   @font-face {

@@ -140,6 +140,11 @@ const Wrap = styled.div`
   height: 14%;
   margin: 0 auto;
   width: 85%;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
 `;
 
 const CurrentEducation = styled.div`
@@ -193,6 +198,7 @@ const CurrentState = styled.span`
   height: 100%;
   display: inline-grid;
   place-items: center;
+  font-size: 13px;
 `;
 const Time = styled.div`
   width: 100%;

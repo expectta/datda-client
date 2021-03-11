@@ -29,14 +29,16 @@ function Signup({
               placeholder="이메일 설정"
               onChange={(e) => onChange('email', e)}
             ></input>
-            <Button
-              className="check"
-              onClick={() => {
-                handleIsEmail(inputs.email);
-              }}
-            >
-              중복 확인
-            </Button>
+            <div className="checkFrame">
+              <Button
+                className="check"
+                onClick={() => {
+                  handleIsEmail(inputs.email);
+                }}
+              >
+                중복 확인
+              </Button>
+            </div>
           </div>
           <div className="signupFrame">
             <input
@@ -102,8 +104,10 @@ const Setemail = styled.label`
     border: solid 0px;
     border-bottom: solid 1.5px;
     width: 400px;
+    ${({ theme }) => theme.common.defaultInput};
   }
   .signupFrame {
+    display: flex;
     width: 600px;
   }
   .error {
@@ -129,6 +133,8 @@ const Setemail = styled.label`
   @media ${({ theme }) => theme.device.mobileL} {
     .signupFrame {
       width: 200px;
+      display: flex;
+      flex-direction: column;
     }
     .frameCenter {
       display: flex;
@@ -150,6 +156,10 @@ const Setemail = styled.label`
     }
     .check {
       margin-top: 0px;
+    }
+    .checkFrame {
+      display: flex;
+      justify-content: center;
     }
   }
 `;

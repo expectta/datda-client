@@ -102,4 +102,5 @@ const More = styled(Link)<any>`
   display: block;
   padding: 1%;
   text-align: end;
+  margin-right: 2%;
 `;

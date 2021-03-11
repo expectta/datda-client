@@ -43,7 +43,7 @@ function SignupInstitution({
     institutionName: string,
   ) => {
     if (info.length === 0) {
-      setErrormessage('교습소 중 하나를 선택해주세요');
+      setErrormessage('기관유형 중 하나를 선택해주세요');
     } else {
       axios
         .post('https://datda.link/auth/institution', {

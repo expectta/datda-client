@@ -124,6 +124,8 @@ const ContentCard = styled.div`
   ${({ theme }) => theme.common.contentCardDiv}
 `;
 const Title = styled.div`
+  text-align: center;
+  width: 100%;
   ${({ theme }) => theme.common.contentTitle}
 `;
 const CategoryWrap = styled.div`
@@ -131,7 +133,6 @@ const CategoryWrap = styled.div`
   height: 4%;
   margin: 0 auto;
   display: flex;
-  border-bottom: 1px solid lightgray;
   padding-bottom: 1%;
   ${(props) => props.id}
 `;
@@ -194,7 +195,7 @@ const Category = styled.div<any>`
 `;
 const Text = styled.div<any>`
   height: 100%;
-  font-size: ${({ theme }) => theme.fontSizes.xxl};
+  font-size: ${({ theme }) => theme.fontSizes.l};
   display: flex;
   align-items: center;
   place-content: center;

@@ -27,8 +27,10 @@ export default function ListInnerCard(props: propsType) {
         id={content.contentId}
         to={`${urlMatch.path}/post/${content.noticeId}`}
       >
-        <Point>* </Point>
-        <Content> {title}</Content>
+        <Point>
+          <img className="pointer" src="../images/point.png" />
+        </Point>
+        <Content>{title}</Content>
         <Writer>{content.writer}</Writer>
         <CreateAt>
           {content ? changeTimeStamp(content.createdAt) : '누구냐'}
@@ -38,42 +40,48 @@ export default function ListInnerCard(props: propsType) {
   );
 }
 const Point = styled.div`
-  width: 4%;
+  flex: 1 auto;
+  margin: 0 2%;
+  width: 100%;
+  height: auto;
+  width: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const NoticeCard = styled(Link)<any>`
   display: flex;
+  width: 100%;
   padding: 1%;
   cursor: pointer;
 `;
-
 const CreateAt = styled.div`
   width: 30%;
-  text-align: end;
-
-  margin: 0 auto;
+  flex: 2 auto;
+  font-size: 10px;
   color: #bcbbbb;
-  align-self: center;
+  margin: 0 2%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: end;
 `;
 const Content = styled.div`
-  width: 66%;
-  align-self: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  flex: 12 auto;
-  white-space: nowrap;
-`;
-const GoToPostButton = styled(Link)`
-  flex: 1 auto;
-  font-size: 3rem;
-  color: #bcbbbb;
-  text-decoration: none;
+  width: 100%;
+  font-size: 15px;
+  flex: 4 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 const Writer = styled.div`
+  flex: 2 auto;
   width: 30%;
-  text-align: end;
-
-  margin: 0 auto;
   color: #bcbbbb;
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: end;
+  font-size: 13px;
 `;

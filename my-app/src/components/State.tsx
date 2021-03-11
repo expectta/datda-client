@@ -166,15 +166,15 @@ const StateWrap = styled.div<any>`
     `}
 `;
 const StateIcons = styled.img`
-  width: 2rem;
-  height: 2rem;
+  width: auto;
+  height: 20px;
   margin: 4%;
 `;
 
 const StateText = styled.span<any>`
   flex: 1 auto;
   color: #7f7b7b;
-  font-size: 1.2rem;
+  font-size: 15px;
   ${(props) =>
     props.isTeacher === true &&
     css`
