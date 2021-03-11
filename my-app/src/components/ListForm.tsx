@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 import { notice } from '../assets/testdata';
@@ -8,6 +8,7 @@ interface propsType {
   fristCategory?: string;
   secondCategory?: string;
   contents: any;
+  handleUpdateList: any;
   handleChangeNotice?: any;
   permission: string;
   location: RouteComponentProps['location'];
@@ -20,6 +21,7 @@ function ListForm({
   title,
   fristCategory,
   secondCategory,
+  handleUpdateList,
   handleChangeNotice,
   match,
 }: propsType) {
@@ -34,9 +36,27 @@ function ListForm({
   // 탭 메뉴 변경 핸들러
   const handleChangeMenu = (menu: number, category?: string) => {
     setClickedMenu(menu);
-    console.log(fristCategory, '카테고리 뭐냐고');
-    handleChangeNotice(category);
+    console.log(category, '카테고리 뭐냐고');
+    if (category === '공지사항') {
+      console.log('바뀐 카테고리', category);
+      handleChangeNotice(category);
+      return;
+    }
+    if (category === '행사') {
+      console.log('바뀐 카테고리', category);
+      handleChangeNotice(category);
+      return;
+    }
+    if (category === '투약의뢰서') {
+      console.log('바뀐 카테고리', category);
+      handleChangeNotice(category);
+      return;
+    }
   };
+  // 유저가 현재 있는 리시트 페이지의 내용을 랜더링 하기 위해 리스트를 업데이트 함.
+  useEffect(() => {
+    handleUpdateList(title);
+  }, []);
   console.log('현재 url', match.path);
   return (
     <Wrap>
@@ -80,7 +100,7 @@ function ListForm({
           </CardWrapper>
           <>
             {(() => {
-              console.log(title, ' = 타이틀 ', permission, '= 권한');
+              // console.log(title, ' = 타이틀 ', permission, '= 권한');
               if (title === '알림장' && permission === 'institution') {
                 return null;
               }
@@ -149,7 +169,6 @@ const CardWrapper = styled.div`
   width: 98%;
   height: 85%;
   margin: 0 auto;
-  margin-bottom: 3%;
   overflow: auto;
 `;
 
