@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { director, teacher, parents } from '../../assets/testdata';
 axios.defaults.withCredentials = true;
 import 'dotenv/config';
+import { stringify } from 'querystring';
 
 //! 서버 카카오 로그인 url
 const serverLoginUrl = 'https://datda.link/kakao/login'; //! datda 카카오로그인 주소
@@ -300,7 +301,7 @@ export function requestGuestTeacherRegister(institutionId: string) {
     });
   return result;
 }
-
+//parent 아이 추가
 export function requestGuestParentRegister(
   childName: string,
   institutionId: string,
@@ -355,6 +356,30 @@ export const requestUploadTimetable = async (timetable: any) => {
     });
   return result;
 };
+
+//반 추가 삭제;
+export function requestManageClass(className: string, option: string) {
+  axios.defaults.headers.common['authorization'] = JSON.parse(
+    localStorage.getItem('loginInfo')!,
+  ).accessToken;
+  const results = axios
+    .post('https://datda.link/institution/manageclass', {
+      className: className,
+      clickedButton: option,
+    })
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        return false;
+      }
+    })
+    .catch((err) => {
+      alert(err);
+    });
+  return results;
+}
+
 // 공지사항 요청
 // childId: 2, // ! optional. 부모의 경우 required
 // category: 'notice', // ! optional 이긴 하나 글 업로드 시에는 required
