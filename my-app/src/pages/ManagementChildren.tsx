@@ -17,6 +17,11 @@ interface propsType {
 export default function Management({ userInfo }: propsType) {
   const urlMatch = useRouteMatch();
   handleGetAllChildByInstitution(userInfo.mainData.institutionId);
+  const [inputVlaue, setInputValue] = useState({
+    title: '',
+    content: '',
+    category: '',
+  });
   //승인된 원아의 상태관리
   const [childInfo, setChildInfo] = useState<any>({
     isDataOk: false,
@@ -67,6 +72,19 @@ export default function Management({ userInfo }: propsType) {
         });
       });
   };
+  // 사용자 입력 값 핸들러
+  const handleInputValue = (
+    name: string,
+    content: string,
+    category: string,
+  ) => {
+    console.log(name, ' 제목은?', content, '내용은?');
+    setInputValue({
+      ...inputVlaue,
+      [name]: content,
+      category: category,
+    });
+  };
   useEffect(() => {
     console.log(childInfo.childrenList, '지금 맅스트');
     if (childInfo.childrenList.length !== 0) {
@@ -90,6 +108,8 @@ export default function Management({ userInfo }: propsType) {
         </Route>
         <Route pasth={`${urlMatch.path}/write`}>
           <WriteForm
+            handleInputValue={handleInputValue}
+            inputVlaue={inputVlaue}
             userInfo={userInfo}
             title="급식표 등록"
             type="meal"

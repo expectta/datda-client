@@ -39,8 +39,12 @@ import StateListForm from './StateListForm';
 import StateCardForm from './StateCardForm';
 import TimeTableCard from './TimeTableCard';
 import TimtableListForm from './TimetableListForm';
+import WriteMedicineForm from './WiretMedicineForm';
+import MedicineReport from './MedicineReport';
 
 export {
+  MedicineReport,
+  WriteMedicineForm,
   TimtableListForm,
   TimeTableCard,
   StateCardForm,

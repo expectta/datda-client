@@ -80,7 +80,7 @@ export function handleCheckData(institutionId: string, childId: string) {
       if (doc.data()) {
         return console.log(doc.id, ' ', doc.data);
       }
-      console.log('기관', institutionId, ' 의', childId, ' =아이');
+      // console.log('기관', institutionId, ' 의', childId, ' =아이');
       //아이가 승인이 되지 않았을때
       alert('원아의 정보가 없습니다');
     });
@@ -112,7 +112,7 @@ export function InsertChildStat(institutionId: string, childId: string) {
       if (doc.data()) {
         return doc.data();
       }
-      console.log('기관', institutionId, ' 의', childId, ' =아이');
+      // console.log('기관', institutionId, ' 의', childId, ' =아이');
       //아이가 승인이 되지 않았을때
       alert('원아의 정보가 없습니다');
     });

@@ -34,7 +34,7 @@ export default function State({
       state,
     );
   };
-  console.log(isCheck, ' =출석', isOk, '=완료', isSleep, '=낮잠');
+  // console.log(isCheck, ' =출석', isOk, '=완료', isSleep, '=낮잠');
   return (
     <Wrap>
       <Container type={type}>
@@ -59,7 +59,7 @@ export default function State({
             alt="출석"
           ></StateIcons>
         </StateWrap>
-        <StateWrap nowState={isOk}>
+        <StateWrap nowState={!isOk}>
           {childInfo ? (
             <StateText
               id={childInfo.childId}
@@ -74,8 +74,8 @@ export default function State({
           <StateIcons
             src={
               isOk
-                ? '../images/medicine-white.png'
-                : '../images/medicine-gray.png'
+                ? '../images/medicine-gray.png'
+                : '../images/medicine-white.png'
             }
             alt="투약"
           ></StateIcons>

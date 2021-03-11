@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Link, useRouteMatch, withRouter } from 'react-router-dom';
-import { ImagePostForm, TextAreaForm } from './Index';
+import { ImagePostForm, TextAreaForm, WriteMedicineForm } from './Index';
+import { requestNotice } from '../common/axios';
 interface propsType {
   title: string;
   type: string;
+  inputVlaue: any;
+  handleInputValue: any;
   userInfo: {
     permission: string;
     isLogin: boolean;
@@ -15,29 +18,79 @@ interface propsType {
 interface objectType {
   [key: string]: JSX.Element;
 }
-function WriteForm({ title, type, userInfo }: propsType) {
+function WriteForm({
+  title,
+  type,
+  userInfo,
+  handleInputValue,
+  inputVlaue,
+}: propsType) {
   const urlMatch = useRouteMatch();
   const PREVIOUS_PAGE = -1;
   //메뉴별 선택적으로 화면 구성
   const printContent: objectType = {
-    medicine: <TextAreaForm />,
-    notice: <TextAreaForm />,
+    medicine: (
+      <WriteMedicineForm type={type} handleInputValue={handleInputValue} />
+    ),
+    notice: <TextAreaForm type={type} handleInputValue={handleInputValue} />,
     meal: <ImagePostForm userInfo={userInfo} />,
-    indiNotice: <TextAreaForm />,
+    indiNotice: (
+      <TextAreaForm type={type} handleInputValue={handleInputValue} />
+    ),
     album: <ImagePostForm userInfo={userInfo} />,
   };
+  //제목 입력에 대한 핸들러
+  const handleTitleValue = (e: any) => {
+    const { name, value } = e.target;
+    handleInputValue(name, value, type);
+  };
+  //작성 글 등록 요청
+  const handleRequestPost = async () => {
+    const { title, content, category } = inputVlaue;
+    // console.log('등록요청');
+    // console.log(type, '현재 타입은??');
+    if (type === 'notice') {
+      // console.log('공지사항 등록요청 완료');
+      const result = await requestNotice(title, content, category);
+      // console.log(result, '공지사항 등록요청 완료');
+      history.go(PREVIOUS_PAGE);
+    }
+  };
+  // console.log(type, ' 현재의 타입은!! ');
   return (
     <Wrap>
-      <Title>{title}</Title>
-      <TitleWrapper>
-        <SubTitle>
-          <TitleInput required placeholder="제목"></TitleInput>
-        </SubTitle>
-        <Writer>{'작성자'}</Writer>
-      </TitleWrapper>
+      {type === 'medicine' ? (
+        <TitleWrapper>
+          <SubTitle>
+            <TitleInput
+              required
+              placeholder="제목"
+              name="title"
+              onChange={(e: any) => handleTitleValue(e)}
+            ></TitleInput>
+          </SubTitle>
+          <Writer>작성자 : {userInfo.mainData.userName}</Writer>
+        </TitleWrapper>
+      ) : (
+        <>
+          <Title>{title}</Title>
+          <TitleWrapper>
+            <SubTitle>
+              <TitleInput
+                required
+                placeholder="제목"
+                name="title"
+                onChange={(e: any) => handleTitleValue(e)}
+              ></TitleInput>
+            </SubTitle>
+            <Writer>작성자 : {userInfo.mainData.userName}</Writer>
+          </TitleWrapper>
+        </>
+      )}
+
       <Container>{printContent[type]}</Container>
       <ButtonWrapper>
-        <PostButton to="/main/notice">작성완료</PostButton>
+        <PostButton onClick={() => handleRequestPost()}>작성완료</PostButton>
         <CancleButton onClick={() => history.go(PREVIOUS_PAGE)}>
           취소
         </CancleButton>
@@ -80,7 +133,6 @@ const Writer = styled.span`
   flex: 1 auto;
   text-align: right;
 `;
-
 const TextBox = styled.textarea`
   width: 100%;
   padding: 2%;
@@ -96,15 +148,16 @@ const TextBox = styled.textarea`
   box-shadow: 0px 0px 5px #c8c8c8;
 `;
 const ButtonWrapper = styled.div`
-  text-align: center;
-  height: auto;
+  display: flex;
+  justify-content: center;
   a {
     margin: 2%;
   }
 `;
-const PostButton = styled(Link)`
+const PostButton = styled.div`
   ${({ theme }) => theme.common.defaultButton}
 `;
 const CancleButton = styled.span`
   ${({ theme }) => theme.common.defaultButton}
+  margin-left:3%;
 `;
