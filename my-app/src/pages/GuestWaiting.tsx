@@ -112,13 +112,13 @@ export default function GuestWaiting() {
                   onChange(setInstiInput, e);
                 }}
               ></input>
-              <button
+              <Button
                 onClick={() => {
                   SearchInsti(instiInput);
                 }}
               >
                 검색
-              </button>
+              </Button>
             </div>
           </div>
           <div id="instiResults">
@@ -210,16 +210,18 @@ const WaitingWrap = styled.div`
     }
   }
   #instiSearch {
-    width: 50px;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid;
   }
   #instiResults {
     margin-top: 2%;
-    width: 30vw;
+    width: 22vw;
     height: 20vh;
     overflow: scroll;
     @media ${({ theme }) => theme.device.mobileL} {
       margin-top: 2%;
-      width: 54%;
+      width: 44%;
     }
   }
   .buttonArea {
