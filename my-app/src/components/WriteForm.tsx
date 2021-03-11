@@ -69,6 +69,7 @@ function WriteForm({
               onChange={(e: any) => handleTitleValue(e)}
             ></TitleInput>
           </SubTitle>
+
           <Writer>작성자 : {userInfo.mainData.userName}</Writer>
         </TitleWrapper>
       ) : (
@@ -82,6 +83,8 @@ function WriteForm({
                 name="title"
                 onChange={(e: any) => handleTitleValue(e)}
               ></TitleInput>
+              <RadioBtn type="radio" id="radio" />
+              <label htmlFor="radio"></label>
             </SubTitle>
             <Writer>작성자 : {userInfo.mainData.userName}</Writer>
           </TitleWrapper>
@@ -161,3 +164,5 @@ const CancleButton = styled.span`
   ${({ theme }) => theme.common.defaultButton}
   margin-left:3%;
 `;
+
+const RadioBtn = styled.input``;
