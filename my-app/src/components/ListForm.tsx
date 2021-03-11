@@ -116,9 +116,10 @@ function ListForm({
           </>
         </>
       ) : (
-        <LoadingWrapper>
-          <Loader id="loadingImage" src="../images/loading.gif"></Loader>
-        </LoadingWrapper>
+        // <LoadingWrapper>
+        //   <Loader id="loadingImage" src="../images/loading.gif"></Loader>
+        // </LoadingWrapper>
+        <div>등록된 데이터가 없습니다.</div>
       )}
     </Wrap>
   );

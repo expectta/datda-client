@@ -4,6 +4,7 @@ import { TimeTableCard } from '../components/Index';
 import { requestUploadTimetable } from '../common/axios';
 import { ChangeToArray } from '../common/utils/findCurrentEducation';
 import { Route, Switch, useRouteMatch, Link } from 'react-router-dom';
+import { time } from 'console';
 interface propType {
   userInfo: any;
   timetable: any;
@@ -32,16 +33,20 @@ export default function TimtableListForm({
     <Wrap>
       <Title>시간표</Title>
       <ContentCard>
-        {timetable.list.map((element: any, index: number) => {
-          return (
-            <TimeTableCard
-              key={index}
-              type={type}
-              timetable={element}
-              handleUpdateTimetable={handleUpdateTimetable}
-            ></TimeTableCard>
-          );
-        })}
+        {timetable.list ? (
+          timetable.list.map((element: any, index: number) => {
+            return (
+              <TimeTableCard
+                key={index}
+                type={type}
+                timetable={element}
+                handleUpdateTimetable={handleUpdateTimetable}
+              ></TimeTableCard>
+            );
+          })
+        ) : (
+          <div>등록된 시간표가 없습니다.</div>
+        )}
         {urlMatch.path === '/main/timetable/write' ? (
           <>
             <AddText>
