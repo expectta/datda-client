@@ -30,32 +30,22 @@ function ListForm({
   const [clickedMenu, setClickedMenu] = useState(0);
   //카테고리 상태
   const [category, setCategory] = useState({
-    fristCategory: fristCategory,
-    secondCategory: secondCategory,
+    fristCategory: '',
+    secondCategory: '',
   });
+
   // 탭 메뉴 변경 핸들러
   const handleChangeMenu = (menu: number, category?: string) => {
     setClickedMenu(menu);
-    console.log(category, '카테고리 뭐냐고');
-    if (category === '공지사항') {
-      console.log('바뀐 카테고리', category);
-      handleChangeNotice(category);
-      return;
-    }
-    if (category === '행사') {
-      console.log('바뀐 카테고리', category);
-      handleChangeNotice(category);
-      return;
-    }
-    if (category === '투약의뢰서') {
-      console.log('바뀐 카테고리', category);
-      handleChangeNotice(category);
-      return;
-    }
+    handleChangeNotice(category);
   };
-  // 유저가 현재 있는 리시트 페이지의 내용을 랜더링 하기 위해 리스트를 업데이트 함.
+  // 유저가 현재 있는 리스트 페이지의 내용을 랜더링 하기 위해 리스트를 업데이트 함.
   useEffect(() => {
     handleUpdateList(title);
+    setCategory({
+      fristCategory: fristCategory!,
+      secondCategory: secondCategory!,
+    });
   }, []);
   console.log('현재 url', match.path);
   return (
@@ -83,7 +73,7 @@ function ListForm({
         </Category>
         {/* <CategoryYear>년도별 검색</CategoryYear> */}
       </CategoryWrap>
-      {contents.length > 0 ? (
+      {contents !== undefined ? (
         <>
           <CardWrapper>
             {contents.map((element: any, index: number) => {
@@ -91,7 +81,7 @@ function ListForm({
                 <ListInnerCard
                   key={index}
                   content={element}
-                  title={element.title}
+                  title={title === '알림장' ? title : element.title}
                   // category={notice.category}
                   // createAt={notice.created_at}
                 ></ListInnerCard>
