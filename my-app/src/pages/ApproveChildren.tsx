@@ -140,7 +140,6 @@ const Container = styled.div`
   width: 95%;
   height: 85%;
   margin: 0 auto;
-
   margin-bottom: 3%;
 `;
 

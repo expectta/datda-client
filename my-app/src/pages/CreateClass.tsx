@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
   requestApproveTeacher,
   requestGetClassList,
@@ -6,7 +7,6 @@ import {
 } from '../common/axios';
 import styled from 'styled-components';
 import { ClassManage, TeacherManage, StudentManage } from '../components/Index';
-import axios from 'axios';
 interface Props {
   setModalMessage: any;
   setModalVisible: any;
@@ -97,15 +97,18 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
     <Wrap>
       <h3>{isClass ? '반 구성' : isTeacher ? '선생님 관리' : '원아 관리'}</h3>
       <div>
-        <button className="manageType" onClick={() => toggleTeacher()}>
+        <Button
+          className="manageType manageTeacher"
+          onClick={() => toggleTeacher()}
+        >
           교사관리
-        </button>
+        </Button>
         {/* <button className="manageType" onClick={() => toggleStudent()}>
           원아관리
         </button> */}
-        <button className="manageType" onClick={() => toggleClass()}>
+        <Button className="manageType" onClick={() => toggleClass()}>
           반관리
-        </button>
+        </Button>
       </div>
 
       <TeacherManage
@@ -132,6 +135,11 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
         classCheck={classCheck}
         setClassCheck={setClassCheck}
       />
+      <ButtonArea>
+        <Link to="/main">
+          <Button>닫기</Button>
+        </Link>
+      </ButtonArea>
     </Wrap>
   );
 }
@@ -140,6 +148,7 @@ export default CreateClass;
 const Wrap = styled.div`
   width: 100%;
   height: 97%;
+  padding: 5%;
   .teacherArea {
     background-color: pink;
   }
@@ -169,7 +178,19 @@ const Wrap = styled.div`
   .manageType {
     margin: 2%;
   }
+  .manageTeacher {
+    margin-left: 0%;
+  }
   .indiTeacher {
     text-align: center;
   }
+`;
+
+const ButtonArea = styled.div`
+  text-align: center;
+`;
+
+const Button = styled.button`
+  ${({ theme }) => theme.common.defaultButton}
+  margin : 2% 0 2% 0;
 `;
