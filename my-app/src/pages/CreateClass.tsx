@@ -17,6 +17,8 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
   const [isStudent, setIsStudent] = useState<boolean>(false);
 
   const [message, setMessage] = useState<number>();
+  //useEffect를 위한 인자
+  const [classCheck, setClassCheck] = useState<string>('');
 
   const [classInfo, setClassInfo] = useState([]);
 
@@ -26,9 +28,9 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
     unapproved: [],
   });
 
-  const [students, setStudents] = useState([
-    { userName: 'a', userId: '1', className: 'a', classId: '1' },
-  ]);
+  // const [students, setStudents] = useState([
+  //   { userName: 'a', userId: '1', className: 'a', classId: '1' },
+  // ]);
 
   const initGetClass = async () => {
     const classList = await requestGetClassList();
@@ -61,9 +63,11 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
       setMessage(classId);
     }
   };
+  useEffect(() => {
+    initGetClass();
+  }, [classCheck]);
 
   useEffect(() => {
-    console.log(message);
     initApproveTeacher();
   }, [message]);
 
@@ -71,14 +75,6 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
     initGetClass();
     initApproveTeacher();
   }, []);
-
-  useEffect(() => {
-    console.log(classInfo);
-  }, [classInfo]);
-
-  useEffect(() => {
-    console.log(teachers);
-  }, [teachers]);
 
   const toggleClass = () => {
     setIsClass(true);
@@ -133,6 +129,8 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
         classInfo={classInfo}
         setModalMessage={setModalMessage}
         setModalVisible={setModalVisible}
+        classCheck={classCheck}
+        setClassCheck={setClassCheck}
       />
     </Wrap>
   );
