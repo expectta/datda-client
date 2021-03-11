@@ -27,10 +27,10 @@ export default function Timetable({ userInfo }: props) {
   });
   // 현재 진행중인 교육상태 업데이트
   useEffect(() => {
-    console.log(time, '현재시간');
+    // console.log(time, '현재시간');
     //시간표를 등록했을경우
     if (currentTimeTable.totalTimetable !== "'[]'") {
-      console.log('시간표가 없을경우');
+      // console.log('시간표가 없을경우');
       const currentEducation = findStepEducation(
         time,
         currentTimeTable.totalTimetable,
@@ -44,7 +44,7 @@ export default function Timetable({ userInfo }: props) {
       });
     }
 
-    console.log('현재시간');
+    // console.log('현재시간');
   }, [time]);
 
   // 현재 시간 업데이트
@@ -64,7 +64,7 @@ export default function Timetable({ userInfo }: props) {
   }, []);
   //09시부터 ~ 18시까지 정규수업
   if (Number(time) > 900 && Number(time) < 1700) {
-    console.log('정규시간 아님');
+    // console.log('정규시간 아님');
     setInterval(tick, 1000);
   }
   useEffect(() => {
