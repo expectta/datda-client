@@ -49,7 +49,7 @@ function SignupInstitution({
         .post('https://datda.link/auth/institution', {
           userName: name,
           role: role,
-          mobile: phone,
+          mobile: Number(phone),
           permission: permission,
           email: email,
           password: password,
