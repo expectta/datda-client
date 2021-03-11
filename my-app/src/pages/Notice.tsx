@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { requestNotice } from '../common/axios';
 import {
   Link,
   match,
@@ -16,6 +15,9 @@ import {
   WriteForm,
 } from '../components/Index';
 interface propsType {
+  list: any;
+  handleUpdateList: any;
+  handleChangeNotice: any;
   userInfo: {
     permission: string;
     isLogin: boolean;
@@ -23,53 +25,32 @@ interface propsType {
     currentChild: number;
   };
 }
-function Notice({ userInfo }: propsType) {
-  const [notice, setNotice] = useState({
-    event: [],
-    notice: [],
-    all: [],
-    currentList: [],
-  });
-  //notice 상태 업데이트
-  const handleUpdateNotice = async () => {
-    const childId =
-      userInfo.permission === 'parent'
-        ? userInfo.mainData[userInfo.currentChild].childId
-        : null;
-    const result = await requestNotice(childId);
-    console.log(result, '결과값은?');
-    console.log(childId, ' 지금 아이는??');
-    if (result) {
-      setNotice({
-        event: result.ElEvent,
-        notice: result.ElNotice,
-        all: result.noticeInfo,
-        currentList: result.noticeInfo,
-      });
-    }
-  };
-  // catgegory 선택에 따른 list 내용 변경
-  const handleChangeNotice = (category?: string) => {
-    console.log('현재 선택한 카테고리', category);
-
-    if (category === '공지사항') {
-      setNotice({
-        ...notice,
-        currentList: notice.notice,
-      });
-    }
-    if (category === '행사') {
-      setNotice({
-        ...notice,
-        currentList: notice.event,
-      });
-    }
-  };
-  useEffect(() => {
-    console.log('시작');
-    handleUpdateNotice();
-  }, []);
+function Notice({
+  userInfo,
+  list,
+  handleUpdateList,
+  handleChangeNotice,
+}: propsType) {
   const urlMatch = useRouteMatch();
+  const [inputVlaue, setInputValue] = useState({
+    title: '',
+    content: '',
+    category: '',
+  });
+  // 사용자 입력 값 핸들러
+  const handleInputValue = (
+    name: string,
+    content: string,
+    category: string,
+  ) => {
+    console.log(name, ' 제목은?', content, '내용은?', category, '카테고리는?');
+    setInputValue({
+      ...inputVlaue,
+      [name]: content,
+      category: category,
+    });
+  };
+
   return (
     <Wrap>
       <Switch>
@@ -77,7 +58,8 @@ function Notice({ userInfo }: propsType) {
           <ListForm
             permission={userInfo.permission}
             title="공지사항"
-            contents={notice.currentList}
+            contents={list.currentList}
+            handleUpdateList={handleUpdateList}
             handleChangeNotice={handleChangeNotice}
             fristCategory="공지사항"
             secondCategory="행사"
@@ -85,13 +67,15 @@ function Notice({ userInfo }: propsType) {
         </Route>
         <Route exact path={`${urlMatch.path}/write`}>
           <WriteForm
+            inputVlaue={inputVlaue}
+            handleInputValue={handleInputValue}
             userInfo={userInfo}
             title="공지사항 작성"
             type="notice"
           ></WriteForm>
         </Route>
         <Route exact path={`${urlMatch.path}/post/:no`}>
-          <ReadForm contents={notice.currentList} title="공지사항"></ReadForm>
+          <ReadForm contents={list.currentList} title="공지사항"></ReadForm>
         </Route>
       </Switch>
     </Wrap>
