@@ -168,27 +168,6 @@ const Wrap = styled.div`
       bottom: 0px;
     }
   }
-  #teacher {
-    #teacherWaitingTitle {
-      border-bottom: solid 1px;
-    }
-    #teacherWaiting {
-      border: solid 1px;
-      border-radius: 5px;
-    }
-    #teacherManage {
-      border: solid 1px;
-      border-radius: 5px;
-    }
-    #teacherManageTitle {
-      border-bottom: solid 1px;
-    }
-    .teacherButtonArea1 {
-    }
-    #teacherButtonArea2 {
-      text-align: center;
-    }
-  }
   .manageType {
     margin: 2%;
   }
