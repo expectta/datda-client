@@ -12,6 +12,7 @@ axios.defaults.withCredentials = true;
 const kakaoKey = process.env.REACT_APP_KAKAO_RESTAPI_KEY;
 //!카카오 로그인&회원가입 관련 url
 const redirectUri = 'https://datda.net/login'; //! 후에 datda 주소로 변경
+// const redirectUri = 'http://localhost:3000/login'; //! 후에 datda 주소로 변경
 const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${kakaoKey}&redirect_uri=${redirectUri}&response_type=code`;
 
 interface propType {
@@ -88,12 +89,11 @@ function Login({ hadleSetMainData }: propType) {
   return (
     <LoginGlobal>
       <div className="LoginGlobalFrame">
-        <div className="headerFrame">
-          <Link to="/">
-            <img id="logo" src="../images/logo.png" />
-            <Header>datda</Header>
-          </Link>
-        </div>
+        <Link to="/">
+          <div className="headerFrame">
+            <img id="logo" src="../images/datda_symbol_text_main.png" />
+          </div>
+        </Link>
         <InputBox>
           <input
             className="inputBox"
@@ -136,7 +136,9 @@ function Login({ hadleSetMainData }: propType) {
       {!isLoading ? (
         <div></div>
       ) : (
-        <img id="loadingImage" src="../images/loading.gif"></img>
+        <div className="loadingFrame">
+          <img id="loadingImage" src="../images/loading.gif"></img>
+        </div>
       )}
     </LoginGlobal>
   );
@@ -157,15 +159,26 @@ const LoginGlobal = styled.div`
     align-items: center;
   }
   .headerFrame {
+    display: flex;
+    justify-content: center;
     margin: 150px 0 60px 0;
   }
   #logo {
-    height: auto;
-    width: 40px;
+    height: 40px;
+    width: auto;
   }
-
+  .header {
+    margin-bottom: 0px;
+    font-size: 30px;
+    font-weight: bold;
+    @font-face {
+      font-family: 'NanumSquareWeb';
+      src: url('../fonts/NanumSquareOTFLight.otf');
+    }
+    font-family: 'NanumSquareWeb';
+  }
   #loadingImage {
-    width: 50%;
+    width: 100px;
     height: auto;
   }
   .error {
@@ -174,7 +187,6 @@ const LoginGlobal = styled.div`
   #kakaoImg {
     width: auto;
     height: 30px;
-    margin-bottom: 30px;
   }
 
   @font-face {
@@ -184,13 +196,18 @@ const LoginGlobal = styled.div`
   font-family: 'NanumSquareWeb';
 
   .buttonSession {
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
 
   .buttonEl {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .loadingFrame {
     display: flex;
     justify-content: center;
   }
@@ -205,8 +222,9 @@ const InputBox = styled.div`
   .inputBox {
     border: solid 0px;
     border-bottom: solid 1px;
-    width: 300px;
+    width: 500px;
     margin-bottom: 30px;
+    font-size: 20px;
   }
   margin: 5px 0px 5px 0px;
   @font-face {
@@ -221,12 +239,8 @@ const InputBox = styled.div`
   }
 `;
 
-const Header = styled.span`
-  margin-bottom: 0px;
-  font-size: 3rem;
-`;
 const Button = styled.button`
   ${({ theme }) => theme.common.defaultButton}
-  margin : 2vh 0 3vh 0;
+  margin : 2vh 0 2vh 0;
   width: 216px;
 `;

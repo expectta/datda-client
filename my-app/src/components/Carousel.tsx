@@ -97,11 +97,16 @@ const Arrow = styled.span`
   z-index: 9;
 `;
 const CarouselContainer = styled.div`
-  width: 89%%;
+  width: 90%;
   overflow: hidden;
   height: auto;
   margin: 5%;
   margin-top: 2%;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
 `;
 const SliderContainer = styled.div`
   display: flex;

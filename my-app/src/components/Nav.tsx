@@ -13,10 +13,8 @@ function Nav({ history, handleLogout }: propsType) {
       <WrapLinks>
         <Space></Space>
         <LogoWrapper to="/main">
-          <Logo src="../images/logo.png" alt="logo"></Logo>
-          <Name>{'datda'}</Name>
+          <Logo src="../images/datda_symbol_text_main.png" alt="logo"></Logo>
         </LogoWrapper>
-
         {/* <label onClick={() => history.push('/main/profile')}>프로필</label> */}
         <Links to="/" onClick={() => handleLogout()}>
           Log out
@@ -61,7 +59,7 @@ const LogoWrapper = styled(Link)<any>`
   flex: 22 auto;
 `;
 const Logo = styled.img`
-  width: 21px;
+  width: auto;
   height: 20px;
 `;
 
