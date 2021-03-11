@@ -12,7 +12,7 @@ export default function MiniNotice({ userInfo }: propsType) {
   return (
     <Wrap permission={userInfo.permission}>
       <Title>공지사항</Title>
-      {userInfo.mainData[userInfo.currentChild].notice ? (
+      {userInfo.mainData[userInfo.currentChild] ? (
         <NoticeContainar permission={userInfo.permission}>
           {userInfo.permission === 'parent'
             ? userInfo.mainData[userInfo.currentChild].notice.map(
