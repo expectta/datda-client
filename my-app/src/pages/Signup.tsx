@@ -102,11 +102,11 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
   //! 이것은 카카오 회원가입 할때 필요한 사이드이펙트
   useEffect(() => {
     if (!isKakao) {
+      setIsLoading(true);
       const url = new URL(window.location.href);
       // console.log(url);
       const authorizationCode = url.searchParams.get('code');
       if (authorizationCode) {
-        setIsLoading(true);
         setSelection(false);
         handleKakaoSignup(authorizationCode);
       }
@@ -234,7 +234,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       .post('https://datda.link/auth/signup', {
         userName: name,
         role: role,
-        mobile: phone,
+        mobile: Number(phone),
         permission: permission,
         email: email,
         password: password,

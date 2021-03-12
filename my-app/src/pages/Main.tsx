@@ -433,7 +433,7 @@ const Wrap = styled.div`
     .bottomNav {
       position: fixed;
       bottom: 0px;
-      background: #6f6eff;
+      background: #efefef;
       width: 100%;
       z-index: 10;
       display: flex;
