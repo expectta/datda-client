@@ -6,9 +6,13 @@ export default function SecondSubMenu() {
   return (
     <Wrap>
       <Container>
-        <ImageWrapper to="/main/program">
-          <Image className="bugReport" src="../images/bugReport.png"></Image>
-          <Image className="eduCoding" src="../images/eduCoding.png"></Image>
+        <ImageWrapper>
+          <Link to="/main/report">
+            <Image className="bugReport" src="../images/bugReport.png"></Image>
+          </Link>
+          <Link to="/main/education">
+            <Image className="eduCoding" src="../images/eduCoding.png"></Image>
+          </Link>
         </ImageWrapper>
       </Container>
     </Wrap>
@@ -63,7 +67,7 @@ const Image = styled.img`
   }
 `;
 
-const ImageWrapper = styled(Link)`
+const ImageWrapper = styled.div`
   @media ${({ theme }) => theme.device.mobileL} {
     display: flex;
     flex-direction: column;
