@@ -64,7 +64,14 @@ const ContentCard = styled.div`
   ${({ theme }) => theme.common.contentCardDiv}
 `;
 const Title = styled.div`
-  ${({ theme }) => theme.common.contentTitle}
+  justify-content: start;
+  margin-left: 15px;
+  width: 100%;
+  font-size: 35px;
+  width: 100%;
+  height: 10%;
+  color: black;
+  padding-top: 30px;
 `;
 const CategoryWrap = styled.div`
   width: 95%;
