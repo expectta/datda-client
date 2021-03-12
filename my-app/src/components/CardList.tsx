@@ -18,7 +18,6 @@ function CardList({
 }: propsType) {
   const urlMatch = useRouteMatch();
   console.log(content, '콘텐트 머임');
-
   return (
     <>
       <Wrap>
