@@ -49,11 +49,13 @@ export default function ProfileList({ userInfo }: Props) {
   };
 
   return profileInfo.basicInfo.length === 0 ? (
-    <div>
-      <Loading>
-        <img id="loading" src="../images/loading.gif" />
-      </Loading>
-    </div>
+    <Wrap>
+      <ContentCard>
+        <Loading>
+          <img id="loading" src="../images/loading.gif" />
+        </Loading>
+      </ContentCard>
+    </Wrap>
   ) : (
     <Wrap>
       <ContentCard>
@@ -268,7 +270,6 @@ const Wrap = styled.div`
 `;
 
 const Loading = styled.div`
-  margin-top: 25%;
   display: flex;
   justify-content: center;
   #loading {
@@ -318,6 +319,7 @@ const ProfileApprovedList = styled.div`
   .indiApprovedResults {
     width: 100%;
     display: flex;
+
     .approvedNameResults {
       width: 100%;
       flex: 1 auto;
@@ -375,7 +377,7 @@ const ProfileApprovedWrap = styled.div`
 `;
 
 const ProfileUnapprovedWrap = styled.div`
-  margin-top: 2%;
+  margin-top: 60px;
 `;
 
 const AvatarCard = styled.img`

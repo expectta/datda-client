@@ -196,6 +196,11 @@ const IntroGlobal = styled.div`
 
   .bigText{
     font-size : ${({ theme }) => theme.fontSizes.titleSize};
+    @font-face {
+      font-family: 'NanumSquareWebBig';
+      src: url('../fonts/NanumSquareOTFExtraBold.otf');
+    }
+    font-family: 'NanumSquareWebBig';
     @media ${({ theme }) => theme.device.mobileL} {
       font-size: 2em;
     }
@@ -211,8 +216,8 @@ const IntroGlobal = styled.div`
   }
   #goToTop{
     position: fixed;
-    left: 90vw;
-    top: 78vh;
+    left: 94vw;
+    top: 79vh;
     width : 5%;
     cursor: pointer;
     @media ${({ theme }) => theme.device.mobileL} {
