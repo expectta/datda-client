@@ -211,8 +211,8 @@ const IntroGlobal = styled.div`
   }
   #goToTop{
     position: fixed;
-    left: 95vw;
-    top: 70vh;
+    left: 90vw;
+    top: 78vh;
     width : 5%;
     cursor: pointer;
     @media ${({ theme }) => theme.device.mobileL} {
