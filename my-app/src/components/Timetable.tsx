@@ -57,6 +57,12 @@ export default function Timetable({ userInfo }: props) {
       minute = '0' + minute;
       // console.log('분이 이상', hour, '시', minute, '분');
     }
+    if (Number(time) < 900 || Number(time) > 1700) {
+      setCurrentTimeTable({
+        ...currentTimeTable,
+        currentEducation: '수업시간이 아니에요',
+      });
+    }
     setTime(`${hour}${minute}`);
   };
   useEffect(() => {
