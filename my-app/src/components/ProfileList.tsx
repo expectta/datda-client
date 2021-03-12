@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { requestGetProfile } from '../common/axios';
+import { GuestWaiting } from '../pages/Index';
 
 interface Props {
   userInfo: {
@@ -48,9 +49,13 @@ export default function ProfileList({ userInfo }: Props) {
   };
 
   return profileInfo.basicInfo.length === 0 ? (
-    <div>
-      <img id="loading" src="../images/loading.gif" />
-    </div>
+    <Wrap>
+      <ContentCard>
+        <Loading>
+          <img id="loading" src="../images/loading.gif" />
+        </Loading>
+      </ContentCard>
+    </Wrap>
   ) : (
     <Wrap>
       <ContentCard>
@@ -157,25 +162,46 @@ export default function ProfileList({ userInfo }: Props) {
           {JSON.parse(localStorage.getItem('loginInfo')!).permission ===
           'parent' ? (
             <>
-              <div className="blue">승인된 내 아이들</div>
-              <div id="profileApprovedList">
-                {profileInfo.approved.map((child: any) => (
-                  <div>
-                    <span>{child.name}</span>
-                    <span>{child.classs.className}</span>
-                    <span>{child.institution.institutionName}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="blue">승인 대기중인 내 아이들</div>
-              <div id="profileUnapprovedList">
-                {profileInfo.unapproved.map((child: any) => (
-                  <div>
-                    <span>{child.name}</span>
-                    <span>{child.institution.institutionName}</span>
-                  </div>
-                ))}
-              </div>
+              <ProfileApprovedWrap>
+                <div className="blue bigText">승인된 내 아이들</div>
+                <ProfileApprovedList>
+                  <ApprovedTitle>
+                    <span className="approvedName">이름</span>
+                    <span className="approvedClass">반</span>
+                    <span className="approvedInsti">기관</span>
+                  </ApprovedTitle>
+                  {profileInfo.approved.map((child: any) => (
+                    <div className="indiApprovedResults">
+                      <span className="approvedNameResults">{child.name}</span>
+                      <span className="approvedClassResults">
+                        {child.classs.className}
+                      </span>
+                      <span className="approvedInstiResults">
+                        {child.institution.institutionName}
+                      </span>
+                    </div>
+                  ))}
+                </ProfileApprovedList>
+              </ProfileApprovedWrap>
+              <ProfileUnapprovedWrap>
+                <div className="blue bigText">승인 대기중인 내 아이들</div>
+                <ProfileUnapprovedList>
+                  <UnapprovedTitle>
+                    <span className="unapprovedName">이름</span>
+                    <span className="unapprovedInsti">기관</span>
+                  </UnapprovedTitle>
+                  {profileInfo.unapproved.map((child: any) => (
+                    <div className="indiUnapprovedResults">
+                      <span className="unapprovedNameResults">
+                        {child.name}
+                      </span>
+                      <span className="unapprovedInstiResults">
+                        {child.institution.institutionName}
+                      </span>
+                    </div>
+                  ))}
+                </ProfileUnapprovedList>
+              </ProfileUnapprovedWrap>
             </>
           ) : (
             <div></div>
@@ -205,6 +231,7 @@ const Wrap = styled.div`
   }
   #profile {
     padding-left: 5%;
+    padding-right: 5%;
   }
   .profile {
     margin-bottom: 13%;
@@ -219,13 +246,9 @@ const Wrap = styled.div`
   .blue {
     color: blue;
   }
-  #profileApprovedList {
-    border: solid 1px;
-    border-radius: 10px;
-  }
-  #profileUnapprovedList {
-    border: solid 1px;
-    border-radius: 10px;
+
+  .blue.bigText {
+    font-size: 2rem;
   }
   .textBox {
     border: solid 0px;
@@ -245,15 +268,116 @@ const Wrap = styled.div`
     padding-left: 40px;
   }
 `;
+
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  #loading {
+    text-align: center;
+    width: 25%;
+    height: auto;
+  }
+`;
+
 const ContentCard = styled.div`
   ${({ theme }) => theme.common.contentCardDiv}
 `;
-const Title = styled.div`
+const Title = styled.h3`
   ${({ theme }) => theme.common.contentTitle}
+  color : black;
+  margin-left: 5%;
 `;
 const Button = styled.button`
   ${({ theme }) => theme.common.defaultButton}
   margin : 4% 2% 0 2%;
+`;
+
+const ApprovedTitle = styled.div`
+  width: 100%;
+  display: flex;
+  border-bottom: solid 1px;
+  .approvedName {
+    width: 100%;
+    flex: 1 auto;
+    text-align: center;
+  }
+  .approvedClass {
+    width: 100%;
+    flex: 1 auto;
+    text-align: center;
+  }
+  .approvedInsti {
+    width: 100%;
+    flex: 1 auto;
+    text-align: center;
+  }
+`;
+
+const ProfileApprovedList = styled.div`
+  border: solid 1px;
+  border-radius: 10px;
+  .indiApprovedResults {
+    width: 100%;
+    display: flex;
+
+    .approvedNameResults {
+      width: 100%;
+      flex: 1 auto;
+      text-align: center;
+    }
+    .approvedClassResults {
+      width: 100%;
+      flex: 1 auto;
+      text-align: center;
+    }
+    .approvedInstiResults {
+      width: 100%;
+      flex: 1 auto;
+      text-align: center;
+    }
+  }
+`;
+
+const ProfileUnapprovedList = styled.div`
+  border: solid 1px;
+  border-radius: 10px;
+  .indiUnapprovedResults {
+    width: 100%;
+    display: flex;
+    .unapprovedNameResults {
+      width: 100%;
+      flex: 1 auto;
+      text-align: center;
+    }
+    .unapprovedInstiResults {
+      width: 100%;
+      flex: 1 auto;
+      text-align: center;
+    }
+`;
+
+const UnapprovedTitle = styled.div`
+  width: 100%;
+  display: flex;
+  border-bottom: solid 1px;
+  .unapprovedName {
+    width: 100%;
+    flex: 1 auto;
+    text-align: center;
+  }
+  .unapprovedInsti {
+    width: 100%;
+    flex: 1 auto;
+    text-align: center;
+  }
+`;
+
+const ProfileApprovedWrap = styled.div`
+  margin-top: 2%;
+`;
+
+const ProfileUnapprovedWrap = styled.div`
+  margin-top: 60px;
 `;
 
 const AvatarCard = styled.img`

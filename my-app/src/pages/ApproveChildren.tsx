@@ -59,6 +59,7 @@ export default function ApproveChildren({ userInfo }: propType) {
               <FristCategory>어린이</FristCategory>
               <SecondCategory>시간</SecondCategory>
               <ThirdCategory>보호자</ThirdCategory>
+              <BlankCategory />
             </CategoryWrapper>
             <Contents>
               {approveChildren.unapproved.map((element: any, index: number) => {
@@ -69,8 +70,7 @@ export default function ApproveChildren({ userInfo }: propType) {
                       <CardName>{element.childName} 어린이</CardName>
                       <CardTime>{changeTimeStamp(element.createdAt)}</CardTime>
                       <CardParent>{element.user.parentName}</CardParent>
-                    </Wrapper>
-                    <CardButtonWrapper>
+
                       <CardAllowButton
                         onClick={() =>
                           handleApproveChild(
@@ -81,7 +81,7 @@ export default function ApproveChildren({ userInfo }: propType) {
                       >
                         수락
                       </CardAllowButton>
-                    </CardButtonWrapper>
+                    </Wrapper>
                   </CardWrapper>
                 );
               })}
@@ -93,6 +93,7 @@ export default function ApproveChildren({ userInfo }: propType) {
               <FristCategory>어린이</FristCategory>
               <SecondCategory>시간</SecondCategory>
               <ThirdCategory>보호자</ThirdCategory>
+              <BlankCategory />
             </CategoryWrapper>
             <Contents>
               {approveChildren.approved.map((element: any, index: number) => {
@@ -102,8 +103,6 @@ export default function ApproveChildren({ userInfo }: propType) {
                       <CardName>{element.childName} 어린이</CardName>
                       <CardTime>{changeTimeStamp(element.createdAt)}</CardTime>
                       <CardParent>{element.user.parentName}</CardParent>
-                    </Wrapper>
-                    <CardButtonWrapper>
                       <CardAllowButton
                         onClick={() =>
                           handleUnapproveChild(
@@ -114,7 +113,7 @@ export default function ApproveChildren({ userInfo }: propType) {
                       >
                         승인해제
                       </CardAllowButton>
-                    </CardButtonWrapper>
+                    </Wrapper>
                   </CardWrapper>
                 );
               })}
@@ -184,19 +183,31 @@ const CategoryWrapper = styled.div`
 `;
 
 const FristCategory = styled.span`
+  width: 81%;
   align-self: center;
   color: ${({ theme }) => theme.colors.gray};
   flex: 1 auto;
 `;
 const SecondCategory = styled.span`
+  width: 100%;
   align-self: center;
   color: ${({ theme }) => theme.colors.gray};
-  flex: 4 auto;
+  flex: 1 auto;
 `;
 const ThirdCategory = styled.span`
+  width: 100%;
+  padding-left: 37px;
   align-self: center;
   color: ${({ theme }) => theme.colors.gray};
-  flex: 5 auto;
+  flex: 1 auto;
+  @media ${({ theme }) => theme.device.mobileL} {
+    padding-left: 1px;
+  }
+`;
+
+const BlankCategory = styled.span`
+  width: 100%;
+  flex: 1 auto;
 `;
 const Contents = styled.div`
   width: 100%;
@@ -209,10 +220,7 @@ const Contents = styled.div`
 const CardWrapper = styled.div`
   width: 100%;
   height: 40px;
-  display: flex;
-  span {
-    margin: 0% 2% 0% 2%;
-  }
+  
   @media ${({ theme }) => theme.device.tablet} {
     display: grid;
     text-align-last: center;
@@ -223,25 +231,30 @@ const CardWrapper = styled.div`
   color: ${({ theme }) => theme.colors.gray};
 `;
 const CardName = styled.span`
+  text-align: center;
+  width: 75%;
   flex: 1 auto;
 `;
 const CardTime = styled.span`
-  flex: 2 auto;
+  text-align: center;
+  width: 100%;
+  flex: 1 auto;
 `;
 const CardParent = styled.span`
+  text-align: center;
+  width: 100%;
   flex: 1 auto;
 `;
 const CardButtonWrapper = styled.span`
   flex: 1 auto;
-  text-align: end;
-  align-self: center;
 `;
-const CardAllowButton = styled.span`
+const CardAllowButton = styled.button`
+  width: 69%;
+  height: 27px;
   ${({ theme }) => theme.common.unclickedButtonStyle}
   flex: 1 auto;
 `;
 const Wrapper = styled.span`
-  flex: 3 auto;
-  align-self: center;
+  width: 100%;
   display: flex;
 `;
