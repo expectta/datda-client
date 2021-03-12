@@ -201,6 +201,7 @@ const LoginGlobal = styled.div`
   #kakaoImg {
     width: auto;
     height: 30px;
+    cursor: pointer;
   }
 
   @font-face {

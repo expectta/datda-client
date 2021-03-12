@@ -24,11 +24,11 @@ function Intro() {
       <Section1 className="section 1">
         <Section1Box>
           <div className="bigText big1">
-            <div className="text">
+            <div className="insuText">
               <span className="bold">정확한 공지사항</span>
               <span>과 </span>
             </div>
-            <div className="text">
+            <div className="insuText">
               <span className="bold">알림장</span>
               <span> 전달받기</span>
             </div>
@@ -50,11 +50,11 @@ function Intro() {
             <Section2Box>
               <div className="bigText section2">
                 <div className="text">
-                  <span className="bold bigText">아이들의 모든 일상을</span>
+                  <span className="bold insuText">아이들의 모든 일상을</span>
                 </div>
                 <div className="text">
-                  <span className="bold bigText">실시간</span>
-                  <span className="bigText">으로 공유하기</span>
+                  <span className="bold insuText">실시간</span>
+                  <span className="insuText">으로 공유하기</span>
                 </div>
               </div>
               <div className="smallText">
@@ -83,8 +83,8 @@ function Intro() {
       <Section3 className="section 3">
         <div className="section3Box">
           <div className="bigText bold">
-            <div className="text">아이들이 먹는 음식은</div>
-            <div className="text">너무나도 중요하니까</div>
+            <div className="insuText">아이들이 먹는 음식은</div>
+            <div className="insuText">너무나도 중요하니까</div>
           </div>
           <div className="smallText">
             <div className="text">아이들이 건강한 몸을 위해</div>
@@ -102,8 +102,8 @@ function Intro() {
         <div id="section4Flex">
           <div id="section4Box">
             <div className="bigText section4 bold">
-              <div className="text">간단하게 선생님과 </div>
-              <div className="text">원아 관리하기</div>
+              <div className="insuText">간단하게 선생님과 </div>
+              <div className="insuText">원아 관리하기</div>
             </div>
             <div className="smallText">
               <div className="text">간편하게 선생님과 원아를 반배정 하기</div>
@@ -125,8 +125,8 @@ function Intro() {
       <Section5 className="section 5">
         <div id="section5Box">
           <div className="bigText bold">
-            <div className="text">투약 의뢰서로</div>
-            <div className="text">아이건강 챙기기</div>
+            <div className="insuText">투약 의뢰서로</div>
+            <div className="insuText">아이건강 챙기기</div>
           </div>
           <div className="smallText">
             <div className="text">닿다는 투약의로서를 온라인으로 접수하여</div>
@@ -144,9 +144,9 @@ function Intro() {
         <div id="section6Left">
           <div id="section6Box">
             <div className="bigText bold">
-              <div className="text">빠르게</div>
-              <div className="text">차량정보</div>
-              <div className="text">확인하기</div>
+              <div className="insuText">빠르게</div>
+              <div className="insuText">차량정보</div>
+              <div className="insuText">확인하기</div>
             </div>
             <div className="smallText">
               <div className="text">우리 아이 무슨 버스 타야 좋을까</div>
@@ -195,20 +195,31 @@ const IntroGlobal = styled.div`
   .bold {
     font-weight: bold;
   }
-
+  .insuText {
+    font-size: 25px;
+    @media only screen and (min-width: 700px) {
+      font-size: 55px;
+    }
+    @media only screen and (min-width: 1680px) {
+      font-size : 80px;
+    }
+  }
   .bigText{
-    font-size : 100px;
-    @media ${({ theme }) => theme.device.mobileL} {
+    font-size: 80px;
+    @media only screen and (max-width: 700px) {
       font-size: 25px;
     }
-    .section2{
-      font-size : 2rem;
+    @media only screen and (max-width: 1680px) {
+      font-size : 80px;
     }
   }
   .smallText{
     font-size : 30px;
     @media ${({ theme }) => theme.device.mobileL} {
       font-size : 16px;
+    }
+    @media only screen and (max-width: 1680px) {
+      font-size : 20px;
     }
   }
   .text{
@@ -319,10 +330,19 @@ const Section2 = styled.div`
   #section2Image1 {
     margin-top: -15%;
     width: 800px;
-    @media ${({ theme }) => theme.device.mobileL} {
+    @media only screen and (max-width: 700px) {
       resize: both;
       width: 400px;
-      margin-top: 30%;
+      height: auto;
+      margin-top: 1px;
+    }
+    @media only screen and (max-width: 1680px) {
+      height: auto;
+      width: 700px;
+    }
+    @media only screen and (max-width: 1550px) {
+      height: auto;
+      width: 600px;
     }
   }
 `;
@@ -437,7 +457,7 @@ const Section6 = styled.div`
   }
 
   #section6Left {
-    width: 30%;
+    width: 70%;
     @media ${({ theme }) => theme.device.mobileL} {
       width: 100%;
       margin-top: 10%;
@@ -453,9 +473,14 @@ const Section6 = styled.div`
     }
   }
   #section6Image1 {
-    @media ${({ theme }) => theme.device.mobileL} {
-      width: 650px;
-      text-align: left;
+    height: 300px;
+    width: auto;
+    text-align: left;
+    margin-top: 10px;
+    @media only screen and (min-width: 1680px) {
+      height: 500px;
+      width: auto;
+      margin-top: 30px;
     }
   }
 `;
