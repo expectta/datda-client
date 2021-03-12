@@ -55,7 +55,7 @@ export default function ListInnerCard(props: propsType) {
           <Content>{title}</Content>
         )}
 
-        <Writer>작성자 : {writer}</Writer>
+        <Writer>{writer}</Writer>
         <CreateAt>
           {content ? changeTimeStamp(content.createdAt) : '누구냐'}
         </CreateAt>

@@ -4,7 +4,11 @@ import { time } from 'console';
 export const findStepEducation = (currentTime: string, totalTimetable: any) => {
   // console.log(totalTimetable, '타임테이블');
   let currentStep = 0;
-  if (totalTimetable === null || totalTimetable === undefined) {
+  if (
+    totalTimetable === null ||
+    totalTimetable === undefined ||
+    totalTimetable === 'undefinded'
+  ) {
     return;
   }
   const data = totalTimetable
@@ -30,6 +34,12 @@ export const findStepEducation = (currentTime: string, totalTimetable: any) => {
       ),
     );
   }
+  console.log(
+    totalTimetable,
+    '타임테이블!!!!!!!',
+    currentTime,
+    '커렌트타임!!!!!!!!',
+  );
   const calculatedCurrentTime = Number(currentTime);
   for (const element of newArr) {
     const fristTime = element.time.split('~')[0];

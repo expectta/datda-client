@@ -60,14 +60,16 @@ export default function Carousel({ userInfo }: propType) {
         ) : null}
 
         <More to="/main/album">더보기</More>
-        <SlideButtonWrap>
-          <SlideButton onClick={prevSlide}>
-            <Arrow>{'<'}</Arrow>
-          </SlideButton>
-          <SlideButton onClick={nextSlide}>
-            <Arrow>{'>'}</Arrow>
-          </SlideButton>
-        </SlideButtonWrap>
+        {userInfo.mainData.album.length >= 1 ? (
+          <SlideButtonWrap>
+            <SlideButton onClick={prevSlide}>
+              <Arrow>{'<'}</Arrow>
+            </SlideButton>
+            <SlideButton onClick={nextSlide}>
+              <Arrow>{'>'}</Arrow>
+            </SlideButton>
+          </SlideButtonWrap>
+        ) : null}
       </CarouselContainer>
     </>
   );
