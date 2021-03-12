@@ -48,9 +48,11 @@ export default function Modal({
       >
         <ModalInner tabIndex={0} className="modal-inner">
           {closable && (
-            <CloseButton className="modal-close" onClick={close}>
-              X
-            </CloseButton>
+            <ClossButtonWrapper>
+              <CloseButton className="modal-close" onClick={close}>
+                X
+              </CloseButton>
+            </ClossButtonWrapper>
           )}
           {children}
           <ConfirmButton onClick={close}>확인</ConfirmButton>
@@ -62,11 +64,24 @@ export default function Modal({
 interface myStyle {
   visible: boolean;
 }
+const ClossButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 const CloseButton = styled.button`
-  border: 0px;
-  display: block;
-  float: right;
-  background: white;
+  background: #d8d8d8;
+  color: white;
+  padding: 5px 20px 5px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: 0px;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: #6f6eff;
+    color: #fff;
+  }
 `;
 
 const ModalWrapper = styled.div`
@@ -107,16 +122,19 @@ const ModalInner = styled.div`
   transform: translateY(-50%);
   margin: 0 auto;
   padding: 20px 20px;
+  &:focus {
+    outline: none;
+  }
 `;
 const ConfirmButton = styled.button`
-  border: 1px solid #0b0b20;
-  padding: 0.5em 2em;
-  color: #0b0b20;
-  border-radius: 10px;
-  background: white;
-  &:hover {
-    transition: all 0.3s ease-in-out;
-    background-color: #0b0b20;
-    color: #fff;
-  }
+  background: #6f6eff;
+  width: 50%;
+  font-size: 1rem;
+  color: white;
+  padding: 5px 20px 5px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: 0px;
+  cursor: pointer;
+  text-decoration: none;
 `;
