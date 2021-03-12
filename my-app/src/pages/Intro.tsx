@@ -6,10 +6,13 @@ import { ImagePostForm } from '../components/Index';
 function Intro() {
   return (
     <IntroGlobal id="intro_global">
+      <div className="logoWhiteFrame">
+        <img className="logoWhite" src="../images/logo_white.png" />
+      </div>
       <SectionIntro className="section intro">
         <div id="introText" data-aos="fade-down" data-aos-duration="2000">
-          <div className="text">우리 아이 유치원 생활</div>
-          <div className="text">더욱 스마트하게 관리하기</div>
+          <div className="insuText">우리 아이 유치원 생활</div>
+          <div className="insuText">더욱 스마트하게 관리하기</div>
         </div>
         <LinkArea>
           <Link to="/signup">
@@ -192,6 +195,22 @@ const IntroGlobal = styled.div`
       width : 100%;
     }
   }
+  .logoWhiteFrame {
+    position: relative;
+    width: 100%;
+  }
+  .logoWhite {
+    display: none;
+    @media only screen and (max-width: 700px) {
+      display: block;
+      position: absolute;
+      height: 40px;
+      width: auto;
+      left: 50%;
+      top: 50%;
+      transform:translate(-50%, 200%);
+    }
+  }
   .bold {
     font-weight: bold;
   }
@@ -206,6 +225,11 @@ const IntroGlobal = styled.div`
   }
   .bigText{
     font-size: 80px;
+    @font-face {
+      font-family: 'NanumSquareWebBig';
+      src: url('../fonts/NanumSquareOTFExtraBold.otf');
+    }
+    font-family: 'NanumSquareWebBig';
     @media only screen and (max-width: 700px) {
       font-size: 25px;
     }
@@ -216,7 +240,7 @@ const IntroGlobal = styled.div`
   .smallText{
     font-size : 30px;
     @media ${({ theme }) => theme.device.mobileL} {
-      font-size : 16px;
+      font-size : 15px;
     }
     @media only screen and (max-width: 1680px) {
       font-size : 20px;
@@ -224,11 +248,14 @@ const IntroGlobal = styled.div`
   }
   .text{
     margin : 2vh 0 2vh 0;
+    @media ${({ theme }) => theme.device.mobileL} {
+      font-size : 15px;
+    }
   }
   #goToTop{
     position: fixed;
-    left: 95vw;
-    top: 70vh;
+    left: 94vw;
+    top: 79vh;
     width : 5%;
     cursor: pointer;
     @media ${({ theme }) => theme.device.mobileL} {

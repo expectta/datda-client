@@ -74,6 +74,11 @@ const TimeWrapper = styled.span`
 const ContentsWrapper = styled.span`
   display: flex;
   flex: 2 auto;
+  @font-face {
+    font-family: 'NanumSquareWeb';
+    src: url('../fonts/NanumSquareOTFLight.otf');
+  }
+  font-family: 'NanumSquareWeb';
 `;
 const Number = styled.span`
   font-size: 1.2rem;

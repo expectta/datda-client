@@ -177,7 +177,7 @@ const TeacherManageWrap = styled.div`
       flex: 1 auto;
     }
     .titleBlank {
-      width: 71%;
+      width: 41%;
       flex: 1 auto;
     }
   }
@@ -196,6 +196,7 @@ const TeacherManageWrap = styled.div`
     .waitingEl {
       display: flex;
       width: 100%;
+      margin: 1% 0 1% 0;
     }
     .nameResults {
       flex: 1 auto;
@@ -209,13 +210,13 @@ const TeacherManageWrap = styled.div`
     }
     .approvedButton {
       flex: 1 auto;
-      width: 51%;
+      width: 25%;
     }
   }
   #teacherManage {
     border: solid 1px;
     border-radius: 5px;
-    height: 50vh;
+    height: 51vh;
     #teacherManageList {
       overflow: scroll;
       #manageListArea {
@@ -241,7 +242,7 @@ const TeacherManageWrap = styled.div`
         flex: 1 auto;
       }
       .titleButton {
-        width: 100%;
+        width: 61%;
         flex: 1 auto;
       }
     }
@@ -249,7 +250,7 @@ const TeacherManageWrap = styled.div`
 
   .managingEl {
     display: flex;
-    margin-bottom: 2px;
+    margin: 1% 0 1% 0;
     .manageRadio {
       width: 100%;
       flex: 1 auto;
@@ -265,7 +266,7 @@ const TeacherManageWrap = styled.div`
       flex: 1 auto;
     }
     .unapprovedButton {
-      width: 68%;
+      width: 31%;
       flex: 1 auto;
     }
   }

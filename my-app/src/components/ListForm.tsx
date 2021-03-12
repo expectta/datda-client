@@ -93,39 +93,39 @@ function ListForm({
                 ></ListInnerCard>
               );
             })}
+            <>
+              {(() => {
+                // console.log(title, ' = 타이틀 ', permission, '= 권한');
+                if (title === '알림장' && permission === 'institution') {
+                  return null;
+                }
+                if (
+                  title === '투약의뢰서' &&
+                  (permission === 'institution' || permission === 'teacher')
+                ) {
+                  return null;
+                }
+                if (title === '공지사항' && permission === 'parent') {
+                  return null;
+                }
+                return (
+                  <ButtonWrapper>
+                    <WireButton to={`${match.path}/write`}>작성</WireButton>
+                    <GoListButton onClick={() => history.replace('/main')}>
+                      {' '}
+                      홈
+                    </GoListButton>
+                  </ButtonWrapper>
+                );
+              })()}
+            </>
           </CardWrapper>
-          <>
-            {(() => {
-              // console.log(title, ' = 타이틀 ', permission, '= 권한');
-              if (title === '알림장' && permission === 'institution') {
-                return null;
-              }
-              if (
-                title === '투약의뢰서' &&
-                (permission === 'institution' || permission === 'teacher')
-              ) {
-                return null;
-              }
-              if (title === '공지사항' && permission === 'parent') {
-                return null;
-              }
-              return (
-                <ButtonWrapper>
-                  <WireButton to={`${match.path}/write`}>작성</WireButton>
-                  <GoListButton onClick={() => history.replace('/main')}>
-                    {' '}
-                    홈
-                  </GoListButton>
-                </ButtonWrapper>
-              );
-            })()}
-          </>
         </>
       ) : (
         // <LoadingWrapper>
         //   <Loader id="loadingImage" src="../images/loading.gif"></Loader>
         // </LoadingWrapper>
-        <div>등록된 데이터가 없습니다.</div>
+        <div className="emptyData">등록된 데이터가 없습니다.</div>
       )}
     </Wrap>
   );
@@ -134,6 +134,15 @@ export default withRouter(ListForm);
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
+  .emptyData {
+    @font-face {
+      font-family: 'NanumSquareWeb';
+      src: url('../fonts/NanumSquareOTFLight.otf');
+    }
+    font-family: 'NanumSquareWeb';
+    text-align: center;
+    margin-top: 100px;
+  }
 `;
 
 const ContentCard = styled.div`
@@ -171,14 +180,14 @@ const CategoryYear = styled.span`
 const CardWrapper = styled.div`
   width: 98%;
   height: 85%;
-  margin: 0 auto;
+  margin: 5% 0;
   overflow: auto;
 `;
 
 const ButtonWrapper = styled.div`
   width: 95%;
   text-align: center;
-  margin: 0 auto;
+  margin: 10% 0;
 `;
 const WireButton = styled(Link)`
   text-decoration: none;

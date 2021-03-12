@@ -135,10 +135,11 @@ export default function GuestWaiting() {
                 <span>{insti.institutionName}</span>
               </div>
             ))}
-            <div>{errorMessage}</div>
           </div>
+          <div className="errorMessage">{errorMessage}</div>
           <div className="buttonArea">
             <Button
+              className="complete"
               onClick={() => {
                 handleNextStep(checked.institutionId);
               }}
@@ -161,7 +162,7 @@ export default function GuestWaiting() {
               }}
             />
           </div>
-          <div>{errorMessage}</div>
+          <div className="errorMessage">{errorMessage}</div>
           <div className="buttonArea">
             <Button
               onClick={() => {
@@ -215,12 +216,11 @@ const WaitingWrap = styled.div`
     border-bottom: 1px solid;
   }
   #instiResults {
-    margin-top: 2%;
     width: 22vw;
     height: 20vh;
     overflow: scroll;
+    margin-bottom: 2vh;
     @media ${({ theme }) => theme.device.mobileL} {
-      margin-top: 2%;
       width: 44%;
     }
   }
@@ -230,9 +230,15 @@ const WaitingWrap = styled.div`
   @media ${({ theme }) => theme.device.mobileL} {
     background: none;
   }
+  .complete {
+    margin: 2vh 0vw 2vh 0vw;
+  }
+  .errorMessage {
+    color: red;
+  }
 `;
 
 const Button = styled.button`
   ${({ theme }) => theme.common.defaultButton}
-  margin: 2vh 0vw 2vh 0vw;
+  margin: 2vh 0vw 2vh 1vw;
 `;

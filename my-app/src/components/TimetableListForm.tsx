@@ -45,7 +45,7 @@ export default function TimtableListForm({
             );
           })
         ) : (
-          <div>등록된 시간표가 없습니다.</div>
+          <div className="emptyTime">등록된 시간표가 없습니다.</div>
         )}
         {urlMatch.path === '/main/timetable/write' ? (
           <>
@@ -81,13 +81,26 @@ const Wrap = styled.div`
   height: 95%;
 `;
 const ContentCard = styled.div`
-  height: 87%;
+  height: 50%;
   overflow: auto;
+  .emptyTime {
+    @font-face {
+      font-family: 'NanumSquareWeb';
+      src: url('../fonts/NanumSquareOTFLight.otf');
+    }
+    font-family: 'NanumSquareWeb';
+    text-align: center;
+    margin-top: 100px;
+  }
 `;
 const Title = styled.div`
-  ${({ theme }) => theme.common.contentTitle}
-  width:100%;
-  border-bottom: 1px solid lightgray;
+  justify-content: start;
+  margin-left: 15px;
+  font-size: 35px;
+  width: 100%;
+  height: 10%;
+  color: black;
+  padding-top: 30px;
 `;
 const AddText = styled.div`
   width: 100%;
