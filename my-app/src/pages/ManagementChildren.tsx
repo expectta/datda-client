@@ -106,7 +106,7 @@ export default function Management({ userInfo }: propsType) {
             secondCategory="반별"
           ></StateListForm>
         </Route>
-        <Route pasth={`${urlMatch.path}/write`}>
+        {/* <Route pasth={`${urlMatch.path}/write`}>
           <WriteForm
             handleInputValue={handleInputValue}
             inputVlaue={inputVlaue}
@@ -114,7 +114,7 @@ export default function Management({ userInfo }: propsType) {
             title="급식표 등록"
             type="meal"
           ></WriteForm>
-        </Route>
+        </Route> */}
       </Switch>
     </Wrap>
   );
