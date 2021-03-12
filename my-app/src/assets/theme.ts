@@ -61,7 +61,6 @@ const common = {
 		outline:0px;
 		cursor:pointer;
     text-decoration: none;
-
 	`,
   //미선택 버튼 (회색)
   unclickedButtonStyle: `

@@ -167,7 +167,7 @@ const StateWrap = styled.div<any>`
 `;
 const StateIcons = styled.img`
   width: auto;
-  height: 20px;
+  height: 25px;
   margin: 4%;
 `;
 
