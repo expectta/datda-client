@@ -24,11 +24,11 @@ function Intro() {
       <Section1 className="section 1">
         <Section1Box>
           <div className="bigText big1">
-            <div className="text">
+            <div className="insuText">
               <span className="bold">정확한 공지사항</span>
               <span>과 </span>
             </div>
-            <div className="text">
+            <div className="insuText">
               <span className="bold">알림장</span>
               <span> 전달받기</span>
             </div>
@@ -50,11 +50,11 @@ function Intro() {
             <Section2Box>
               <div className="bigText section2">
                 <div className="text">
-                  <span className="bold">아이들의 모든 일상을</span>
+                  <span className="bold insuText">아이들의 모든 일상을</span>
                 </div>
                 <div className="text">
-                  <span className="bold">실시간</span>
-                  <span>으로 공유하기</span>
+                  <span className="bold insuText">실시간</span>
+                  <span className="insuText">으로 공유하기</span>
                 </div>
               </div>
               <div className="smallText">
@@ -83,14 +83,15 @@ function Intro() {
       <Section3 className="section 3">
         <div className="section3Box">
           <div className="bigText bold">
-            <div className="text">아이들이 먹는 음식은</div>
-            <div className="text">너무나도 중요하니까</div>
+            <div className="insuText">아이들이 먹는 음식은</div>
+            <div className="insuText">너무나도 중요하니까</div>
           </div>
           <div className="smallText">
-            <div className="text">아이들이 건강한 몸을 위해 닿다는</div>
+            <div className="text">아이들이 건강한 몸을 위해</div>
             <div className="text section3">
-              오늘의 식단들을 공유합니다. 쑥쑥 성장할 우리 아이들!
+              닿다는 오늘의 식단들을 공유합니다.
             </div>
+            <div className="text">쑥쑥 성장할 우리 아이들!</div>
           </div>
         </div>
         <div id="section3Image" data-aos="fade-right" data-aos-duration="2000">
@@ -101,8 +102,8 @@ function Intro() {
         <div id="section4Flex">
           <div id="section4Box">
             <div className="bigText section4 bold">
-              <div className="text">간단하게 선생님과 </div>
-              <div className="text">원아 관리하기</div>
+              <div className="insuText">간단하게 선생님과 </div>
+              <div className="insuText">원아 관리하기</div>
             </div>
             <div className="smallText">
               <div className="text">간편하게 선생님과 원아를 반배정 하기</div>
@@ -124,8 +125,8 @@ function Intro() {
       <Section5 className="section 5">
         <div id="section5Box">
           <div className="bigText bold">
-            <div className="text">투약 의뢰서로</div>
-            <div className="text">아이건강 챙기기</div>
+            <div className="insuText">투약 의뢰서로</div>
+            <div className="insuText">아이건강 챙기기</div>
           </div>
           <div className="smallText">
             <div className="text">닿다는 투약의로서를 온라인으로 접수하여</div>
@@ -143,15 +144,16 @@ function Intro() {
         <div id="section6Left">
           <div id="section6Box">
             <div className="bigText bold">
-              <div className="text">빠르게 차량정보</div>
-              <div className="text">확인하기</div>
+              <div className="insuText">빠르게</div>
+              <div className="insuText">차량정보</div>
+              <div className="insuText">확인하기</div>
             </div>
             <div className="smallText">
               <div className="text">우리 아이 무슨 버스 타야 좋을까</div>
+              <div className="text">우리 아이는 언제쯤 집에 도착하는지</div>
               <div className="text">
-                우리 아이는 언제쯤 집에 도착하는지 궁금할 때
+                궁금할 때 닿다를 통해 빠르게 확인하세요
               </div>
-              <div className="text">닿다를 통해 빠르게 확인하세요</div>
             </div>
           </div>
         </div>
@@ -193,23 +195,37 @@ const IntroGlobal = styled.div`
   .bold {
     font-weight: bold;
   }
-
+  .insuText {
+    font-size: 25px;
+    @media only screen and (min-width: 700px) {
+      font-size: 55px;
+    }
+    @media only screen and (min-width: 1680px) {
+      font-size : 80px;
+    }
+  }
   .bigText{
-    font-size : ${({ theme }) => theme.fontSizes.titleSize};
+    font-size: 80px;
     @font-face {
       font-family: 'NanumSquareWebBig';
       src: url('../fonts/NanumSquareOTFExtraBold.otf');
     }
     font-family: 'NanumSquareWebBig';
-    @media ${({ theme }) => theme.device.mobileL} {
-      font-size: 2em;
+    @media only screen and (max-width: 700px) {
+      font-size: 25px;
     }
-    .section2{
-      font-size : 2rem;
+    @media only screen and (max-width: 1680px) {
+      font-size : 80px;
     }
   }
   .smallText{
-    font-size : ${({ theme }) => theme.fontSizes.small};
+    font-size : 30px;
+    @media ${({ theme }) => theme.device.mobileL} {
+      font-size : 16px;
+    }
+    @media only screen and (max-width: 1680px) {
+      font-size : 20px;
+    }
   }
   .text{
     margin : 2vh 0 2vh 0;
@@ -255,7 +271,7 @@ const SectionIntro = styled.div`
   }
   @media ${({ theme }) => theme.device.mobileL} {
     background-image: url('../images/mobile/intro1_crop_dark.png');
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
   }
 `;
@@ -267,11 +283,13 @@ const Section1 = styled.div`
 
     #section1Image1 {
       position: relative;
-      top: -20rem;
+      height: 600px;
+      top: -30rem;
       @media ${({ theme }) => theme.device.mobileL} {
-        top: -9rem;
+        top: -18rem;
         resize: both;
         width: 70%;
+        height: 400px;
       }
     }
   }
@@ -316,10 +334,20 @@ const Section2 = styled.div`
   }
   #section2Image1 {
     margin-top: -15%;
-    @media ${({ theme }) => theme.device.mobileL} {
+    width: 800px;
+    @media only screen and (max-width: 700px) {
       resize: both;
       width: 400px;
-      margin-top: 30%;
+      height: auto;
+      margin-top: 1px;
+    }
+    @media only screen and (max-width: 1680px) {
+      height: auto;
+      width: 700px;
+    }
+    @media only screen and (max-width: 1550px) {
+      height: auto;
+      width: 600px;
     }
   }
 `;
@@ -341,6 +369,7 @@ const Section3 = styled.div`
     padding-left: 5%;
     @media ${({ theme }) => theme.device.mobileL} {
       margin-top: 10%;
+      padding-top; 50px;
       .section3 {
         width: 104%;
       }
@@ -350,10 +379,13 @@ const Section3 = styled.div`
     text-align: right;
   }
   #section3Image1 {
+    height: 500px;
+    margin-top: -5%;
     @media ${({ theme }) => theme.device.mobileL} {
       margin-top: 30%;
       resize: both;
-      width: 500px;
+      width: auto;
+      height: 300px;
     }
   }
 `;
@@ -369,12 +401,15 @@ const Section4 = styled.div`
   }
   #section4Image {
     text-align: right;
+    height: 500px;
     @media ${({ theme }) => theme.device.mobileL} {
       padding-top: 30%;
     }
   }
   #section4Image1 {
+    height: 400px;
     @media ${({ theme }) => theme.device.mobileL} {
+      margin-top: -40%;
       resize: both;
       width: 400px;
     }
@@ -427,7 +462,7 @@ const Section6 = styled.div`
   }
 
   #section6Left {
-    width: 30%;
+    width: 70%;
     @media ${({ theme }) => theme.device.mobileL} {
       width: 100%;
       margin-top: 10%;
@@ -443,9 +478,14 @@ const Section6 = styled.div`
     }
   }
   #section6Image1 {
-    @media ${({ theme }) => theme.device.mobileL} {
-      width: 650px;
-      text-align: left;
+    height: 300px;
+    width: auto;
+    text-align: left;
+    margin-top: 10px;
+    @media only screen and (min-width: 1680px) {
+      height: 500px;
+      width: auto;
+      margin-top: 30px;
     }
   }
 `;

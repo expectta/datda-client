@@ -35,22 +35,37 @@ function Notice({
   const [inputVlaue, setInputValue] = useState({
     title: '',
     content: '',
+    type: '',
     category: '',
   });
+  // 카테고리에 대한 상태
+  const [radioButton, setRadioButton] = useState('');
+  //카테고리 상태변환
+  const handleClickRadioButton = (category: string) => {
+    setInputValue({
+      ...inputVlaue,
+      category: category,
+    });
+  };
   // 사용자 입력 값 핸들러
   const handleInputValue = (
     name: string,
     content: string,
+    type: string,
     category: string,
   ) => {
-    console.log(name, ' 제목은?', content, '내용은?', category, '카테고리는?');
+    console.log(name, ' 제목은?', content, '내용은?', type, '카테고리는?');
     setInputValue({
       ...inputVlaue,
       [name]: content,
-      category: category,
+      type: type,
     });
   };
-
+  useEffect(() => {
+    return () => {
+      console.log(inputVlaue, '사용자 입력값');
+    };
+  }, [inputVlaue, radioButton]);
   return (
     <Wrap>
       <Switch>
@@ -67,16 +82,24 @@ function Notice({
         </Route>
         <Route exact path={`${urlMatch.path}/write`}>
           <WriteForm
+            radioButton={radioButton}
             inputVlaue={inputVlaue}
             handleInputValue={handleInputValue}
             userInfo={userInfo}
+            fristCategory="공지사항"
+            handleClickRadioButton={handleClickRadioButton}
+            secondCategory="행사"
             title="공지사항 작성"
             type="notice"
           ></WriteForm>
         </Route>
-        <Route exact path={`${urlMatch.path}/post/:no`}>
-          <ReadForm contents={list.currentList} title="공지사항"></ReadForm>
-        </Route>
+        <Route
+          exact
+          path={`${urlMatch.path}/post/:no`}
+          render={() => (
+            <ReadForm contents={list.currentList} title="공지사항"></ReadForm>
+          )}
+        ></Route>
       </Switch>
     </Wrap>
   );

@@ -18,8 +18,15 @@ export default function IndiNotice({
   const [inputVlaue, setInputValue] = useState({
     title: '',
     content: '',
+    type: '',
     category: '',
   });
+  // 카테고리에 대한 상태
+  const [radioButton, setRadioButton] = useState('');
+  //카테고리 상태변환
+  const handleClickRadioButton = (category: string) => {
+    setRadioButton(category);
+  };
   // 사용자 입력 값 핸들러
   const handleInputValue = (
     name: string,
@@ -52,9 +59,14 @@ export default function IndiNotice({
         </Route>
         <Route exact path={`${urlMatch.path}/write`}>
           <WriteForm
+            contents={list}
+            radioButton={radioButton}
+            handleClickRadioButton={handleClickRadioButton}
             handleInputValue={handleInputValue}
             inputVlaue={inputVlaue}
             userInfo={userInfo}
+            fristCategory="수신"
+            secondCategory="발송"
             title="알림장 작성"
             type="indiNotice"
           ></WriteForm>

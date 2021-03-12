@@ -13,14 +13,12 @@ interface propsType {
   title?: string;
   category?: string;
 }
-
 export default function ListInnerCard(props: propsType) {
   const urlMatch = useRouteMatch();
   let destination = '';
   // console.log(urlMatch, '현재 위치');
   if (urlMatch.path === '/main') {
     destination = '/main/notice';
-
     console.log(destination, '도착지 위치');
   }
   // 공지사항 리스트 상태
@@ -28,20 +26,25 @@ export default function ListInnerCard(props: propsType) {
   // 투약의뢰서 리스트 상태
   const { userId, userName, classId, className } = props;
   let writer = '';
-  if (title === '알림장') {
+  if (title === '알림장' && content.user.writterName !== undefined) {
     writer = content.user.writterName;
   }
-  if (title === '공지사항') {
+  if (content.category === 'notice') {
+    console.log(content.writer, ' 작성자 ');
+    writer = content.writer;
+  }
+  if (content.category === 'event') {
+    console.log(content.writer, ' 작성자 ');
     writer = content.writer;
   }
   console.log(title, ' 현재 타이틀');
-
   console.log(writer, ' 작성자');
   return (
     <>
       <NoticeCard
         id={content.contentId}
-        to={`${destination}/post/${content.noticeId}`}
+        to={`${destination || urlMatch.path}/post/${content.noticeId}`}
+        // to={'/main'}
       >
         <Point>
           <img className="pointer" src="../images/point.png" />
@@ -52,7 +55,7 @@ export default function ListInnerCard(props: propsType) {
           <Content>{title}</Content>
         )}
 
-        <Writer>{writer}</Writer>
+        <Writer>작성자 : {writer}</Writer>
         <CreateAt>
           {content ? changeTimeStamp(content.createdAt) : '누구냐'}
         </CreateAt>

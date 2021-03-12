@@ -69,17 +69,31 @@ function Login({ hadleSetMainData }: propType) {
       if (authorizationCode) {
         setIsLoading(true);
         requestKakaoLogin(authorizationCode).then((mainData) => {
-          if (mainData) {
-            // handleLoading();
-            hadleSetMainData(mainData);
-            setErrormessage('');
+          if (typeof mainData !== 'boolean') {
+            if (mainData !== undefined) {
+              hadleSetMainData(mainData);
+              setIsLoading(false);
+              history.push('/main');
+            } else {
+              setErrormessage('잘못된 요청입니다');
+              setIsLoading(false);
+            }
+          } else if (mainData === true) {
             setIsLoading(false);
-            history.push('/main'); // 바로 너 때문이야.
+            history.push('/waiting');
+          } else if (mainData === false) {
+            setIsLoading(false);
+            history.push('/waiting/approving');
+            // if (mainData) {
+            //   // handleLoading();
+            //   hadleSetMainData(mainData);
+            //   setErrormessage('');
+            //   setIsLoading(false);
+            //   history.push('/main'); // 바로 너 때문이야.
           }
-          setIsLoading(false);
-          alert('아직 승인대기 중입니다.');
-          // handleLoading();
-          return;
+          // setIsLoading(false);
+          // // handleLoading();
+          // return;
         });
       }
       setIsKakao(true);
@@ -187,6 +201,7 @@ const LoginGlobal = styled.div`
   #kakaoImg {
     width: auto;
     height: 30px;
+    cursor: pointer;
   }
 
   @font-face {

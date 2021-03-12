@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import {
+  useHistory,
+  Link,
+  withRouter,
+  RouteComponentProps,
+} from 'react-router-dom';
 import styled from 'styled-components';
 import { notice } from '../assets/testdata';
 import { ListInnerCard } from './Index';
@@ -25,6 +30,7 @@ function ListForm({
   handleChangeNotice,
   match,
 }: propsType) {
+  const history = useHistory();
   const PREVIOUS_PAGE = -1;
   //탭 메뉴 상태
   const [clickedMenu, setClickedMenu] = useState(0);
@@ -106,7 +112,7 @@ function ListForm({
               return (
                 <ButtonWrapper>
                   <WireButton to={`${match.path}/write`}>작성</WireButton>
-                  <GoListButton onClick={() => history.go(PREVIOUS_PAGE)}>
+                  <GoListButton onClick={() => history.replace('/main')}>
                     {' '}
                     홈
                   </GoListButton>
@@ -135,9 +141,14 @@ const ContentCard = styled.div`
   ${({ theme }) => theme.common.contentCardDiv}
 `;
 const Title = styled.div`
-  text-align: center;
+  justify-content: start;
+  margin-left: 15px;
   width: 100%;
-  ${({ theme }) => theme.common.contentTitle}
+  font-size: 35px;
+  width: 100%;
+  height: 10%;
+  color: black;
+  padding-top: 30px;
 `;
 const CategoryWrap = styled.div`
   width: 95%;
