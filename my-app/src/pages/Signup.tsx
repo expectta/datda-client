@@ -241,8 +241,10 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       })
       .then((res) => {
         if (res.status === 200) {
+          setIsLoading(false);
           history.push('/login');
         } else {
+          setIsLoading(false);
           alert('이미 아이디가 있습니다.');
         }
       });
