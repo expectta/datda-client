@@ -37,25 +37,27 @@ export default function Carousel({ userInfo }: propType) {
     <>
       <CarouselContainer>
         <Title>앨범</Title>
-        <SliderContainer ref={slideRef}>
-          {userInfo.permission === 'parent'
-            ? userInfo.mainData[userInfo.currentChild].album.map(
-                (element: any, index: number) => {
+        {userInfo.mainData ? (
+          <SliderContainer ref={slideRef}>
+            {userInfo.permission === 'parent'
+              ? userInfo.mainData[userInfo.currentChild].album.map(
+                  (element: any, index: number) => {
+                    return (
+                      <AlbumCard key={element.albumId}>
+                        <AlbumImg src={element.photo} alt="앨범사진"></AlbumImg>
+                      </AlbumCard>
+                    );
+                  },
+                )
+              : userInfo.mainData.album.map((element: any, index: number) => {
                   return (
                     <AlbumCard key={element.albumId}>
                       <AlbumImg src={element.photo} alt="앨범사진"></AlbumImg>
                     </AlbumCard>
                   );
-                },
-              )
-            : userInfo.mainData.album.map((element: any, index: number) => {
-                return (
-                  <AlbumCard key={element.albumId}>
-                    <AlbumImg src={element.photo} alt="앨범사진"></AlbumImg>
-                  </AlbumCard>
-                );
-              })}
-        </SliderContainer>
+                })}
+          </SliderContainer>
+        ) : null}
 
         <More to="/main/album">더보기</More>
         <SlideButtonWrap>
