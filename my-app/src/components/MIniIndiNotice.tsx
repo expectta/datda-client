@@ -11,35 +11,33 @@ export default function MiniIndiNotice({ userInfo }: propsType) {
   return (
     <Wrap>
       <Title>알림장</Title>
-      {userInfo.mainData[userInfo.currentChild] ? (
-        <NoticeContainar>
-          {userInfo.permission === 'parent'
-            ? userInfo.mainData[userInfo.currentChild].indiNotice.map(
-                (element: any, index: number) => {
-                  return (
-                    <ListInnerCard
-                      content={element}
-                      key={element.noticeId}
-                      title={element.contents}
-                    ></ListInnerCard>
-                  );
-                },
-              )
-            : userInfo.mainData.indiNotice.map(
-                (element: any, index: number) => {
-                  return (
-                    <ListInnerCard
-                      content={element}
-                      key={element.noticeId}
-                      title={element.contents}
-                    ></ListInnerCard>
-                  );
-                },
-              )}
-        </NoticeContainar>
-      ) : (
-        <div>데이터가 없습니다</div>
-      )}
+      {/* {userInfo.mainData[userInfo.currentChild] ? ( */}
+      <NoticeContainar>
+        {userInfo.permission === 'parent'
+          ? userInfo.mainData[userInfo.currentChild].indiNotice.map(
+              (element: any, index: number) => {
+                return (
+                  <ListInnerCard
+                    content={element}
+                    key={element.noticeId}
+                    title={element.contents}
+                  ></ListInnerCard>
+                );
+              },
+            )
+          : userInfo.mainData.indiNotice.map((element: any, index: number) => {
+              return (
+                <ListInnerCard
+                  content={element}
+                  key={element.noticeId}
+                  title={element.contents}
+                ></ListInnerCard>
+              );
+            })}
+      </NoticeContainar>
+      {/* ) : ( */}
+      {/* <div>데이터가 없습니다</div> */}
+      {/* )} */}
 
       <More to="/main/indi_notice">더보기</More>
     </Wrap>

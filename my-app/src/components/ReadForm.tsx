@@ -10,11 +10,13 @@ export default function ReadForm({ title, contents }: propsType) {
   const { no }: any = useParams();
   const PREVIOUS_PAGE = -1;
   console.log(no, 'match');
+  console.log(contents, ' 콘텐츠는???');
   const postView = contents.filter((element: any, index: number) => {
     if (element.noticeId === Number(no)) {
       return element;
     }
   });
+
   return (
     <Wrap>
       <ContentCard>
@@ -31,7 +33,6 @@ export default function ReadForm({ title, contents }: propsType) {
         <PostButton to="/main/notice">수정</PostButton>
         <PostButton to="/main/notice">삭제</PostButton>
         <GoListButton onClick={() => history.go(PREVIOUS_PAGE)}>
-          {' '}
           목록
         </GoListButton>
       </ButtonWrapper>

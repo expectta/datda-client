@@ -11,8 +11,15 @@ export default function Meal({ userInfo }: propsType) {
   const [inputVlaue, setInputValue] = useState({
     title: '',
     content: '',
+    type: '',
     category: '',
   });
+  // 카테고리에 대한 상태
+  const [radioButton, setRadioButton] = useState('');
+  //카테고리 상태변환
+  const handleClickRadioButton = (category: string) => {
+    setRadioButton(category);
+  };
   // 사용자 입력 값 핸들러
   const handleInputValue = (
     name: string,
@@ -39,6 +46,8 @@ export default function Meal({ userInfo }: propsType) {
         </Route>
         <Route exact pasth={`${urlMatch.path}/write`}>
           <WriteForm
+            radioButton={radioButton}
+            handleClickRadioButton={handleClickRadioButton}
             handleInputValue={handleInputValue}
             inputVlaue={inputVlaue}
             userInfo={userInfo}

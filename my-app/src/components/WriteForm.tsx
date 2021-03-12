@@ -8,6 +8,11 @@ interface propsType {
   type: string;
   inputVlaue: any;
   handleInputValue: any;
+  fristCategory?: string;
+  secondCategory?: string;
+  handleClickRadioButton: any;
+  radioButton: string;
+  contents?: any;
   userInfo: {
     permission: string;
     isLogin: boolean;
@@ -21,7 +26,12 @@ interface objectType {
 function WriteForm({
   title,
   type,
+  contents,
+  radioButton,
+  fristCategory,
+  secondCategory,
   userInfo,
+  handleClickRadioButton,
   handleInputValue,
   inputVlaue,
 }: propsType) {
@@ -69,7 +79,6 @@ function WriteForm({
               onChange={(e: any) => handleTitleValue(e)}
             ></TitleInput>
           </SubTitle>
-
           <Writer>작성자 : {userInfo.mainData.userName}</Writer>
         </TitleWrapper>
       ) : (
@@ -83,8 +92,34 @@ function WriteForm({
                 name="title"
                 onChange={(e: any) => handleTitleValue(e)}
               ></TitleInput>
-              <RadioBtn type="radio" id="radio" />
-              <label htmlFor="radio"></label>
+              {title === '앨범 등록' ? null : (
+                <select>
+                  {contents.teacherRead.map((element: any, index: number) => {
+                    return <option>{element}</option>;
+                  })}
+                </select>
+              )}
+              {(() => {
+                if (title === '알림장 작성' || title === '앨범 등록') {
+                  return null;
+                }
+                <>
+                  <RadioBtn
+                    type="radio"
+                    id="fristCategory"
+                    checked={inputVlaue.category === fristCategory}
+                    onChange={() => handleClickRadioButton(fristCategory)}
+                  />
+                  <label htmlFor="fristCategory">{fristCategory}</label>
+                  <RadioBtn
+                    type="radio"
+                    id="secondCategory"
+                    checked={inputVlaue.category === secondCategory}
+                    onChange={() => handleClickRadioButton(secondCategory)}
+                  />
+                  <label htmlFor="secondCategory">{secondCategory}</label>
+                </>;
+              })()}
             </SubTitle>
             <Writer>작성자 : {userInfo.mainData.userName}</Writer>
           </TitleWrapper>

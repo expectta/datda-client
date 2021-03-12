@@ -12,21 +12,11 @@ export default function MiniNotice({ userInfo }: propsType) {
   return (
     <Wrap permission={userInfo.permission}>
       <Title>공지사항</Title>
-      {userInfo.mainData[userInfo.currentChild] ? (
-        <NoticeContainar permission={userInfo.permission}>
-          {userInfo.permission === 'parent'
-            ? userInfo.mainData[userInfo.currentChild].notice.map(
-                (element: any, index: number) => {
-                  return (
-                    <ListInnerCard
-                      content={element}
-                      key={index}
-                      title={element.title}
-                    ></ListInnerCard>
-                  );
-                },
-              )
-            : userInfo.mainData.notice.map((element: any, index: number) => {
+      {/* {userInfo.mainData[userInfo.currentChild] ? ( */}
+      <NoticeContainar permission={userInfo.permission}>
+        {userInfo.permission === 'parent'
+          ? userInfo.mainData[userInfo.currentChild].notice.map(
+              (element: any, index: number) => {
                 return (
                   <ListInnerCard
                     content={element}
@@ -34,11 +24,21 @@ export default function MiniNotice({ userInfo }: propsType) {
                     title={element.title}
                   ></ListInnerCard>
                 );
-              })}
-        </NoticeContainar>
-      ) : (
+              },
+            )
+          : userInfo.mainData.notice.map((element: any, index: number) => {
+              return (
+                <ListInnerCard
+                  content={element}
+                  key={index}
+                  title={element.title}
+                ></ListInnerCard>
+              );
+            })}
+      </NoticeContainar>
+      {/* ) : (
         <div>데이터가 없습니다</div>
-      )}
+      )} */}
 
       <More to="/main/notice">더보기</More>
     </Wrap>
