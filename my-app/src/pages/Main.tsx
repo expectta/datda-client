@@ -110,7 +110,6 @@ export default function Main({
     }
     if (title === '알림장') {
       const result = await requestIndiNotice();
-      console.log(result, ' 요청 결과값');
       if (result) {
         setList({
           ...list,

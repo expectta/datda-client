@@ -41,7 +41,6 @@ function App() {
   });
   //부모가 자신의 아이들 탭을 선택시 원아 정보를 변경
   const handleChangeChild = (index: number) => {
-    console.log(index, '유저가 선택한아이');
     setUserInfo({
       ...userInfo,
       currentChild: index,
@@ -66,7 +65,6 @@ function App() {
     const newTimetable = {
       timetable: timetable,
     };
-    console.log('시간표업데이트 ');
     setUserInfo({
       ...userInfo,
       mainData: {
@@ -77,7 +75,6 @@ function App() {
   };
   useEffect(() => {
     if (Object.keys(userInfo.mainData).length !== 0) {
-      console.log(userInfo, ' 이펙트 안');
       history.push('/main');
     }
   }, [userInfo.mainData]);

@@ -66,7 +66,7 @@ export async function requestKakaoLogin(authorizationCode: string) {
       return requestMainData(res.data.accessToken);
     })
     .catch((error) => {
-      console.log(error);
+      alert(error);
     });
   return mainData;
 }
@@ -81,7 +81,6 @@ export const isEmailExist = async (email: string) => {
       if (res.status === 201) {
         return false;
       } else if (res.status === 200) {
-        console.log(res.data);
         return true;
       } else {
         return false;
@@ -111,7 +110,6 @@ export function requestMainData(token?: string) {
     .catch((err) => {
       alert(err);
     });
-  console.log('반환값', mainData);
   return mainData;
 }
 // 승인, 미승인 원아 리스트 요청
@@ -127,10 +125,8 @@ export function requestApproveChild(childId?: number | null) {
     })
     .then((res) => {
       if (res.status === 200) {
-        console.log(res.data, ' 애들 ');
         return res.data;
       }
-      console.log(res.data, '승인요청 ');
       alert('아이의 정보가 없습니다.');
     })
     .catch((error) => {
@@ -148,10 +144,8 @@ export function requestApproveTeacher(teacherId?: number | null) {
     .post('https://datda.link/institution/approve', { teacherId: id })
     .then((res) => {
       if (res.status === 200) {
-        console.log(res.data, '선생님');
         return res.data;
       }
-      console.log(res.data, '승인요쳥');
       alert('선생님의 정보가 없습니다');
     })
     .catch((err) => {

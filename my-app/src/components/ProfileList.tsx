@@ -73,11 +73,7 @@ export default function ProfileList({ userInfo }: Props) {
               ></AvatarCard>
               {JSON.parse(localStorage.getItem('loginInfo')!).permission ===
               'teacher' ? (
-                <div id="profileButton">
-                  <Link to="/main/profile/institution">
-                    <Button>기관등록</Button>
-                  </Link>
-                </div>
+                <div id="profileButton"></div>
               ) : JSON.parse(localStorage.getItem('loginInfo')!).permission ===
                 'parent' ? (
                 <div id="profileButton">

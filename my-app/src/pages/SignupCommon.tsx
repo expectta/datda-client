@@ -18,7 +18,7 @@ function SignupCommon({
   //   console.log(inputs.email);
   // };
   if (inputs.email === null) {
-    return <div>loding</div>;
+    return <div>loading</div>;
   }
   return (
     <Common>

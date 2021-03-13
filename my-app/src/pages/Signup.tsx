@@ -349,13 +349,13 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
         handleInstiSelection={handleInstiSelection}
         inputInstiInfo={inputInstiInfo}
       /> */}
-      {!isLoading ? (
+      {/* {!isLoading ? (
         <div></div>
       ) : (
         <div className="loadingFrame">
           <img id="loadingImage" src="../images/loading.gif"></img>
         </div>
-      )}
+      )} */}
     </SignupGlobal>
   );
 }
