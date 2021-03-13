@@ -81,7 +81,7 @@ const ContentsWrapper = styled.span`
   font-family: 'NanumSquareWeb';
 `;
 const Number = styled.span`
-  font-size: 1.2rem;
+  font-size: 10px;
   flex: 1 auto;
 `;
 const InputNumber = styled.input`

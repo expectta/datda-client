@@ -154,7 +154,7 @@ export default function GuestWaiting() {
       {isChild ? (
         <div id="childArea">
           <div id="childInput">
-            <div>이름을 입력해주세요</div>
+            <div>아이 이름을 입력해주세요</div>
             <input
               type="text"
               onChange={(e) => {
@@ -218,7 +218,7 @@ const WaitingWrap = styled.div`
   #instiResults {
     width: 22vw;
     height: 20vh;
-    overflow: scroll;
+    overflow: auto;
     margin-bottom: 2vh;
     @media ${({ theme }) => theme.device.mobileL} {
       width: 44%;

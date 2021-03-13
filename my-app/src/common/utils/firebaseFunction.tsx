@@ -6,7 +6,7 @@ export function handleAddInstitution(institutionId: string) {
     .doc(String(institutionId))
     .set({})
     .then(() => {
-      alert('실시간 데이터 베이스에 기관 등록완료');
+      console.log('');
     })
     .catch((error) => {
       alert('오류가 발생했습니다.');
@@ -30,7 +30,6 @@ export function handleAddChild(institutionId: string, childId: string) {
     })
     .then(() => {
       // handleCheckData(institutionId, childId);
-      alert('실시간 데이터에 원아를 등록했습니다.');
     })
     .catch((error) => {
       alert('오류가 발생했습니다.');
@@ -46,7 +45,7 @@ export function handleDeleteChild(institutionId: string, childId: string) {
     .doc(childId)
     .delete()
     .then(() => {
-      alert('실시간 데이터에서 해당원아를 삭제 했습니다.');
+      console.log('');
     })
     .catch((error) => {
       alert('오류가 발생했습니다.');
