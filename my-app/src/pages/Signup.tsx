@@ -241,8 +241,10 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
       })
       .then((res) => {
         if (res.status === 200) {
+          setIsLoading(false);
           history.push('/login');
         } else {
+          setIsLoading(false);
           alert('이미 아이디가 있습니다.');
         }
       });
@@ -347,13 +349,13 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
         handleInstiSelection={handleInstiSelection}
         inputInstiInfo={inputInstiInfo}
       /> */}
-      {!isLoading ? (
+      {/* {!isLoading ? (
         <div></div>
       ) : (
         <div className="loadingFrame">
           <img id="loadingImage" src="../images/loading.gif"></img>
         </div>
-      )}
+      )} */}
     </SignupGlobal>
   );
 }

@@ -5,7 +5,7 @@ import {
   requestGuestTeacherRegister,
   requestGuestParentRegister,
 } from '../common/axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { isNameCHeck } from '../common/utils/validation';
 import { access } from 'fs';
 
@@ -39,10 +39,6 @@ export default function GuestWaiting() {
     const { value } = e.target;
     callback(value);
   };
-
-  useEffect(() => {
-    console.log(permission, accessToken);
-  }, []);
 
   const SearchInsti = async (value: string) => {
     const results = await requestSearchInsti(value);
@@ -92,10 +88,13 @@ export default function GuestWaiting() {
 
   return (
     <WaitingWrap>
-      <div id="header">
-        <span className="blue">닿다</span>
-        <span>에 오신 것을 환영합니다</span>
-      </div>
+      <Link to="/">
+        <div id="header">
+          <span className="blue">닿다</span>
+          <span>에 오신 것을 환영합니다</span>
+        </div>
+      </Link>
+
       <div id="header2">
         <div>회원가입이 완료되었습니다. 기관승인을 진행해주세요.</div>
       </div>

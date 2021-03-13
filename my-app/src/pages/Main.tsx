@@ -107,7 +107,6 @@ export default function Main({
     }
     if (title === '알림장') {
       const result = await requestIndiNotice();
-      console.log(result, ' 요청 결과값');
       if (result) {
         setList({
           ...list,
@@ -117,9 +116,6 @@ export default function Main({
       }
     }
   };
-  useEffect(() => {
-    console.log(list, ' == 리스트 모니터링');
-  }, [list]);
   // catgegory 선택에 따른 list 내용 변경
   const handleChangeNotice = (category?: string) => {
     console.log('현재 선택한 카테고리', category);
@@ -131,7 +127,6 @@ export default function Main({
       });
       return;
     } else if (category === '행사') {
-      console.log('행사가 들어옴??');
       setList({
         ...list,
         currentList: list.event,
@@ -139,14 +134,12 @@ export default function Main({
     }
     //알림장
     if (category === '수신') {
-      console.log('수신인가요??');
       setList({
         ...list,
         currentList: list.IndiNotice.teacherRead,
       });
     }
     if (category === '발송') {
-      console.log('발송했다');
       setList({
         ...list,
         currentList: list.IndiNotice.teacherWrite,
@@ -204,7 +197,6 @@ export default function Main({
   };
 
   useEffect(() => {
-    console.log(userInfo.currentChild, '현재 아이가 바뀌었어요');
     if (userInfo.permission === 'parent') {
       handleCheckData(
         userInfo.mainData[userInfo.currentChild].institutionId,
