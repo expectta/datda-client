@@ -33,20 +33,21 @@ export default function TimtableListForm({
     <Wrap>
       <Title>시간표</Title>
       <ContentCard>
-        {timetable.list ? (
-          timetable.list.map((element: any, index: number) => {
-            return (
-              <TimeTableCard
-                key={index}
-                type={type}
-                timetable={element}
-                handleUpdateTimetable={handleUpdateTimetable}
-              ></TimeTableCard>
-            );
-          })
-        ) : (
-          <div className="emptyTime">등록된 시간표가 없습니다.</div>
-        )}
+        {
+          timetable.list
+            ? timetable.list.map((element: any, index: number) => {
+                return (
+                  <TimeTableCard
+                    key={index}
+                    type={type}
+                    timetable={element}
+                    handleUpdateTimetable={handleUpdateTimetable}
+                  ></TimeTableCard>
+                );
+              })
+            : null
+          // <div className="emptyTime">등록된 시간표가 없습니다.</div>
+        }
         {urlMatch.path === '/main/timetable/write' ? (
           <>
             <AddText>
