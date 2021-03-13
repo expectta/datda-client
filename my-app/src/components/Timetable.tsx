@@ -100,7 +100,7 @@ export default function Timetable({ userInfo }: props) {
                     <Icon src="../images/education.png" alt="아이콘"></Icon>
                     <CurrentState>
                       <Time>
-                        <label>
+                        <TimeText>
                           {(() => {
                             if (currentTimeTable.currentTime) {
                               return currentTimeTable.currentTime;
@@ -109,7 +109,7 @@ export default function Timetable({ userInfo }: props) {
                               return '시간표를 등록하세요';
                             }
                           })()}
-                        </label>
+                        </TimeText>
                       </Time>
                       <Education>
                         <label>
@@ -152,7 +152,9 @@ const Wrap = styled.div`
   }
   font-family: 'NanumSquareWeb';
 `;
-
+const TimeText = styled.label`
+  font-size: 10px;
+`;
 const CurrentEducation = styled.div`
   width: 120px;
   height: 70px;
@@ -160,6 +162,7 @@ const CurrentEducation = styled.div`
   top: -27px;
   right: -41px;
   z-index: 3;
+  font-size: 10px;
   background: white;
   border-radius: 6px 6px 6px 6px;
   box-shadow: 0px 0px 5px #c8c8c8;
@@ -204,10 +207,11 @@ const CurrentState = styled.span`
   height: 100%;
   display: inline-grid;
   place-items: center;
-  font-size: 13px;
+  font-size: 10px;
 `;
 const Time = styled.div`
   width: 100%;
+  font-size: 10px;
   height: 50%;
 `;
 const Education = styled.div`
@@ -226,7 +230,7 @@ const TimeTable = styled(Link)`
 const Loader = styled.img`
   width: 50px;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1rem;
   align-self: center;
 `;
 const LoadingWrapper = styled.div`

@@ -165,7 +165,7 @@ const Wrap = styled.div`
       border: solid 1px;
       height: 400px;
       border-radius: 5px;
-      overflow: scroll;
+      overflow: auto;
     }
     #studentTitleList {
       border-bottom: solid 1px;

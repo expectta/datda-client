@@ -5,7 +5,9 @@ export function handleAddInstitution(institutionId: string) {
     .collection('institution')
     .doc(String(institutionId))
     .set({})
-    .then(() => {})
+    .then(() => {
+      console.log('');
+    })
     .catch((error) => {
       alert('오류가 발생했습니다.');
     });
@@ -42,7 +44,9 @@ export function handleDeleteChild(institutionId: string, childId: string) {
     .collection('children')
     .doc(childId)
     .delete()
-    .then(() => {})
+    .then(() => {
+      console.log('');
+    })
     .catch((error) => {
       alert('오류가 발생했습니다.');
     });
