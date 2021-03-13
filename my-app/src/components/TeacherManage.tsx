@@ -162,23 +162,21 @@ export default TeacherManage;
 
 const TeacherManageWrap = styled.div`
   #teacherWaitingTitle {
-    border-bottom: solid 1px;
+    border-bottom: 1px solid lightgray;
     display: flex;
-    width: 100%;
+    font-size: 1.2rem;
+    padding: 1%;
     .titleTeacher {
       text-align: center;
-      width: 100%;
-      flex: 1 auto;
+      flex: 2 auto;
       padding-left: 20px;
     }
     .titleTime {
       text-align: center;
-      width: 100%;
       flex: 1 auto;
     }
     .titleBlank {
-      width: 41%;
-      flex: 1 auto;
+      flex: 9 auto;
     }
   }
   .subTitle {
@@ -186,105 +184,114 @@ const TeacherManageWrap = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.xxl};
   }
   #teacherWaiting {
-    border: solid 1px;
     border-radius: 5px;
-    overflow: scroll;
+    height: 15vh;
+
+    overflow: auto;
+    border: 1px solid lightgray;
+    border-radius: 7px;
   }
 
   #teacherWaitingList {
     margin-left: 20px;
     .waitingEl {
       display: flex;
-      width: 100%;
+      align-items: center;
+
       margin: 1% 0 1% 0;
     }
     .nameResults {
       flex: 1 auto;
-      width: 100%;
       text-align: center;
     }
     .timeResults {
-      flex: 1 auto;
-      width: 100%;
-      text-align: center;
+      color: ${({ theme }) => theme.colors.gray};
+      flex: 4 auto;
     }
     .approvedButton {
-      flex: 1 auto;
-      width: 25%;
+      flex: 2 auto;
+      max-width: fit-content;
     }
   }
   #teacherManage {
     border: solid 1px;
     border-radius: 5px;
-    height: 51vh;
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    height: 68vh;
+    font-size: 1.2rem;
     #teacherManageList {
-      overflow: scroll;
+      overflow: auto;
       #manageListArea {
-        height: 42vh;
+        max-height: 57vh;
       }
     }
     #teacherManageTitle {
-      border-bottom: solid 1px;
+      border-bottom: 1px solid lightgray;
       display: flex;
+      padding: 1%;
       .titleSelect {
         text-align: center;
-        width: 100%;
         flex: 1 auto;
       }
       .titleTeacherr {
         text-align: center;
-        width: 100%;
-        flex: 1 auto;
+        flex: 2 auto;
       }
       .titleClass {
         text-align: center;
-        width: 100%;
-        flex: 1 auto;
+        flex: 2 auto;
       }
       .titleButton {
-        width: 61%;
-        flex: 1 auto;
+        flex: 2 auto;
       }
     }
   }
 
   .managingEl {
     display: flex;
+    align-items: center;
+
     margin: 1% 0 1% 0;
     .manageRadio {
-      width: 100%;
-      flex: 1 auto;
+      flex: 2 auto;
     }
     .manageTeacher {
       text-align: center;
-      width: 100%;
-      flex: 1 auto;
+      flex: 2 auto;
     }
     .manageClass {
       text-align: center;
-      width: 100%;
-      flex: 1 auto;
+      flex: 3 auto;
     }
     .unapprovedButton {
-      width: 31%;
-      flex: 1 auto;
+      max-width: fit-content;
+      flex: 5 auto;
     }
   }
 
   #teacherButtonArea2 {
-    text-align: center;
+    text-align: end;
+    border-top: 1px solid lightgray;
+    margin-top: 2%;
+    padding-top: 2%;
+    width: 90%;
+    margin: 0 auto;
   }
 `;
 
 const UnclickedButton = styled.button`
   ${({ theme }) => theme.common.unclickedButtonStyle}
   margin : 0 2% 0 2%;
-  width: 100%;
 `;
 
 const PostButton = styled.button`
   ${({ theme }) => theme.common.unclickedButtonStyle}
   margin : 0 2% 0 2%;
+  color: lightgray;
+  background: white;
+  border: 1px solid;
+  border-radius: 5px;
 `;
 
 const UnapprovedArea = styled.div`
