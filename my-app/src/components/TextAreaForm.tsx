@@ -7,7 +7,6 @@ interface propType {
 export default function TextAreaForm({ handleInputValue, type }: propType) {
   const handleTextArea = (e: any, category: string) => {
     const { name, value } = e.target;
-    console.log(value, 'text 입력값', name, ' 이름은??');
     handleInputValue(name, value, category);
   };
   return (

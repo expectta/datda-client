@@ -3,14 +3,10 @@ import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function GuestApproving() {
-  const permission = JSON.parse(localStorage.getItem('loginInfo')!).permission;
+  // const permission = JSON.parse(localStorage.getItem('loginInfo')!).permission;
 
-  const accessToken = JSON.parse(localStorage.getItem('loginInfo')!)
-    .accessToken;
-
-  useEffect(() => {
-    console.log(permission, accessToken);
-  }, []);
+  // const accessToken = JSON.parse(localStorage.getItem('loginInfo')!)
+  //   .accessToken;
 
   return (
     <ApprovingWrap>

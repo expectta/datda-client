@@ -41,12 +41,10 @@ export default function Album({ userInfo }: propsType) {
     if (result) {
       history.go(PREVIOUS_PAGE);
     }
-    console.log(result, '이미지 등록 완료?');
   };
   // 앨범 초기화 핸들러
   const handleInitailzeAlbum = async (childId?: number) => {
     const result = await requestImageAlbum(childId);
-    console.log(result, ' 이미지 결과값');
     setAlbum({
       albumInfo: result,
     });
@@ -58,12 +56,11 @@ export default function Album({ userInfo }: propsType) {
       formData: imageFile,
     });
   };
-  useEffect(() => {
-    console.log(album, ' =  앨범 상태확인');
-  }, [album.albumInfo]);
+  // useEffect(() => {
+  //   console.log(album, ' =  앨범 상태확인');
+  // }, [album.albumInfo]);
   // 화면 랜더링 시 앨범 초기화
   useEffect(() => {
-    console.log(userInfo, '유저정보');
     if (userInfo.permission === 'parent') {
       const childId = userInfo.mainData[userInfo.currentChild].childId;
       handleInitailzeAlbum(childId);

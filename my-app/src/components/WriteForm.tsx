@@ -71,7 +71,7 @@ function WriteForm({
   //작성 글 등록 요청
   const handleRequestPost = async () => {
     const { title, content, category } = inputVlaue;
-    console.log(type, 'type이 뭘까?');
+
     // console.log(type, '현재 타입은??');
     if (type === 'notice') {
       // console.log('공지사항 등록요청 완료');
@@ -83,9 +83,9 @@ function WriteForm({
       handleRequestUpload();
     }
   };
-  useEffect(() => {
-    console.log(inputVlaue, '입력값');
-  }, [inputVlaue]);
+  // useEffect(() => {
+  //   console.log(inputVlaue, '입력값');
+  // }, [inputVlaue]);
   return (
     <Wrap>
       {type === 'medicine' ? (

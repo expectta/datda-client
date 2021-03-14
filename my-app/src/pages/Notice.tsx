@@ -54,18 +54,17 @@ function Notice({
     type: string,
     category: string,
   ) => {
-    console.log(name, ' 제목은?', content, '내용은?', type, '카테고리는?');
     setInputValue({
       ...inputVlaue,
       [name]: content,
       type: type,
     });
   };
-  useEffect(() => {
-    return () => {
-      console.log(inputVlaue, '사용자 입력값');
-    };
-  }, [inputVlaue, radioButton]);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log(inputVlaue, '사용자 입력값');
+  //   };
+  // }, [inputVlaue, radioButton]);
   return (
     <Wrap>
       <Switch>

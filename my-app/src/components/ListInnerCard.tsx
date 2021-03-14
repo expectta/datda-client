@@ -31,11 +31,9 @@ export default function ListInnerCard(props: propsType) {
   }
 
   if (content.category === 'notice') {
-    console.log(content.writer, ' 작성자 ');
     writer = content.writer;
   }
   if (content.category === 'event') {
-    console.log(content.writer, ' 작성자 ');
     writer = content.writer;
   }
   return (

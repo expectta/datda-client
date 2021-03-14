@@ -20,7 +20,6 @@ export default function Timetable({
   });
   //로그인 한 유저의 timetable 최초 등록
   const handleAddTimetable = (timetableArray: any) => {
-    console.log('추가');
     setTimtable({
       list: timetableArray,
     });
@@ -63,9 +62,7 @@ export default function Timetable({
   //시간표 서버로 등록 요청 후 새로운 시간표를 업데이트
   const handlePostTimetable = async () => {
     const requestReult = await requestUploadTimetable(timetable.list);
-    console.log(requestReult, '요청전 결과');
     if (requestReult) {
-      console.log('요청후');
       handleAddTimetable(ChangeToArray(requestReult));
       handleTimetableChange(requestReult);
       history.go(PREVIOUS_PAGE);
@@ -81,9 +78,9 @@ export default function Timetable({
       ),
     );
   }, []);
-  useEffect(() => {
-    console.log(`'${JSON.stringify(timetable.list)}'`, ' 현재 ');
-  }, [timetable.list]);
+  // useEffect(() => {
+  //   console.log(`'${JSON.stringify(timetable.list)}'`, ' 현재 ');
+  // }, [timetable.list]);
   return (
     <Wrap>
       <Switch>

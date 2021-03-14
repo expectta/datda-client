@@ -158,7 +158,7 @@ function Signin({ setModalMessage, setModalVisible }: Props) {
         }
       })
       .catch((error) => {
-        console.log('error : ', error);
+        alert(error);
       });
   };
 

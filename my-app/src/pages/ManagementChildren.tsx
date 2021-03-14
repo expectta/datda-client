@@ -29,7 +29,6 @@ export default function Management({ userInfo }: propsType) {
   });
   const handleUpdateChildInfo = async () => {
     const chilrenList = await requestApproveChild();
-    console.log(chilrenList, '원아 리스트');
     setChildInfo({
       isDataOk: true,
       childrenList: await addState(chilrenList),
@@ -45,18 +44,10 @@ export default function Management({ userInfo }: propsType) {
         //   console.log(`${doc.id} => ${doc.data()}`);
         //   children.push(doc.data());
         // });
-        console.log(
-          doc.docChanges()[0].doc.id,
-          '이게 id',
-          doc.docChanges()[0].doc.data(),
-          ' 내용',
-        );
         const updateData = doc.docChanges()[0].doc.data();
         if (updateData) {
           childInfo.childrenList.forEach((elelemt: any, index: number) => {
-            console.log(childInfo.childrenList, '변환전');
             if (elelemt.childId === Number(doc.docChanges()[0].doc.id)) {
-              console.log('변환시작');
               elelemt.state.isOk = updateData.isOk;
               elelemt.state.isCheck = updateData.isCheck;
               elelemt.state.isSleep = updateData.isSleep;
@@ -65,7 +56,6 @@ export default function Management({ userInfo }: propsType) {
             }
           });
         }
-        console.log(childInfo.childrenList, '변환후');
         setChildInfo({
           ...childInfo,
           childrenList: childInfo.childrenList,
@@ -78,7 +68,6 @@ export default function Management({ userInfo }: propsType) {
     content: string,
     category: string,
   ) => {
-    console.log(name, ' 제목은?', content, '내용은?');
     setInputValue({
       ...inputVlaue,
       [name]: content,
@@ -86,15 +75,14 @@ export default function Management({ userInfo }: propsType) {
     });
   };
   useEffect(() => {
-    console.log(childInfo.childrenList, '지금 맅스트');
     if (childInfo.childrenList.length !== 0) {
       handleRealTimeChildrenState(userInfo.mainData.institutionId);
     }
   }, [childInfo.childrenList]);
-  useEffect(() => {
-    console.log(userInfo, '유저정보');
-    handleUpdateChildInfo();
-  }, []);
+  // useEffect(() => {
+  //   console.log(userInfo, '유저정보');
+  //   handleUpdateChildInfo();
+  // }, []);
   return (
     <Wrap>
       <Switch>

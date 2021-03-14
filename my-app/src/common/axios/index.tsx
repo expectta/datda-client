@@ -40,7 +40,7 @@ export async function requestLogin(email: string, password: string) {
       }
     })
     .catch((error) => {
-      alert(error);
+      console.log(error);
     });
   return mainData;
 }
@@ -52,7 +52,7 @@ export async function requestKakaoLogin(authorizationCode: string) {
     })
     .then((res) => {
       if (res.status === 201) {
-        console.log('회원가입을 해주세요.');
+        // console.log('회원가입을 해주세요.');
       } else if (res.status === 200) {
         localStorage.setItem(
           'loginInfo',
@@ -66,7 +66,7 @@ export async function requestKakaoLogin(authorizationCode: string) {
       return requestMainData(res.data.accessToken);
     })
     .catch((error) => {
-      alert(error);
+      console.log(error);
     });
   return mainData;
 }
@@ -87,7 +87,7 @@ export const isEmailExist = async (email: string) => {
       }
     })
     .catch((error) => {
-      alert(error);
+      console.log(error);
     });
   return results;
 };
@@ -108,7 +108,7 @@ export function requestMainData(token?: string) {
       }
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
   return mainData;
 }
@@ -118,7 +118,6 @@ export function requestApproveChild(childId?: number | null) {
     localStorage.getItem('loginInfo')!,
   ).accessToken;
   const id = childId || null;
-  console.log('원아승인시작', id, ' 값은/?');
   const childrenList = axios
     .post('https://datda.link/teacher/approve', {
       childId: id,
@@ -130,7 +129,7 @@ export function requestApproveChild(childId?: number | null) {
       alert('아이의 정보가 없습니다.');
     })
     .catch((error) => {
-      alert(error);
+      console.log(error);
     });
   return childrenList;
 }
@@ -149,7 +148,7 @@ export function requestApproveTeacher(teacherId?: number | null) {
       alert('선생님의 정보가 없습니다');
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
   return teacherList;
 }
@@ -167,7 +166,9 @@ export function requestGetClassList() {
         alert('데이터가 없습니다');
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+    });
   return classList;
 }
 
@@ -187,7 +188,7 @@ export function requestChangeTeacherClass(teacherId: number, classId: number) {
       alert('반을 변경할 수 업습니다');
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
   return changeClass;
 }
@@ -206,7 +207,7 @@ export function requestSearchInsti(value: string) {
       return false;
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
   return instiData;
 }
@@ -224,7 +225,7 @@ export function requestGetProfile(childId?: string | null) {
       return false;
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
 
   return profile;
@@ -250,7 +251,7 @@ export function requestProfileParentRegister(
       return false;
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
   return results;
 }
@@ -271,7 +272,7 @@ export function requestGuestTeacherRegister(institutionId: string) {
       }
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
   return result;
 }
@@ -296,7 +297,7 @@ export function requestGuestParentRegister(
       }
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
   return result;
 }
@@ -320,13 +321,10 @@ export const requestUploadTimetable = async (timetable: any) => {
       timetable: `'${JSON.stringify(timetable)}'`,
     })
     .then((res) => {
-      console.log(res.status, res.data);
-
       return res.data;
     })
     .catch((err) => {
       console.log(err);
-      alert('콘솔창에 console.log(err)');
     });
   return result;
 };
@@ -349,7 +347,7 @@ export function requestManageClass(className: string, option: string) {
       }
     })
     .catch((err) => {
-      alert(err);
+      console.log(err);
     });
   return results;
 }
@@ -371,7 +369,6 @@ export async function requestNotice(
   axios.defaults.headers.common['authorization'] = JSON.parse(
     localStorage.getItem('loginInfo')!,
   ).accessToken;
-  console.log('공지사항 요청', childId, '=어린이 아이디');
   const result = await axios
     .post('https://datda.link/notice', {
       childId: childId || null,
@@ -380,7 +377,6 @@ export async function requestNotice(
       category: category || null,
     })
     .then((res) => {
-      console.log(res.status, res.data);
       return res.data;
     })
     .catch((err) => {
@@ -417,7 +413,7 @@ export const handleReqeustUploadImage = async (
     )
     .then((res) => {
       const { avatarUrl } = res.data;
-      console.log(avatarUrl);
+      // console.log(avatarUrl);
     })
     .catch((err) => {
       console.log(err);
@@ -438,7 +434,6 @@ export const requestIndiNotice = async (childId?: number, content?: string) => {
     })
     .then((res) => {
       if (res.status === 200) {
-        console.log(res.status, res.data);
         return res.data;
       }
     })
@@ -451,7 +446,7 @@ export const IndiNoticeChildrenList = () => {
   axios
     .get('https://datda.link/indinotice/childrenlist', {})
     .then((res) => {
-      console.log(res.status, res.data);
+      // console.log(res.status, res.data);
     })
     .catch((err) => {
       console.log(err);
@@ -464,16 +459,6 @@ export const requestImageAlbum = async (
   title?: string | null,
   content?: string | null,
 ) => {
-  console.log(
-    childId,
-    '어린이 아이디',
-    formData,
-    '파일',
-    title,
-    '제목',
-    content,
-    '내용',
-  );
   axios.defaults.headers.common['authorization'] = JSON.parse(
     localStorage.getItem('loginInfo')!,
   ).accessToken;
@@ -487,13 +472,9 @@ export const requestImageAlbum = async (
       // ! 하나의 API로 작성하다 보니 title 이 빈칸으로 작성하기 버튼을 클릭하는 상황은 client 에서 막아주셔야 합니다.
     })
     .then((res) => {
-      console.log(res.status, '응답 확인 ');
       if (res.status === 200) {
-        console.log(res.data.albumInfo, '앨범 ㅋㅋ');
         // ! (1) 사진을 등록한 경우 아래의 조건으로 빠집니다.
         if (childId !== undefined && title !== undefined) {
-          console.log('사진등록 axios');
-
           axios({
             method: 'post',
             url: 'https://datda.link/image/albumpost',
@@ -514,14 +495,15 @@ export const requestImageAlbum = async (
             .then((res) => {
               alert('앨범이 등록 되었습니다.');
 
-              console.log(123, res.data); // ! => 이 res.data 를 활용하시길 바랍니다!
+              // ! => 이 res.data 를 활용하시길 바랍니다!
 
               return res.data;
             });
-          console.log(res.data); // ! => 이 res.data 를 활용하는 것이 아닙니다!
+          // ! => 이 res.data 를 활용하는 것이 아닙니다!
         } else {
           // ! (2) 사진을 등록하지 않은 경우 아래의 조건으로 빠집니다.
-          console.log(res.data);
+          return;
+          // console.log(res.data);
         }
         return res.data.albumInfo;
       } else {
@@ -540,16 +522,6 @@ export const requestMealListAndUpload = async (
   title?: string | null,
   content?: string | null,
 ) => {
-  console.log(
-    childId,
-    '어린이 아이디',
-    formData,
-    '파일',
-    title,
-    '제목',
-    content,
-    '내용',
-  );
   axios.defaults.headers.common['authorization'] = JSON.parse(
     localStorage.getItem('loginInfo')!,
   ).accessToken;
@@ -563,15 +535,11 @@ export const requestMealListAndUpload = async (
       // ! 하나의 API로 작성하다 보니 title 이 빈칸으로 작성하기 버튼을 클릭하는 상황은 client 에서 막아주셔야 합니다.
     })
     .then((res) => {
-      console.log(res.status, '응답 확인 ');
       if (res.status === 200) {
-        console.log(res.data, '앨범 ㅋㅋ');
         return res.data.foodInfo;
 
         // ! (1) 사진을 등록한 경우 아래의 조건으로 빠집니다.
         if (childId !== undefined && title !== undefined) {
-          console.log('사진등록 axios');
-
           // axios({
           //   method: 'post',
           //   url: 'https://datda.link/image/albumpost',

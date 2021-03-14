@@ -53,7 +53,6 @@ function ListForm({
       secondCategory: secondCategory!,
     });
   }, []);
-  console.log('현재 url', match.path);
   return (
     <Wrap>
       <Title>{title}</Title>

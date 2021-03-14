@@ -28,7 +28,6 @@ export default function ProfileList({ userInfo }: Props) {
     } else {
       getProfile(userInfo.mainData[userInfo.currentChild].childId);
     }
-    console.log(profileInfo.approved);
   }, []);
 
   const getProfile = async (childId?: string | null) => {
