@@ -98,7 +98,7 @@ function TeacherManage({
                   <span className="manageTeacher">{teacher.teacherName}</span>
                   <span className="manageClass">
                     {!teacher.classs
-                      ? '아직 반 없음'
+                      ? '미지정'
                       : teacher.classs.teacherClassName}
                   </span>
                   <UnclickedButton
@@ -125,7 +125,6 @@ function TeacherManage({
                             value={classs.classId}
                             onChange={(e) => {
                               onCheckedClass(e);
-                              console.log(checkedClass.classId);
                             }}
                           ></input>
                           <span>{classs.className}</span>
@@ -139,7 +138,6 @@ function TeacherManage({
               </PostButton>
               <PostButton
                 onClick={() => {
-                  console.log(checkedTeacher, checkedClass);
                   changeClassButton(
                     checkedTeacher.teacherId,
                     checkedClass.classId,
@@ -233,17 +231,21 @@ const TeacherManageWrap = styled.div`
       .titleSelect {
         text-align: center;
         flex: 1 auto;
+        width: 100%;
       }
       .titleTeacherr {
         text-align: center;
-        flex: 2 auto;
+        flex: 1 auto;
+        width: 100%;
       }
       .titleClass {
         text-align: center;
-        flex: 2 auto;
+        flex: 1 auto;
+        width: 100%;
       }
       .titleButton {
-        flex: 2 auto;
+        flex: 1 auto;
+        width: 100%;
       }
     }
   }
@@ -254,19 +256,28 @@ const TeacherManageWrap = styled.div`
 
     margin: 1% 0 1% 0;
     .manageRadio {
-      flex: 2 auto;
+      flex: 1 auto;
+      width: 85%;
     }
     .manageTeacher {
       text-align: center;
-      flex: 2 auto;
+      flex: 1 auto;
+      width: 71%;
+      padding-right: 9px;
     }
     .manageClass {
       text-align: center;
-      flex: 3 auto;
+      width: 90%;
+      flex: 1 auto;
+      padding-right: 49px;
+      @media ${({ theme }) => theme.device.mobileL} {
+        padding-right: 0px;
+      }
     }
     .unapprovedButton {
       max-width: fit-content;
-      flex: 5 auto;
+      flex: 1 auto;
+      width: 80%;
     }
   }
 
