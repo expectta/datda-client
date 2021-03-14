@@ -479,7 +479,6 @@ export const requestImageAlbum = async (
             method: 'post',
             url: 'https://datda.link/image/albumpost',
             data: formData,
-            // headers: { 'Content-Type': 'form-data' },
           })
             // axios
             //   .post(
