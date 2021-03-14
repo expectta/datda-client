@@ -79,10 +79,9 @@ export default function Management({ userInfo }: propsType) {
       handleRealTimeChildrenState(userInfo.mainData.institutionId);
     }
   }, [childInfo.childrenList]);
-  // useEffect(() => {
-  //   console.log(userInfo, '유저정보');
-  //   handleUpdateChildInfo();
-  // }, []);
+  useEffect(() => {
+    handleUpdateChildInfo();
+  }, []);
   return (
     <Wrap>
       <Switch>
