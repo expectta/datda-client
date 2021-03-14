@@ -37,7 +37,7 @@ export default function Carousel({ userInfo }: propType) {
     <>
       <CarouselContainer>
         <Title>앨범</Title>
-        {userInfo.mainData.album ? (
+        {userInfo.mainData ? (
           <SliderContainer ref={slideRef}>
             {userInfo.permission === 'parent'
               ? userInfo.mainData[userInfo.currentChild].album.map(
