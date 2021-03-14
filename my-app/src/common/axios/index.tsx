@@ -472,6 +472,7 @@ export const requestImageAlbum = async (
       // ! 하나의 API로 작성하다 보니 title 이 빈칸으로 작성하기 버튼을 클릭하는 상황은 client 에서 막아주셔야 합니다.
     })
     .then((res) => {
+      return res.data.albumInfo;
       if (res.status === 200) {
         // ! (1) 사진을 등록한 경우 아래의 조건으로 빠집니다.
         if (childId !== undefined && title !== undefined) {
@@ -504,6 +505,7 @@ export const requestImageAlbum = async (
           return;
           // console.log(res.data);
         }
+        console.log(res.data.albumInfo, '서버 응답결과');
         return res.data.albumInfo;
       } else {
         return res.data.albumInfo;
