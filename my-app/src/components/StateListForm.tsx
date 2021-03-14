@@ -19,7 +19,6 @@ function StateListForm({
   secondCategory,
   match,
 }: propsType) {
-  console.log('현재 url', match.path);
   return (
     <Wrap>
       <Title>{title}</Title>
@@ -36,7 +35,6 @@ function StateListForm({
       {childInfo.childrenList.length !== 0 ? (
         <CardWrapper>
           {childInfo.childrenList.map((element: any, index: number) => {
-            console.log(element, '현재 엘리먼트');
             return (
               <StateCardForm
                 key={element.childId}

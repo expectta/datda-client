@@ -44,13 +44,13 @@ export default function Medicine({ userInfo, handleUpdateList }: propsType) {
     },
   });
   // 사용자 입력 값 핸들러
-  const handleInputValue = (
-    name: string,
-    content: string,
-    category: string,
-  ) => {
-    console.log(name, ' 제목은?', content, '내용은?', category, '카테고리는?');
-  };
+  // const handleInputValue = (
+  //   name: string,
+  //   content: string,
+  //   category: string,
+  // ) => {
+  //   console.log(name, ' 제목은?', content, '내용은?', category, '카테고리는?');
+  // };
   const PREVIOUS_PAGE = -1;
   return (
     <Wrap>

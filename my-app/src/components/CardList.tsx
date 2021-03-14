@@ -17,7 +17,6 @@ function CardList({
   userInfo,
 }: propsType) {
   const urlMatch = useRouteMatch();
-  console.log(content, '콘텐트 머임');
   return (
     <>
       <Wrap>
@@ -52,7 +51,6 @@ function CardList({
         </CardWrapper>
 
         {(() => {
-          console.log(userInfo.permission, 'cardlist권한 확인');
           if (userInfo.permission === 'parent') {
             return null;
           }

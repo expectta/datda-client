@@ -125,11 +125,7 @@ export default function Main({
         ? userInfo.mainData[userInfo.currentChild].childId
         : null;
     const notice = await requestNotice(childId);
-    console.log(notice, ' 요청 결과값');
-
     const indiNotice = await requestIndiNotice();
-    console.log(indiNotice, ' 알림장 결과값');
-
     if (indiNotice && notice) {
       setList({
         ...list,
@@ -146,12 +142,11 @@ export default function Main({
   useEffect(() => {
     handleInitializeList();
   }, []);
-  useEffect(() => {
-    console.log(list, ' == 리스트 모니터링');
-  }, [list]);
+  // useEffect(() => {
+  //   console.log(list, ' == 리스트 모니터링');
+  // }, [list]);
   // catgegory 선택에 따른 list 내용 변경
   const handleChangeNotice = (category?: string) => {
-    console.log('현재 선택한 카테고리', category);
     //공지사항
     if (category === '공지사항') {
       setList({
@@ -196,7 +191,6 @@ export default function Main({
       .doc(String(childId))
       .get()
       .then((doc) => {
-        console.log(institutionId, '기관', childId, '아이');
         // 등록한 아이가 승인이 완료 되었을때
         if (doc.data()) {
           handleRealTimeState(institutionId, childId);

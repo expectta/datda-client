@@ -29,7 +29,6 @@ export default function Meal({ userInfo }: propsType) {
     content: string,
     category: string,
   ) => {
-    console.log(name, ' 제목은?', content, '내용은?', category, '카테고리는?');
     setInputValue({
       ...inputVlaue,
       [name]: content,
@@ -38,16 +37,13 @@ export default function Meal({ userInfo }: propsType) {
   };
   //급식표 초기화 핸들러
   const handleInitailzeMealList = async (childId?: number) => {
-    console.log('급식표 요청');
     const result = await requestMealListAndUpload(childId);
-    console.log(result, ' 이미지 결과값');
     setMealList({
       mealList: result,
     });
   };
   // 화면 랜더링 시 급식 초기화
   useEffect(() => {
-    console.log(userInfo, '유저정보');
     if (userInfo.permission === 'parent') {
       const childId = userInfo.mainData[userInfo.currentChild].childId;
       handleInitailzeMealList(childId);

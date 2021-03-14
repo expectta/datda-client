@@ -5,9 +5,9 @@ export function handleAddInstitution(institutionId: string) {
     .collection('institution')
     .doc(String(institutionId))
     .set({})
-    .then(() => {
-      console.log('');
-    })
+    // .then(() => {
+    //   console.log('');
+    // })
     .catch((error) => {
       alert('오류가 발생했습니다.');
     });
@@ -15,7 +15,6 @@ export function handleAddInstitution(institutionId: string) {
 //선생님이 미승인된 원아를 승인완료 했을경우 마다 실행됨
 //추가될 원아의 아이디가 존재 할 경우 덮어씌워짐.
 export function handleAddChild(institutionId: string, childId: string) {
-  console.log(institutionId, ' =기관', childId, ' =아이');
   firestore
     .collection('institution')
     .doc(String(institutionId))
@@ -31,23 +30,22 @@ export function handleAddChild(institutionId: string, childId: string) {
     .then(() => {
       // handleCheckData(institutionId, childId);
     })
-    .catch((error) => {
+    .catch(() => {
       alert('오류가 발생했습니다.');
     });
 }
 //실시간 데이터 베이스에서 원아 삭제
 export function handleDeleteChild(institutionId: string, childId: string) {
-  console.log(institutionId, ' =기관', childId, ' =아이');
   firestore
     .collection('institution')
     .doc(institutionId)
     .collection('children')
     .doc(childId)
     .delete()
-    .then(() => {
-      console.log('');
-    })
-    .catch((error) => {
+    // .then(() => {
+    //   console.log('');
+    // })
+    .catch(() => {
       alert('오류가 발생했습니다.');
     });
 }
@@ -85,7 +83,6 @@ export function handleCheckData(institutionId: string, childId: string) {
     });
 }
 export function handleGetAllChildByInstitution(institutionId: any) {
-  console.log('모든 원아 불러오기');
   firestore
     .collection('institution')
     .doc(String(institutionId))

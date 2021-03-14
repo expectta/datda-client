@@ -9,7 +9,6 @@ interface propsType {
 export default function ReadForm({ title, contents }: propsType) {
   const { no }: any = useParams();
   const PREVIOUS_PAGE = -1;
-  console.log(contents, ' 무엇?');
   let postView = [];
   if (title === '알림장') {
     postView = contents.filter((element: any, index: number) => {
@@ -25,7 +24,6 @@ export default function ReadForm({ title, contents }: propsType) {
     });
   }
 
-  console.log(postView, '필터 후');
   return (
     <Wrap>
       <ContentCard>

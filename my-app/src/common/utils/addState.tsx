@@ -13,6 +13,5 @@ export async function addState(childrenList: any) {
       String(element.childId),
     );
   }
-  console.log(childrenArray, '교체된 배열');
   return childrenArray;
 }

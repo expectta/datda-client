@@ -63,7 +63,6 @@ export default function ApproveChildren({ userInfo }: propType) {
             </CategoryWrapper>
             <Contents>
               {approveChildren.unapproved.map((element: any, index: number) => {
-                console.log(element.childId, '아이 id');
                 return (
                   <CardWrapper key={element.childId}>
                     <Wrapper>

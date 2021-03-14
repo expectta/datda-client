@@ -33,7 +33,6 @@ export default function IndiNotice({
     content: string,
     category: string,
   ) => {
-    console.log(name, ' 제목은?', content, '내용은?', category, '카테고리는?');
     setInputValue({
       ...inputVlaue,
       [name]: content,

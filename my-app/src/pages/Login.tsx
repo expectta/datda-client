@@ -39,7 +39,6 @@ function Login({ hadleSetMainData }: propType) {
       // axios 로그인 요청
       //!await로 동기적 실행 필요함.
       const mainData = await requestLogin(email, password);
-      console.log(mainData, 'main Data는??');
       if (typeof mainData !== 'boolean') {
         if (mainData !== undefined) {
           hadleSetMainData(mainData);
