@@ -1,9 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ImagePostForm } from '../components/Index';
+import { requestLogin } from '../common/axios';
+import { Link, useHistory, Redirect } from 'react-router-dom';
+import 'dotenv/config';
+interface props {
+  hadleSetMainData: (mainData: any) => void;
+}
 //첫 페이지
-function Intro() {
+function Intro({ hadleSetMainData }: props) {
+  const history = useHistory();
+  const [guest, setGuest] = useState({
+    institution: 'institution1@datda.net',
+    teacher: 'teacher1@datda.net',
+    parent: 'parent1@datda.net',
+  });
+  const handleLogin = async (email: string) => {
+    const password = 'asdf123!';
+    console.log(email, '= email', password, '= password');
+    const mainData = await requestLogin(email, String(password));
+    if (typeof mainData !== 'boolean') {
+      console.log(mainData);
+      if (mainData !== undefined) {
+        hadleSetMainData(mainData);
+        history.push('/main');
+      }
+    }
+  };
   return (
     <IntroGlobal id="intro_global">
       <div className="logoWhiteFrame">
@@ -21,6 +44,15 @@ function Intro() {
           <Link to="/login">
             <LinkDetail>로그인</LinkDetail>
           </Link>
+          <button onClick={() => handleLogin(guest.institution)}>
+            기관장 로그인
+          </button>
+          <button onClick={() => handleLogin(guest.teacher)}>
+            선생님 로그인
+          </button>
+          <button onClick={() => handleLogin(guest.parent)}>
+            학부모 로그인
+          </button>
         </LinkArea>
       </SectionIntro>
 

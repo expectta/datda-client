@@ -51,7 +51,7 @@ function App() {
     setModalVisible(false);
   };
   // 회원이 로그인 하고 유저 상태를 변경!
-  const hadleSetMainData = async (data: any) => {
+  const hadleSetMainData = (data: any) => {
     const loginInfo = JSON.parse(localStorage.getItem('loginInfo')!);
     setUserInfo({
       ...userInfo,
@@ -89,7 +89,9 @@ function App() {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route exact path="/" component={Intro} />
+          <Route exact path="/">
+            <Intro hadleSetMainData={hadleSetMainData}></Intro>
+          </Route>
           <Route path="/login">
             <Login hadleSetMainData={hadleSetMainData}></Login>
           </Route>

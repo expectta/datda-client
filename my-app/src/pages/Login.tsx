@@ -19,6 +19,7 @@ interface propType {
   hadleSetMainData: (mainData: any) => void;
 }
 function Login({ hadleSetMainData }: propType) {
+  console.log(hadleSetMainData);
   const history = useHistory();
   const [inputs, setInputs] = useState({ email: '', password: '' });
   const [errormessage, setErrormessage] = useState<string>('');
@@ -41,6 +42,7 @@ function Login({ hadleSetMainData }: propType) {
       const mainData = await requestLogin(email, password);
       if (typeof mainData !== 'boolean') {
         if (mainData !== undefined) {
+          console.log('핸들러작동');
           hadleSetMainData(mainData);
           history.push('/main');
         } else {
