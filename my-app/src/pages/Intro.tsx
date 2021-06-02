@@ -17,10 +17,8 @@ function Intro({ hadleSetMainData }: props) {
   });
   const handleLogin = async (email: string) => {
     const password = 'asdf123!';
-    console.log(email, '= email', password, '= password');
     const mainData = await requestLogin(email, String(password));
     if (typeof mainData !== 'boolean') {
-      console.log(mainData);
       if (mainData !== undefined) {
         hadleSetMainData(mainData);
         history.push('/main');
@@ -44,6 +42,11 @@ function Intro({ hadleSetMainData }: props) {
           <Link to="/login">
             <LinkDetail>로그인</LinkDetail>
           </Link>
+          <Guest>Guest 로그인</Guest>
+          <Describe>
+            아래 버튼은 자동로그인 버튼입니다. 미리 구축된 Data를 기반으로
+            사이트를 둘러볼 수 있습니다.
+          </Describe>
           <button onClick={() => handleLogin(guest.institution)}>
             기관장 로그인
           </button>
@@ -563,4 +566,11 @@ const LinkDetail = styled.button`
 const LinkButton = styled.button`
   ${({ theme }) => theme.common.defaultButton}
   margin: 0vh 2vw 0vh 2vw;
+`;
+
+const Guest = styled.h2`
+  color: white;
+`;
+const Describe = styled.h3`
+  color: white;
 `;
