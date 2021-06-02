@@ -126,16 +126,16 @@ function Login({ hadleSetMainData }: propType) {
         <div className="error">{errormessage}</div>
         <div className="buttonSession">
           <div className="buttonEl">
-            <Button onClick={() => handleLogin(inputs.email, inputs.password)}>
-              로그인
-            </Button>
-          </div>
-          <div className="buttonEl">
             <img
               id="kakaoImg"
               src="../images/kakaoLogin.png"
               onClick={handleKakao}
             ></img>
+          </div>
+          <div className="buttonEl">
+            <Button onClick={() => handleLogin(inputs.email, inputs.password)}>
+              로그인
+            </Button>
           </div>
           <div className="buttonEl">
             <Link to="/signup">
