@@ -92,33 +92,33 @@ function ListForm({
                 ></ListInnerCard>
               );
             })}
-            <>
-              {(() => {
-                // console.log(title, ' = 타이틀 ', permission, '= 권한');
-                if (title === '알림장' && permission === 'institution') {
-                  return null;
-                }
-                if (
-                  title === '투약의뢰서' &&
-                  (permission === 'institution' || permission === 'teacher')
-                ) {
-                  return null;
-                }
-                if (title === '공지사항' && permission === 'parent') {
-                  return null;
-                }
-                return (
-                  <ButtonWrapper>
-                    <WireButton to={`${match.path}/write`}>작성</WireButton>
-                    <GoListButton onClick={() => history.replace('/main')}>
-                      {' '}
-                      홈
-                    </GoListButton>
-                  </ButtonWrapper>
-                );
-              })()}
-            </>
           </CardWrapper>
+          <>
+            {(() => {
+              // console.log(title, ' = 타이틀 ', permission, '= 권한');
+              if (title === '알림장' && permission === 'institution') {
+                return null;
+              }
+              if (
+                title === '투약의뢰서' &&
+                (permission === 'institution' || permission === 'teacher')
+              ) {
+                return null;
+              }
+              if (title === '공지사항' && permission === 'parent') {
+                return null;
+              }
+              return (
+                <ButtonWrapper>
+                  <WireButton to={`${match.path}/write`}>작성</WireButton>
+                  <GoListButton onClick={() => history.replace('/main')}>
+                    {' '}
+                    홈
+                  </GoListButton>
+                </ButtonWrapper>
+              );
+            })()}
+          </>
         </>
       ) : (
         // <LoadingWrapper>
@@ -152,7 +152,7 @@ const Title = styled.div`
   justify-content: start;
   margin-left: 15px;
   width: 100%;
-  font-size: 35px;
+  font-size: ${({ theme }) => theme.fontSizes.xxxl};
   width: 100%;
   height: 10%;
   color: black;
@@ -178,7 +178,7 @@ const CategoryYear = styled.span`
 `;
 const CardWrapper = styled.div`
   width: 98%;
-  height: 85%;
+  height: 75%;
   margin: 5% 0;
   overflow: auto;
 `;
