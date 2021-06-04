@@ -1,9 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ImagePostForm } from '../components/Index';
+import { requestLogin } from '../common/axios';
+import { Link, useHistory, Redirect } from 'react-router-dom';
+import 'dotenv/config';
+interface props {
+  hadleSetMainData: (mainData: any) => void;
+}
 //첫 페이지
-function Intro() {
+function Intro({ hadleSetMainData }: props) {
+  const history = useHistory();
+  const [guest, setGuest] = useState({
+    institution: 'institution1@datda.net',
+    teacher: 'teacher1@datda.net',
+    parent: 'parent1@datda.net',
+  });
+  const handleLogin = async (email: string) => {
+    const password = 'asdf123!';
+    const mainData = await requestLogin(email, String(password));
+    if (typeof mainData !== 'boolean') {
+      if (mainData !== undefined) {
+        hadleSetMainData(mainData);
+        history.push('/main');
+      }
+    }
+  };
   return (
     <IntroGlobal id="intro_global">
       <div className="logoWhiteFrame">
@@ -21,6 +42,20 @@ function Intro() {
           <Link to="/login">
             <LinkDetail>로그인</LinkDetail>
           </Link>
+          <Guest>Guest 로그인</Guest>
+          <Describe>
+            아래 버튼은 자동로그인 버튼입니다. 미리 구축된 Data를 기반으로
+            사이트를 둘러볼 수 있습니다.
+          </Describe>
+          <button onClick={() => handleLogin(guest.institution)}>
+            기관장 로그인
+          </button>
+          <button onClick={() => handleLogin(guest.teacher)}>
+            선생님 로그인
+          </button>
+          <button onClick={() => handleLogin(guest.parent)}>
+            학부모 로그인
+          </button>
         </LinkArea>
       </SectionIntro>
 
@@ -531,4 +566,11 @@ const LinkDetail = styled.button`
 const LinkButton = styled.button`
   ${({ theme }) => theme.common.defaultButton}
   margin: 0vh 2vw 0vh 2vw;
+`;
+
+const Guest = styled.h2`
+  color: white;
+`;
+const Describe = styled.h3`
+  color: white;
 `;
