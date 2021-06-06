@@ -45,7 +45,7 @@ const StateCard = styled.div`
 `;
 const Avatar = styled.div`
   width: 75px;
-  height: auto;
+  height: 75px;
   margin: 1%;
   overflow: hidden;
   border-radius: 10px;
@@ -53,7 +53,8 @@ const Avatar = styled.div`
 `;
 const AvatarImage = styled.img`
 	width: 100%;
-	height: 100%;
+	height: auto;
+	object-fit : cover;
 }`;
 const Wrapper = styled.div`
   width: 100%;

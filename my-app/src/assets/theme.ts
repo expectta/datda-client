@@ -121,8 +121,9 @@ const common = {
   box-shadow: 0px 0px 5px #c8c8c8;	
 	`,
   avatarImageDiv: `
-	width: auto;
-	height: 100%;
+	width: 100%;
+  height: 100%;
+  object-fit: cover;
 	`,
   stateDiv: `
 	background:#6f6eff;

@@ -119,7 +119,7 @@ const SecondMenu = styled.span`
   flex: 11 auto;
 `;
 const Title = styled.div`
-  font-size: 35px;
+  font-size: ${({ theme }) => theme.fontSizes.xxxl};
   width: 100%;
   height: 10%;
   color: black;

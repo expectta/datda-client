@@ -110,31 +110,32 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
           반관리
         </Button>
       </div>
-
-      <TeacherManage
-        isTeacher={isTeacher}
-        teachers={teachers}
-        classInfo={classInfo}
-        setModalMessage={setModalMessage}
-        setModalVisible={setModalVisible}
-        approveButton={approveButton}
-        changeClassButton={changeClassButton}
-      />
-      {/* <StudentManage
+      <ManageContainer>
+        <TeacherManage
+          isTeacher={isTeacher}
+          teachers={teachers}
+          classInfo={classInfo}
+          setModalMessage={setModalMessage}
+          setModalVisible={setModalVisible}
+          approveButton={approveButton}
+          changeClassButton={changeClassButton}
+        />
+        {/* <StudentManage
         classInfo={classInfo}
         isStudent={isStudent}
         students={students}
         setModalMessage={setModalMessage}
         setModalVisible={setModalVisible}
       /> */}
-      <ClassManage
-        isClass={isClass}
-        classInfo={classInfo}
-        setModalMessage={setModalMessage}
-        setModalVisible={setModalVisible}
-        classCheck={classCheck}
-        setClassCheck={setClassCheck}
-      />
+        <ClassManage
+          isClass={isClass}
+          classInfo={classInfo}
+          setModalMessage={setModalMessage}
+          setModalVisible={setModalVisible}
+          classCheck={classCheck}
+          setClassCheck={setClassCheck}
+        />
+      </ManageContainer>
       <ButtonArea>
         <Link to="/main">
           <Button>닫기</Button>
@@ -145,9 +146,13 @@ function CreateClass({ setModalMessage, setModalVisible }: Props) {
 }
 export default CreateClass;
 
+const ManageContainer = styled.div`
+  width: 100%;
+  height: 75%;
+`;
 const Wrap = styled.div`
   width: 100%;
-  height: 97%;
+  height: 100%;
   padding: 5%;
   .teacherArea {
     background-color: pink;
@@ -187,6 +192,7 @@ const Wrap = styled.div`
 `;
 
 const ButtonArea = styled.div`
+  height: 10%;
   text-align: center;
 `;
 

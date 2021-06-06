@@ -377,6 +377,7 @@ const ProfileUnapprovedWrap = styled.div`
 
 const AvatarCard = styled.img`
   overflow: hidden;
+  border-radius: 20px;
   resize: both;
   width: 200px;
   height: 200px;
