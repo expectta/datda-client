@@ -65,7 +65,7 @@ const Title = styled.div`
   justify-content: start;
   margin-left: 15px;
   width: 100%;
-  font-size: 35px;
+  font-size: ${({ theme }) => theme.fontSizes.xxxl};
   width: 100%;
   height: 10%;
   color: black;
