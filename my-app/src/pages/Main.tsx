@@ -178,10 +178,6 @@ export default function Main({
     if (category === '투약보고서') {
     }
   };
-  // useEffect(() => {
-  //   console.log('시작');
-  //   handleUpdateNotice();
-  // }, []);
   // 기관에 소속되어 승인이 완료된 원아는 실시간 상태 확인을 할 수있다.
   function handleCheckData(institutionId: string, childId: string) {
     firestore
