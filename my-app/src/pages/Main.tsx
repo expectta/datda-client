@@ -142,10 +142,6 @@ export default function Main({
   useEffect(() => {
     handleInitializeList();
   }, []);
-  // useEffect(() => {
-  //   console.log(list, ' == 리스트 모니터링');
-  // }, [list]);
-  // catgegory 선택에 따른 list 내용 변경
   const handleChangeNotice = (category?: string) => {
     //공지사항
     if (category === '공지사항') {
@@ -178,10 +174,6 @@ export default function Main({
     if (category === '투약보고서') {
     }
   };
-  // useEffect(() => {
-  //   console.log('시작');
-  //   handleUpdateNotice();
-  // }, []);
   // 기관에 소속되어 승인이 완료된 원아는 실시간 상태 확인을 할 수있다.
   function handleCheckData(institutionId: string, childId: string) {
     firestore
@@ -224,11 +216,6 @@ export default function Main({
   };
 
   useEffect(() => {
-    // setList({
-    //   ...list,
-    //   mainMiniIndiNotice: userInfo.mainData.indiNotice,
-    //   mainMiniNotice: userInfo.mainData.notice,
-    // });
     if (userInfo.permission === 'parent') {
       handleCheckData(
         userInfo.mainData[userInfo.currentChild].institutionId,
