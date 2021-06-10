@@ -1,10 +1,6 @@
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import { director, teacher, parents } from '../../assets/testdata';
-axios.defaults.withCredentials = true;
 import 'dotenv/config';
-import { stringify } from 'querystring';
-import { findAllInRenderedTree } from 'react-dom/test-utils';
+axios.defaults.withCredentials = true;
 
 //! 서버 카카오 로그인 url
 const serverLoginUrl = 'https://datda.link/kakao/login'; //! datda 카카오로그인 주소
@@ -74,7 +70,6 @@ export async function requestKakaoLogin(authorizationCode: string) {
 export const isEmailExist = async (email: string) => {
   const results = await axios
     .post('https://datda.link/auth/isemail', {
-      // axios.post('http://localhost:5000/auth/isemail', {
       email: email,
     })
     .then((res) => {
@@ -519,7 +514,6 @@ export const requestImageAlbum = async (
 // 급식표 리스트 요청 및 등록
 export const requestMealListAndUpload = async (
   childId?: number | null,
-  formData?: any | null,
   title?: string | null,
   content?: string | null,
 ) => {
@@ -538,39 +532,6 @@ export const requestMealListAndUpload = async (
     .then((res) => {
       if (res.status === 200) {
         return res.data.foodInfo;
-
-        // ! (1) 사진을 등록한 경우 아래의 조건으로 빠집니다.
-        if (childId !== undefined && title !== undefined) {
-          // axios({
-          //   method: 'post',
-          //   url: 'https://datda.link/image/albumpost',
-          //   data: formData,
-          //   headers: { 'Content-Type': 'form-data' },
-          // })
-          // axios
-          //   .post(
-          //     'https://datda.link/image/albumpost',
-          //     {
-          //       // ! asdfasdf payload에 대한 고찰
-          //       formData: formData,
-          //     },
-          //     {
-          //       headers: { 'Content-Type': 'multipart/form-data' },
-          //     },
-          //   )
-          // .then((res) => {
-          //   alert('앨범이 등록 되었습니다.');
-
-          //   console.log(123, res.data); // ! => 이 res.data 를 활용하시길 바랍니다!
-
-          //   return res.data;
-          // });
-          console.log(res.data); // ! => 이 res.data 를 활용하는 것이 아닙니다!
-        } else {
-          // ! (2) 사진을 등록하지 않은 경우 아래의 조건으로 빠집니다.
-          console.log(res.data);
-        }
-        return res.data.albumInfo;
       } else {
         return res.data.albumInfo;
       }
