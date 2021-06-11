@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { ListInnerCard } from './Index';
-import { notice } from '../assets/testdata';
 import { StringLiteral } from 'typescript';
 import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 interface propsType {
