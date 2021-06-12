@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
-import { medicine } from '../assets/testdata';
 import { ListInnerCard } from './Index';
 interface propsType {
   NoticeInnerCard: JSX.Element;
@@ -16,7 +15,7 @@ export default function MedicineList(props: propsType) {
           <CategoryEvent>투약 보고서</CategoryEvent>
         </CategoryWrap>
         <CardWrapper>
-          {medicine.data.map((element, index) => {
+          {/* {medicine.data.map((element, index) => {
             return (
               <ListInnerCard
                 key={index}
@@ -27,7 +26,7 @@ export default function MedicineList(props: propsType) {
                 className={element.className}
               ></ListInnerCard>
             );
-          })}
+          })} */}
         </CardWrapper>
       </ContentCard>
       <ButtonWrapper>
