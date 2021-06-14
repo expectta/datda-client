@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ListInnerCard } from './Index';
-import { notice } from '../assets/testdata';
 import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 interface propsType {
   userInfo: any;

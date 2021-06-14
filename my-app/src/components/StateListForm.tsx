@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
-import { notice } from '../assets/testdata';
 import { ListInnerCard, StateCardForm } from './Index';
 interface propsType {
   title: string;

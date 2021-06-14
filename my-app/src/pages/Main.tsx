@@ -142,10 +142,6 @@ export default function Main({
   useEffect(() => {
     handleInitializeList();
   }, []);
-  // useEffect(() => {
-  //   console.log(list, ' == 리스트 모니터링');
-  // }, [list]);
-  // catgegory 선택에 따른 list 내용 변경
   const handleChangeNotice = (category?: string) => {
     //공지사항
     if (category === '공지사항') {
@@ -220,11 +216,6 @@ export default function Main({
   };
 
   useEffect(() => {
-    // setList({
-    //   ...list,
-    //   mainMiniIndiNotice: userInfo.mainData.indiNotice,
-    //   mainMiniNotice: userInfo.mainData.notice,
-    // });
     if (userInfo.permission === 'parent') {
       handleCheckData(
         userInfo.mainData[userInfo.currentChild].institutionId,
