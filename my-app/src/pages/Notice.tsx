@@ -60,11 +60,6 @@ function Notice({
       type: type,
     });
   };
-  // useEffect(() => {
-  //   return () => {
-  //     console.log(inputVlaue, '사용자 입력값');
-  //   };
-  // }, [inputVlaue, radioButton]);
   return (
     <Wrap>
       <Switch>
