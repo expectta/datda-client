@@ -72,11 +72,13 @@ function WriteForm({
   //작성 글 등록 요청
   const handleRequestPost = async (category: string) => {
     const { title, content } = inputVlaue;
+
     if (title.length === 0) {
       alert('제목을 입력해주세요');
       return;
     }
     if (type === 'notice') {
+
       const result = await requestNotice(title, content, category);
       // console.log(result, '공지사항 등록요청 완료');
       history.go(PREVIOUS_PAGE);
