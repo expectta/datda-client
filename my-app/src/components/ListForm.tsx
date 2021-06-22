@@ -30,27 +30,21 @@ function ListForm({
   match,
 }: propsType) {
   const history = useHistory();
-  const PREVIOUS_PAGE = -1;
   //탭 메뉴 상태
   const [clickedMenu, setClickedMenu] = useState(0);
   //카테고리 상태
   const [category, setCategory] = useState({
-    fristCategory: '',
-    secondCategory: '',
+    fristCategory: fristCategory,
+    secondCategory: secondCategory,
   });
-
-  // 탭 메뉴 변경 핸들러
+  // 탭 메뉴 변경 핸들러에 따른 리스트 데이터 변경
   const handleChangeMenu = (menu: number, category?: string) => {
     setClickedMenu(menu);
     handleChangeNotice(category);
   };
   // 유저가 현재 있는 리스트 페이지의 내용을 랜더링 하기 위해 리스트를 업데이트 함.
   useEffect(() => {
-    handleUpdateList(title);
-    setCategory({
-      fristCategory: fristCategory!,
-      secondCategory: secondCategory!,
-    });
+    handleUpdateList(title, category.fristCategory);
   }, []);
   return (
     <Wrap>
@@ -143,10 +137,6 @@ const Wrap = styled.div`
   }
 `;
 
-const ContentCard = styled.div`
-  margin-bottom: 3%;
-  ${({ theme }) => theme.common.contentCardDiv}
-`;
 const Title = styled.div`
   justify-content: start;
   margin-left: 15px;
@@ -165,16 +155,6 @@ const CategoryWrap = styled.div`
   padding-bottom: 1%;
   ${(props) => props.id}
 `;
-const FristCategory = styled.span`
-  flex: 1 auto;
-`;
-const SecondCategory = styled.span`
-  flex: 11 auto;
-`;
-const CategoryYear = styled.span`
-  flex: 11 auto;
-  text-align: right;
-`;
 const CardWrapper = styled.div`
   width: 98%;
   height: 75%;
@@ -190,19 +170,6 @@ const ButtonWrapper = styled.div`
 const WireButton = styled(Link)`
   text-decoration: none;
   ${({ theme }) => theme.common.defaultButton}
-`;
-const Loader = styled.img`
-  width: 200px;
-  text-align: center;
-  font-size: 2rem;
-  align-self: center;
-`;
-const LoadingWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 `;
 const Category = styled.div<any>`
   background: white;
