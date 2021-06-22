@@ -7,6 +7,7 @@ interface propsType {
   title: string;
   type: string;
   inputVlaue: any;
+  currentCategory?: string;
   handleInputValue: any;
   fristCategory?: string;
   secondCategory?: string;
@@ -31,6 +32,7 @@ function WriteForm({
   userInfo,
   contents,
   radioButton,
+  currentCategory,
   fristCategory,
   secondCategory,
   handleRequestUpload,
@@ -39,7 +41,6 @@ function WriteForm({
   handleInputValue,
   inputVlaue,
 }: propsType) {
-  const urlMatch = useRouteMatch();
   const PREVIOUS_PAGE = -1;
   //메뉴별 선택적으로 화면 구성
   const printContent: objectType = {
@@ -69,12 +70,13 @@ function WriteForm({
     handleInputValue(name, value, type);
   };
   //작성 글 등록 요청
-  const handleRequestPost = async () => {
-    const { title, content, category } = inputVlaue;
-
-    // console.log(type, '현재 타입은??');
+  const handleRequestPost = async (category: string) => {
+    const { title, content } = inputVlaue;
+    if (title.length === 0) {
+      alert('제목을 입력해주세요');
+      return;
+    }
     if (type === 'notice') {
-      // console.log('공지사항 등록요청 완료');
       const result = await requestNotice(title, content, category);
       // console.log(result, '공지사항 등록요청 완료');
       history.go(PREVIOUS_PAGE);
@@ -83,9 +85,6 @@ function WriteForm({
       handleRequestUpload();
     }
   };
-  // useEffect(() => {
-  //   console.log(inputVlaue, '입력값');
-  // }, [inputVlaue]);
   return (
     <Wrap>
       {type === 'medicine' ? (
@@ -111,13 +110,13 @@ function WriteForm({
                 name="title"
                 onChange={(e: any) => handleTitleValue(e)}
               ></TitleInput>
-              {title === '앨범 등록' ? null : (
+              {/* {title === '앨범 등록' ? null : (
                 <select>
                   {contents.teacherRead.map((element: any, index: number) => {
                     return <option>{element}</option>;
                   })}
                 </select>
-              )}
+              )} */}
               {(() => {
                 if (title === '알림장 작성' || title === '앨범 등록') {
                   return null;
@@ -147,7 +146,9 @@ function WriteForm({
 
       <Container>{printContent[type]}</Container>
       <ButtonWrapper>
-        <PostButton onClick={() => handleRequestPost()}>작성완료</PostButton>
+        <PostButton onClick={() => handleRequestPost(currentCategory!)}>
+          작성완료
+        </PostButton>
         <CancleButton onClick={() => history.go(PREVIOUS_PAGE)}>
           취소
         </CancleButton>
