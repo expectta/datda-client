@@ -1,19 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  Link,
-  match,
-  Route,
-  Switch,
-  useRouteMatch,
-  RouteComponentProps,
-} from 'react-router-dom';
-import {
-  ReadForm,
-  ListForm,
-  WriteNotice,
-  WriteForm,
-} from '../components/Index';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { ReadForm, ListForm, WriteForm } from '../components/Index';
 interface propsType {
   list: any;
   handleUpdateList: any;
@@ -83,6 +71,7 @@ function Notice({
             fristCategory="공지사항"
             handleClickRadioButton={handleClickRadioButton}
             secondCategory="행사"
+            currentCategory={list.currentCategory}
             title="공지사항 작성"
             type="notice"
           ></WriteForm>
