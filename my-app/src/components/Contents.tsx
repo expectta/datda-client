@@ -14,9 +14,9 @@ interface propsType {
   handleChangeChild: (index: number) => void;
 }
 export default function Contents({
+  list,
   userInfo,
   handleChangeChild,
-  list,
 }: propsType) {
   //탭 메뉴 상태
   const [clickedMenu, setClickedMenu] = useState(0);
@@ -88,10 +88,6 @@ export default function Contents({
     </Wrap>
   );
 }
-interface Property {
-  checked: number;
-  order: number;
-}
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
@@ -133,9 +129,4 @@ const Name = styled.div`
   transform: unset;
   margin-top: 6px;
   // transform: perspective(40px) rotateX(-15deg);
-`;
-const ListWrapper = styled.div`
-  width: 100%;
-  height: 37%;
-  padding: 2%;
 `;
