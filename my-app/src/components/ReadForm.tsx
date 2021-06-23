@@ -8,22 +8,21 @@ interface propsType {
 }
 export default function ReadForm({ title, contents }: propsType) {
   const { no }: any = useParams();
-  const PREVIOUS_PAGE = -1;
-  let postView = [];
+  let clickedArticle = [];
   if (title === '알림장') {
-    postView = contents.filter((element: any, index: number) => {
+    clickedArticle = contents.filter((element: any, index: number) => {
       if (element.indiNoticeId === Number(no)) {
         return element;
       }
     });
-  } else {
-    postView = contents.filter((element: any, index: number) => {
+  }
+  if (title === '공지사항') {
+    clickedArticle = contents.filter((element: any, index: number) => {
       if (element.noticeId === Number(no)) {
         return element;
       }
     });
   }
-
   return (
     <Wrap>
       <ContentCard>
@@ -31,27 +30,31 @@ export default function ReadForm({ title, contents }: propsType) {
         {title === '알림장' ? (
           <Container>
             <TitleWrapper>
-              <SubTitle>제목 : {postView[0].content}</SubTitle>
-              <Writer>작성자 : {postView[0].user.writterName}</Writer>
+              <SubTitle>제목 : {clickedArticle[0].content}</SubTitle>
+              <Writer>작성자 : {clickedArticle[0].user.writterName}</Writer>
             </TitleWrapper>
-            <TextBox readOnly defaultValue={postView[0].content}></TextBox>
+            <TextBox
+              readOnly
+              defaultValue={clickedArticle[0].content}
+            ></TextBox>
           </Container>
         ) : (
           <Container>
             <TitleWrapper>
-              <SubTitle>제목 : {postView[0].title}</SubTitle>
-              <Writer>작성자 : {postView[0].writer}</Writer>
+              <SubTitle>제목 : {clickedArticle[0].title}</SubTitle>
+              <Writer>작성자 : {clickedArticle[0].writer}</Writer>
             </TitleWrapper>
-            <TextBox readOnly defaultValue={postView[0].content}></TextBox>
+            <TextBox
+              readOnly
+              defaultValue={clickedArticle[0].content}
+            ></TextBox>
           </Container>
         )}
       </ContentCard>
       <ButtonWrapper>
         <PostButton to="/main/notice">수정</PostButton>
         <PostButton to="/main/notice">삭제</PostButton>
-        <GoListButton onClick={() => history.go(PREVIOUS_PAGE)}>
-          목록
-        </GoListButton>
+        <GoListButton onClick={() => history.back()}>목록</GoListButton>
       </ButtonWrapper>
     </Wrap>
   );
