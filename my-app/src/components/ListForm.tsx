@@ -82,6 +82,7 @@ function ListForm({
                   title={title === '알림장' ? title : element.title}
                   // category={notice.category}
                   // createAt={notice.created_at}
+                  type={''}
                 ></ListInnerCard>
               );
             })}
