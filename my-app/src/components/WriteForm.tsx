@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
-import { Link, useRouteMatch, withRouter } from 'react-router-dom';
+import React from 'react';
+import styled from 'styled-components';
 import { ImagePostForm, TextAreaForm, WriteMedicineForm } from './Index';
 import { requestNotice } from '../common/axios';
 interface propsType {
@@ -30,8 +29,6 @@ function WriteForm({
   title,
   type,
   userInfo,
-  contents,
-  radioButton,
   currentCategory,
   fristCategory,
   secondCategory,
@@ -78,9 +75,7 @@ function WriteForm({
       return;
     }
     if (type === 'notice') {
-
-      const result = await requestNotice(title, content, category);
-      // console.log(result, '공지사항 등록요청 완료');
+      await requestNotice(title, content, category);
       history.go(PREVIOUS_PAGE);
     }
     if (type === 'album') {
@@ -145,7 +140,6 @@ function WriteForm({
           </TitleWrapper>
         </>
       )}
-
       <Container>{printContent[type]}</Container>
       <ButtonWrapper>
         <PostButton onClick={() => handleRequestPost(currentCategory!)}>
@@ -162,9 +156,6 @@ export default WriteForm;
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
-`;
-const ContentCard = styled.div`
-  ${({ theme }) => theme.common.contentCardDiv}
 `;
 const Title = styled.div`
   ${({ theme }) => theme.common.contentTitle}
@@ -193,20 +184,6 @@ const Writer = styled.span`
   flex: 1 auto;
   text-align: right;
 `;
-const TextBox = styled.textarea`
-  width: 100%;
-  padding: 2%;
-  height: 50%;
-  outline: none;
-  border: 0px;
-  resize: none;
-  ::placeholder {
-    color: #dbdbdb;
-  }
-  margin-top: 2%;
-  border-radius: 15px 15px 15px 15px;
-  box-shadow: 0px 0px 5px #c8c8c8;
-`;
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -221,5 +198,4 @@ const CancleButton = styled.span`
   ${({ theme }) => theme.common.defaultButton}
   margin-left:3%;
 `;
-
 const RadioBtn = styled.input``;
