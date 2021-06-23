@@ -306,6 +306,26 @@ export default function Main({
                   ></Contents>
                 </Route>
                 <Route
+                  exact
+                  path={`/main/notice/:no`}
+                  render={() => (
+                    <ReadForm
+                      contents={list.mainMiniNotice}
+                      title="공지사항"
+                    ></ReadForm>
+                  )}
+                ></Route>
+                <Route
+                  exact
+                  path={`/main/mainIndiNotice/:no`}
+                  render={() => (
+                    <ReadForm
+                      contents={list.mainMiniIndiNotice}
+                      title="알림장"
+                    ></ReadForm>
+                  )}
+                ></Route>
+                <Route
                   path={`/main/notice`}
                   render={() => (
                     <Notice
