@@ -64,7 +64,7 @@ const Wrap = styled.div`
   height: 100%;
 `;
 const ContentCard = styled.div`
-  height: 98%;
+  height: 95%;
 `;
 const Title = styled.div`
   ${({ theme }) => theme.common.contentTitle}

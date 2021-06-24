@@ -42,20 +42,24 @@ function Intro({ hadleSetMainData }: props) {
           <Link to="/login">
             <LinkDetail>로그인</LinkDetail>
           </Link>
-          <Guest>Guest 로그인</Guest>
-          <Describe>
-            아래 버튼은 자동로그인 버튼입니다. 미리 구축된 Data를 기반으로
-            사이트를 둘러볼 수 있습니다.
-          </Describe>
-          <button onClick={() => handleLogin(guest.institution)}>
-            기관장 로그인
-          </button>
-          <button onClick={() => handleLogin(guest.teacher)}>
-            선생님 로그인
-          </button>
-          <button onClick={() => handleLogin(guest.parent)}>
-            학부모 로그인
-          </button>
+          <GuestSpace>
+            <Guest>Guest 로그인</Guest>
+            <Describe>
+              아래 버튼은 자동로그인 버튼입니다. 미리 구축된 Data를 기반으로
+              사이트를 둘러볼 수 있습니다.
+            </Describe>
+            <GuestButtonWrapper>
+              <GuestLoginButton onClick={() => handleLogin(guest.institution)}>
+                기관장 로그인
+              </GuestLoginButton>
+              <GuestLoginButton onClick={() => handleLogin(guest.teacher)}>
+                선생님 로그인
+              </GuestLoginButton>
+              <GuestLoginButton onClick={() => handleLogin(guest.parent)}>
+                학부모 로그인
+              </GuestLoginButton>
+            </GuestButtonWrapper>
+          </GuestSpace>
         </LinkArea>
       </SectionIntro>
 
@@ -221,6 +225,19 @@ function Intro({ hadleSetMainData }: props) {
 }
 
 export default Intro;
+const GuestSpace = styled.div`
+  background: #ffffff59;
+  width: fit-content;
+  border-radius: 20px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 2%;
+`;
+const GuestButtonWrapper = styled.div``;
+const GuestLoginButton = styled.button`
+  ${({ theme }) => theme.common.defaultButton}
+  margin : 1%;
+`;
 // 어느 id or classname인지만
 const IntroGlobal = styled.div`
   .section {

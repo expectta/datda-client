@@ -504,7 +504,7 @@ const Aside = styled.div`
 `;
 const Section = styled.div`
   width: 75%;
-  height: 1000px;
+  height: 1300px;
   float: left;
   padding: 1%;
 `;

@@ -27,7 +27,6 @@ export default function Timetable({ userInfo }: props) {
   });
   // 현재 진행중인 교육상태 업데이트
   useEffect(() => {
-    // console.log(time, '현재시간');
     //시간표를 등록했을경우
     if (currentTimeTable.totalTimetable !== "'[]'") {
       // console.log('시간표가 없을경우');
@@ -37,14 +36,11 @@ export default function Timetable({ userInfo }: props) {
       );
       setCurrentTimeTable({
         ...currentTimeTable,
-        // currentTime: currentEducation!.time,
         step: currentEducation?.step || 0,
         currentTime: currentEducation?.timetable,
         currentEducation: currentEducation?.currentEducation,
       });
     }
-
-    // console.log('현재시간');
   }, [time]);
 
   // 현재 시간 업데이트
@@ -55,14 +51,7 @@ export default function Timetable({ userInfo }: props) {
     // let minute: string = date.getMinutes().toString();
     if (minute.length === 1) {
       minute = '0' + minute;
-      // console.log('분이 이상', hour, '시', minute, '분');
     }
-    // if (Number(time) < 900 || Number(time) > 1700) {
-    //   setCurrentTimeTable({
-    //     ...currentTimeTable,
-    //     currentEducation: '수업시간이 아니에요',
-    //   });
-    // }
     setTime(`${hour}${minute}`);
   };
   useEffect(() => {
@@ -74,12 +63,6 @@ export default function Timetable({ userInfo }: props) {
     setInterval(tick, 1000);
   }
   useEffect(() => {
-    // console.log(
-    //   currentTimeTable.step,
-    //   '현재스탭',
-    //   currentTimeTable.previousStep,
-    //   '이전스탭',
-    // );
     setCurrentTimeTable({
       ...currentTimeTable,
       previousStep: currentTimeTable.step,
@@ -219,9 +202,10 @@ const Education = styled.div`
   height: 50%;
 `;
 const Container = styled.div`
-  width: 65%;
+  width: 77%;
   height: 80%;
   margin: 0 auto;
+  padding-top: 3%;
 `;
 const TimeTable = styled(Link)`
   float: right;
