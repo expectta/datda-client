@@ -356,7 +356,7 @@ export function requestManageClass(className: string, option: string) {
 // ! < 주의 >
 // ! 하나의 API로 작성하다 보니, title 이 빈칸인 상태로 작성하기 버튼을 클릭하는 상황은 client 에서 막아주셔야 합니다.
 export async function requestNotice(
-  childId?: number,
+  chlidId?: number,
   title?: string,
   content?: string,
   category?: string,
@@ -364,9 +364,10 @@ export async function requestNotice(
   axios.defaults.headers.common['authorization'] = JSON.parse(
     localStorage.getItem('loginInfo')!,
   ).accessToken;
+  const permission = JSON.parse(localStorage.getItem('loginInfo')!).permission;
   const result = await axios
     .post('https://datda.link/notice', {
-      childId: childId || null,
+      childId: chlidId || null,
       title: title || null,
       content: content || null,
       category: category || null,

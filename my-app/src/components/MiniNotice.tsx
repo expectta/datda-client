@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { ListInnerCard } from './Index';
-import { StringLiteral } from 'typescript';
-import { changeTimeStamp } from '../common/utils/changeTimeStamp';
 interface propsType {
   userInfo: any;
   list: any;
@@ -21,6 +19,7 @@ export default function MiniNotice({ userInfo, list }: propsType) {
                     content={element}
                     key={element.noticeId}
                     title={element.title}
+                    type={'notice'}
                   ></ListInnerCard>
                 );
               })
@@ -30,6 +29,7 @@ export default function MiniNotice({ userInfo, list }: propsType) {
                     content={element}
                     key={element.noticeId}
                     title={element.title}
+                    type={'notice'}
                   ></ListInnerCard>
                 );
               })}
@@ -62,14 +62,6 @@ const Wrap = styled.div<any>`
   flex-direction: column;
   border-radius: 15px 15px 15px 15px;
 `;
-
-const NoticeWrap = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  height: 80%;
-  border-radius: 15px 15px 15px 15px;
-  box-shadow: 0px 0px 5px #c8c8c8;
-`;
 const Title = styled.label`
   font-size: 1.5rem;
   text-align: center;
@@ -87,12 +79,6 @@ const NoticeContainar = styled.div<any>`
     css`
       height: 85%;
     `}
-`;
-
-const GoToPostButton = styled(Link)`
-  flex: 1 auto;
-  font-size: 3rem;
-  color: #bcbbbb;
 `;
 const More = styled(Link)<any>`
   display: block;

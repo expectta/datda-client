@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {
-  Link,
-  match,
-  Route,
-  Switch,
-  useRouteMatch,
-  RouteComponentProps,
-} from 'react-router-dom';
-import {
-  ReadForm,
-  ListForm,
-  WriteNotice,
-  WriteForm,
-} from '../components/Index';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { ReadForm, ListForm, WriteForm } from '../components/Index';
 interface propsType {
   list: any;
+  setList: ({}: any) => void;
   handleUpdateList: any;
   handleChangeNotice: any;
   userInfo: {
@@ -28,6 +17,7 @@ interface propsType {
 function Notice({
   userInfo,
   list,
+  setList,
   handleUpdateList,
   handleChangeNotice,
 }: propsType) {
@@ -67,6 +57,8 @@ function Notice({
           <ListForm
             permission={userInfo.permission}
             title="공지사항"
+            list={list}
+            setList={setList}
             contents={list.currentList}
             handleUpdateList={handleUpdateList}
             handleChangeNotice={handleChangeNotice}
@@ -83,6 +75,7 @@ function Notice({
             fristCategory="공지사항"
             handleClickRadioButton={handleClickRadioButton}
             secondCategory="행사"
+            currentCategory={list.currentCategory}
             title="공지사항 작성"
             type="notice"
           ></WriteForm>

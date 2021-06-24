@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import styled, { css } from 'styled-components';
-import { Link, useRouteMatch, withRouter } from 'react-router-dom';
+import React from 'react';
+import styled from 'styled-components';
 import { ImagePostForm, TextAreaForm, WriteMedicineForm } from './Index';
 import { requestNotice } from '../common/axios';
 interface propsType {
   title: string;
   type: string;
   inputVlaue: any;
+  currentCategory?: string;
   handleInputValue: any;
   fristCategory?: string;
   secondCategory?: string;
@@ -29,8 +29,7 @@ function WriteForm({
   title,
   type,
   userInfo,
-  contents,
-  radioButton,
+  currentCategory,
   fristCategory,
   secondCategory,
   handleRequestUpload,
@@ -39,7 +38,6 @@ function WriteForm({
   handleInputValue,
   inputVlaue,
 }: propsType) {
-  const urlMatch = useRouteMatch();
   const PREVIOUS_PAGE = -1;
   //메뉴별 선택적으로 화면 구성
   const printContent: objectType = {
@@ -69,23 +67,21 @@ function WriteForm({
     handleInputValue(name, value, type);
   };
   //작성 글 등록 요청
-  const handleRequestPost = async () => {
-    const { title, content, category } = inputVlaue;
+  const handleRequestPost = async (category: string) => {
+    const { title, content } = inputVlaue;
 
-    // console.log(type, '현재 타입은??');
+    if (title.length === 0) {
+      alert('제목을 입력해주세요');
+      return;
+    }
     if (type === 'notice') {
-      // console.log('공지사항 등록요청 완료');
-      const result = await requestNotice(title, content, category);
-      // console.log(result, '공지사항 등록요청 완료');
+      await requestNotice(title, content, category);
       history.go(PREVIOUS_PAGE);
     }
     if (type === 'album') {
       handleRequestUpload();
     }
   };
-  // useEffect(() => {
-  //   console.log(inputVlaue, '입력값');
-  // }, [inputVlaue]);
   return (
     <Wrap>
       {type === 'medicine' ? (
@@ -111,13 +107,13 @@ function WriteForm({
                 name="title"
                 onChange={(e: any) => handleTitleValue(e)}
               ></TitleInput>
-              {title === '앨범 등록' ? null : (
+              {/* {title === '앨범 등록' ? null : (
                 <select>
                   {contents.teacherRead.map((element: any, index: number) => {
                     return <option>{element}</option>;
                   })}
                 </select>
-              )}
+              )} */}
               {(() => {
                 if (title === '알림장 작성' || title === '앨범 등록') {
                   return null;
@@ -144,10 +140,11 @@ function WriteForm({
           </TitleWrapper>
         </>
       )}
-
       <Container>{printContent[type]}</Container>
       <ButtonWrapper>
-        <PostButton onClick={() => handleRequestPost()}>작성완료</PostButton>
+        <PostButton onClick={() => handleRequestPost(currentCategory!)}>
+          작성완료
+        </PostButton>
         <CancleButton onClick={() => history.go(PREVIOUS_PAGE)}>
           취소
         </CancleButton>
@@ -159,9 +156,6 @@ export default WriteForm;
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
-`;
-const ContentCard = styled.div`
-  ${({ theme }) => theme.common.contentCardDiv}
 `;
 const Title = styled.div`
   ${({ theme }) => theme.common.contentTitle}
@@ -190,20 +184,6 @@ const Writer = styled.span`
   flex: 1 auto;
   text-align: right;
 `;
-const TextBox = styled.textarea`
-  width: 100%;
-  padding: 2%;
-  height: 50%;
-  outline: none;
-  border: 0px;
-  resize: none;
-  ::placeholder {
-    color: #dbdbdb;
-  }
-  margin-top: 2%;
-  border-radius: 15px 15px 15px 15px;
-  box-shadow: 0px 0px 5px #c8c8c8;
-`;
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -218,5 +198,4 @@ const CancleButton = styled.span`
   ${({ theme }) => theme.common.defaultButton}
   margin-left:3%;
 `;
-
 const RadioBtn = styled.input``;

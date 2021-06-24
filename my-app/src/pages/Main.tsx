@@ -80,6 +80,7 @@ export default function Main({
     event: [],
     notice: [],
     all: [],
+    currentCategory: '',
     currentList: [],
     mainMiniNotice: [],
     mainMiniIndiNotice: [],
@@ -102,6 +103,7 @@ export default function Main({
           event: result.ElEvent,
           notice: result.ElNotice,
           all: result.noticeInfo,
+          currentCategory: 'notice',
           currentList: result.ElNotice,
         });
       }
@@ -147,13 +149,17 @@ export default function Main({
       setList({
         ...list,
         currentList: list.notice,
+        currentCategory: 'notice',
       });
       return;
-    } else if (category === '행사') {
+    }
+    if (category === '행사') {
       setList({
         ...list,
         currentList: list.event,
+        currentCategory: 'event',
       });
+      return;
     }
     //알림장
     if (category === '수신') {
@@ -161,12 +167,14 @@ export default function Main({
         ...list,
         currentList: list.indiNotice.teacherRead,
       });
+      return;
     }
     if (category === '발송') {
       setList({
         ...list,
         currentList: list.indiNotice.teacherWrite,
       });
+      return;
     }
     if (category === '투약의뢰서') {
     }
@@ -298,11 +306,32 @@ export default function Main({
                   ></Contents>
                 </Route>
                 <Route
+                  exact
+                  path={`/main/notice/:no`}
+                  render={() => (
+                    <ReadForm
+                      contents={list.mainMiniNotice}
+                      title="공지사항"
+                    ></ReadForm>
+                  )}
+                ></Route>
+                <Route
+                  exact
+                  path={`/main/mainIndiNotice/:no`}
+                  render={() => (
+                    <ReadForm
+                      contents={list.mainMiniIndiNotice}
+                      title="알림장"
+                    ></ReadForm>
+                  )}
+                ></Route>
+                <Route
                   path={`/main/notice`}
                   render={() => (
                     <Notice
                       userInfo={userInfo}
                       list={list}
+                      setList={setList}
                       handleChangeNotice={handleChangeNotice}
                       handleUpdateList={handleUpdateList}
                     />
@@ -329,6 +358,7 @@ export default function Main({
                       handleUpdateList={handleUpdateList}
                       userInfo={userInfo}
                       list={list}
+                      setList={setList}
                     />
                   )}
                 />
@@ -476,7 +506,7 @@ const Aside = styled.div`
 `;
 const Section = styled.div`
   width: 75%;
-  height: 1000px;
+  height: 1300px;
   float: left;
   padding: 1%;
 `;

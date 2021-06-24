@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
+  AlbumCarousel,
   Timetable,
   Carousel,
   MiniNotice,
@@ -14,9 +15,9 @@ interface propsType {
   handleChangeChild: (index: number) => void;
 }
 export default function Contents({
+  list,
   userInfo,
   handleChangeChild,
-  list,
 }: propsType) {
   //탭 메뉴 상태
   const [clickedMenu, setClickedMenu] = useState(0);
@@ -43,25 +44,6 @@ export default function Contents({
               </BookMark>
             );
           })}
-
-          {/* <BookMark
-            checked={clickedMenu}
-            order={20}
-            className={clickedMenu === 1 ? 'active' : ''}
-            onClick={() => handleChangeMenu(1)}
-          >
-            {' '}
-            <Name>{'심종훈'}</Name>
-          </BookMark>
-          <BookMark
-            checked={clickedMenu}
-            order={10}
-            className={clickedMenu === 2 ? 'active' : ''}
-            onClick={() => handleChangeMenu(2)}
-          >
-            {' '}
-            <Name>{'박한솔'}</Name>
-          </BookMark> */}
         </BookMarkWrap>
       ) : null}
       <Timetable userInfo={userInfo}></Timetable>
@@ -76,22 +58,30 @@ export default function Contents({
             <>
               <MIniIndiNotice
                 userInfo={userInfo}
-                list={list.mainMiniIndiNotice}
+                list={
+                  userInfo.permission === 'teacher'
+                    ? list.mainMiniIndiNotice
+                    : userInfo.mainData[userInfo.currentChild].indiNotice
+                }
               ></MIniIndiNotice>
             </>
           );
         }
         return null;
       })()}
-
-      <Carousel userInfo={userInfo}></Carousel>
+      <Title>앨범</Title>
+      <AlbumCarousel userInfo={userInfo}></AlbumCarousel>
     </Wrap>
   );
 }
-interface Property {
-  checked: number;
-  order: number;
-}
+const Title = styled.label`
+  width: 100%;
+  font-size: 1.5rem;
+  margin: 0 auto;
+  display: flex;
+  margin: 2% 0% 0% 0%;
+  justify-content: center;
+`;
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
@@ -133,9 +123,4 @@ const Name = styled.div`
   transform: unset;
   margin-top: 6px;
   // transform: perspective(40px) rotateX(-15deg);
-`;
-const ListWrapper = styled.div`
-  width: 100%;
-  height: 37%;
-  padding: 2%;
 `;

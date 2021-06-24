@@ -20,6 +20,7 @@ export default function MiniIndiNotice({ userInfo, list }: propsType) {
                     content={element}
                     key={element.indiNoticeId}
                     title={'알림장'}
+                    type={'mainIndiNotice'}
                   ></ListInnerCard>
                 );
               })
@@ -29,6 +30,7 @@ export default function MiniIndiNotice({ userInfo, list }: propsType) {
                     content={element}
                     key={element.indiNoticeId}
                     title={'알림장'}
+                    type={'mainIndiNotice'}
                   ></ListInnerCard>
                 );
               })}
@@ -66,39 +68,6 @@ const NoticeContainar = styled.div`
   width: 100%;
   height: 80%;
   overflow: auto;
-`;
-const NoticeCard = styled.div`
-  ${({ theme }) => theme.common.noticeCardDiv}
-`;
-const SubTitle = styled.div`
-  width: 100%;
-  display: flex;
-  border-bottom: 1px solid lightgray;
-  height: 35%;
-`;
-const Contents = styled.div`
-  width: 96%;
-  margin: 0 auto;
-  display: flex;
-`;
-const CreateAt = styled.div`
-  width: 96%;
-  margin: 0 auto;
-  color: #bcbbbb;
-  align-self: center;
-`;
-const Text = styled.span`
-  flex: 22 auto;
-  align-self: center;
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-const GoToPostButton = styled(Link)`
-  flex: 1 auto;
-  font-size: 3rem;
-  color: #bcbbbb;
 `;
 const More = styled(Link)<any>`
   display: block;
