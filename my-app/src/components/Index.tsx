@@ -41,8 +41,10 @@ import TimeTableCard from './TimeTableCard';
 import TimtableListForm from './TimetableListForm';
 import WriteMedicineForm from './WiretMedicineForm';
 import MedicineReport from './MedicineReport';
+import AlbumCarousel from './AlbumCarousel';
 
 export {
+  AlbumCarousel,
   MedicineReport,
   WriteMedicineForm,
   TimtableListForm,
