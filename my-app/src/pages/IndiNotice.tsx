@@ -6,11 +6,13 @@ interface propsType {
   userInfo: any;
   handleUpdateList: any;
   list: any;
+  setList: ({}: any) => void;
   handleChangeNotice: any;
 }
 export default function IndiNotice({
   userInfo,
   list,
+  setList,
   handleChangeNotice,
   handleUpdateList,
 }: propsType) {
@@ -48,6 +50,8 @@ export default function IndiNotice({
         <Route exact path={`${urlMatch.path}`}>
           <ListForm
             title="알림장"
+            list={list}
+            setList={setList}
             handleUpdateList={handleUpdateList}
             handleChangeNotice={handleChangeNotice}
             contents={list.currentList}
