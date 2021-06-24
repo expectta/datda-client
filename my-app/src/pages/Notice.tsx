@@ -4,6 +4,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { ReadForm, ListForm, WriteForm } from '../components/Index';
 interface propsType {
   list: any;
+  setList: ({}: any) => void;
   handleUpdateList: any;
   handleChangeNotice: any;
   userInfo: {
@@ -16,6 +17,7 @@ interface propsType {
 function Notice({
   userInfo,
   list,
+  setList,
   handleUpdateList,
   handleChangeNotice,
 }: propsType) {
@@ -55,6 +57,8 @@ function Notice({
           <ListForm
             permission={userInfo.permission}
             title="공지사항"
+            list={list}
+            setList={setList}
             contents={list.currentList}
             handleUpdateList={handleUpdateList}
             handleChangeNotice={handleChangeNotice}

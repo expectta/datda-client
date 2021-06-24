@@ -9,6 +9,8 @@ import styled from 'styled-components';
 import { ListInnerCard } from './Index';
 interface propsType {
   title: string;
+  list: any;
+  setList: ({}) => void;
   fristCategory?: string;
   secondCategory?: string;
   contents: any;
@@ -22,6 +24,8 @@ interface propsType {
 function ListForm({
   contents,
   permission,
+  list,
+  setList,
   title,
   fristCategory,
   secondCategory,
@@ -45,6 +49,12 @@ function ListForm({
   // 유저가 현재 있는 리스트 페이지의 내용을 랜더링 하기 위해 리스트를 업데이트 함.
   useEffect(() => {
     handleUpdateList(title, category.fristCategory);
+    return () => {
+      setList({
+        ...list,
+        currentList: [],
+      });
+    };
   }, []);
   return (
     <Wrap>

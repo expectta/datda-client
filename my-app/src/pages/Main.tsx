@@ -331,6 +331,7 @@ export default function Main({
                     <Notice
                       userInfo={userInfo}
                       list={list}
+                      setList={setList}
                       handleChangeNotice={handleChangeNotice}
                       handleUpdateList={handleUpdateList}
                     />
@@ -357,6 +358,7 @@ export default function Main({
                       handleUpdateList={handleUpdateList}
                       userInfo={userInfo}
                       list={list}
+                      setList={setList}
                     />
                   )}
                 />
