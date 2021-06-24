@@ -48,7 +48,7 @@ export default function ListInnerCard(props: propsType) {
           <img className="pointer" src="../images/point.png" />
         </Point>
         {title === '알림장' ? (
-          <Content>{content.content}</Content>
+          <Content>{content.contents || content.content}</Content>
         ) : (
           <Content>{title}</Content>
         )}
