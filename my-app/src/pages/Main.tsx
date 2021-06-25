@@ -275,12 +275,13 @@ export default function Main({
                 <>
                   <State
                     type="현재상태"
-                    childInfo={userInfo}
+                    userInfo={userInfo}
                     isCheck={isCheck}
                     isOk={isOk}
                     isSleep={isSleep}
                     isEat={isEat}
                     please={please}
+                    isTeacher={false}
                   ></State>
                 </>
               ) : null}
@@ -509,7 +510,7 @@ const Aside = styled.div`
 `;
 const Section = styled.div`
   width: 75%;
-  height: 1300px;
+  height: 1000px;
   float: left;
   padding: 1%;
 `;
