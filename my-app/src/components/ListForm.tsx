@@ -10,7 +10,7 @@ import { ListInnerCard } from './Index';
 interface propsType {
   title: string;
   list: any;
-  setList: ({}) => void;
+  setList: ({}: any) => void;
   fristCategory?: string;
   secondCategory?: string;
   contents: any;
@@ -41,6 +41,7 @@ function ListForm({
     fristCategory: fristCategory,
     secondCategory: secondCategory,
   });
+  const [selectedCategory, setSelectedCategory] = useState('');
   // 탭 메뉴 변경 핸들러에 따른 리스트 데이터 변경
   const handleChangeMenu = (menu: number, category?: string) => {
     setClickedMenu(menu);
@@ -52,10 +53,15 @@ function ListForm({
     return () => {
       setList({
         ...list,
+        currentCategory: selectedCategory,
         currentList: [],
       });
     };
   }, []);
+  useEffect(() => {
+    setSelectedCategory(list.currentCategory);
+    console.log(list, ' = update list ');
+  }, [list]);
   return (
     <Wrap>
       <Title>{title}</Title>
