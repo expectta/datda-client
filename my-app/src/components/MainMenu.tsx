@@ -36,7 +36,7 @@ export default function MainMenu() {
 }
 const Wrap = styled.div`
   width: 100%;
-  height: 20%;
+  height: 10%;
   border-top: 1px solid #eeeeee;
   border-bottom: 1px solid #eeeeee;
 `;
