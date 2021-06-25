@@ -166,6 +166,7 @@ export default function Main({
       setList({
         ...list,
         currentList: list.indiNotice.teacherRead,
+        currentCategory: 'receive',
       });
       return;
     }
@@ -173,6 +174,7 @@ export default function Main({
       setList({
         ...list,
         currentList: list.indiNotice.teacherWrite,
+        currentCategory: 'send',
       });
       return;
     }
@@ -305,16 +307,7 @@ export default function Main({
                     handleChangeChild={handleChangeChild}
                   ></Contents>
                 </Route>
-                <Route
-                  exact
-                  path={`/main/notice/:no`}
-                  render={() => (
-                    <ReadForm
-                      contents={list.mainMiniNotice}
-                      title="공지사항"
-                    ></ReadForm>
-                  )}
-                ></Route>
+
                 <Route
                   exact
                   path={`/main/mainIndiNotice/:no`}
@@ -337,6 +330,16 @@ export default function Main({
                     />
                   )}
                 />
+                <Route
+                  exact
+                  path={`/main/notice/:no`}
+                  render={() => (
+                    <ReadForm
+                      contents={list.mainMiniNotice}
+                      title="공지사항"
+                    ></ReadForm>
+                  )}
+                ></Route>
                 <Route
                   path={`/main/medicine`}
                   render={() => (
