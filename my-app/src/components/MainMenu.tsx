@@ -18,7 +18,7 @@ export default function MainMenu() {
           <IconImage src="../images/meal-list.png" alt="공지사항"></IconImage>
           <Describe>급식표</Describe>
         </IconWrap>
-        <IconWrap to="/main/indi_notice">
+        <IconWrap to="/main/message">
           <IconImage src="../images/indi-notice.png" alt="공지사항"></IconImage>
           <Describe>알림장</Describe>
         </IconWrap>
